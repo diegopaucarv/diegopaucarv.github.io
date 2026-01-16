@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,12 +30,18 @@
             line-height: 1.6;
         }
 
-        /* LANGUAGE TOGGLE */
-        .language-toggle {
+        /* Combined header with lang toggle and config */
+        .header-controls {
             position: fixed;
             top: 1.5rem;
             right: 1.5rem;
             z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .language-toggle {
             display: flex;
             gap: 0.25rem;
             background: var(--background);
@@ -59,6 +65,116 @@
         .lang-btn.active {
             background: var(--primary);
             color: var(--background);
+        }
+
+        /* Config button */
+        .btn-config {
+            padding: 0.5rem 0.75rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .btn-config:hover {
+            background: var(--primary);
+            color: var(--background);
+        }
+
+        /* Login modal styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--background);
+            border-radius: 8px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .modal-form input {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .modal-form input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-primary, .btn-secondary {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--background);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .modal-error {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 1rem;
         }
 
         /* HEADER */
@@ -214,7 +330,7 @@
             order: 2;
         }
 
-        /* square bullet integrated with title */
+        /* Square bullet integrated with title */
         .timeline-header {
             display: flex;
             align-items: center;
@@ -285,6 +401,7 @@
 
         .info-item {
             margin-bottom: 1.25rem;
+            position: relative; /* For delete button positioning */
         }
 
         .info-item:last-child {
@@ -303,14 +420,12 @@
         }
 
         .info-item a {
-            color: var(--accent-work);
+            color: var(--primary);
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
         }
 
         .info-item a:hover {
-            color: var(--primary);
+            text-decoration: underline;
         }
 
         /* SKILLS */
@@ -328,81 +443,81 @@
 
         .skill-tag {
             display: inline-block;
-            padding: 0.45rem 0.9rem;
+            padding: 0.5rem 1rem;
             background: #f0f0f0;
             border: 1px solid var(--border);
-            border-radius: 4px;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--primary);
-            color: var(--background);
-            border-color: var(--primary);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
         /* FOOTER */
         .footer {
-            margin-top: 3rem;
-            padding: 2rem;
             text-align: center;
+            padding: 2rem;
             color: var(--text-light);
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border-top: 1px solid var(--border);
-        }
-
-        .footer a {
-            color: var(--accent-work);
-            text-decoration: none;
+            margin-top: 3rem;
         }
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .header {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 2rem 1.5rem;
-            }
-
-            .header-content h1 {
-                font-size: 1.75rem;
-            }
-
             .timeline::before {
-                left: 7px;
+                left: 20px;
             }
 
             .timeline-item {
-                grid-template-columns: 1fr;
+                grid-template-columns: auto 1fr;
                 gap: 1rem;
-            }
-
-            .timeline-content {
-                text-align: left !important;
-            }
-
-            .timeline-content.left .timeline-header {
-                flex-direction: row;
+                margin-bottom: 2rem;
             }
 
             .timeline-center {
-                flex-direction: row;
-                gap: 1rem;
-                margin-bottom: 0.5rem;
+                position: absolute;
+                left: 0;
+                top: 0;
             }
 
-            .timeline-year {
-                order: 1;
+            .timeline-content {
+                margin-left: 40px;
+                text-align: left !important;
+            }
+
+            .timeline-content .timeline-header {
+                flex-direction: row !important;
+            }
+
+            .timeline-content.left .timeline-header {
+                flex-direction: row !important;
+            }
+
+            .header {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .profile-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .header-content h1 {
+                font-size: 1.8rem;
             }
 
             .section-title {
                 font-size: 1.4rem;
             }
 
-            .language-toggle {
+            .header-controls {
                 top: 1rem;
                 right: 1rem;
+                gap: 0.5rem;
+            }
+
+            .language-toggle {
+                gap: 0.1rem;
             }
 
             .info-section {
@@ -412,9 +527,11 @@
 
         /* PRINT STYLES */
         @media print {
-            .language-toggle,
-            .btn-print {
-                display: none;
+            .header-controls,
+            .btn-print,
+            .btn-add,
+            .btn-delete {
+                display: none !important;
             }
 
             body {
@@ -426,29 +543,166 @@
             }
         }
 
-        /* LANGUAGE FADE */
-        [data-lang] {
-            transition: opacity 0.3s ease;
+        /* Language content visibility */
+        .lang-content {
+            display: none;
         }
 
-        [data-lang].hidden {
+        .lang-content.active {
+            display: block;
+        }
+
+        /* Add edit mode styles for inline editing and CRUD operations */
+        .editable-field {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .editable-field:hover {
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 2px;
+        }
+
+        .editable-field.edit-mode {
+            background: #fffef0;
+            padding: 0.5rem;
+            border-radius: 3px;
+            border: 2px solid var(--primary);
+        }
+
+        .editable-field input,
+        .editable-field textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--primary);
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .edit-controls {
             display: none;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .edit-controls.active {
+            display: flex;
+        }
+
+        .btn-delete {
+            padding: 0.4rem 0.8rem;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            position: absolute; /* Position delete button */
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+
+        .timeline-item:hover .btn-delete,
+        .info-item:hover .btn-delete {
+            opacity: 1;
+        }
+
+        .btn-delete:hover {
+            background: #b71c1c;
+        }
+
+        .btn-add {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .btn-add:hover {
+            background: #333;
+        }
+
+        /* Create modal styles */
+        .create-modal {
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <!-- Language Toggle -->
-    <div class="language-toggle">
-        <button class="lang-btn active" data-lang="en" onclick="changeLanguage('en')">EN</button>
-        <button class="lang-btn" data-lang="es" onclick="changeLanguage('es')">ES</button>
+    <!-- Header controls with lang toggle and config -->
+    <div class="header-controls">
+        <div class="language-toggle">
+            <button class="lang-btn active" data-lang="en" onclick="UI.changeLanguage('en')">EN</button>
+            <button class="lang-btn" data-lang="es" onclick="UI.changeLanguage('es')">ES</button>
+        </div>
+        <button class="btn-config" onclick="UI.toggleLoginModal()" id="configBtn">⚙ Config</button>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal">
+            <h2 id="modalTitle">Login</h2>
+            <form class="modal-form" onsubmit="Auth.handleLogin(event)">
+                <input type="email" id="emailInput" placeholder="Email" required>
+                <input type="password" id="passwordInput" placeholder="Password" required>
+                <div id="modalError" class="modal-error"></div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-primary" id="submitBtn">Login</button>
+                    <button type="button" class="btn-secondary" onclick="UI.toggleLoginModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <!-- Header -->
     <div class="header">
         <img id="profileImage" src="/placeholder.svg?height=100&width=100" alt="Profile" class="profile-image">
         <div class="header-content">
-            <p class="header-subtitle" data-lang="en">Hello, my name is</p>
-            <p class="header-subtitle hidden" data-lang="es">Hola, mi nombre es</p>
+            <p class="header-subtitle">
+                <span class="lang-content active" data-lang="en">Hello, my name is</span>
+                <span class="lang-content" data-lang="es">Hola, mi nombre es</span>
+            </p>
             
             <h1 id="personName">Diego Paucar</h1>
             
@@ -458,20 +712,24 @@
             
             <button class="btn-print" onclick="window.print()">
                 <span>📄</span>
-                <span data-lang="en">Print Resume</span>
-                <span class="hidden" data-lang="es">Imprimir CV</span>
+                <span class="lang-content active" data-lang="en">Print Resume</span>
+                <span class="lang-content" data-lang="es">Imprimir CV</span>
             </button>
         </div>
     </div>
 
     <!-- Timeline Section -->
     <div class="timeline-section">
-        <h2 class="section-title" data-lang="en">Experience</h2>
-        <h2 class="section-title hidden" data-lang="es">Experiencia</h2>
+        <h2 class="section-title">
+            <span class="lang-content active" data-lang="en">Experience</span>
+            <span class="lang-content" data-lang="es">Experiencia</span>
+        </h2>
         
         <div class="timeline" id="timelineContainer">
             <!-- Timeline items populated by JavaScript -->
         </div>
+        <!-- Add create button for experience -->
+        <button class="btn-add" id="addExpBtn" style="display: none;" onclick="CRUD.openCreateModal('experiencia')">+ Add Experience</button>
     </div>
 
     <!-- Education & Links -->
@@ -484,227 +742,635 @@
         <!-- Populated by JavaScript -->
     </div>
 
+    <!-- Add create modal for generic CRUD operations -->
+    <div class="modal-overlay" id="createModal">
+        <div class="modal create-modal">
+            <h2 id="createModalTitle">Create New Entry</h2>
+            <form class="modal-form" id="createForm" onsubmit="CRUD.handleCreateSubmit(event)">
+                <div id="formFieldsContainer"></div>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-primary" id="createSubmitBtn">Create</button>
+                    <button type="button" class="btn-secondary" onclick="CRUD.closeCreateModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <div class="footer">
-        <p data-lang="en">© 2026 Diego Paucar. All rights reserved.</p>
-        <p class="hidden" data-lang="es">© 2026 Diego Paucar. Todos los derechos reservados.</p>
+        <p class="lang-content active" data-lang="en">© 2026 Diego Paucar. All rights reserved.</p>
+        <p class="lang-content" data-lang="es">© 2026 Diego Paucar. Todos los derechos reservados.</p>
     </div>
 
     <script>
-        let cvData = null;
-        let currentLanguage = localStorage.getItem('language') || 'en';
+        const App = {
+            cvData: null,
+            currentLanguage: localStorage.getItem('language') || 'en',
+            isLoggedIn: localStorage.getItem('sessionToken') ? true : false,
+            credentials: null
+        };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            changeLanguage(currentLanguage);
-            fetchCVData();
-        });
-
-        async function fetchCVData() {
-            try {
-                const response = await fetch('./cvs.json');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const text = await response.text();
-                const data = JSON.parse(text);
-                cvData = Array.isArray(data) ? data[0] : data;
-                renderCV();
-            } catch (error) {
-                console.error('Error loading CV:', error);
-                loadMockData();
-            }
-        }
-
-        function loadMockData() {
-            cvData = {
-                nombres: 'Diego Paucar',
-                profesiones: [
-                    { id: 1, profesion: 'Full Stack Developer' },
-                    { id: 2, profesion: 'UI Designer' }
-                ],
-                perfil: 'Passionate about building elegant and functional digital experiences.',
-                foto_url: '/placeholder.svg?height=100&width=100',
-                experiencia: [
-                    {
-                        id: 1,
-                        institucion: 'Tech Company',
-                        rol: 'Senior Developer',
-                        inicio_anio: '2023-01-15',
-                        fin_anio: 'Actual',
-                        tareas: 'Led development of new features and mentored junior developers.',
-                        profesion_id: 1
-                    },
-                    {
-                        id: 2,
-                        institucion: 'Design Studio',
-                        rol: 'UI/UX Designer',
-                        inicio_anio: '2021-06-01',
-                        fin_anio: '2022-12-31',
-                        tareas: 'Designed user interfaces for web and mobile applications.',
-                        profesion_id: 2
+        const Auth = {
+            async init() {
+                try {
+                    const response = await fetch('https://raw.githubusercontent.com/diegopaucarv/cv_data/main/config.json');
+                    if (response.ok) {
+                        App.credentials = await response.json();
+                    } else {
+                        console.warn('Config file not found. Proceeding without auth.');
                     }
-                ],
-                educacion: [
-                    {
-                        id: 1,
-                        titulo: 'Bachelor in Computer Science',
-                        institucion: 'University Name',
-                        fecha_inicio: '2018-09-01'
-                    }
-                ],
-                enlaces_personales: [
-                    { id: 1, tipo: 'GitHub', url: 'https://github.com' },
-                    { id: 2, tipo: 'LinkedIn', url: 'https://linkedin.com' }
-                ],
-                skills: [
-                    { skill_name: 'React', tipo_skill: 'Professional skills', profesion_id: 1 },
-                    { skill_name: 'JavaScript', tipo_skill: 'Professional skills', profesion_id: 1 }
-                ]
-            };
-            renderCV();
-        }
-
-        function renderCV() {
-            if (!cvData) return;
-
-            document.getElementById('personName').textContent = cvData.nombres || 'Name';
-            document.getElementById('professions').textContent = cvData.profesiones?.map(p => p.profesion).join(' | ') || '';
-            document.getElementById('description').textContent = cvData.perfil || '';
+                } catch (error) {
+                    console.warn('Could not load credentials:', error);
+                }
+            },
             
-            if (cvData.foto_url) {
-                document.getElementById('profileImage').src = cvData.foto_url;
-            }
+            handleLogin(event) {
+                event.preventDefault();
+                const email = document.getElementById('emailInput').value;
+                const password = document.getElementById('passwordInput').value;
+                const errorDiv = document.getElementById('modalError');
+                errorDiv.textContent = '';
 
-            renderTimeline();
-            renderInfoSections();
-            renderSkills();
-        }
-
-        function renderTimeline() {
-            const container = document.getElementById('timelineContainer');
-            container.innerHTML = '';
-
-            if (!cvData.experiencia) return;
-
-            const sorted = [...cvData.experiencia].sort((a, b) => {
-                const dateA = new Date(a.inicio_anio === 'Actual' ? Date.now() : a.inicio_anio);
-                const dateB = new Date(b.inicio_anio === 'Actual' ? Date.now() : b.inicio_anio);
-                return dateB - dateA;
-            });
-
-            sorted.forEach((exp, index) => {
-                const isLeft = index % 2 === 0;
-                const year = formatYear(exp.inicio_anio, exp.fin_anio);
-                const categoryClass = getCategoryClass(exp.profesion_id);
-
-                const item = document.createElement('div');
-                item.className = 'timeline-item';
-                
-                const contentClass = isLeft ? 'left' : 'right';
-                const emptyDiv = isLeft ? '' : `<div></div>`;
-                const bulletDiv = `
-                    <div class="timeline-center">
-                        <div class="timeline-bullet ${categoryClass}"></div>
-                        <p class="timeline-year">${year}</p>
-                    </div>
-                `;
-                const contentDiv = `
-                    <div class="timeline-content ${contentClass}">
-                        <div class="timeline-header">
-                            <div class="timeline-bullet ${categoryClass}"></div>
-                            <h3>${exp.institucion}</h3>
-                        </div>
-                        <p class="timeline-role">${exp.rol}</p>
-                        <p class="timeline-description">${exp.tareas}</p>
-                    </div>
-                `;
-
-                if (isLeft) {
-                    item.innerHTML = `${contentDiv}${bulletDiv}${emptyDiv}`;
-                } else {
-                    item.innerHTML = `${emptyDiv}${bulletDiv}${contentDiv}`;
+                if (!App.credentials) {
+                    errorDiv.textContent = 'Authentication not configured.';
+                    return;
                 }
 
-                container.appendChild(item);
-            });
-        }
+                const validUser = App.credentials.users?.find(u => u.email === email && u.password === password);
+                
+                if (validUser) {
+                    const sessionToken = btoa(`${email}:${Date.now()}`);
+                    localStorage.setItem('sessionToken', sessionToken);
+                    App.isLoggedIn = true;
+                    UI.updateConfigButton();
+                    UI.toggleLoginModal();
+                    alert('Logged in successfully!');
+                    document.getElementById('emailInput').value = '';
+                    document.getElementById('passwordInput').value = '';
+                    Render.renderCV(); // Re-render to show admin controls
+                } else {
+                    errorDiv.textContent = 'Invalid email or password.';
+                }
+            },
 
-        function getCategoryClass(profId) {
-            const map = { 1: 'work', 2: 'design', 3: 'education' };
-            return map[profId] || 'other';
-        }
+            logout() {
+                localStorage.removeItem('sessionToken');
+                App.isLoggedIn = false;
+                UI.updateConfigButton();
+                Render.renderCV(); // Re-render to hide admin controls
+            }
+        };
 
-        function renderInfoSections() {
-            const container = document.getElementById('infoSection');
-            container.innerHTML = '';
+        const UI = {
+            changeLanguage(lang) {
+                App.currentLanguage = lang;
+                localStorage.setItem('language', lang);
 
-            if (cvData.educacion && cvData.educacion.length > 0) {
-                const eduCard = document.createElement('div');
-                eduCard.className = 'info-card';
-                eduCard.innerHTML = `
-                    <h3 data-lang="en">Education</h3>
-                    <h3 class="hidden" data-lang="es">Educación</h3>
-                    ${cvData.educacion.map(edu => `
-                        <div class="info-item">
-                            <h4>${edu.titulo}</h4>
-                            <p>${edu.institucion}</p>
-                            <p>${new Date(edu.fecha_inicio).getFullYear()}</p>
+                // Update lang buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+
+                // Update lang content
+                document.querySelectorAll('.lang-content').forEach(el => {
+                    el.classList.toggle('active', el.dataset.lang === lang);
+                });
+            },
+
+            toggleLoginModal() {
+                const modal = document.getElementById('loginModal');
+                modal.classList.toggle('active');
+            },
+
+            updateConfigButton() {
+                const btn = document.getElementById('configBtn');
+                if (App.isLoggedIn) {
+                    btn.textContent = '🔓 Logout';
+                    btn.onclick = () => {
+                        Auth.logout();
+                        UI.updateConfigButton();
+                    };
+                } else {
+                    btn.textContent = '⚙ Config';
+                    btn.onclick = () => UI.toggleLoginModal();
+                }
+            }
+        };
+
+        const Data = {
+            async fetchCVData() {
+                try {
+                    // Attempt to fetch from a real API if available, otherwise fall back to mock
+                    const response = await fetch('./cvs.json');
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    const text = await response.text();
+                    const data = JSON.parse(text);
+                    App.cvData = Array.isArray(data) ? data[0] : data;
+                    Render.renderCV();
+                } catch (error) {
+                    console.error('Error loading CV from GitHub, falling back to mock data:', error);
+                    this.loadMockData();
+                }
+            },
+
+            loadMockData() {
+                App.cvData = {
+                    nombres: 'Diego Paucar',
+                    profesiones: [
+                        { id: 1, profesion: 'Full Stack Developer' },
+                        { id: 2, profesion: 'UI Designer' }
+                    ],
+                    perfil: 'Passionate about building elegant and functional digital experiences.',
+                    foto_url: '/placeholder.svg?height=100&width=100',
+                    experiencia: [
+                        {
+                            id: 1,
+                            institucion: 'Tech Company',
+                            rol: 'Senior Developer',
+                            inicio_anio: '2023-01-15',
+                            fin_anio: 'Actual',
+                            tareas: 'Led development of new features and mentored junior developers.',
+                            profesion_id: 1
+                        },
+                        {
+                            id: 2,
+                            institucion: 'Design Studio',
+                            rol: 'UI/UX Designer',
+                            inicio_anio: '2021-06-01',
+                            fin_anio: '2022-12-31',
+                            tareas: 'Designed user interfaces for web and mobile applications.',
+                            profesion_id: 2
+                        }
+                    ],
+                    educacion: [
+                        {
+                            id: 1,
+                            titulo: 'Bachelor in Computer Science',
+                            institucion: 'University Name',
+                            fecha_inicio: '2018-09-01'
+                        }
+                    ],
+                    enlaces_personales: [
+                        { id: 1, tipo: 'GitHub', url: 'https://github.com' },
+                        { id: 2, tipo: 'LinkedIn', url: 'https://linkedin.com' }
+                    ],
+                    skills: [
+                        { skill_name: 'React', tipo_skill: 'Professional skills', profesion_id: 1 },
+                        { skill_name: 'JavaScript', tipo_skill: 'Professional skills', profesion_id: 1 }
+                    ]
+                };
+                Render.renderCV();
+            }
+        };
+
+        const Render = {
+            renderCV() {
+                if (!App.cvData) return;
+
+                document.getElementById('personName').textContent = App.cvData.nombres || 'Name';
+                document.getElementById('professions').textContent = App.cvData.profesiones?.map(p => p.profesion).join(' | ') || '';
+                document.getElementById('description').textContent = App.cvData.perfil || '';
+                
+                if (App.cvData.foto_url) {
+                    document.getElementById('profileImage').src = App.cvData.foto_url;
+                }
+
+                this.renderTimeline();
+                this.renderInfoSections();
+                this.renderSkills();
+
+                // Show/hide admin controls based on login status
+                document.getElementById('addExpBtn').style.display = App.isLoggedIn ? 'inline-block' : 'none';
+            },
+
+            renderTimeline() {
+                const container = document.getElementById('timelineContainer');
+                container.innerHTML = '';
+
+                if (!App.cvData.experiencia || App.cvData.experiencia.length === 0) {
+                    container.innerHTML = '<p class="lang-content active" data-lang="en">No experience available.</p><p class="lang-content" data-lang="es">No hay experiencia disponible.</p>';
+                    return;
+                }
+
+                const sorted = [...App.cvData.experiencia].sort((a, b) => {
+                    const dateA = new Date(a.inicio_anio === 'Actual' ? Date.now() : a.inicio_anio);
+                    const dateB = new Date(b.inicio_anio === 'Actual' ? Date.now() : b.inicio_anio);
+                    return dateB - dateA;
+                });
+
+                sorted.forEach((exp, index) => {
+                    const isLeft = index % 2 === 0;
+                    const year = this.formatYear(exp.inicio_anio, exp.fin_anio);
+                    const categoryClass = this.getCategoryClass(exp.profesion_id);
+
+                    const item = document.createElement('div');
+                    item.className = 'timeline-item';
+                    
+                    const contentClass = isLeft ? 'left' : 'right';
+                    const emptyDiv = isLeft ? '' : `<div></div>`;
+                    const bulletDiv = `
+                        <div class="timeline-center">
+                            <div class="timeline-bullet ${categoryClass}"></div>
+                            <p class="timeline-year">${year}</p>
                         </div>
-                    `).join('')}
-                `;
-                container.appendChild(eduCard);
-            }
-
-            if (cvData.enlaces_personales && cvData.enlaces_personales.length > 0) {
-                const linksCard = document.createElement('div');
-                linksCard.className = 'info-card';
-                linksCard.innerHTML = `
-                    <h3 data-lang="en">Links</h3>
-                    <h3 class="hidden" data-lang="es">Enlaces</h3>
-                    ${cvData.enlaces_personales.map(link => `
-                        <div class="info-item">
-                            <h4><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.tipo}</a></h4>
+                    `;
+                    <!-- Add delete button and edit capability to timeline items -->
+                    const deleteBtn = App.isLoggedIn ? `<button class="btn-delete" onclick="CRUD.deleteExperience(${exp.id})">Delete</button>` : '';
+                    const contentDiv = `
+                        <div class="timeline-content ${contentClass}">
+                            <div class="timeline-header">
+                                <div class="timeline-bullet ${categoryClass}"></div>
+                                <h3 class="editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${exp.institucion}</h3>
+                            </div>
+                            <p class="timeline-role editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${exp.rol}</p>
+                            <p class="timeline-description editable-field" ondblclick="CRUD.makeEditable(this, 'textarea')">${exp.tareas}</p>
+                            ${deleteBtn}
                         </div>
-                    `).join('')}
+                    `;
+
+                    if (isLeft) {
+                        item.innerHTML = `${contentDiv}${bulletDiv}${emptyDiv}`;
+                    } else {
+                        item.innerHTML = `${emptyDiv}${bulletDiv}${contentDiv}`;
+                    }
+
+                    container.appendChild(item);
+                });
+                
+                <!-- Show add button when logged in -->
+                const addBtn = document.getElementById('addExpBtn');
+                if (addBtn) addBtn.style.display = App.isLoggedIn ? 'inline-block' : 'none';
+            },
+
+            getCategoryClass(profId) {
+                const map = { 1: 'work', 2: 'design', 3: 'education' }; // Assuming profession IDs map to categories
+                return map[profId] || 'other';
+            },
+
+            renderInfoSections() {
+                const container = document.getElementById('infoSection');
+                container.innerHTML = '';
+
+                if (App.cvData.educacion && App.cvData.educacion.length > 0) {
+                    const eduCard = document.createElement('div');
+                    eduCard.className = 'info-card';
+                    <!-- Add delete buttons and edit capability to education items -->
+                    const eduItems = App.cvData.educacion.map(edu => {
+                        const deleteBtn = App.isLoggedIn ? `<button class="btn-delete" onclick="CRUD.deleteEducation(${edu.id})">Delete</button>` : '';
+                        return `
+                            <div class="info-item">
+                                <h4 class="editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${edu.titulo}</h4>
+                                <p class="editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${edu.institucion}</p>
+                                <p>${edu.fecha_inicio ? new Date(edu.fecha_inicio).getFullYear() : 'Year unknown'}</p>
+                                ${deleteBtn}
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    eduCard.innerHTML = `
+                        <h3>
+                            <span class="lang-content active" data-lang="en">Education</span>
+                            <span class="lang-content" data-lang="es">Educación</span>
+                        </h3>
+                        ${eduItems}
+                        ${App.isLoggedIn ? '<button class="btn-add" onclick="CRUD.openCreateModal(\'educacion\')">+ Add Education</button>' : ''}
+                    `;
+                    container.appendChild(eduCard);
+                }
+
+                if (App.cvData.enlaces_personales && App.cvData.enlaces_personales.length > 0) {
+                    const linksCard = document.createElement('div');
+                    linksCard.className = 'info-card';
+                    <!-- Add delete buttons to links -->
+                    const linkItems = App.cvData.enlaces_personales.map(link => {
+                        const deleteBtn = App.isLoggedIn ? `<button class="btn-delete" onclick="CRUD.deleteLink(${link.id})">Delete</button>` : '';
+                        return `
+                            <div class="info-item">
+                                <h4><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.tipo}</a></h4>
+                                ${deleteBtn}
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    linksCard.innerHTML = `
+                        <h3>
+                            <span class="lang-content active" data-lang="en">Links</span>
+                            <span class="lang-content" data-lang="es">Enlaces</span>
+                        </h3>
+                        ${linkItems}
+                        ${App.isLoggedIn ? '<button class="btn-add" onclick="CRUD.openCreateModal(\'enlaces_personales\')">+ Add Link</button>' : ''}
+                    `;
+                    container.appendChild(linksCard);
+                }
+            },
+
+            renderSkills() {
+                const container = document.getElementById('skillsSection');
+                if (!App.cvData.skills || App.cvData.skills.length === 0) {
+                    container.style.display = 'none';
+                    return;
+                }
+
+                container.innerHTML = `
+                    <h2 class="section-title">
+                        <span class="lang-content active" data-lang="en">Skills</span>
+                        <span class="lang-content" data-lang="es">Habilidades</span>
+                    </h2>
+                    <div class="skills-grid">
+                        ${App.cvData.skills.map(skill => `
+                            <span class="skill-tag">${skill.skill_name}</span>
+                        `).join('')}
+                    </div>
                 `;
-                container.appendChild(linksCard);
+            },
+
+            formatYear(start, end) {
+                const startDate = new Date(start);
+                const startYear = isNaN(startDate) ? start : startDate.getFullYear();
+                
+                let endYear;
+                if (end === 'Actual') {
+                    endYear = 'Present';
+                } else {
+                    const endDate = new Date(end);
+                    endYear = isNaN(endDate) ? end : endDate.getFullYear();
+                }
+                
+                return `${startYear} – ${endYear}`;
             }
-        }
+        };
 
-        function renderSkills() {
-            const container = document.getElementById('skillsSection');
-            if (!cvData.skills || cvData.skills.length === 0) {
-                container.style.display = 'none';
-                return;
+        <!-- Add CRUD operations module for edit/delete/create functionality -->
+        const CRUD = {
+            currentEditElement: null,
+            currentEditField: null,
+
+            makeEditable(element, fieldType) {
+                if (!App.isLoggedIn) return;
+
+                // Prevent making nested elements editable
+                if (element.querySelector('.edit-controls')) return;
+
+                const originalContent = element.innerHTML; // Keep HTML for nested tags like <a>
+                const inputType = fieldType === 'textarea' ? 'textarea' : 'input';
+                const input = document.createElement(inputType);
+                
+                // Extract plain text for input value
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = originalContent;
+                input.value = tempDiv.textContent.trim(); // Use textContent to get plain text
+
+                input.className = `editable-${fieldType}`;
+
+                element.innerHTML = '';
+                element.appendChild(input);
+                element.classList.add('edit-mode');
+
+                const saveBtn = document.createElement('button');
+                saveBtn.textContent = 'Save';
+                saveBtn.type = 'button';
+                saveBtn.className = 'btn-primary';
+                saveBtn.style.marginRight = '0.5rem';
+                saveBtn.onclick = (e) => {
+                    e.preventDefault();
+                    CRUD.saveEdit(element, input.value, originalContent, fieldType);
+                };
+
+                const cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Cancel';
+                cancelBtn.type = 'button';
+                cancelBtn.className = 'btn-secondary';
+                cancelBtn.onclick = (e) => {
+                    e.preventDefault();
+                    CRUD.cancelEdit(element, originalContent);
+                };
+
+                const controls = document.createElement('div');
+                controls.className = 'edit-controls active';
+                controls.appendChild(saveBtn);
+                controls.appendChild(cancelBtn);
+
+                element.appendChild(controls);
+                input.focus();
+
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' && fieldType === 'text') {
+                        e.preventDefault(); // Prevent default Enter behavior for text input
+                        CRUD.saveEdit(element, input.value, originalContent, fieldType);
+                    }
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        CRUD.cancelEdit(element, originalContent);
+                    }
+                });
+            },
+
+            saveEdit(element, newValue, originalHtml, fieldType) {
+                element.classList.remove('edit-mode');
+                
+                // Reconstruct the element with saved value, preserving original structure if possible
+                if (fieldType === 'textarea') {
+                    element.innerHTML = newValue;
+                } else {
+                    // For text, try to preserve original HTML structure if it was more than just text
+                    if (originalHtml.includes('<')) {
+                        // Simple heuristic: if original had HTML, assume it was intended.
+                        // More robust would be to parse and update specific elements.
+                        // For now, replace the text content of the editable element.
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = originalHtml;
+                        const editablePart = tempDiv.querySelector('.editable-field'); // Find the exact editable part if nested
+                        if (editablePart) {
+                           editablePart.textContent = newValue; // Replace only the text
+                           element.innerHTML = tempDiv.innerHTML;
+                        } else {
+                           // Fallback if structure not recognized, just set the new value
+                           element.textContent = newValue;
+                        }
+                    } else {
+                        element.textContent = newValue;
+                    }
+                }
+                
+                // For simplicity, this example doesn't sync back to App.cvData or GitHub.
+                // In a real app, you'd find the ID of the item and update the corresponding field in App.cvData.
+                // e.g., update CVData(element, newValue);
+                
+                const controls = element.querySelector('.edit-controls');
+                if(controls) controls.remove();
+
+                // Re-apply event listener if needed, or structure might prevent it
+                if (element.parentElement.classList.contains('timeline-item')) {
+                    // Timeline item, re-render might be complex. For now, assume it works.
+                } else if (element.parentElement.classList.contains('info-item')) {
+                    // Info item
+                }
+            },
+
+            cancelEdit(element, originalHtml) {
+                element.classList.remove('edit-mode');
+                element.innerHTML = originalHtml;
+                const controls = element.querySelector('.edit-controls');
+                if(controls) controls.remove();
+            },
+
+            deleteExperience(id) {
+                if (!confirm('Delete this experience?')) return;
+                App.cvData.experiencia = App.cvData.experiencia.filter(e => e.id !== id);
+                Render.renderTimeline();
+            },
+
+            deleteEducation(id) {
+                if (!confirm('Delete this education?')) return;
+                App.cvData.educacion = App.cvData.educacion.filter(e => e.id !== id);
+                Render.renderInfoSections();
+            },
+
+            deleteLink(id) {
+                if (!confirm('Delete this link?')) return;
+                App.cvData.enlaces_personales = App.cvData.enlaces_personales.filter(e => e.id !== id);
+                Render.renderInfoSections();
+            },
+
+            openCreateModal(tableName) {
+                const modal = document.getElementById('createModal');
+                const title = document.getElementById('createModalTitle');
+                const container = document.getElementById('formFieldsContainer');
+
+                const schema = this.getTableSchema(tableName);
+                title.textContent = `Add New ${tableName.charAt(0).toUpperCase() + tableName.slice(1)}`; // Capitalize table name
+                container.innerHTML = '';
+
+                Object.entries(schema).forEach(([fieldName, fieldType]) => {
+                    const group = document.createElement('div');
+                    group.className = 'form-group';
+                    
+                    const label = document.createElement('label');
+                    label.textContent = fieldName.replace(/_/g, ' ').toUpperCase();
+                    
+                    let input;
+                    if (fieldType === 'textarea') {
+                        input = document.createElement('textarea');
+                    } else {
+                        input = document.createElement('input');
+                        input.type = fieldType === 'date' ? 'date' : 'text';
+                    }
+                    input.id = `field-${fieldName}`;
+                    input.dataset.field = fieldName;
+                    input.required = true; // Assume most fields are required
+
+                    group.appendChild(label);
+                    group.appendChild(input);
+                    container.appendChild(group);
+                });
+
+                modal.classList.add('active');
+                document.getElementById('createForm').dataset.table = tableName;
+                
+                // Focus first input
+                const firstInput = container.querySelector('input, textarea');
+                if (firstInput) firstInput.focus();
+            },
+
+            closeCreateModal() {
+                const modal = document.getElementById('createModal');
+                modal.classList.remove('active');
+                document.getElementById('createForm').reset(); // Reset form on close
+                document.getElementById('formFieldsContainer').innerHTML = ''; // Clear fields
+            },
+
+            handleCreateSubmit(event) {
+                event.preventDefault();
+                const form = document.getElementById('createForm');
+                const tableName = form.dataset.table;
+                const newEntry = {};
+
+                // Basic validation for required fields
+                let allFieldsValid = true;
+                form.querySelectorAll('[data-field]').forEach(input => {
+                    if (input.required && !input.value.trim()) {
+                        allFieldsValid = false;
+                        input.style.borderColor = 'red'; // Highlight invalid field
+                    } else {
+                        input.style.borderColor = ''; // Reset border color
+                        newEntry[input.dataset.field] = input.value;
+                    }
+                });
+
+                if (!allFieldsValid) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                // Generate a simple unique ID
+                const currentEntries = App.cvData[tableName] || [];
+                const maxId = Math.max(0, ...currentEntries.map(e => e.id || 0));
+                newEntry.id = maxId + 1;
+
+                // Add the new entry to the corresponding array in App.cvData
+                if (App.cvData[tableName]) {
+                    App.cvData[tableName].push(newEntry);
+                } else {
+                    // If the array doesn't exist, create it
+                    App.cvData[tableName] = [newEntry];
+                }
+
+                // Re-render the relevant section
+                if (tableName === 'experiencia') {
+                    Render.renderTimeline();
+                } else if (tableName === 'educacion' || tableName === 'enlaces_personales') {
+                    Render.renderInfoSections();
+                }
+                // Potentially add rendering for other sections if more tables are added
+
+                CRUD.closeCreateModal();
+                form.reset();
+            },
+
+            getTableSchema(tableName) {
+                // Define the schema for each table that can be created
+                const schemas = {
+                    experiencia: {
+                        institucion: 'text',
+                        rol: 'text',
+                        inicio_anio: 'date',
+                        fin_anio: 'date',
+                        tareas: 'textarea'
+                    },
+                    educacion: {
+                        titulo: 'text',
+                        institucion: 'text',
+                        fecha_inicio: 'date'
+                    },
+                    enlaces_personales: {
+                        tipo: 'text',
+                        url: 'text'
+                    }
+                };
+                return schemas[tableName] || {};
             }
+        };
 
-            container.innerHTML = `
-                <h2 class="section-title" data-lang="en">Skills</h2>
-                <h2 class="section-title hidden" data-lang="es">Habilidades</h2>
-                <div class="skills-grid">
-                    ${cvData.skills.map(skill => `
-                        <span class="skill-tag">${skill.skill_name}</span>
-                    `).join('')}
-                </div>
-            `;
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            UI.changeLanguage(App.currentLanguage);
+            UI.updateConfigButton();
+            Auth.init().then(() => Data.fetchCVData());
+        });
 
-        function formatYear(start, end) {
-            const startYear = new Date(start).getFullYear();
-            const endYear = end === 'Actual' ? 'Present' : new Date(end).getFullYear();
-            return `${startYear} – ${endYear}`;
-        }
-
-        function changeLanguage(lang) {
-            currentLanguage = lang;
-            localStorage.setItem('language', lang);
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-
-            document.querySelectorAll('[data-lang]').forEach(el => {
-                el.classList.toggle('hidden', el.dataset.lang !== lang);
-            });
-        }
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('loginModal');
+            const createModal = document.getElementById('createModal');
+            if (modal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    UI.toggleLoginModal();
+                }
+            }
+            if (createModal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    CRUD.closeCreateModal();
+                }
+            }
+        });
     </script>
 </body>
 </html>
