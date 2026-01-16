@@ -865,7 +865,8 @@
                     if (!response.ok) throw new Error('Network response was not ok');
                     const text = await response.text();
                     const data = JSON.parse(text);
-                    App.cvData = Array.isArray(data) ? data[0].data : data.data;
+                    App.cvData = data.data;
+                    console.log(data.data)
                     Render.renderCV();
                 } catch (error) {
                     console.error('Error loading CV from GitHub, falling back to mock data:', error);
