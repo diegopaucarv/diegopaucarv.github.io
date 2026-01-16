@@ -858,107 +858,60 @@
             }
         };
 
-        const Data = {
-            async fetchCVData() {
-                try {
-                    // Attempt to fetch from a real API if available, otherwise fall back to mock
-                    const response = await fetch('./cvs.json');
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    const fullJson = await response.json();
-                    
-                    // Your data is inside the "data" key
-                    const rawData = fullJson.data;
-                    const schema = fullJson.tables;
-        
-                    // Map the arrays of arrays to arrays of objects using the schema
-                    App.cvData = {
-                        nombres: rawData.datos_personales[0][1], // Direct access to name
-                        perfil: rawData.datos_personales[0][5], // Direct access to profile
-                        foto_url: "/placeholder.svg?height=100&width=100", 
-                        
-                        // Map complex sections
-                        profesiones: this.mapDataToObjects(rawData.profesiones, schema, 'profesiones'),
-                        experiencia: this.mapDataToObjects(rawData.experiencia, schema, 'experiencia'),
-                        educacion: this.mapDataToObjects(rawData.educacion, schema, 'educacion'),
-                        enlaces_personales: this.mapDataToObjects(rawData.enlaces_personales, schema, 'enlaces_personales'),
-                        skills: this.mapDataToObjects(rawData.skills, schema, 'skills')
-                    };
-        
-                    Render.renderCV();
-                } catch (error) {
-                    console.error('Error loading CV from GitHub, falling back to mock data:', error);
-                    this.loadMockData();
-                }
-            },
-
-            // Helper to match column names to array values
-            mapDataToObjects(dataArray, schema, tableName) {
-                const tableSchema = schema.find(t => t.name === tableName);
-                if (!tableSchema) return [];
-        
-                const columns = tableSchema.columns.map(col => col.name);
-                
-                return dataArray.map(row => {
-                    let obj = {};
-                    // We skip the first column 'n' because your 'data' arrays 
-                    // often start directly with 'id' or 'nombres'
-                    row.forEach((value, index) => {
-                        const columnName = columns[index + 1] || columns[index]; 
-                        obj[columnName] = value;
-                    });
-                    return obj;
-                });
-            },
+const Data = {
+    async fetchCVData() {
+        try {
+            const response = await fetch('./cvs.json');
+            if (!response.ok) throw new Error('Network response was not ok');
+            const fullJson = await response.json();
             
-            loadMockData() {
-                App.cvData = {
-                    nombres: 'Diego Paucar',
-                    profesiones: [
-                        { id: 1, profesion: 'Full Stack Developer' },
-                        { id: 2, profesion: 'UI Designer' }
-                    ],
-                    perfil: 'Passionate about building elegant and functional digital experiences.',
-                    foto_url: '/placeholder.svg?height=100&width=100',
-                    experiencia: [
-                        {
-                            id: 1,
-                            institucion: 'Tech Company',
-                            rol: 'Senior Developer',
-                            inicio_anio: '2023-01-15',
-                            fin_anio: 'Actual',
-                            tareas: 'Led development of new features and mentored junior developers.',
-                            profesion_id: 1
-                        },
-                        {
-                            id: 2,
-                            institucion: 'Design Studio',
-                            rol: 'UI/UX Designer',
-                            inicio_anio: '2021-06-01',
-                            fin_anio: '2022-12-31',
-                            tareas: 'Designed user interfaces for web and mobile applications.',
-                            profesion_id: 2
-                        }
-                    ],
-                    educacion: [
-                        {
-                            id: 1,
-                            titulo: 'Bachelor in Computer Science',
-                            institucion: 'University Name',
-                            fecha_inicio: '2018-09-01'
-                        }
-                    ],
-                    enlaces_personales: [
-                        { id: 1, tipo: 'GitHub', url: 'https://github.com' },
-                        { id: 2, tipo: 'LinkedIn', url: 'https://linkedin.com' }
-                    ],
-                    skills: [
-                        { skill_name: 'React', tipo_skill: 'Professional skills', profesion_id: 1 },
-                        { skill_name: 'JavaScript', tipo_skill: 'Professional skills', profesion_id: 1 }
-                    ]
-                };
-                Render.renderCV();
-            }
-        };
+            const rawData = fullJson.data;
+            const schema = fullJson.tables;
+
+            // 1. Find the personal data row that matches the current language
+            const personalRow = rawData.datos_personales.find(row => row.includes(App.currentLanguage)) 
+                               || rawData.datos_personales[0];
+
+            App.cvData = {
+                nombres: personalRow[1], 
+                perfil: personalRow[5],
+                foto_url: "/profile.jpg", // Update this to your real path
+                
+                // 2. Map and FILTER by language simultaneously
+                profesiones: this.mapAndFilter(rawData.profesiones, schema, 'profesiones'),
+                experiencia: this.mapAndFilter(rawData.experiencia, schema, 'experiencia'),
+                educacion: this.mapAndFilter(rawData.educacion, schema, 'educacion'),
+                enlaces_personales: this.mapAndFilter(rawData.enlaces_personales, schema, 'enlaces_personales'),
+                skills: this.mapAndFilter(rawData.skills, schema, 'skills')
+            };
+
+            Render.renderCV();
+        } catch (error) {
+            console.error('Parsing error:', error);
+            this.loadMockData();
+        }
+    },
+
+    mapAndFilter(dataArray, schema, tableName) {
+        const tableSchema = schema.find(t => t.name === tableName);
+        if (!tableSchema) return [];
+
+        const columns = tableSchema.columns.map(col => col.name);
+        
+        return dataArray
+            .map(row => {
+                let obj = {};
+                row.forEach((value, index) => {
+                    // Skips 'n' and maps based on actual data structure
+                    const columnName = columns[index + 1]; 
+                    obj[columnName] = value;
+                });
+                return obj;
+            })
+            // CRITICAL: Only keep items for the current language
+            .filter(item => item.lengua === App.currentLanguage);
+    }
+};
 
         const Render = {
             renderCV() {
