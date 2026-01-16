@@ -866,7 +866,6 @@
                     const text = await response.text();
                     const data = JSON.parse(text);
                     App.cvData = data.data;
-                    console.log(data.data)
                     Render.renderCV();
                 } catch (error) {
                     console.error('Error loading CV from GitHub, falling back to mock data:', error);
@@ -928,9 +927,12 @@
             renderCV() {
                 if (!App.cvData) return;
 
-                document.getElementById('personName').textContent = App.cvData.nombres || 'Name';
+                let desc_es = "Sociólogo y científico de datos neurodivergente y amado por Dios. Me defino como un agente de cambio. Disfruto simplificando problemas complejos, automatizando la investigación social y haciendo la vida más fácil para quienes me rodean, empezando por mí mismo."
+                let desc_en = "Neurodivergent and God-loved sociologist and data scientist. I define myself as a change agent. I enjoy simplifying hard problems, automatizing social research and making life easier to others around me, starting by myself." 
+                
+                document.getElementById('personName').textContent = "Diego Paucar"
                 document.getElementById('professions').textContent = App.cvData.profesiones?.map(p => p.profesion).join(' | ') || '';
-                document.getElementById('description').textContent = App.cvData.perfil || '';
+                document.getElementById('description').textContent = (App.currentLanguage === "es") ? desc_es : desc_en;
                 
                 if (App.cvData.foto_url) {
                     document.getElementById('profileImage').src = App.cvData.foto_url;
