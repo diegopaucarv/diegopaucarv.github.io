@@ -940,8 +940,8 @@ const Data = {
                 const container = document.getElementById('timelineContainer');
                 container.innerHTML = '';
                 const filteredExp = App.cvData.experiencia.filter(exp => exp.lengua === App.currentLanguage);
-                if (filteredExp.length === 0) {
-                    container.innerHTML = '<p>No experience available.</p>';
+                if (!App.cvData.experiencia || App.cvData.experiencia.length === 0) {
+                    container.innerHTML = '<p class="lang-content active" data-lang="en">No experience available.</p><p class="lang-content" data-lang="es">No hay experiencia disponible.</p>';
                     return;
                 }
 
