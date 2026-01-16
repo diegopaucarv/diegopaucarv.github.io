@@ -914,6 +914,16 @@
                 Data.refreshParsedData();
                 Render.renderCV();
             },
+            
+            initLanguageUI() {
+        const lang = App.currentLanguage;
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        document.querySelectorAll('.lang-content').forEach(el => {
+            el.classList.toggle('active', el.dataset.lang === lang);
+        });
+    },
 
             toggleLoginModal() {
                 const modal = document.getElementById('loginModal');
@@ -1148,24 +1158,30 @@ const Data = {
 
 
     refreshParsedData() {
-        const { data, tables } = App.originalData;
-        
-        // Re-mapeamos y filtramos todas las tablas según el idioma actual
-        App.cvData = {
-            profesiones: this.mapAndFilter(data.profesiones, tables, 'profesiones'),
-            experiencia: this.mapAndFilter(data.experiencia, tables, 'experiencia'),
-            educacion: this.mapAndFilter(data.educacion, tables, 'educacion'),
-            enlaces_personales: this.mapAndFilter(data.enlaces_personales, tables, 'enlaces_personales'),
-            skills: this.mapAndFilter(data.skills, tables, 'skills')
-        };
+if (!App.originalData || !App.originalData.data) {
+        console.warn("Intento de refresco sin datos cargados.");
+        return; 
+    }
 
-        // Actualizar datos personales
-        const personalRow = data.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
-                           || data.datos_personales[0];
-        App.cvData.nombres = personalRow[1];
-        App.cvData.perfil = personalRow[5];
+    const { data, tables } = App.originalData;
+    
+    // ... resto de tu lógica de mapeo y filtrado ...
+    App.cvData = {
+        profesiones: this.mapAndFilter(data.profesiones, tables, 'profesiones'),
+        experiencia: this.mapAndFilter(data.experiencia, tables, 'experiencia'),
+        educacion: this.mapAndFilter(data.educacion, tables, 'educacion'),
+        enlaces_personales: this.mapAndFilter(data.enlaces_personales, tables, 'enlaces_personales'),
+        skills: this.mapAndFilter(data.skills, tables, 'skills')
+    };
 
-        Render.renderCV(); // Redibujar la interfaz
+    // Actualizar datos personales buscando la fila por idioma
+    const personalRow = data.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
+                       || data.datos_personales[0];
+    
+    App.cvData.nombres = personalRow[1];
+    App.cvData.perfil = personalRow[5];
+
+    Render.renderCV(); 
     },
     
     mapAndFilter(dataArray, schema, tableName) {
@@ -1688,7 +1704,14 @@ const Data = {
                 return schemas[tableName] || {};
             }
         };
-
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Configuramos la UI (estilos de botones), pero SIN llamar a render todavía
+    UI.initLanguageUI(); 
+    
+    // 2. Iniciamos Auth y cargamos Data
+    await Auth.init();
+    await Data.fetchCVData(); // Esto internamente llamará a refreshParsedData una vez tenga la data
+});
         document.addEventListener('DOMContentLoaded', () => {
             UI.changeLanguage(App.currentLanguage);
             UI.updateConfigButton();
