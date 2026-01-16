@@ -890,29 +890,65 @@ const Data = {
             this.loadMockData();
         }
     },
-
+    
     mapAndFilter(dataArray, schema, tableName) {
-        const tableSchema = schema.find(t => t.name === tableName);
-        if (!tableSchema) return [];
-        const columns = tableSchema.columns.map(col => col.name);
-        
-        return dataArray
-            .map(row => {
-                let obj = {};
-                // Capture the language from the LAST element of the array
-                const rowLanguage = row[row.length - 1];
-                
+        return dataArray.map(row => {
+            let obj = {};
+            
+            // Definimos mapas específicos porque la data del JSON es más corta que el SQL
+            if (tableName === 'experiencia') {
+                obj = {
+                    id: row[0],
+                    persona_id: row[1],
+                    profesion_id: row[2],
+                    inicio_anio: row[3],      // Aquí ahora caerá "Actual" o el año
+                    institucion: row[4],      // Aquí caerá "ESCAPE" o "Universidad..."
+                    lugar: row[5],
+                    rol: row[6],
+                    tareas: row[7],
+                    logros: row[8],
+                    referencia: row[9],
+                    referencia_linkedin: row[10],
+                    lengua: row[row.length - 1] // Siempre el último es el idioma
+                };
+            } 
+            else if (tableName === 'skills') {
+                obj = {
+                    id: row[0],
+                    persona_id: row[1],
+                    profesion_id: row[2],
+                    skill_name: row[3],
+                    skill_level: row[4],
+                    tipo_skill: row[5],
+                    certificate_name: row[6],
+                    lengua: row[row.length - 1]
+                };
+            }
+            else if (tableName === 'educacion') {
+                obj = {
+                    id: row[0],
+                    persona_id: row[1],
+                    grado_instruccion: row[2],
+                    institucion: row[3],
+                    titulo: row[4],
+                    fecha_inicio: row[5],
+                    en_curso: row[6],
+                    lengua: row[row.length - 1]
+                };
+            }
+            else {
+                // Mapeo genérico para tablas simples como 'profesiones' o 'enlaces'
+                const tableSchema = schema.find(t => t.name === tableName);
+                const columns = tableSchema.columns.map(col => col.name);
                 row.forEach((value, index) => {
                     const columnName = columns[index + 1]; 
                     if (columnName) obj[columnName] = value;
                 });
-
-                // Force the language property to the actual value found
-                obj.lengua = rowLanguage; 
-                return obj;
-            })
-            // Filter strictly by the current language
-            .filter(item => item.lengua === App.currentLanguage);
+                obj.lengua = row[row.length - 1];
+            }
+            return obj;
+        })
+        .filter(item => item.lengua === App.currentLanguage);
     }
 };
 
