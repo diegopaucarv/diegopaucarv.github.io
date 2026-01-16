@@ -864,9 +864,26 @@
                     // Attempt to fetch from a real API if available, otherwise fall back to mock
                     const response = await fetch('./cvs.json');
                     if (!response.ok) throw new Error('Network response was not ok');
-                    const text = await response.text();
-                    const data = JSON.parse(text);
-                    App.cvData = data.data;
+                    const fullJson = await response.json();
+                    
+                    // Your data is inside the "data" key
+                    const rawData = fullJson.data;
+                    const schema = fullJson.tables;
+        
+                    // Map the arrays of arrays to arrays of objects using the schema
+                    App.cvData = {
+                        nombres: rawData.datos_personales[0][1], // Direct access to name
+                        perfil: rawData.datos_personales[0][5], // Direct access to profile
+                        foto_url: "/placeholder.svg?height=100&width=100", 
+                        
+                        // Map complex sections
+                        profesiones: this.mapDataToObjects(rawData.profesiones, schema, 'profesiones'),
+                        experiencia: this.mapDataToObjects(rawData.experiencia, schema, 'experiencia'),
+                        educacion: this.mapDataToObjects(rawData.educacion, schema, 'educacion'),
+                        enlaces_personales: this.mapDataToObjects(rawData.enlaces_personales, schema, 'enlaces_personales'),
+                        skills: this.mapDataToObjects(rawData.skills, schema, 'skills')
+                    };
+        
                     Render.renderCV();
                 } catch (error) {
                     console.error('Error loading CV from GitHub, falling back to mock data:', error);
@@ -874,6 +891,25 @@
                 }
             },
 
+            // Helper to match column names to array values
+            mapDataToObjects(dataArray, schema, tableName) {
+                const tableSchema = schema.find(t => t.name === tableName);
+                if (!tableSchema) return [];
+        
+                const columns = tableSchema.columns.map(col => col.name);
+                
+                return dataArray.map(row => {
+                    let obj = {};
+                    // We skip the first column 'n' because your 'data' arrays 
+                    // often start directly with 'id' or 'nombres'
+                    row.forEach((value, index) => {
+                        const columnName = columns[index + 1] || columns[index]; 
+                        obj[columnName] = value;
+                    });
+                    return obj;
+                });
+            }
+            
             loadMockData() {
                 App.cvData = {
                     nombres: 'Diego Paucar',
@@ -950,13 +986,13 @@
             renderTimeline() {
                 const container = document.getElementById('timelineContainer');
                 container.innerHTML = '';
-
-                if (!App.cvData.experiencia || App.cvData.experiencia.length === 0) {
-                    container.innerHTML = '<p class="lang-content active" data-lang="en">No experience available.</p><p class="lang-content" data-lang="es">No hay experiencia disponible.</p>';
+                const filteredExp = App.cvData.experiencia.filter(exp => exp.lengua === App.currentLanguage);
+                if (filteredExp.length === 0) {
+                    container.innerHTML = '<p>No experience available.</p>';
                     return;
                 }
 
-                const sorted = [...App.cvData.experiencia].sort((a, b) => {
+                const sorted = [...filteredExp].sort((a, b) => {
                     const dateA = new Date(a.inicio_anio === 'Actual' ? Date.now() : a.inicio_anio);
                     const dateB = new Date(b.inicio_anio === 'Actual' ? Date.now() : b.inicio_anio);
                     return dateB - dateA;
@@ -1014,12 +1050,14 @@
             renderInfoSections() {
                 const container = document.getElementById('infoSection');
                 container.innerHTML = '';
-
-                if (App.cvData.educacion && App.cvData.educacion.length > 0) {
+            
+                // Filter education by language
+                const filteredEdu = App.cvData.educacion.filter(edu => edu.lengua === App.currentLanguage);
+                if (filteredEdu.length > 0) {
                     const eduCard = document.createElement('div');
                     eduCard.className = 'info-card';
                     <!-- Add delete buttons and edit capability to education items -->
-                    const eduItems = App.cvData.educacion.map(edu => {
+                    const eduItems = filteredEdu.map(edu => {
                         const deleteBtn = App.isLoggedIn ? `<button class="btn-delete" onclick="CRUD.deleteEducation(${edu.id})">Delete</button>` : '';
                         return `
                             <div class="info-item">
