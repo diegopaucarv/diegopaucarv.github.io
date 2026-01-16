@@ -911,6 +911,7 @@
                 document.querySelectorAll('.lang-content').forEach(el => {
                     el.classList.toggle('active', el.dataset.lang === lang);
                 });
+                Data.refreshParsedData();
                 Render.renderCV();
             },
 
@@ -1094,7 +1095,6 @@ const AutoExport = {
 const Data = {
     async fetchCVData() {
         try {
-            // Primero intentar cargar desde caché
             const cachedData = CacheManager.loadFromCache();
             
             if (cachedData && App.isLoggedIn) {
@@ -1112,8 +1112,9 @@ const Data = {
             
             const rawData = fullJson.data;
             const schema = fullJson.tables;
+            this.refreshParsedData();
 
-            // Procesar datos como antes...
+
             const personalRow = rawData.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
                                || rawData.datos_personales[0];
 
@@ -1143,6 +1144,28 @@ const Data = {
             console.error('Parsing error:', error);
             this.loadMockData();
         }
+    },
+
+
+    refreshParsedData() {
+        const { data, tables } = App.fullJson;
+        
+        // Re-mapeamos y filtramos todas las tablas según el idioma actual
+        App.cvData = {
+            profesiones: this.mapAndFilter(data.profesiones, tables, 'profesiones'),
+            experiencia: this.mapAndFilter(data.experiencia, tables, 'experiencia'),
+            educacion: this.mapAndFilter(data.educacion, tables, 'educacion'),
+            enlaces_personales: this.mapAndFilter(data.enlaces_personales, tables, 'enlaces_personales'),
+            skills: this.mapAndFilter(data.skills, tables, 'skills')
+        };
+
+        // Actualizar datos personales
+        const personalRow = data.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
+                           || data.datos_personales[0];
+        App.cvData.nombres = personalRow[1];
+        App.cvData.perfil = personalRow[5];
+
+        Render.renderCV(); // Redibujar la interfaz
     },
     
     mapAndFilter(dataArray, schema, tableName) {
