@@ -933,7 +933,164 @@
                 }
             }
         };
-
+const AutoExport = {
+    // Bandera para evitar múltiples exportaciones simultáneas
+    isExporting: false,
+    
+    // Exportar automáticamente después de cambios
+    async exportOnChange() {
+        if (!App.isLoggedIn) return;
+        
+        // Evitar múltiples llamadas simultáneas
+        if (this.isExporting) {
+            setTimeout(() => this.exportOnChange(), 1000);
+            return;
+        }
+        
+        this.isExporting = true;
+        
+        try {
+            await this.exportToJSON();
+            console.log('Datos exportados automáticamente');
+        } catch (error) {
+            console.error('Error en exportación automática:', error);
+        } finally {
+            this.isExporting = false;
+        }
+    },
+    
+    async exportToJSON() {
+        if (!App.cvData) return;
+        
+        // Reconstruir la estructura del JSON original con los cambios
+        const exportData = this.reconstructOriginalJSON();
+        
+        // Crear y descargar el archivo
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        
+        // Crear un enlace invisible y hacer click
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `cv_modified_${this.getTimestamp()}.json`;
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        
+        // Limpiar
+        setTimeout(() => {
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }, 100);
+    },
+    
+    // Reconstruir la estructura del JSON original
+    reconstructOriginalJSON() {
+        // Esta es la estructura de tu cvs.json
+        const reconstructed = {
+            version: "1.0",
+            tables: [
+                {
+                    name: "datos_personales",
+                    columns: [
+                        { name: "id", type: "INTEGER" },
+                        { name: "nombres", type: "TEXT" },
+                        { name: "perfil", type: "TEXT" },
+                        { name: "foto_url", type: "TEXT" },
+                        { name: "persona_id", type: "INTEGER" },
+                        { name: "profesion_id", type: "INTEGER" },
+                        { name: "lengua", type: "TEXT" }
+                    ]
+                },
+                {
+                    name: "experiencia",
+                    columns: [
+                        { name: "id", type: "INTEGER" },
+                        { name: "persona_id", type: "INTEGER" },
+                        { name: "profesion_id", type: "INTEGER" },
+                        { name: "inicio_anio", type: "TEXT" },
+                        { name: "institucion", type: "TEXT" },
+                        { name: "lugar", type: "TEXT" },
+                        { name: "rol", type: "TEXT" },
+                        { name: "tareas", type: "TEXT" },
+                        { name: "logros", type: "TEXT" },
+                        { name: "referencia", type: "TEXT" },
+                        { name: "referencia_linkedin", type: "TEXT" },
+                        { name: "lengua", type: "TEXT" }
+                    ]
+                }
+                // ... agregar más tablas según sea necesario
+            ],
+            data: {
+                datos_personales: this.reconstructPersonalData(),
+                profesiones: this.reconstructProfessions(),
+                experiencia: this.reconstructExperience(),
+                educacion: this.reconstructEducation(),
+                enlaces_personales: this.reconstructLinks(),
+                skills: this.reconstructSkills()
+            }
+        };
+        
+        return reconstructed;
+    },
+    
+    // Reconstruir datos personales
+    reconstructPersonalData() {
+        // Suponiendo que mantienes los datos originales + cambios
+        const baseData = App.originalData?.datos_personales || [];
+        const currentLang = App.currentLanguage;
+        
+        // Esto es un ejemplo - necesitarías adaptarlo a tu estructura real
+        return [
+            [1, App.cvData.nombres || "Diego Paucar", App.cvData.perfil || "", 
+             App.cvData.foto_url || "/profile.jpg", 1, 1, currentLang]
+        ];
+    },
+    
+    // Reconstruir experiencia
+    reconstructExperience() {
+        if (!App.cvData.experiencia) return [];
+        
+        return App.cvData.experiencia.map(exp => [
+            exp.id || 0,
+            exp.persona_id || 1,
+            exp.profesion_id || 1,
+            exp.inicio_anio || "",
+            exp.institucion || "",
+            exp.lugar || "",
+            exp.rol || "",
+            exp.tareas || "",
+            exp.logros || "",
+            exp.referencia || "",
+            exp.referencia_linkedin || "",
+            exp.lengua || App.currentLanguage
+        ]);
+    },
+    
+    // Reconstruir educación
+    reconstructEducation() {
+        if (!App.cvData.educacion) return [];
+        
+        return App.cvData.educacion.map(edu => [
+            edu.id || 0,
+            edu.persona_id || 1,
+            edu.grado_instruccion || "",
+            edu.institucion || "",
+            edu.titulo || "",
+            edu.fecha_inicio || "",
+            edu.en_curso || 0,
+            edu.lengua || App.currentLanguage
+        ]);
+    },
+    
+    // Métodos similares para reconstructProfessions, reconstructLinks, reconstructSkills
+    
+    getTimestamp() {
+        const now = new Date();
+        return now.toISOString().replace(/[:.]/g, '-').split('T')[0];
+    }
+};
 const Data = {
     aasync fetchCVData() {
         try {
@@ -1300,34 +1457,69 @@ const Data = {
         element.classList.remove('edit-mode');
         element.innerHTML = newValue;
         
-        // Encontrar y actualizar el dato en App.cvData
+        // Actualizar en memoria
         this.updateDataInMemory(element, newValue);
         
-        // Guardar en caché inmediatamente
+        // Guardar en caché
         CacheManager.saveToCache(App.cvData);
+        
+        // Exportar automáticamente
+        if (App.isLoggedIn) {
+            setTimeout(() => AutoExport.exportOnChange(), 100);
+        }
     },
 
     deleteExperience(id) {
         if (!confirm('Delete this experience?')) return;
-        App.cvData.experiencia = App.cvData.experiencia.filter(e => e.id !== id);
+        
+        // Buscar el índice para eliminarlo del array
+        const index = App.cvData.experiencia.findIndex(e => e.id === id);
+        if (index !== -1) {
+            App.cvData.experiencia.splice(index, 1);
+        }
+        
         CacheManager.saveToCache(App.cvData);
         Render.renderTimeline();
+        
+        // Exportar automáticamente
+        if (App.isLoggedIn) {
+            setTimeout(() => AutoExport.exportOnChange(), 100);
+        }
     },
-
+    
     deleteEducation(id) {
         if (!confirm('Delete this education?')) return;
-        App.cvData.educacion = App.cvData.educacion.filter(e => e.id !== id);
+        
+        const index = App.cvData.educacion.findIndex(e => e.id === id);
+        if (index !== -1) {
+            App.cvData.educacion.splice(index, 1);
+        }
+        
         CacheManager.saveToCache(App.cvData);
         Render.renderInfoSections();
+        
+        // Exportar automáticamente
+        if (App.isLoggedIn) {
+            setTimeout(() => AutoExport.exportOnChange(), 100);
+        }
     },
 
     deleteLink(id) {
         if (!confirm('Delete this link?')) return;
-        App.cvData.enlaces_personales = App.cvData.enlaces_personales.filter(e => e.id !== id);
+        
+        const index = App.cvData.enlaces_personales.findIndex(e => e.id === id);
+        if (index !== -1) {
+            App.cvData.enlaces_personales.splice(index, 1);
+        }
+        
         CacheManager.saveToCache(App.cvData);
         Render.renderInfoSections();
+        
+        // Exportar automáticamente
+        if (App.isLoggedIn) {
+            setTimeout(() => AutoExport.exportOnChange(), 100);
+        }
     },
-
             cancelEdit(element, originalHtml) {
                 element.classList.remove('edit-mode');
                 element.innerHTML = originalHtml;
@@ -1411,11 +1603,17 @@ const Data = {
                 newEntry.id = maxId + 1;
 
                 // Add the new entry to the corresponding array in App.cvData
-         if (App.cvData[tableName]) {
-            App.cvData[tableName].push(newEntry);
-        } else {
-            App.cvData[tableName] = [newEntry];
+                const currentEntries = App.cvData[tableName] || [];
+        const maxId = Math.max(0, ...currentEntries.map(e => e.id || 0));
+        newEntry.id = maxId + 1;
+        newEntry.lengua = App.currentLanguage;
+
+        // Agregar a los datos
+        if (!App.cvData[tableName]) {
+            App.cvData[tableName] = [];
         }
+        App.cvData[tableName].push(newEntry);
+
         // Guardar en caché
         CacheManager.saveToCache(App.cvData);
 
@@ -1426,9 +1624,27 @@ const Data = {
             Render.renderInfoSections();
         }
 
+        // Exportar automáticamente
+        if (App.isLoggedIn) {
+            setTimeout(() => AutoExport.exportOnChange(), 100);
+        }
+
         CRUD.closeCreateModal();
         form.reset();
             },
+                updateDataInMemory(element, newValue) {
+        // Esta función necesita mapear el elemento DOM a los datos
+        // Implementación simplificada:
+        const parentItem = element.closest('.timeline-item, .info-item');
+        if (!parentItem) return;
+        
+        // Aquí necesitarías lógica para encontrar qué campo específico actualizar
+        // Por ahora, solo registro
+        console.log('Actualizando campo:', {
+            element: element.className,
+            value: newValue,
+            parent: parentItem
+        });},
 
             getTableSchema(tableName) {
                 // Define the schema for each table that can be created
