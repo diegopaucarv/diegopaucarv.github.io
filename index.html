@@ -1105,143 +1105,93 @@ const AutoExport = {
 const Data = {
     async fetchCVData() {
         try {
+            // 1. Intentar cargar desde caché si es admin
             const cachedData = CacheManager.loadFromCache();
-            
             if (cachedData && App.isLoggedIn) {
-                // Si hay caché y el usuario es admin, usar datos cacheados
                 App.cvData = cachedData;
-                console.log('Usando datos cacheados');
                 Render.renderCV();
                 return;
             }
 
-            // Si no hay caché o no es admin, cargar desde archivo
+            // 2. Cargar archivo original
             const response = await fetch('./cvs.json');
-            if (!response.ok) throw new Error('Network response was not ok');
+            if (!response.ok) throw new Error('Error al cargar cvs.json');
             App.originalData = await response.json();
-            
-            const rawData = App.originalData.data;
-            const schema = App.originalData.tables;
+
+            // 3. Procesar y Filtrar (IMPORTANTE: primero asignar originalData)
             this.refreshParsedData();
 
-
-            const personalRow = rawData.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
-                               || rawData.datos_personales[0];
-
-            const processedData = {
-                nombres: personalRow[1], 
-                perfil: personalRow[5],
-                foto_url: "/profile.jpg", 
-                
-                profesiones: this.mapAndFilter(rawData.profesiones, schema, 'profesiones'),
-                experiencia: this.mapAndFilter(rawData.experiencia, schema, 'experiencia'),
-                educacion: this.mapAndFilter(rawData.educacion, schema, 'educacion'),
-                enlaces_personales: this.mapAndFilter(rawData.enlaces_personales, schema, 'enlaces_personales'),
-                skills: this.mapAndFilter(rawData.skills, schema, 'skills')
-            };
-
-            // Guardar como original y actual
-            App.originalData = { ...processedData };
-            App.cvData = App.isLoggedIn ? cachedData || processedData : processedData;
-            
-            // Si es admin y no había caché, crear uno inicial
-            if (App.isLoggedIn && !cachedData) {
-                CacheManager.saveToCache(App.cvData);
-            }
-
-            Render.renderCV();
         } catch (error) {
-            console.error('Parsing error:', error);
-            this.loadMockData();
+            console.error('Error en Data.fetchCVData:', error);
         }
     },
 
-
     refreshParsedData() {
-if (!App.originalData || !App.originalData.data) {
-        console.warn("Intento de refresco sin datos cargados.");
-        return; 
-    }
+        if (!App.originalData || !App.originalData.data) return;
 
-    const { data, tables } = App.originalData;
-    
-    // ... resto de tu lógica de mapeo y filtrado ...
-    App.cvData = {
-        profesiones: this.mapAndFilter(data.profesiones, tables, 'profesiones'),
-        experiencia: this.mapAndFilter(data.experiencia, tables, 'experiencia'),
-        educacion: this.mapAndFilter(data.educacion, tables, 'educacion'),
-        enlaces_personales: this.mapAndFilter(data.enlaces_personales, tables, 'enlaces_personales'),
-        skills: this.mapAndFilter(data.skills, tables, 'skills')
-    };
+        const { data, tables } = App.originalData;
+        
+        // Mapear y filtrar por idioma actual usando App.currentLanguage
+        App.cvData = {
+            profesiones: this.mapAndFilter(data.profesiones, tables, 'profesiones'),
+            experiencia: this.mapAndFilter(data.experiencia, tables, 'experiencia'),
+            educacion: this.mapAndFilter(data.educacion, tables, 'educacion'),
+            enlaces_personales: this.mapAndFilter(data.enlaces_personales, tables, 'enlaces_personales'),
+            skills: this.mapAndFilter(data.skills, tables, 'skills')
+        };
 
-    // Actualizar datos personales buscando la fila por idioma
-    const personalRow = data.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
-                       || data.datos_personales[0];
-    
-    App.cvData.nombres = personalRow[1];
-    App.cvData.perfil = personalRow[5];
+        // Datos personales (busca la fila que termina en el idioma actual)
+        const personalRow = data.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
+                           || data.datos_personales[0];
+        
+        App.cvData.nombres = personalRow[1];
+        App.cvData.perfil = personalRow[5];
 
-    Render.renderCV(); 
+        Render.renderCV();
     },
-    
+
     mapAndFilter(dataArray, schema, tableName) {
         return dataArray.map(row => {
             let obj = {};
-            
-            // Definimos mapas específicos porque la data del JSON es más corta que el SQL
+            // Mapeo manual para corregir el desfase de columnas del SQL original
             if (tableName === 'experiencia') {
                 obj = {
                     id: row[0],
                     persona_id: row[1],
                     profesion_id: row[2],
-                    inicio_anio: row[3],      // Aquí ahora caerá "Actual" o el año
-                    institucion: row[4],      // Aquí caerá "ESCAPE" o "Universidad..."
+                    inicio_anio: row[3], // "Actual" o fecha
+                    institucion: row[4], // "ESCAPE", etc.
                     lugar: row[5],
                     rol: row[6],
                     tareas: row[7],
-                    logros: row[8],
-                    referencia: row[9],
-                    referencia_linkedin: row[10],
-                    lengua: row[row.length - 1] // Siempre el último es el idioma
+                    lengua: row[row.length - 1] // Siempre el último elemento
                 };
-            } 
-            else if (tableName === 'skills') {
+            } else if (tableName === 'skills') {
                 obj = {
                     id: row[0],
-                    persona_id: row[1],
-                    profesion_id: row[2],
                     skill_name: row[3],
                     skill_level: row[4],
                     tipo_skill: row[5],
-                    certificate_name: row[6],
                     lengua: row[row.length - 1]
                 };
-            }
-            else if (tableName === 'educacion') {
+            } else if (tableName === 'educacion') {
                 obj = {
                     id: row[0],
-                    persona_id: row[1],
                     grado_instruccion: row[2],
                     institucion: row[3],
                     titulo: row[4],
                     fecha_inicio: row[5],
-                    en_curso: row[6],
                     lengua: row[row.length - 1]
                 };
-            }
-            else {
-                // Mapeo genérico para tablas simples como 'profesiones' o 'enlaces'
+            } else {
+                // Genérico para tablas simples
                 const tableSchema = schema.find(t => t.name === tableName);
                 const columns = tableSchema.columns.map(col => col.name);
-                row.forEach((value, index) => {
-                    const columnName = columns[index + 1]; 
-                    if (columnName) obj[columnName] = value;
-                });
+                row.forEach((val, i) => { if (columns[i+1]) obj[columns[i+1]] = val; });
                 obj.lengua = row[row.length - 1];
             }
             return obj;
-        })
-        .filter(item => item.lengua === App.currentLanguage);
+        }).filter(item => item.lengua === App.currentLanguage);
     }
 };
 
@@ -1705,19 +1655,11 @@ if (!App.originalData || !App.originalData.data) {
             }
         };
 document.addEventListener('DOMContentLoaded', async () => {
-    // 1. Configuramos la UI (estilos de botones), pero SIN llamar a render todavía
-    UI.initLanguageUI(); 
-    
-    // 2. Iniciamos Auth y cargamos Data
+    UI.initLanguageUI();
+    UI.updateConfigButton();
     await Auth.init();
-    await Data.fetchCVData(); // Esto internamente llamará a refreshParsedData una vez tenga la data
+    await Data.fetchCVData(); // Esto cargará y renderizará todo
 });
-        document.addEventListener('DOMContentLoaded', () => {
-            UI.changeLanguage(App.currentLanguage);
-            UI.updateConfigButton();
-            Auth.init().then(() => Data.fetchCVData());
-        });
-
         document.addEventListener('keydown', (e) => {
             const modal = document.getElementById('loginModal');
             const createModal = document.getElementById('createModal');
