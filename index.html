@@ -835,6 +835,7 @@
                 document.querySelectorAll('.lang-content').forEach(el => {
                     el.classList.toggle('active', el.dataset.lang === lang);
                 });
+                Render.renderCV();
             },
 
             toggleLoginModal() {
@@ -932,7 +933,7 @@
                 
                 document.getElementById('personName').textContent = "Diego Paucar"
                 document.getElementById('professions').textContent = App.cvData.profesiones?.map(p => p.profesion).join(' | ') || '';
-                document.getElementById('description').textContent = (localStorage.getItem('language') === "es") ? desc_es : desc_en;
+                document.getElementById('description').textContent = (App.currentLanguage === "es") ? desc_es : desc_en;
                 
                 if (App.cvData.foto_url) {
                     document.getElementById('profileImage').src = App.cvData.foto_url;
