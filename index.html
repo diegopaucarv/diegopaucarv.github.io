@@ -765,9 +765,85 @@
     <script>
         const App = {
             cvData: null,
+            originalData: null, // Para mantener los datos originales
+            cachedData: null,   // Para mantener los datos modificados
             currentLanguage: localStorage.getItem('language') || 'en',
             isLoggedIn: localStorage.getItem('sessionToken') ? true : false,
             credentials: null
+            dataVersion: '1.0' // Para manejar versiones de datos
+        };
+
+        const CacheManager = {
+            // Guardar datos modificados en localStorage
+            saveToCache(data) {
+                try {
+                    const cacheData = {
+                        data: data,
+                        timestamp: new Date().toISOString(),
+                        version: App.dataVersion
+                    };
+                    localStorage.setItem('cvData_cache', JSON.stringify(cacheData));
+                    console.log('Datos guardados en caché');
+                } catch (error) {
+                    console.error('Error guardando en caché:', error);
+                }
+            },
+        
+            // Cargar datos desde caché
+            loadFromCache() {
+                try {
+                    const cached = localStorage.getItem('cvData_cache');
+                    if (cached) {
+                        const parsed = JSON.parse(cached);
+                        // Verificar que la versión coincida
+                        if (parsed.version === App.dataVersion) {
+                            console.log('Datos cargados desde caché');
+                            return parsed.data;
+                        } else {
+                            console.log('Versión de caché obsoleta, limpiando');
+                            localStorage.removeItem('cvData_cache');
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error cargando caché:', error);
+                }
+                return null;
+            },
+        
+            // Exportar datos modificados como JSON descargable
+            exportModifiedData() {
+                if (!App.cvData) {
+                    alert('No hay datos para exportar');
+                    return;
+                }
+        
+                const exportData = {
+                    version: App.dataVersion,
+                    timestamp: new Date().toISOString(),
+                    description: 'Datos modificados del CV',
+                    data: App.cvData
+                };
+        
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `cv_modified_${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            },
+        
+            // Limpiar caché y volver a datos originales
+            clearCache() {
+                localStorage.removeItem('cvData_cache');
+                App.cvData = { ...App.originalData };
+                Render.renderCV();
+                alert('Caché limpiado, usando datos originales');
+            }
         };
 
         const Auth = {
@@ -859,8 +935,20 @@
         };
 
 const Data = {
-    async fetchCVData() {
+    aasync fetchCVData() {
         try {
+            // Primero intentar cargar desde caché
+            const cachedData = CacheManager.loadFromCache();
+            
+            if (cachedData && App.isLoggedIn) {
+                // Si hay caché y el usuario es admin, usar datos cacheados
+                App.cvData = cachedData;
+                console.log('Usando datos cacheados');
+                Render.renderCV();
+                return;
+            }
+
+            // Si no hay caché o no es admin, cargar desde archivo
             const response = await fetch('./cvs.json');
             if (!response.ok) throw new Error('Network response was not ok');
             const fullJson = await response.json();
@@ -868,11 +956,11 @@ const Data = {
             const rawData = fullJson.data;
             const schema = fullJson.tables;
 
-            // Find the personal data row matching current language
+            // Procesar datos como antes...
             const personalRow = rawData.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
                                || rawData.datos_personales[0];
 
-            App.cvData = {
+            const processedData = {
                 nombres: personalRow[1], 
                 perfil: personalRow[5],
                 foto_url: "/profile.jpg", 
@@ -883,6 +971,15 @@ const Data = {
                 enlaces_personales: this.mapAndFilter(rawData.enlaces_personales, schema, 'enlaces_personales'),
                 skills: this.mapAndFilter(rawData.skills, schema, 'skills')
             };
+
+            // Guardar como original y actual
+            App.originalData = { ...processedData };
+            App.cvData = App.isLoggedIn ? cachedData || processedData : processedData;
+            
+            // Si es admin y no había caché, crear uno inicial
+            if (App.isLoggedIn && !cachedData) {
+                CacheManager.saveToCache(App.cvData);
+            }
 
             Render.renderCV();
         } catch (error) {
@@ -1199,71 +1296,43 @@ const Data = {
                 });
             },
 
-            saveEdit(element, newValue, originalHtml, fieldType) {
-                element.classList.remove('edit-mode');
-                
-                // Reconstruct the element with saved value, preserving original structure if possible
-                if (fieldType === 'textarea') {
-                    element.innerHTML = newValue;
-                } else {
-                    // For text, try to preserve original HTML structure if it was more than just text
-                    if (originalHtml.includes('<')) {
-                        // Simple heuristic: if original had HTML, assume it was intended.
-                        // More robust would be to parse and update specific elements.
-                        // For now, replace the text content of the editable element.
-                        const tempDiv = document.createElement('div');
-                        tempDiv.innerHTML = originalHtml;
-                        const editablePart = tempDiv.querySelector('.editable-field'); // Find the exact editable part if nested
-                        if (editablePart) {
-                           editablePart.textContent = newValue; // Replace only the text
-                           element.innerHTML = tempDiv.innerHTML;
-                        } else {
-                           // Fallback if structure not recognized, just set the new value
-                           element.textContent = newValue;
-                        }
-                    } else {
-                        element.textContent = newValue;
-                    }
-                }
-                
-                // For simplicity, this example doesn't sync back to App.cvData or GitHub.
-                // In a real app, you'd find the ID of the item and update the corresponding field in App.cvData.
-                // e.g., update CVData(element, newValue);
-                
-                const controls = element.querySelector('.edit-controls');
-                if(controls) controls.remove();
+    saveEdit(element, newValue, originalHtml, fieldType) {
+        element.classList.remove('edit-mode');
+        element.innerHTML = newValue;
+        
+        // Encontrar y actualizar el dato en App.cvData
+        this.updateDataInMemory(element, newValue);
+        
+        // Guardar en caché inmediatamente
+        CacheManager.saveToCache(App.cvData);
+    },
 
-                // Re-apply event listener if needed, or structure might prevent it
-                if (element.parentElement.classList.contains('timeline-item')) {
-                    // Timeline item, re-render might be complex. For now, assume it works.
-                } else if (element.parentElement.classList.contains('info-item')) {
-                    // Info item
-                }
-            },
+    deleteExperience(id) {
+        if (!confirm('Delete this experience?')) return;
+        App.cvData.experiencia = App.cvData.experiencia.filter(e => e.id !== id);
+        CacheManager.saveToCache(App.cvData);
+        Render.renderTimeline();
+    },
+
+    deleteEducation(id) {
+        if (!confirm('Delete this education?')) return;
+        App.cvData.educacion = App.cvData.educacion.filter(e => e.id !== id);
+        CacheManager.saveToCache(App.cvData);
+        Render.renderInfoSections();
+    },
+
+    deleteLink(id) {
+        if (!confirm('Delete this link?')) return;
+        App.cvData.enlaces_personales = App.cvData.enlaces_personales.filter(e => e.id !== id);
+        CacheManager.saveToCache(App.cvData);
+        Render.renderInfoSections();
+    },
 
             cancelEdit(element, originalHtml) {
                 element.classList.remove('edit-mode');
                 element.innerHTML = originalHtml;
                 const controls = element.querySelector('.edit-controls');
                 if(controls) controls.remove();
-            },
-
-            deleteExperience(id) {
-                if (!confirm('Delete this experience?')) return;
-                App.cvData.experiencia = App.cvData.experiencia.filter(e => e.id !== id);
-                Render.renderTimeline();
-            },
-
-            deleteEducation(id) {
-                if (!confirm('Delete this education?')) return;
-                App.cvData.educacion = App.cvData.educacion.filter(e => e.id !== id);
-                Render.renderInfoSections();
-            },
-
-            deleteLink(id) {
-                if (!confirm('Delete this link?')) return;
-                App.cvData.enlaces_personales = App.cvData.enlaces_personales.filter(e => e.id !== id);
-                Render.renderInfoSections();
             },
 
             openCreateModal(tableName) {
@@ -1342,23 +1411,23 @@ const Data = {
                 newEntry.id = maxId + 1;
 
                 // Add the new entry to the corresponding array in App.cvData
-                if (App.cvData[tableName]) {
-                    App.cvData[tableName].push(newEntry);
-                } else {
-                    // If the array doesn't exist, create it
-                    App.cvData[tableName] = [newEntry];
-                }
+         if (App.cvData[tableName]) {
+            App.cvData[tableName].push(newEntry);
+        } else {
+            App.cvData[tableName] = [newEntry];
+        }
+        // Guardar en caché
+        CacheManager.saveToCache(App.cvData);
 
-                // Re-render the relevant section
-                if (tableName === 'experiencia') {
-                    Render.renderTimeline();
-                } else if (tableName === 'educacion' || tableName === 'enlaces_personales') {
-                    Render.renderInfoSections();
-                }
-                // Potentially add rendering for other sections if more tables are added
+        // Re-renderizar
+        if (tableName === 'experiencia') {
+            Render.renderTimeline();
+        } else if (tableName === 'educacion' || tableName === 'enlaces_personales') {
+            Render.renderInfoSections();
+        }
 
-                CRUD.closeCreateModal();
-                form.reset();
+        CRUD.closeCreateModal();
+        form.reset();
             },
 
             getTableSchema(tableName) {
