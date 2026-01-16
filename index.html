@@ -866,6 +866,7 @@
                     const text = await response.text();
                     const data = JSON.parse(text);
                     App.cvData = Array.isArray(data) ? data[0] : data;
+                    console.log(data)
                     Render.renderCV();
                 } catch (error) {
                     console.error('Error loading CV from GitHub, falling back to mock data:', error);
@@ -1096,7 +1097,7 @@
                     endYear = isNaN(endDate) ? end : endDate.getFullYear();
                 }
                 
-                return `${startYear} – ${endYear}`;
+                return `${startYear}`;
             }
         };
 
