@@ -773,7 +773,7 @@
         const Auth = {
             async init() {
                 try {
-                    const response = await fetch('https://raw.githubusercontent.com/diegopaucarv/cv_data/main/config.json');
+                    const response = await fetch('./config.json');
                     if (response.ok) {
                         App.credentials = await response.json();
                     } else {
