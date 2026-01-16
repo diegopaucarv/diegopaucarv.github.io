@@ -858,22 +858,6 @@
             }
         };
 
-The reason your experience and skills sections are appearing empty is a mapping misalignment.
-
-In your JSON, your data arrays have fewer items than the tables schema defines columns. Specifically, your mapping logic columns[index + 1] assumes the language tag is at a specific index that your data doesn't reach.
-Why it's failing:
-
-    For Experience: Your schema has 14 columns, but your data row only has 12 items. Your current logic maps the final "en" to referencia_linkedin instead of lengua.
-
-    For Skills: Your schema has 12 columns, but your data row only has 8 items. The "en" tag is being mapped to certificate_year.
-
-    The Result: When the filter runs (item.lengua === App.currentLanguage), it finds undefined instead of "en", so it removes every item from the list.
-
-The Solution: Updated mapAndFilter
-
-Replace your Data object with this version. It identifies the language tag by looking at the last item in each data array, which is consistent across your entire JSON file.
-JavaScript
-
 const Data = {
     async fetchCVData() {
         try {
