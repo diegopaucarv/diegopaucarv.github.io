@@ -868,21 +868,22 @@ const Data = {
             const rawData = fullJson.data;
             const schema = fullJson.tables;
 
-            // 1. Find the personal data row that matches the current language
-            const personalRow = rawData.datos_personales.find(row => row.includes(App.currentLanguage)) 
+            // Use the last index for safer language matching in personal data
+            const personalRow = rawData.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
                                || rawData.datos_personales[0];
 
             App.cvData = {
                 nombres: personalRow[1], 
                 perfil: personalRow[5],
-                foto_url: "/profile.jpg", // Update this to your real path
+                foto_url: "/profile.jpg", 
                 
-                // 2. Map and FILTER by language simultaneously
                 profesiones: this.mapAndFilter(rawData.profesiones, schema, 'profesiones'),
                 experiencia: this.mapAndFilter(rawData.experiencia, schema, 'experiencia'),
                 educacion: this.mapAndFilter(rawData.educacion, schema, 'educacion'),
                 enlaces_personales: this.mapAndFilter(rawData.enlaces_personales, schema, 'enlaces_personales'),
-                skills: this.mapAndFilter(rawData.skills, schema, 'skills')
+                skills: this.mapAndFilter(rawData.skills, schema, 'skills'),
+                // Special handling for publications since it doesn't follow the schema index
+                publications: rawData.publications.map(p => ({ title: p[0], url: p[1] }))
             };
 
             Render.renderCV();
@@ -895,20 +896,18 @@ const Data = {
     mapAndFilter(dataArray, schema, tableName) {
         const tableSchema = schema.find(t => t.name === tableName);
         if (!tableSchema) return [];
-
         const columns = tableSchema.columns.map(col => col.name);
         
         return dataArray
             .map(row => {
                 let obj = {};
                 row.forEach((value, index) => {
-                    // Skips 'n' and maps based on actual data structure
+                    // This maps index 0 of data to column 1 of schema, 1 to 2, etc.
                     const columnName = columns[index + 1]; 
-                    obj[columnName] = value;
+                    if (columnName) obj[columnName] = value;
                 });
                 return obj;
             })
-            // CRITICAL: Only keep items for the current language
             .filter(item => item.lengua === App.currentLanguage);
     }
 };
