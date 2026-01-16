@@ -1108,10 +1108,10 @@ const Data = {
             // Si no hay caché o no es admin, cargar desde archivo
             const response = await fetch('./cvs.json');
             if (!response.ok) throw new Error('Network response was not ok');
-            const fullJson = await response.json();
+            App.originalData = await response.json();
             
-            const rawData = fullJson.data;
-            const schema = fullJson.tables;
+            const rawData = App.originalData.data;
+            const schema = App.originalData.tables;
             this.refreshParsedData();
 
 
@@ -1148,7 +1148,7 @@ const Data = {
 
 
     refreshParsedData() {
-        const { data, tables } = App.fullJson;
+        const { data, tables } = App.originalData;
         
         // Re-mapeamos y filtramos todas las tablas según el idioma actual
         App.cvData = {
