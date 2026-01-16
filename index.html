@@ -1602,36 +1602,32 @@ const Data = {
                 const maxId = Math.max(0, ...currentEntries.map(e => e.id || 0));
                 newEntry.id = maxId + 1;
 
-                // Add the new entry to the corresponding array in App.cvData
-                const currentEntries = App.cvData[tableName] || [];
-        const maxId = Math.max(0, ...currentEntries.map(e => e.id || 0));
-        newEntry.id = maxId + 1;
-        newEntry.lengua = App.currentLanguage;
-
-        // Agregar a los datos
-        if (!App.cvData[tableName]) {
-            App.cvData[tableName] = [];
-        }
-        App.cvData[tableName].push(newEntry);
-
-        // Guardar en caché
-        CacheManager.saveToCache(App.cvData);
-
-        // Re-renderizar
-        if (tableName === 'experiencia') {
-            Render.renderTimeline();
-        } else if (tableName === 'educacion' || tableName === 'enlaces_personales') {
-            Render.renderInfoSections();
-        }
-
-        // Exportar automáticamente
-        if (App.isLoggedIn) {
-            setTimeout(() => AutoExport.exportOnChange(), 100);
-        }
-
-        CRUD.closeCreateModal();
-        form.reset();
-            },
+                newEntry.lengua = App.currentLanguage;
+        
+                // Agregar a los datos
+                if (!App.cvData[tableName]) {
+                    App.cvData[tableName] = [];
+                }
+                App.cvData[tableName].push(newEntry);
+        
+                // Guardar en caché
+                CacheManager.saveToCache(App.cvData);
+        
+                // Re-renderizar
+                if (tableName === 'experiencia') {
+                    Render.renderTimeline();
+                } else if (tableName === 'educacion' || tableName === 'enlaces_personales') {
+                    Render.renderInfoSections();
+                }
+        
+                // Exportar automáticamente
+                if (App.isLoggedIn) {
+                    setTimeout(() => AutoExport.exportOnChange(), 100);
+                }
+        
+                CRUD.closeCreateModal();
+                form.reset();
+                    },
                 updateDataInMemory(element, newValue) {
         // Esta función necesita mapear el elemento DOM a los datos
         // Implementación simplificada:
