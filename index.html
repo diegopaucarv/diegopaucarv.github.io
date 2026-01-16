@@ -858,6 +858,22 @@
             }
         };
 
+The reason your experience and skills sections are appearing empty is a mapping misalignment.
+
+In your JSON, your data arrays have fewer items than the tables schema defines columns. Specifically, your mapping logic columns[index + 1] assumes the language tag is at a specific index that your data doesn't reach.
+Why it's failing:
+
+    For Experience: Your schema has 14 columns, but your data row only has 12 items. Your current logic maps the final "en" to referencia_linkedin instead of lengua.
+
+    For Skills: Your schema has 12 columns, but your data row only has 8 items. The "en" tag is being mapped to certificate_year.
+
+    The Result: When the filter runs (item.lengua === App.currentLanguage), it finds undefined instead of "en", so it removes every item from the list.
+
+The Solution: Updated mapAndFilter
+
+Replace your Data object with this version. It identifies the language tag by looking at the last item in each data array, which is consistent across your entire JSON file.
+JavaScript
+
 const Data = {
     async fetchCVData() {
         try {
@@ -868,7 +884,7 @@ const Data = {
             const rawData = fullJson.data;
             const schema = fullJson.tables;
 
-            // Use the last index for safer language matching in personal data
+            // Find the personal data row matching current language
             const personalRow = rawData.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
                                || rawData.datos_personales[0];
 
@@ -881,9 +897,7 @@ const Data = {
                 experiencia: this.mapAndFilter(rawData.experiencia, schema, 'experiencia'),
                 educacion: this.mapAndFilter(rawData.educacion, schema, 'educacion'),
                 enlaces_personales: this.mapAndFilter(rawData.enlaces_personales, schema, 'enlaces_personales'),
-                skills: this.mapAndFilter(rawData.skills, schema, 'skills'),
-                // Special handling for publications since it doesn't follow the schema index
-                publications: rawData.publications.map(p => ({ title: p[0], url: p[1] }))
+                skills: this.mapAndFilter(rawData.skills, schema, 'skills')
             };
 
             Render.renderCV();
@@ -901,13 +915,19 @@ const Data = {
         return dataArray
             .map(row => {
                 let obj = {};
+                // Capture the language from the LAST element of the array
+                const rowLanguage = row[row.length - 1];
+                
                 row.forEach((value, index) => {
-                    // This maps index 0 of data to column 1 of schema, 1 to 2, etc.
                     const columnName = columns[index + 1]; 
                     if (columnName) obj[columnName] = value;
                 });
+
+                // Force the language property to the actual value found
+                obj.lengua = rowLanguage; 
                 return obj;
             })
+            // Filter strictly by the current language
             .filter(item => item.lengua === App.currentLanguage);
     }
 };
