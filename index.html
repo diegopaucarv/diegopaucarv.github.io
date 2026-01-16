@@ -939,14 +939,13 @@ const Data = {
             renderTimeline() {
                 const container = document.getElementById('timelineContainer');
                 container.innerHTML = '';
-                const filteredExp = App.cvData.experiencia.filter(exp => exp.lengua === App.currentLanguage);
-                console.log(filteredExp);
+
                 if (!App.cvData.experiencia || App.cvData.experiencia.length === 0) {
                     container.innerHTML = '<p class="lang-content active" data-lang="en">No experience available.</p><p class="lang-content" data-lang="es">No hay experiencia disponible.</p>';
                     return;
                 }
 
-                const sorted = [...filteredExp].sort((a, b) => {
+                const sorted = [...App.cvData.experiencia].sort((a, b) => {
                     const dateA = new Date(a.inicio_anio === 'Actual' ? Date.now() : a.inicio_anio);
                     const dateB = new Date(b.inicio_anio === 'Actual' ? Date.now() : b.inicio_anio);
                     return dateB - dateA;
