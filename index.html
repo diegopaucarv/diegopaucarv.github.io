@@ -1092,7 +1092,7 @@ const AutoExport = {
     }
 };
 const Data = {
-    aasync fetchCVData() {
+    async fetchCVData() {
         try {
             // Primero intentar cargar desde caché
             const cachedData = CacheManager.loadFromCache();
