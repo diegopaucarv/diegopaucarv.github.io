@@ -376,18 +376,21 @@
             flex-direction: row-reverse;
         }
 
+        /* Center spine dot only — no bullets inside the content cards */
         .timeline-bullet {
-            width: 10px;
-            height: 10px;
-            border-radius: 2px;
-            background: var(--primary);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            border: 2px solid var(--surface);
             flex-shrink: 0;
+            box-shadow: 0 0 0 1px var(--border);
         }
 
-        .timeline-bullet.work      { background: var(--accent-work); }
-        .timeline-bullet.design    { background: var(--accent-design); }
-        .timeline-bullet.education { background: var(--accent-edu); }
-        .timeline-bullet.other     { background: var(--accent-other); }
+        .timeline-bullet.work      { background: var(--accent-work);    box-shadow: 0 0 0 1px var(--accent-work); }
+        .timeline-bullet.design    { background: var(--accent-design);  box-shadow: 0 0 0 1px var(--accent-design); }
+        .timeline-bullet.education { background: var(--accent-edu);     box-shadow: 0 0 0 1px var(--accent-edu); }
+        .timeline-bullet.other     { background: var(--accent-other);   box-shadow: 0 0 0 1px var(--accent-other); }
 
         .timeline-item h3 {
             font-size: 1rem;
@@ -398,18 +401,42 @@
         }
 
         .timeline-role {
-            color: var(--text-light);
-            font-size: 0.85rem;
-            margin-top: 0.2rem;
-            font-style: italic;
-            font-family: 'Lora', Georgia, serif;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 0.15rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
         }
 
+        /* Description revealed on hover on the opposite side */
         .timeline-description {
             color: var(--text-muted);
             font-size: 0.85rem;
             line-height: 1.55;
             margin-top: 0.4rem;
+        }
+
+        /* The hover reveal panel — lives in the empty opposite cell */
+        .timeline-hover-reveal {
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+            padding: 0.85rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.84rem;
+            color: var(--text-light);
+            line-height: 1.55;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .timeline-item:hover .timeline-hover-reveal {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
         }
 
         /* ── INFO CARDS ── */
@@ -563,6 +590,10 @@
             .timeline-content .timeline-header,
             .timeline-content.left .timeline-header {
                 flex-direction: row !important;
+            }
+
+            .timeline-hover-reveal {
+                display: none;
             }
 
             .header-controls {
@@ -1286,24 +1317,22 @@ const Data = {
                             <p class="timeline-year">${year}</p>
                         </div>
                     `;
-                    <!-- Add delete button and edit capability to timeline items -->
                     const deleteBtn = App.isLoggedIn ? `<button class="btn-delete" onclick="CRUD.deleteExperience(${exp.id})">Delete</button>` : '';
                     const contentDiv = `
                         <div class="timeline-content ${contentClass}">
                             <div class="timeline-header">
-                                <div class="timeline-bullet ${categoryClass}"></div>
-                                <h3 class="editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${exp.institucion}</h3>
+                                <h3 class="editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${exp.rol}</h3>
                             </div>
-                            <p class="timeline-role editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${exp.rol}</p>
-                            <p class="timeline-description editable-field" ondblclick="CRUD.makeEditable(this, 'textarea')">${exp.tareas}</p>
+                            <p class="timeline-role editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${exp.institucion}</p>
                             ${deleteBtn}
                         </div>
                     `;
+                    const revealDiv = exp.tareas ? `<div class="timeline-hover-reveal">${exp.tareas}</div>` : `<div></div>`;
 
                     if (isLeft) {
-                        item.innerHTML = `${contentDiv}${bulletDiv}${emptyDiv}`;
+                        item.innerHTML = `${contentDiv}${bulletDiv}${revealDiv}`;
                     } else {
-                        item.innerHTML = `${emptyDiv}${bulletDiv}${contentDiv}`;
+                        item.innerHTML = `${revealDiv}${bulletDiv}${contentDiv}`;
                     }
 
                     container.appendChild(item);
