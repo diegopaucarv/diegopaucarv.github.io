@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "neurodivergence-and-data",
+    "title": "Neurodivergence and Data Science",
+    "date": "2025-11-14",
+    "description": "How ADHD and autism shaped the way I approach research and systems thinking."
+  },
+  {
+    "slug": "on-building-gt",
+    "title": "On Building gt",
+    "date": "2025-09-03",
+    "description": "Notes on why I built a command-line tool for social research, and what I learned doing it."
+  },
+  {
+    "slug": "methods-for-messy-worlds",
+    "title": "Methods for Messy Worlds",
+    "date": "2025-06-20",
+    "description": "A brief argument for mixed methods in an era of big data enthusiasm."
+  }
+]
