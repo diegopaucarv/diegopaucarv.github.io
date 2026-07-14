@@ -1,1941 +1,3079 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diego Paucar - CV</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #1a1a1a;
-            --background: #f7f5f2;
-            --surface: #ffffff;
-            --text: #1a1a1a;
-            --text-light: #6b6b6b;
-            --text-muted: #9a9a9a;
-            --border: #e2ddd8;
-            --accent: #c0392b;
-            --accent-work: #2563eb;
-            --accent-design: #c0392b;
-            --accent-edu: #16a34a;
-            --accent-other: #d97706;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* ── HEADER CONTROLS ── */
-        .header-controls {
-            position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
-            z-index: 1000;
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-        }
-
-        .language-toggle {
-            display: flex;
-            gap: 0;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 3px;
-        }
-
-        .lang-btn {
-            padding: 0.35rem 0.7rem;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            transition: all 0.2s ease;
-            border-radius: 4px;
-            letter-spacing: 0.05em;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .lang-btn.active {
-            background: var(--primary);
-            color: var(--surface);
-        }
-
-        .btn-config {
-            padding: 0.4rem 0.85rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--text-light);
-            transition: all 0.2s ease;
-            letter-spacing: 0.03em;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-config:hover {
-            background: var(--primary);
-            color: var(--surface);
-            border-color: var(--primary);
-        }
-
-        /* ── MODALS ── */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(26, 26, 26, 0.55);
-            backdrop-filter: blur(2px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--surface);
-            border-radius: 10px;
-            padding: 2rem 2.25rem;
-            width: 90%;
-            max-width: 420px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            border: 1px solid var(--border);
-        }
-
-        .modal h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.35rem;
-            font-weight: 700;
-            font-family: 'Lora', Georgia, serif;
-            letter-spacing: -0.02em;
-        }
-
-        .modal-form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.875rem;
-        }
-
-        .modal-form input {
-            padding: 0.7rem 0.9rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.95rem;
-            background: var(--background);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            transition: border-color 0.2s ease;
-        }
-
-        .modal-form input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--surface);
-            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 0.5rem;
-        }
-
-        .btn-primary, .btn-secondary {
-            flex: 1;
-            padding: 0.7rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: var(--surface);
-        }
-
-        .btn-primary:hover {
-            background: #333;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-light);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--background);
-        }
-
-        .modal-error {
-            color: var(--accent);
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-
-        /* ── HEADER ── */
-        .header {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 2.25rem;
-            padding: 5rem 3rem 3.5rem;
-            max-width: 960px;
-            margin: 0 auto;
-            border-bottom: 1px solid var(--border);
-            align-items: start;
-        }
-
-        .profile-image {
-            width: 96px;
-            height: 96px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid var(--border);
-            background: var(--border);
-        }
-
-        .header-content h1 {
-            font-size: 2.6rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.15;
-            margin-bottom: 0.4rem;
-            font-family: 'Lora', Georgia, serif;
-        }
-
-        .header-subtitle {
-            font-size: 0.72rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 0.35rem;
-            font-weight: 600;
-        }
-
-        .header-professions {
-            font-size: 1rem;
-            color: var(--text-light);
-            margin-bottom: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.01em;
-        }
-
-        .header-description {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.65;
-            margin-bottom: 1.25rem;
-            max-width: 560px;
-        }
-
-        .btn-print {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.55rem 1.1rem;
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.01em;
-        }
-
-        .btn-print:hover {
-            background: var(--primary);
-            color: var(--surface);
-            border-color: var(--primary);
-        }
-
-        /* ── TIMELINE ── */
-        .timeline-section {
-            max-width: 960px;
-            margin: 4rem auto;
-            padding: 0 3rem;
-        }
-
-        .section-title {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        .timeline {
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 1px;
-            height: 100%;
-            background: var(--border);
-            top: 0;
-        }
-
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 2.5rem;
-            margin-bottom: 3rem;
-            align-items: flex-start;
-            opacity: 0;
-            animation: fadeUp 0.45s ease forwards;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .timeline-item:nth-child(1) { animation-delay: 0.08s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.14s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.20s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.26s; }
-        .timeline-item:nth-child(5) { animation-delay: 0.32s; }
-        .timeline-item:nth-child(6) { animation-delay: 0.38s; }
-
-        .timeline-content {
-            font-size: 0.9rem;
-        }
-
-        .timeline-content.left  { text-align: right; }
-        .timeline-content.right { text-align: left; }
-
-        .timeline-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.4rem;
-            padding-top: 3px;
-        }
-
-        .timeline-year {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-weight: 700;
-            order: 2;
-            white-space: nowrap;
-        }
-
-        .timeline-header {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .timeline-content.left .timeline-header {
-            flex-direction: row-reverse;
-        }
-
-        /* Center spine dot only — no bullets inside the content cards */
-        .timeline-bullet {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--border);
-            border: 2px solid var(--surface);
-            flex-shrink: 0;
-            box-shadow: 0 0 0 1px var(--border);
-        }
-
-        .timeline-bullet.work      { background: var(--accent-work);    box-shadow: 0 0 0 1px var(--accent-work); }
-        .timeline-bullet.design    { background: var(--accent-design);  box-shadow: 0 0 0 1px var(--accent-design); }
-        .timeline-bullet.education { background: var(--accent-edu);     box-shadow: 0 0 0 1px var(--accent-edu); }
-        .timeline-bullet.other     { background: var(--accent-other);   box-shadow: 0 0 0 1px var(--accent-other); }
-
-        .timeline-item h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.01em;
-            line-height: 1.3;
-        }
-
-        .timeline-role {
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            margin-top: 0.15rem;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-        }
-
-        /* Description revealed on hover on the opposite side */
-        .timeline-description {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            line-height: 1.55;
-            margin-top: 0.4rem;
-        }
-
-        /* The hover reveal panel — lives in the empty opposite cell */
-        .timeline-hover-reveal {
-            opacity: 0;
-            transform: translateY(6px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            pointer-events: none;
-            padding: 0.85rem 1rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.84rem;
-            color: var(--text-light);
-            line-height: 1.55;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-        }
-
-        .timeline-item:hover .timeline-hover-reveal {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
-        /* ── INFO CARDS ── */
-        .info-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 960px;
-            margin: 4rem auto;
-            padding: 0 3rem;
-        }
-
-        .info-card {
-            padding: 1.75rem;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--surface);
-        }
-
-        .info-card h3 {
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            color: var(--text-muted);
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .info-item {
-            margin-bottom: 1.1rem;
-            position: relative;
-        }
-
-        .info-item:last-child { margin-bottom: 0; }
-
-        .info-item h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 0.15rem;
-            color: var(--text);
-        }
-
-        .info-item p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-        }
-
-        .info-item a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            border-bottom: 1px solid var(--border);
-            transition: border-color 0.2s ease;
-        }
-
-        .info-item a:hover {
-            border-color: var(--text);
-        }
-
-        /* ── SKILLS ── */
-        .skills-section {
-            max-width: 960px;
-            margin: 4rem auto;
-            padding: 0 3rem;
-        }
-
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            display: inline-block;
-            padding: 0.35rem 0.85rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 0.82rem;
-            color: var(--text-light);
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--primary);
-            color: var(--surface);
-            border-color: var(--primary);
-        }
-
-        /* ── PROJECTS ── */
-        .projects-section {
-            max-width: 960px;
-            margin: 4rem auto;
-            padding: 0 3rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .project-card {
-            padding: 1.5rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
-
-        .project-card:hover {
-            box-shadow: 0 6px 24px rgba(0,0,0,0.07);
-            border-color: #ccc8c3;
-        }
-
-        .project-card-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-bottom: 0.6rem;
-        }
-
-        .project-card h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-            color: var(--text);
-            font-family: 'Lora', Georgia, serif;
-        }
-
-        .project-card p {
-            font-size: 0.84rem;
-            color: var(--text-muted);
-            line-height: 1.55;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-decoration: none;
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            padding: 0.25rem 0.6rem;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .project-link:hover {
-            background: var(--primary);
-            color: var(--surface);
-            border-color: var(--primary);
-        }
-
-        .project-link svg {
-            width: 13px;
-            height: 13px;
-        }
-
-        /* ── CREDENTIALS ── */
-        .credentials-section {
-            max-width: 960px;
-            margin: 4rem auto;
-            padding: 0 3rem;
-        }
-
-        .credentials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .credential-item {
-            padding: 1.25rem 1.5rem;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-
-        .credential-item h4 {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.01em;
-        }
-
-        .credential-item .credential-issuer {
-            font-size: 0.82rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .credential-item .credential-year {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.15rem;
-        }
-
-        @media (max-width: 768px) {
-            .projects-section,
-            .credentials-section {
-                padding: 0 1.5rem;
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Diego Paucar - CV</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
             }
 
-            .projects-grid,
-            .credentials-grid {
-                grid-template-columns: 1fr;
+            :root {
+                --primary: #1a1a1a;
+                --background: #f7f5f2;
+                --surface: #ffffff;
+                --text: #1a1a1a;
+                --text-light: #6b6b6b;
+                --text-muted: #9a9a9a;
+                --border: #e2ddd8;
+                --accent: #c0392b;
+                --accent-work: #2563eb;
+                --accent-design: #c0392b;
+                --accent-edu: #16a34a;
+                --accent-other: #d97706;
             }
-        }
 
-        /* ── FOOTER ── */
-        .footer {
-            text-align: center;
-            padding: 2rem 3rem;
-            color: var(--text-muted);
-            font-size: 0.82rem;
-            border-top: 1px solid var(--border);
-            margin-top: 4rem;
-            letter-spacing: 0.02em;
-        }
+            body {
+                font-family:
+                    "Inter",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
+                background: var(--background);
+                color: var(--text);
+                line-height: 1.6;
+            }
 
-        /* ── RESPONSIVE ── */
-        @media (max-width: 768px) {
+            /* ── HEADER CONTROLS ── */
+            .header-controls {
+                position: fixed;
+                top: 1.5rem;
+                right: 1.5rem;
+                z-index: 1000;
+                display: flex;
+                gap: 0.75rem;
+                align-items: center;
+            }
+
+            .language-toggle {
+                display: flex;
+                gap: 0;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 3px;
+            }
+
+            .lang-btn {
+                padding: 0.35rem 0.7rem;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 0.78rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                transition: all 0.2s ease;
+                border-radius: 4px;
+                letter-spacing: 0.05em;
+                font-family: "Inter", sans-serif;
+            }
+
+            .lang-btn.active {
+                background: var(--primary);
+                color: var(--surface);
+            }
+
+            .btn-config {
+                padding: 0.4rem 0.85rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.78rem;
+                font-weight: 600;
+                color: var(--text-light);
+                transition: all 0.2s ease;
+                letter-spacing: 0.03em;
+                font-family: "Inter", sans-serif;
+            }
+
+            .btn-config:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+            }
+
+            /* ── MODALS ── */
+            .modal-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(26, 26, 26, 0.55);
+                backdrop-filter: blur(2px);
+                z-index: 2000;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .modal-overlay.active {
+                display: flex;
+            }
+
+            .modal {
+                background: var(--surface);
+                border-radius: 10px;
+                padding: 2rem 2.25rem;
+                width: 90%;
+                max-width: 420px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+                border: 1px solid var(--border);
+            }
+
+            .modal h2 {
+                margin-bottom: 1.5rem;
+                font-size: 1.35rem;
+                font-weight: 700;
+                font-family: "Lora", Georgia, serif;
+                letter-spacing: -0.02em;
+            }
+
+            .modal-form {
+                display: flex;
+                flex-direction: column;
+                gap: 0.875rem;
+            }
+
+            .modal-form input {
+                padding: 0.7rem 0.9rem;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                font-size: 0.95rem;
+                background: var(--background);
+                color: var(--text);
+                font-family: "Inter", sans-serif;
+                transition: border-color 0.2s ease;
+            }
+
+            .modal-form input:focus {
+                outline: none;
+                border-color: var(--primary);
+                background: var(--surface);
+                box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
+            }
+
+            .modal-buttons {
+                display: flex;
+                gap: 0.75rem;
+                margin-top: 0.5rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                flex: 1;
+                padding: 0.7rem;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 0.9rem;
+                transition: all 0.2s ease;
+                font-family: "Inter", sans-serif;
+            }
+
+            .btn-primary {
+                background: var(--primary);
+                color: var(--surface);
+            }
+
+            .btn-primary:hover {
+                background: #333;
+            }
+
+            .btn-secondary {
+                background: transparent;
+                color: var(--text-light);
+                border: 1px solid var(--border);
+            }
+
+            .btn-secondary:hover {
+                background: var(--background);
+            }
+
+            .modal-error {
+                color: var(--accent);
+                font-size: 0.875rem;
+                margin-top: 0.25rem;
+            }
+
+            /* ── HEADER ── */
             .header {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                padding: 4rem 1.5rem 2.5rem;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 2.25rem;
+                padding: 5rem 3rem 3.5rem;
+                max-width: 960px;
+                margin: 0 auto;
+                border-bottom: 1px solid var(--border);
+                align-items: start;
             }
 
             .profile-image {
-                width: 72px;
-                height: 72px;
+                width: 96px;
+                height: 96px;
+                border-radius: 8px;
+                object-fit: cover;
+                border: 1px solid var(--border);
+                background: var(--border);
             }
 
-            .header-content h1 { font-size: 2rem; }
-
-            .section-title { font-size: 0.7rem; }
-
-            .timeline-section,
-            .info-section,
-            .skills-section {
-                padding: 0 1.5rem;
+            .header-content h1 {
+                font-size: 2.6rem;
+                font-weight: 700;
+                letter-spacing: -0.03em;
+                line-height: 1.15;
+                margin-bottom: 0.4rem;
+                font-family: "Lora", Georgia, serif;
             }
 
-            .info-section {
-                grid-template-columns: 1fr;
+            .header-subtitle {
+                font-size: 0.72rem;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.12em;
+                margin-bottom: 0.35rem;
+                font-weight: 600;
             }
 
-            .timeline::before { left: 14px; }
+            .header-professions {
+                font-size: 1rem;
+                color: var(--text-light);
+                margin-bottom: 0.75rem;
+                font-weight: 500;
+                letter-spacing: 0.01em;
+            }
+
+            .header-description {
+                font-size: 0.95rem;
+                color: var(--text-light);
+                line-height: 1.65;
+                margin-bottom: 1.25rem;
+                max-width: 560px;
+            }
+
+            .btn-print {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.55rem 1.1rem;
+                background: transparent;
+                color: var(--text);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.85rem;
+                font-weight: 600;
+                transition: all 0.2s ease;
+                font-family: "Inter", sans-serif;
+                letter-spacing: 0.01em;
+            }
+
+            .btn-print:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+            }
+
+            /* ── TIMELINE ── */
+            .timeline-section {
+                max-width: 960px;
+                margin: 4rem auto;
+                padding: 0 3rem;
+            }
+
+            .section-title {
+                font-size: 0.72rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.14em;
+                color: var(--text-muted);
+                margin-bottom: 2.5rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .section-title::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: var(--border);
+            }
+
+            .timeline {
+                position: relative;
+            }
+
+            .timeline::before {
+                content: "";
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 1px;
+                height: 100%;
+                background: var(--border);
+                top: 0;
+            }
 
             .timeline-item {
-                grid-template-columns: auto 1fr;
-                gap: 1rem;
-                margin-bottom: 2rem;
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                gap: 2.5rem;
+                margin-bottom: 3rem;
+                align-items: flex-start;
+                opacity: 0;
+                animation: fadeUp 0.45s ease forwards;
             }
 
-            .timeline-center {
-                position: absolute;
-                left: 0;
-                top: 2px;
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(12px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .timeline-item:nth-child(1) {
+                animation-delay: 0.08s;
+            }
+            .timeline-item:nth-child(2) {
+                animation-delay: 0.14s;
+            }
+            .timeline-item:nth-child(3) {
+                animation-delay: 0.2s;
+            }
+            .timeline-item:nth-child(4) {
+                animation-delay: 0.26s;
+            }
+            .timeline-item:nth-child(5) {
+                animation-delay: 0.32s;
+            }
+            .timeline-item:nth-child(6) {
+                animation-delay: 0.38s;
             }
 
             .timeline-content {
-                margin-left: 32px;
-                text-align: left !important;
+                font-size: 0.9rem;
             }
 
-            .timeline-content .timeline-header,
+            .timeline-content.left {
+                text-align: right;
+            }
+            .timeline-content.right {
+                text-align: left;
+            }
+
+            .timeline-center {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.4rem;
+                padding-top: 3px;
+            }
+
+            .timeline-year {
+                font-size: 0.7rem;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                font-weight: 700;
+                order: 2;
+                white-space: nowrap;
+            }
+
+            .timeline-header {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                margin-bottom: 0.35rem;
+            }
+
             .timeline-content.left .timeline-header {
-                flex-direction: row !important;
+                flex-direction: row-reverse;
             }
 
+            /* Center spine dot only — no bullets inside the content cards */
+            .timeline-bullet {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: var(--border);
+                border: 2px solid var(--surface);
+                flex-shrink: 0;
+                box-shadow: 0 0 0 1px var(--border);
+            }
+
+            .timeline-bullet.work {
+                background: var(--accent-work);
+                box-shadow: 0 0 0 1px var(--accent-work);
+            }
+            .timeline-bullet.design {
+                background: var(--accent-design);
+                box-shadow: 0 0 0 1px var(--accent-design);
+            }
+            .timeline-bullet.education {
+                background: var(--accent-edu);
+                box-shadow: 0 0 0 1px var(--accent-edu);
+            }
+            .timeline-bullet.other {
+                background: var(--accent-other);
+                box-shadow: 0 0 0 1px var(--accent-other);
+            }
+
+            .timeline-item h3 {
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--text);
+                letter-spacing: -0.01em;
+                line-height: 1.3;
+            }
+
+            .timeline-role {
+                color: var(--text-muted);
+                font-size: 0.8rem;
+                margin-top: 0.15rem;
+                font-weight: 500;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+            }
+
+            .timeline-category {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                margin-top: 0.2rem;
+                padding: 0.2rem 0.55rem;
+                border-radius: 999px;
+                background: var(--surface-alt);
+                border: 1px solid var(--border);
+                color: var(--text-light);
+                font-size: 0.68rem;
+                font-weight: 600;
+                letter-spacing: 0.03em;
+            }
+
+            /* Description revealed on hover on the opposite side */
+            .timeline-description {
+                color: var(--text-muted);
+                font-size: 0.85rem;
+                line-height: 1.55;
+                margin-top: 0.4rem;
+            }
+
+            /* The hover reveal panel — lives in the empty opposite cell */
             .timeline-hover-reveal {
-                display: none;
+                opacity: 0;
+                transform: translateY(6px);
+                transition:
+                    opacity 0.3s ease,
+                    transform 0.3s ease;
+                pointer-events: none;
+                padding: 0.85rem 1rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 8px;
+                font-size: 0.84rem;
+                color: var(--text-light);
+                line-height: 1.55;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
             }
 
-            .header-controls {
-                top: 0.75rem;
-                right: 0.75rem;
+            .timeline-detail + .timeline-detail {
+                margin-top: 0.55rem;
+            }
+
+            .timeline-detail-label {
+                font-weight: 700;
+                color: var(--text);
+            }
+
+            .timeline-hover-reveal a {
+                color: var(--primary);
+                text-decoration: none;
+                word-break: break-all;
+            }
+
+            .timeline-hover-reveal a:hover {
+                text-decoration: underline;
+            }
+
+            .timeline-item:hover .timeline-hover-reveal {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            /* ── INFO CARDS ── */
+            .info-section {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.5rem;
+                max-width: 960px;
+                margin: 4rem auto;
+                padding: 0 3rem;
+            }
+
+            .info-card {
+                padding: 1.75rem;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                background: var(--surface);
+            }
+
+            .info-card h3 {
+                font-size: 0.72rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.14em;
+                color: var(--text-muted);
+                margin-bottom: 1.25rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .info-item {
+                margin-bottom: 1.1rem;
+                position: relative;
+            }
+
+            .info-item:last-child {
+                margin-bottom: 0;
+            }
+
+            .info-item h4 {
+                font-size: 0.9rem;
+                font-weight: 600;
+                margin-bottom: 0.15rem;
+                color: var(--text);
+            }
+
+            .info-item p {
+                font-size: 0.82rem;
+                color: var(--text-muted);
+            }
+
+            .info-item a {
+                color: var(--text);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 0.9rem;
+                border-bottom: 1px solid var(--border);
+                transition: border-color 0.2s ease;
+            }
+
+            .info-item a:hover {
+                border-color: var(--text);
+            }
+
+            /* ── SKILLS ── */
+            .skills-section {
+                max-width: 960px;
+                margin: 4rem auto;
+                padding: 0 3rem;
+            }
+
+            .skills-grid {
+                display: flex;
+                flex-wrap: wrap;
                 gap: 0.5rem;
             }
-        }
 
-        /* ── PRINT ── */
-        @media print {
-            .header-controls,
-            .btn-print,
-            .btn-add,
-            .btn-delete { display: none !important; }
+            .skill-tag {
+                display: inline-block;
+                padding: 0.35rem 0.85rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 100px;
+                font-size: 0.82rem;
+                color: var(--text-light);
+                font-weight: 500;
+                transition: all 0.2s ease;
+            }
 
-            body { background: white; }
-            .header { padding-top: 1.5rem; }
-        }
+            .skill-tag:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+            }
 
-        /* ── LANGUAGE VISIBILITY ── */
-        .lang-content { display: none; }
-        .lang-content.active { display: block; }
+            /* ── PROJECTS ── */
+            .projects-section {
+                max-width: 960px;
+                margin: 4rem auto;
+                padding: 0 3rem;
+            }
 
-        /* ── EDIT MODE ── */
-        .editable-field {
-            cursor: pointer;
-            position: relative;
-        }
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 1.25rem;
+            }
 
-        .editable-field:hover {
-            background: rgba(26, 26, 26, 0.03);
-            border-radius: 3px;
-        }
+            .project-card {
+                padding: 1.5rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                transition:
+                    box-shadow 0.2s ease,
+                    border-color 0.2s ease;
+            }
 
-        .editable-field.edit-mode {
-            background: #fffbf0;
-            padding: 0.4rem 0.6rem;
-            border-radius: 4px;
-            border: 1.5px solid var(--primary);
-        }
+            .project-card:hover {
+                box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+                border-color: #ccc8c3;
+            }
 
-        .editable-field input,
-        .editable-field textarea {
-            width: 100%;
-            padding: 0.4rem 0.5rem;
-            border: 1px solid var(--primary);
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: inherit;
-            background: var(--surface);
-            color: var(--text);
-        }
+            .project-card-header {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 0.6rem;
+            }
 
-        .edit-controls { display: none; gap: 0.5rem; margin-top: 0.5rem; }
-        .edit-controls.active { display: flex; }
+            .project-card h3 {
+                font-size: 1rem;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+                color: var(--text);
+                font-family: "Lora", Georgia, serif;
+            }
 
-        .btn-delete {
-            padding: 0.3rem 0.65rem;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.78rem;
-            font-weight: 600;
-            opacity: 0;
-            transition: opacity 0.15s ease;
-            position: absolute;
-            top: 0.25rem;
-            right: 0.25rem;
-            font-family: 'Inter', sans-serif;
-        }
+            .project-card p {
+                font-size: 0.84rem;
+                color: var(--text-muted);
+                line-height: 1.55;
+            }
 
-        .timeline-item:hover .btn-delete,
-        .info-item:hover .btn-delete { opacity: 1; }
+            .project-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.3rem;
+                font-size: 0.78rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                text-decoration: none;
+                border: 1px solid var(--border);
+                border-radius: 5px;
+                padding: 0.25rem 0.6rem;
+                white-space: nowrap;
+                transition: all 0.2s ease;
+                flex-shrink: 0;
+            }
 
-        .btn-delete:hover { background: #a93226; }
+            .project-link:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+            }
 
-        .btn-add {
-            display: inline-block;
-            padding: 0.45rem 0.9rem;
-            background: transparent;
-            color: var(--text-light);
-            border: 1px dashed var(--border);
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.82rem;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
+            .project-link svg {
+                width: 13px;
+                height: 13px;
+            }
 
-        .btn-add:hover {
-            background: var(--primary);
-            color: var(--surface);
-            border-color: var(--primary);
-            border-style: solid;
-        }
+            /* ── CREDENTIALS ── */
+            .credentials-section {
+                max-width: 960px;
+                margin: 4rem auto;
+                padding: 0 3rem;
+            }
 
-        /* ── CREATE MODAL ── */
-        .create-modal { max-width: 560px; }
+            .credentials-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 1.25rem;
+            }
 
-        .form-group { margin-bottom: 1rem; }
+            .credential-item {
+                padding: 1.25rem 1.5rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
 
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
+            .credential-item h4 {
+                font-size: 0.9rem;
+                font-weight: 700;
+                color: var(--text);
+                letter-spacing: -0.01em;
+            }
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.7rem 0.9rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            background: var(--background);
-            color: var(--text);
-            transition: border-color 0.2s ease;
-        }
+            .credential-item .credential-issuer {
+                font-size: 0.82rem;
+                color: var(--text-light);
+                font-weight: 500;
+            }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
+            .credential-item .credential-year {
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 0.15rem;
+            }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: var(--surface);
-            box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
-        }
-    </style>
-</head>
-<body>
-    <!-- Header controls with lang toggle and config -->
-    <div class="header-controls">
-        <div class="language-toggle">
-            <button class="lang-btn active" data-lang="en" onclick="UI.changeLanguage('en')">EN</button>
-            <button class="lang-btn" data-lang="es" onclick="UI.changeLanguage('es')">ES</button>
-        </div>
-        <button class="btn-config" onclick="UI.toggleLoginModal()" id="configBtn">⚙ Config</button>
-    </div>
+            .credential-type {
+                font-size: 0.68rem;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                font-weight: 700;
+            }
 
-    <!-- Login Modal -->
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal">
-            <h2 id="modalTitle">Login</h2>
-            <form class="modal-form" onsubmit="Auth.handleLogin(event)">
-                <input type="email" id="emailInput" placeholder="Email" required>
-                <input type="password" id="passwordInput" placeholder="Password" required>
-                <div id="modalError" class="modal-error"></div>
-                <div class="modal-buttons">
-                    <button type="submit" class="btn-primary" id="submitBtn">Login</button>
-                    <button type="button" class="btn-secondary" onclick="UI.toggleLoginModal()">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
+            .publications-section {
+                max-width: 960px;
+                margin: 4rem auto;
+                padding: 0 3rem;
+            }
 
-    <!-- Header -->
-    <div class="header">
-        <img id="profileImage" src="imageedit_6_7342620706.jpg" alt="Diego Paucar" class="profile-image">
-        <div class="header-content">
-            <p class="header-subtitle">
-                <span class="lang-content active" data-lang="en">Hello, my name is</span>
-                <span class="lang-content" data-lang="es">Hola, mi nombre es</span>
-            </p>
-            
-            <h1 id="personName">Diego Paucar</h1>
-            
-            <p class="header-professions" id="professions">Full Stack Developer</p>
-            
-            <p class="header-description" id="description">Passionate about building elegant and functional digital experiences.</p>
-            
-            <button class="btn-print" onclick="window.print()">
-                <span>📄</span>
-                <span class="lang-content active" data-lang="en">Print Resume</span>
-                <span class="lang-content" data-lang="es">Imprimir CV</span>
+            .publications-list {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .publication-item {
+                padding: 1.25rem 1.5rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+            }
+
+            .publication-item h4 {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--text);
+                letter-spacing: -0.01em;
+                font-family: "Lora", Georgia, serif;
+                margin-bottom: 0.35rem;
+            }
+
+            .pub-meta,
+            .publication-item p {
+                font-size: 0.82rem;
+                color: var(--text-light);
+                line-height: 1.5;
+            }
+
+            .pub-role {
+                margin-top: 0.35rem;
+                color: var(--text);
+                font-weight: 600;
+            }
+
+            .publication-link {
+                display: inline-block;
+                margin-top: 0.45rem;
+                color: var(--accent-work);
+                font-size: 0.78rem;
+                text-decoration: none;
+                font-weight: 600;
+            }
+
+            .publication-link:hover {
+                text-decoration: underline;
+            }
+
+            @media (max-width: 768px) {
+                .projects-section,
+                .publications-section,
+                .credentials-section {
+                    padding: 0 1.5rem;
+                }
+
+                .projects-grid,
+                .credentials-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            /* ── FOOTER ── */
+            .footer {
+                text-align: center;
+                padding: 2rem 3rem;
+                color: var(--text-muted);
+                font-size: 0.82rem;
+                border-top: 1px solid var(--border);
+                margin-top: 4rem;
+                letter-spacing: 0.02em;
+            }
+
+            /* ── RESPONSIVE ── */
+            @media (max-width: 768px) {
+                .header {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                    padding: 4rem 1.5rem 2.5rem;
+                }
+
+                .profile-image {
+                    width: 72px;
+                    height: 72px;
+                }
+
+                .header-content h1 {
+                    font-size: 2rem;
+                }
+
+                .section-title {
+                    font-size: 0.7rem;
+                }
+
+                .timeline-section,
+                .info-section,
+                .skills-section {
+                    padding: 0 1.5rem;
+                }
+
+                .info-section {
+                    grid-template-columns: 1fr;
+                }
+
+                .timeline::before {
+                    left: 14px;
+                }
+
+                .timeline-item {
+                    grid-template-columns: auto 1fr;
+                    gap: 1rem;
+                    margin-bottom: 2rem;
+                }
+
+                .timeline-center {
+                    position: absolute;
+                    left: 0;
+                    top: 2px;
+                }
+
+                .timeline-content {
+                    margin-left: 32px;
+                    text-align: left !important;
+                }
+
+                .timeline-content .timeline-header,
+                .timeline-content.left .timeline-header {
+                    flex-direction: row !important;
+                }
+
+                .timeline-hover-reveal {
+                    display: none;
+                }
+
+                .header-controls {
+                    top: 0.75rem;
+                    right: 0.75rem;
+                    gap: 0.5rem;
+                }
+            }
+
+            /* ── PRINT ── */
+            @media print {
+                .header-controls,
+                .btn-print,
+                .btn-add,
+                .btn-delete {
+                    display: none !important;
+                }
+
+                body {
+                    background: white;
+                }
+                .header {
+                    padding-top: 1.5rem;
+                }
+            }
+
+            /* ── LANGUAGE VISIBILITY ── */
+            .lang-content {
+                display: none;
+            }
+            .lang-content.active {
+                display: block;
+            }
+
+            /* ── EDIT MODE ── */
+            .editable-field {
+                cursor: pointer;
+                position: relative;
+            }
+
+            .editable-field:hover {
+                background: rgba(26, 26, 26, 0.03);
+                border-radius: 3px;
+            }
+
+            .editable-field.edit-mode {
+                background: #fffbf0;
+                padding: 0.4rem 0.6rem;
+                border-radius: 4px;
+                border: 1.5px solid var(--primary);
+            }
+
+            .editable-field input,
+            .editable-field textarea {
+                width: 100%;
+                padding: 0.4rem 0.5rem;
+                border: 1px solid var(--primary);
+                border-radius: 4px;
+                font-family: inherit;
+                font-size: inherit;
+                background: var(--surface);
+                color: var(--text);
+            }
+
+            .edit-controls {
+                display: none;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .edit-controls.active {
+                display: flex;
+            }
+
+            .btn-delete {
+                padding: 0.3rem 0.65rem;
+                background: var(--accent);
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 0.78rem;
+                font-weight: 600;
+                opacity: 0;
+                transition: opacity 0.15s ease;
+                position: absolute;
+                top: 0.25rem;
+                right: 0.25rem;
+                font-family: "Inter", sans-serif;
+            }
+
+            .timeline-item:hover .btn-delete,
+            .info-item:hover .btn-delete {
+                opacity: 1;
+            }
+
+            .btn-delete:hover {
+                background: #a93226;
+            }
+
+            .btn-add {
+                display: inline-block;
+                padding: 0.45rem 0.9rem;
+                background: transparent;
+                color: var(--text-light);
+                border: 1px dashed var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.82rem;
+                font-weight: 600;
+                margin-top: 1rem;
+                transition: all 0.2s ease;
+                font-family: "Inter", sans-serif;
+            }
+
+            .btn-add:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+                border-style: solid;
+            }
+
+            /* ── CREATE MODAL ── */
+            .create-modal {
+                max-width: 560px;
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            .form-group label {
+                display: block;
+                font-weight: 600;
+                margin-bottom: 0.4rem;
+                font-size: 0.8rem;
+                color: var(--text-light);
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 0.7rem 0.9rem;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                font-family: "Inter", sans-serif;
+                font-size: 0.95rem;
+                background: var(--background);
+                color: var(--text);
+                transition: border-color 0.2s ease;
+            }
+
+            .form-group textarea {
+                resize: vertical;
+                min-height: 80px;
+            }
+            /* En lugar de opacity: 0 y pointer-events: none */
+            .timeline-hover-reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                pointer-events: auto !important;
+                padding: 0.3rem 0.5rem !important;
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                font-size: 0.7rem !important;
+                color: var(--text-muted) !important;
+            }
+            .form-group input:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: var(--primary);
+                background: var(--surface);
+                box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
+            }
+
+            @media print {
+                .header {
+                    grid-template-columns: 56px 1fr !important;
+                    gap: 0.95rem !important;
+                    align-items: start !important;
+                    padding: 0.55rem 1.35rem 0.75rem !important;
+                }
+                .header-content h1 {
+                    font-size: 1.5rem !important;
+                }
+                .header-subtitle {
+                    font-size: 0.58rem !important;
+                }
+                .header-professions {
+                    font-size: 0.74rem !important;
+                    font-weight: 600 !important;
+                    letter-spacing: 0.015em !important;
+                    margin-bottom: 0.2rem !important;
+                }
+                .header-description {
+                    font-size: 0.76rem !important;
+                    line-height: 1.34 !important;
+                    max-width: none !important;
+                    margin-bottom: 0.22rem !important;
+                }
+                .profile-image {
+                    width: 50px !important;
+                    height: 50px !important;
+                }
+                .timeline-section {
+                    margin: 0.5rem auto !important;
+                    padding: 0 0.8rem !important;
+                }
+                .timeline-item {
+                    margin-bottom: 0.4rem !important;
+                    gap: 0.5rem !important;
+                }
+                .timeline-content {
+                    font-size: 0.68rem !important;
+                }
+                .timeline-item h3 {
+                    font-size: 0.74rem !important;
+                }
+                .timeline-role {
+                    font-size: 0.63rem !important;
+                }
+                .timeline-category {
+                    font-size: 0.54rem !important;
+                    padding: 0.08rem 0.3rem !important;
+                    margin-top: 0.15rem !important;
+                }
+                .timeline-year {
+                    font-size: 0.54rem !important;
+                }
+                .timeline-hover-reveal {
+                    display: block !important;
+                    opacity: 1 !important;
+                    transform: none !important;
+                    font-size: 0.62rem !important;
+                    padding: 0.2rem 0.4rem !important;
+                    background: transparent !important;
+                    border: none !important;
+                    box-shadow: none !important;
+                }
+                .info-section {
+                    margin: 0.5rem auto !important;
+                    padding: 0 0.8rem !important;
+                    gap: 0.5rem !important;
+                }
+                .info-card {
+                    padding: 0.5rem 0.8rem !important;
+                }
+                .info-card h3 {
+                    font-size: 0.58rem !important;
+                    margin-bottom: 0.3rem !important;
+                }
+                .info-item {
+                    margin-bottom: 0.2rem !important;
+                }
+                .info-item h4 {
+                    font-size: 0.68rem !important;
+                }
+                .info-item p {
+                    font-size: 0.63rem !important;
+                }
+                .skills-section {
+                    margin: 0.5rem auto !important;
+                    padding: 0 0.8rem !important;
+                }
+                .skill-tag {
+                    font-size: 0.58rem !important;
+                    padding: 0.1rem 0.4rem !important;
+                }
+                .section-title {
+                    font-size: 0.54rem !important;
+                    margin-bottom: 0.4rem !important;
+                }
+                .projects-section,
+                .credentials-section,
+                .publications-section {
+                    margin: 0.3rem auto !important;
+                    padding: 0 0.8rem !important;
+                }
+                .projects-grid,
+                .credentials-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                    gap: 0.45rem !important;
+                }
+                .publications-list {
+                    display: grid !important;
+                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                    gap: 0.45rem !important;
+                }
+                .project-card,
+                .credential-item,
+                .publication-item {
+                    padding: 0.4rem 0.6rem !important;
+                }
+                .project-card h3,
+                .credential-item h4,
+                .publication-item h4 {
+                    font-size: 0.69rem !important;
+                }
+                .project-card p,
+                .credential-item .credential-issuer,
+                .credential-item .credential-year,
+                .publication-item p,
+                .pub-meta,
+                .pub-role,
+                .publication-link,
+                .credential-type {
+                    font-size: 0.59rem !important;
+                }
+                .timeline-detail {
+                    font-size: 0.56rem !important;
+                    line-height: 1.28 !important;
+                }
+                .projects-grid,
+                .credentials-grid,
+                .publications-list,
+                .skills-grid {
+                    break-inside: avoid !important;
+                }
+                .projects-grid .project-card:nth-child(n + 3),
+                .publications-list .publication-item:nth-child(n + 3),
+                .timeline .timeline-item:nth-child(n + 9),
+                .skills-grid .skill-tag:nth-child(n + 11),
+                .info-section .info-card:nth-child(n + 2) {
+                    display: none !important;
+                }
+                .publication-item {
+                    page-break-inside: avoid !important;
+                    min-height: 100% !important;
+                }
+                .footer {
+                    padding: 0.25rem !important;
+                    font-size: 0.48rem !important;
+                    margin-top: 0.2rem !important;
+                }
+                .credentials-grid .credential-item:nth-child(n + 7) {
+                    display: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header controls with lang toggle and config -->
+        <div class="header-controls">
+            <div class="language-toggle">
+                <button
+                    class="lang-btn active"
+                    data-lang="en"
+                    onclick="UI.changeLanguage('en')"
+                >
+                    EN
+                </button>
+                <button
+                    class="lang-btn"
+                    data-lang="es"
+                    onclick="UI.changeLanguage('es')"
+                >
+                    ES
+                </button>
+            </div>
+            <button
+                class="btn-config"
+                onclick="UI.toggleLoginModal()"
+                id="configBtn"
+            >
+                ⚙ Config
             </button>
         </div>
-    </div>
 
-    <!-- Projects Section -->
-    <div class="projects-section">
-        <h2 class="section-title">
-            <span class="lang-content active" data-lang="en">Projects</span>
-            <span class="lang-content" data-lang="es">Proyectos</span>
-        </h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-card-header">
-                    <h3>gt</h3>
-                    <a href="https://github.com/diegopaucarv/gt" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 012 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                        GitHub
-                    </a>
-                </div>
-                <p class="lang-content active" data-lang="en">A command-line tool for automating social research workflows and data collection pipelines.</p>
-                <p class="lang-content" data-lang="es">Herramienta de línea de comandos para automatizar flujos de investigación social y pipelines de recolección de datos.</p>
-            </div>
-            <div class="project-card">
-                <div class="project-card-header">
-                    <h3>reii</h3>
-                    <a href="https://github.com/diegopaucarv/reii" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 012 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                        GitHub
-                    </a>
-                </div>
-                <p class="lang-content active" data-lang="en">A framework for reproducible and iterative social inquiry, built around evidence-based methodology.</p>
-                <p class="lang-content" data-lang="es">Framework para la investigación social reproducible e iterativa, construido sobre metodología basada en evidencia.</p>
-            </div>
-            <div class="project-card">
-                <div class="project-card-header">
-                    <h3>neuroplanner</h3>
-                    <a href="https://github.com/diegopaucarv/neuroplanner" target="_blank" rel="noopener noreferrer" class="project-link">
-                        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 012 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                        GitHub
-                    </a>
-                </div>
-                <p class="lang-content active" data-lang="en">A neurodivergent-friendly planner app designed around flexible, low-friction task management.</p>
-                <p class="lang-content" data-lang="es">Aplicación de planificación amigable para neurodivergentes, diseñada para una gestión de tareas flexible y sin fricciones.</p>
+        <!-- Login Modal -->
+        <div class="modal-overlay" id="loginModal">
+            <div class="modal">
+                <h2 id="modalTitle">Login</h2>
+                <form class="modal-form" onsubmit="Auth.handleLogin(event)">
+                    <input
+                        type="email"
+                        id="emailInput"
+                        placeholder="Email"
+                        required
+                    />
+                    <input
+                        type="password"
+                        id="passwordInput"
+                        placeholder="Password"
+                        required
+                    />
+                    <div id="modalError" class="modal-error"></div>
+                    <div class="modal-buttons">
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                            id="submitBtn"
+                        >
+                            Login
+                        </button>
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            onclick="UI.toggleLoginModal()"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
 
-    <!-- Credentials Section -->
-    <div class="credentials-section">
-        <h2 class="section-title">
-            <span class="lang-content active" data-lang="en">Credentials</span>
-            <span class="lang-content" data-lang="es">Credenciales</span>
-        </h2>
-        <div class="credentials-grid" id="credentialsGrid">
-            <div class="credential-item">
-                <h4 class="lang-content active" data-lang="en">Bachelor of Sociology</h4>
-                <h4 class="lang-content" data-lang="es">Licenciado en Sociología</h4>
-                <span class="credential-issuer">Pontificia Universidad Católica del Perú</span>
-                <span class="credential-year">2019</span>
-            </div>
-            <div class="credential-item">
-                <h4>Google Data Analytics Certificate</h4>
-                <span class="credential-issuer">Google / Coursera</span>
-                <span class="credential-year">2022</span>
-            </div>
-            <div class="credential-item">
-                <h4 class="lang-content active" data-lang="en">Diploma in Social Research Methods</h4>
-                <h4 class="lang-content" data-lang="es">Diplomado en Métodos de Investigación Social</h4>
-                <span class="credential-issuer">Pontificia Universidad Católica del Perú</span>
-                <span class="credential-year">2021</span>
+        <!-- Header -->
+        <div class="header">
+            <img
+                id="profileImage"
+                src="imageedit_6_7342620706.jpg"
+                alt="Diego Paucar"
+                class="profile-image"
+            />
+            <div class="header-content">
+                <p class="header-subtitle">
+                    <span class="lang-content active" data-lang="en"
+                        >Hello, my name is</span
+                    >
+                    <span class="lang-content" data-lang="es"
+                        >Hola, mi nombre es</span
+                    >
+                </p>
+
+                <h1 id="personName">Diego Paucar</h1>
+
+                <p class="header-professions" id="professions">
+                    Full Stack Developer
+                </p>
+
+                <p class="header-description" id="description">
+                    Passionate about building elegant and functional digital
+                    experiences.
+                </p>
+
+                <button class="btn-print" onclick="window.print()">
+                    <span>📄</span>
+                    <span class="lang-content active" data-lang="en"
+                        >Print Resume</span
+                    >
+                    <span class="lang-content" data-lang="es">Imprimir CV</span>
+                </button>
             </div>
         </div>
-    </div>
-
-    <!-- Timeline Section -->
-    <div class="timeline-section">
-        <h2 class="section-title">
-            <span class="lang-content active" data-lang="en">Experience</span>
-            <span class="lang-content" data-lang="es">Experiencia</span>
-        </h2>
-        
-        <div class="timeline" id="timelineContainer">
-            <!-- Timeline items populated by JavaScript -->
+        <!-- Projects Section -->
+        <div class="projects-section">
+            <h2 class="section-title">
+                <span class="lang-content active" data-lang="en">Projects</span>
+                <span class="lang-content" data-lang="es">Proyectos</span>
+            </h2>
+            <div class="projects-grid" id="projectsGrid"></div>
         </div>
-        <!-- Add create button for experience -->
-        <button class="btn-add" id="addExpBtn" style="display: none;" onclick="CRUD.openCreateModal('experiencia')">+ Add Experience</button>
-    </div>
 
-    <!-- Education & Links -->
-    <div class="info-section" id="infoSection">
-        <!-- Populated by JavaScript -->
-    </div>
-
-    <!-- Skills Section -->
-    <div class="skills-section" id="skillsSection">
-        <!-- Populated by JavaScript -->
-    </div>
-
-    <!-- Add create modal for generic CRUD operations -->
-    <div class="modal-overlay" id="createModal">
-        <div class="modal create-modal">
-            <h2 id="createModalTitle">Create New Entry</h2>
-            <form class="modal-form" id="createForm" onsubmit="CRUD.handleCreateSubmit(event)">
-                <div id="formFieldsContainer"></div>
-                <div class="modal-buttons">
-                    <button type="submit" class="btn-primary" id="createSubmitBtn">Create</button>
-                    <button type="button" class="btn-secondary" onclick="CRUD.closeCreateModal()">Cancel</button>
-                </div>
-            </form>
+        <!-- Publications Section -->
+        <div class="publications-section" id="publicationsSection">
+            <h2 class="section-title">
+                <span class="lang-content active" data-lang="en"
+                    >Research & Publications</span
+                >
+                <span class="lang-content" data-lang="es"
+                    >Investigación y Publicaciones</span
+                >
+            </h2>
+            <div class="publications-list" id="publicationsList"></div>
         </div>
-    </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        <p class="lang-content active" data-lang="en">© 2026 Diego Paucar. All rights reserved.</p>
-        <p class="lang-content" data-lang="es">© 2026 Diego Paucar. Todos los derechos reservados.</p>
-    </div>
+        <!-- Credentials Section -->
+        <div class="credentials-section">
+            <h2 class="section-title">
+                <span class="lang-content active" data-lang="en"
+                    >Credentials</span
+                >
+                <span class="lang-content" data-lang="es">Credenciales</span>
+            </h2>
+            <div class="credentials-grid" id="credentialsGrid"></div>
+        </div>
 
-    <script>
-        const App = {
-            cvData: null,
-            originalData: null, // Para mantener los datos originales
-            cachedData: null,   // Para mantener los datos modificados
-            currentLanguage: localStorage.getItem('language') || 'en',
-            isLoggedIn: localStorage.getItem('sessionToken') ? true : false,
-            credentials: null,
-            dataVersion: '1.0' // Para manejar versiones de datos
-        };
+        <!-- Timeline Section -->
+        <div class="timeline-section">
+            <h2 class="section-title">
+                <span class="lang-content active" data-lang="en"
+                    >Experience</span
+                >
+                <span class="lang-content" data-lang="es">Experiencia</span>
+            </h2>
 
-        const CacheManager = {
-            // Guardar datos modificados en localStorage
-            saveToCache(data) {
-                try {
-                    const cacheData = {
-                        data: data,
-                        timestamp: new Date().toISOString(),
-                        version: App.dataVersion
-                    };
-                    localStorage.setItem('cvData_cache', JSON.stringify(cacheData));
-                    console.log('Datos guardados en caché');
-                } catch (error) {
-                    console.error('Error guardando en caché:', error);
-                }
-            },
-        
-            // Cargar datos desde caché
-            loadFromCache() {
-                try {
-                    const cached = localStorage.getItem('cvData_cache');
-                    if (cached) {
+            <div class="timeline" id="timelineContainer">
+                <!-- Timeline items populated by JavaScript -->
+            </div>
+            <!-- Add create button for experience -->
+            <button
+                class="btn-add"
+                id="addExpBtn"
+                style="display: none"
+                onclick="CRUD.openCreateModal('experiencia')"
+            >
+                + Add Experience
+            </button>
+        </div>
+
+        <!-- Education & Links -->
+        <div class="info-section" id="infoSection">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Skills Section -->
+        <div class="skills-section" id="skillsSection">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Add create modal for generic CRUD operations -->
+        <div class="modal-overlay" id="createModal">
+            <div class="modal create-modal">
+                <h2 id="createModalTitle">Create New Entry</h2>
+                <form
+                    class="modal-form"
+                    id="createForm"
+                    onsubmit="CRUD.handleCreateSubmit(event)"
+                >
+                    <div id="formFieldsContainer"></div>
+                    <div class="modal-buttons">
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                            id="createSubmitBtn"
+                        >
+                            Create
+                        </button>
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            onclick="CRUD.closeCreateModal()"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p class="lang-content active" data-lang="en">
+                © 2026 Diego Paucar. All rights reserved.
+            </p>
+            <p class="lang-content" data-lang="es">
+                © 2026 Diego Paucar. Todos los derechos reservados.
+            </p>
+        </div>
+
+        <script src="./local-data.js"></script>
+        <script>
+            const App = {
+                cvData: null,
+                originalData: null,
+                cachedData: null,
+                currentLanguage: localStorage.getItem("language") || "en",
+                isLoggedIn: Boolean(localStorage.getItem("sessionToken")),
+                credentials: null,
+                dataVersion: "2.4",
+            };
+
+            const LocalFileData = {
+                clone(value) {
+                    return value ? JSON.parse(JSON.stringify(value)) : null;
+                },
+
+                getCVData() {
+                    return this.clone(window.__CV_DATA__ || null);
+                },
+
+                getConfig() {
+                    return this.clone(window.__CV_CONFIG__ || null);
+                },
+            };
+
+            const CacheManager = {
+                saveToCache(data) {
+                    try {
+                        const cacheData = {
+                            data,
+                            timestamp: new Date().toISOString(),
+                            version: App.dataVersion,
+                        };
+                        localStorage.setItem(
+                            "cvData_cache",
+                            JSON.stringify(cacheData),
+                        );
+                    } catch (error) {
+                        console.error("Error guardando en caché:", error);
+                    }
+                },
+
+                loadFromCache() {
+                    try {
+                        const cached = localStorage.getItem("cvData_cache");
+                        if (!cached) return null;
+
                         const parsed = JSON.parse(cached);
-                        // Verificar que la versión coincida
                         if (parsed.version === App.dataVersion) {
-                            console.log('Datos cargados desde caché');
                             return parsed.data;
-                        } else {
-                            console.log('Versión de caché obsoleta, limpiando');
-                            localStorage.removeItem('cvData_cache');
                         }
+
+                        localStorage.removeItem("cvData_cache");
+                    } catch (error) {
+                        console.error("Error cargando caché:", error);
                     }
-                } catch (error) {
-                    console.error('Error cargando caché:', error);
-                }
-                return null;
-            },
-        
-            // Exportar datos modificados como JSON descargable
-            exportModifiedData() {
-                if (!App.cvData) {
-                    alert('No hay datos para exportar');
-                    return;
-                }
-        
-                const exportData = {
-                    version: App.dataVersion,
-                    timestamp: new Date().toISOString(),
-                    description: 'Datos modificados del CV',
-                    data: App.cvData
-                };
-        
-                const dataStr = JSON.stringify(exportData, null, 2);
-                const dataBlob = new Blob([dataStr], { type: 'application/json' });
-                const url = URL.createObjectURL(dataBlob);
-                
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `cv_modified_${new Date().toISOString().split('T')[0]}.json`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-            },
-        
-            // Limpiar caché y volver a datos originales
-            clearCache() {
-                localStorage.removeItem('cvData_cache');
-                App.cvData = { ...App.originalData };
-                Render.renderCV();
-                alert('Caché limpiado, usando datos originales');
-            }
-        };
 
-        const Auth = {
-            async init() {
-                try {
-                    const response = await fetch('./config.json');
-                    if (response.ok) {
-                        App.credentials = await response.json();
-                    } else {
-                        console.warn('Config file not found. Proceeding without auth.');
+                    return null;
+                },
+
+                exportModifiedData() {
+                    if (!App.cvData) {
+                        alert("No hay datos para exportar");
+                        return;
                     }
-                } catch (error) {
-                    console.warn('Could not load credentials:', error);
-                }
-            },
-            
-            handleLogin(event) {
-                event.preventDefault();
-                const email = document.getElementById('emailInput').value;
-                const password = document.getElementById('passwordInput').value;
-                const errorDiv = document.getElementById('modalError');
-                errorDiv.textContent = '';
 
-                if (!App.credentials) {
-                    errorDiv.textContent = 'Authentication not configured.';
-                    return;
-                }
+                    const exportData = {
+                        version: App.dataVersion,
+                        timestamp: new Date().toISOString(),
+                        description: "Datos modificados del CV",
+                        data: App.cvData,
+                    };
 
-                const validUser = App.credentials.users?.find(u => u.email === email && u.password === password);
-                
-                if (validUser) {
+                    const dataStr = JSON.stringify(exportData, null, 2);
+                    const dataBlob = new Blob([dataStr], {
+                        type: "application/json",
+                    });
+                    const url = URL.createObjectURL(dataBlob);
+                    const link = document.createElement("a");
+
+                    link.href = url;
+                    link.download = `cv_modified_${new Date().toISOString().split("T")[0]}.json`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                },
+
+                clearCache() {
+                    localStorage.removeItem("cvData_cache");
+                    Data.refreshParsedData();
+                    alert("Caché limpiado, usando datos originales");
+                },
+            };
+
+            const Auth = {
+                async init() {
+                    const embeddedConfig = LocalFileData.getConfig();
+
+                    if (location.protocol === "file:" && embeddedConfig) {
+                        App.credentials = embeddedConfig;
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch("./config.json");
+                        if (response.ok) {
+                            App.credentials = await response.json();
+                        } else if (embeddedConfig) {
+                            App.credentials = embeddedConfig;
+                        } else {
+                            console.warn(
+                                "Config file not found. Proceeding without auth.",
+                            );
+                        }
+                    } catch (error) {
+                        if (embeddedConfig) {
+                            App.credentials = embeddedConfig;
+                            return;
+                        }
+                        console.warn("Could not load credentials:", error);
+                    }
+                },
+
+                handleLogin(event) {
+                    event.preventDefault();
+                    const email = document.getElementById("emailInput").value;
+                    const password =
+                        document.getElementById("passwordInput").value;
+                    const errorDiv = document.getElementById("modalError");
+                    errorDiv.textContent = "";
+
+                    if (!App.credentials) {
+                        errorDiv.textContent = "Authentication not configured.";
+                        return;
+                    }
+
+                    const validUser = App.credentials.users?.find(
+                        (user) =>
+                            user.email === email && user.password === password,
+                    );
+
+                    if (!validUser) {
+                        errorDiv.textContent = "Invalid email or password.";
+                        return;
+                    }
+
                     const sessionToken = btoa(`${email}:${Date.now()}`);
-                    localStorage.setItem('sessionToken', sessionToken);
+                    localStorage.setItem("sessionToken", sessionToken);
                     App.isLoggedIn = true;
                     UI.updateConfigButton();
                     UI.toggleLoginModal();
-                    alert('Logged in successfully!');
-                    document.getElementById('emailInput').value = '';
-                    document.getElementById('passwordInput').value = '';
-                    Render.renderCV(); // Re-render to show admin controls
-                } else {
-                    errorDiv.textContent = 'Invalid email or password.';
-                }
-            },
-
-            logout() {
-                localStorage.removeItem('sessionToken');
-                App.isLoggedIn = false;
-                UI.updateConfigButton();
-                Render.renderCV(); // Re-render to hide admin controls
-            }
-        };
-
-        const UI = {
-            changeLanguage(lang) {
-                App.currentLanguage = lang;
-                localStorage.setItem('language', lang);
-
-                // Update lang buttons
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.lang === lang);
-                });
-
-                // Update lang content
-                document.querySelectorAll('.lang-content').forEach(el => {
-                    el.classList.toggle('active', el.dataset.lang === lang);
-                });
-                Data.refreshParsedData();
-                Render.renderCV();
-            },
-            
-            initLanguageUI() {
-        const lang = App.currentLanguage;
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
-        document.querySelectorAll('.lang-content').forEach(el => {
-            el.classList.toggle('active', el.dataset.lang === lang);
-        });
-    },
-
-            toggleLoginModal() {
-                const modal = document.getElementById('loginModal');
-                modal.classList.toggle('active');
-            },
-
-            updateConfigButton() {
-                const btn = document.getElementById('configBtn');
-                if (App.isLoggedIn) {
-                    btn.textContent = '🔓 Logout';
-                    btn.onclick = () => {
-                        Auth.logout();
-                        UI.updateConfigButton();
-                    };
-                } else {
-                    btn.textContent = '⚙ Config';
-                    btn.onclick = () => UI.toggleLoginModal();
-                }
-            }
-        };
-const AutoExport = {
-    // Bandera para evitar múltiples exportaciones simultáneas
-    isExporting: false,
-    
-    // Exportar automáticamente después de cambios
-    async exportOnChange() {
-        if (!App.isLoggedIn) return;
-        
-        // Evitar múltiples llamadas simultáneas
-        if (this.isExporting) {
-            setTimeout(() => this.exportOnChange(), 1000);
-            return;
-        }
-        
-        this.isExporting = true;
-        
-        try {
-            await this.exportToJSON();
-            console.log('Datos exportados automáticamente');
-        } catch (error) {
-            console.error('Error en exportación automática:', error);
-        } finally {
-            this.isExporting = false;
-        }
-    },
-    
-    async exportToJSON() {
-        if (!App.cvData) return;
-        
-        // Reconstruir la estructura del JSON original con los cambios
-        const exportData = this.reconstructOriginalJSON();
-        
-        // Crear y descargar el archivo
-        const dataStr = JSON.stringify(exportData, null, 2);
-        const dataBlob = new Blob([dataStr], { type: 'application/json' });
-        const url = URL.createObjectURL(dataBlob);
-        
-        // Crear un enlace invisible y hacer click
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `cv_modified_${this.getTimestamp()}.json`;
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        
-        // Limpiar
-        setTimeout(() => {
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }, 100);
-    },
-    
-    // Reconstruir la estructura del JSON original
-    reconstructOriginalJSON() {
-        // Esta es la estructura de tu cvs.json
-        const reconstructed = {
-            version: "1.0",
-            tables: [
-                {
-                    name: "datos_personales",
-                    columns: [
-                        { name: "id", type: "INTEGER" },
-                        { name: "nombres", type: "TEXT" },
-                        { name: "perfil", type: "TEXT" },
-                        { name: "foto_url", type: "TEXT" },
-                        { name: "persona_id", type: "INTEGER" },
-                        { name: "profesion_id", type: "INTEGER" },
-                        { name: "lengua", type: "TEXT" }
-                    ]
+                    document.getElementById("emailInput").value = "";
+                    document.getElementById("passwordInput").value = "";
+                    Render.renderCV();
                 },
-                {
-                    name: "experiencia",
-                    columns: [
-                        { name: "id", type: "INTEGER" },
-                        { name: "persona_id", type: "INTEGER" },
-                        { name: "profesion_id", type: "INTEGER" },
-                        { name: "inicio_anio", type: "TEXT" },
-                        { name: "institucion", type: "TEXT" },
-                        { name: "lugar", type: "TEXT" },
-                        { name: "rol", type: "TEXT" },
-                        { name: "tareas", type: "TEXT" },
-                        { name: "logros", type: "TEXT" },
-                        { name: "referencia", type: "TEXT" },
-                        { name: "referencia_linkedin", type: "TEXT" },
-                        { name: "lengua", type: "TEXT" }
-                    ]
-                }
-                // ... agregar más tablas según sea necesario
-            ],
-            data: {
-                datos_personales: this.reconstructPersonalData(),
-                profesiones: this.reconstructProfessions(),
-                experiencia: this.reconstructExperience(),
-                educacion: this.reconstructEducation(),
-                enlaces_personales: this.reconstructLinks(),
-                skills: this.reconstructSkills()
-            }
-        };
-        
-        return reconstructed;
-    },
-    
-    // Reconstruir datos personales
-    reconstructPersonalData() {
-        // Suponiendo que mantienes los datos originales + cambios
-        const baseData = App.originalData?.datos_personales || [];
-        const currentLang = App.currentLanguage;
-        
-        // Esto es un ejemplo - necesitarías adaptarlo a tu estructura real
-        return [
-            [1, App.cvData.nombres || "Diego Paucar", App.cvData.perfil || "", 
-             App.cvData.foto_url || "/profile.jpg", 1, 1, currentLang]
-        ];
-    },
-    
-    // Reconstruir experiencia
-    reconstructExperience() {
-        if (!App.cvData.experiencia) return [];
-        
-        return App.cvData.experiencia.map(exp => [
-            exp.id || 0,
-            exp.persona_id || 1,
-            exp.profesion_id || 1,
-            exp.inicio_anio || "",
-            exp.institucion || "",
-            exp.lugar || "",
-            exp.rol || "",
-            exp.tareas || "",
-            exp.logros || "",
-            exp.referencia || "",
-            exp.referencia_linkedin || "",
-            exp.lengua || App.currentLanguage
-        ]);
-    },
-    
-    // Reconstruir educación
-    reconstructEducation() {
-        if (!App.cvData.educacion) return [];
-        
-        return App.cvData.educacion.map(edu => [
-            edu.id || 0,
-            edu.persona_id || 1,
-            edu.grado_instruccion || "",
-            edu.institucion || "",
-            edu.titulo || "",
-            edu.fecha_inicio || "",
-            edu.en_curso || 0,
-            edu.lengua || App.currentLanguage
-        ]);
-    },
-    
-    // Métodos similares para reconstructProfessions, reconstructLinks, reconstructSkills
-    
-    getTimestamp() {
-        const now = new Date();
-        return now.toISOString().replace(/[:.]/g, '-').split('T')[0];
-    }
-};
-const Data = {
-    async fetchCVData() {
-        try {
-            // 1. Intentar cargar desde caché si es admin
-            const cachedData = CacheManager.loadFromCache();
-            if (cachedData && App.isLoggedIn) {
-                App.cvData = cachedData;
-                Render.renderCV();
-                return;
-            }
 
-            // 2. Cargar archivo original
-            const response = await fetch('./cvs.json');
-            if (!response.ok) throw new Error('Error al cargar cvs.json');
-            App.originalData = await response.json();
+                logout() {
+                    localStorage.removeItem("sessionToken");
+                    App.isLoggedIn = false;
+                    UI.updateConfigButton();
+                    Render.renderCV();
+                },
+            };
 
-            // 3. Procesar y Filtrar (IMPORTANTE: primero asignar originalData)
-            this.refreshParsedData();
+            const UI = {
+                changeLanguage(lang) {
+                    App.currentLanguage = lang;
+                    localStorage.setItem("language", lang);
+                    this.initLanguageUI();
+                    Data.refreshParsedData();
+                },
 
-        } catch (error) {
-            console.error('Error en Data.fetchCVData:', error);
-        }
-    },
+                initLanguageUI() {
+                    const lang = App.currentLanguage;
 
-    refreshParsedData() {
-        if (!App.originalData || !App.originalData.data) return;
+                    document.querySelectorAll(".lang-btn").forEach((btn) => {
+                        btn.classList.toggle(
+                            "active",
+                            btn.dataset.lang === lang,
+                        );
+                    });
 
-        const { data, tables } = App.originalData;
-        
-        // Mapear y filtrar por idioma actual usando App.currentLanguage
-        App.cvData = {
-            profesiones: this.mapAndFilter(data.profesiones, tables, 'profesiones'),
-            experiencia: this.mapAndFilter(data.experiencia, tables, 'experiencia'),
-            educacion: this.mapAndFilter(data.educacion, tables, 'educacion'),
-            enlaces_personales: this.mapAndFilter(data.enlaces_personales, tables, 'enlaces_personales'),
-            skills: this.mapAndFilter(data.skills, tables, 'skills')
-        };
+                    document
+                        .querySelectorAll(".lang-content")
+                        .forEach((element) => {
+                            element.classList.toggle(
+                                "active",
+                                element.dataset.lang === lang,
+                            );
+                        });
+                },
 
-        // Datos personales (busca la fila que termina en el idioma actual)
-        const personalRow = data.datos_personales.find(row => row[row.length - 1] === App.currentLanguage) 
-                           || data.datos_personales[0];
-        
-        App.cvData.nombres = personalRow[1];
-        App.cvData.perfil = personalRow[5];
+                toggleLoginModal() {
+                    const modal = document.getElementById("loginModal");
+                    if (modal) {
+                        modal.classList.toggle("active");
+                    }
+                },
 
-        Render.renderCV();
-    },
+                updateConfigButton() {
+                    const btn = document.getElementById("configBtn");
+                    if (!btn) return;
 
-    mapAndFilter(dataArray, schema, tableName) {
-        return dataArray.map(row => {
-            let obj = {};
-            // Mapeo manual para corregir el desfase de columnas del SQL original
-            if (tableName === 'experiencia') {
-                obj = {
-                    id: row[0],
-                    persona_id: row[1],
-                    profesion_id: row[2],
-                    inicio_anio: row[3], // "Actual" o fecha
-                    institucion: row[4], // "ESCAPE", etc.
-                    lugar: row[5],
-                    rol: row[6],
-                    tareas: row[7],
-                    lengua: row[row.length - 1] // Siempre el último elemento
-                };
-            } else if (tableName === 'skills') {
-                obj = {
-                    id: row[0],
-                    skill_name: row[3],
-                    skill_level: row[4],
-                    tipo_skill: row[5],
-                    lengua: row[row.length - 1]
-                };
-            } else if (tableName === 'educacion') {
-                obj = {
-                    id: row[0],
-                    grado_instruccion: row[2],
-                    institucion: row[3],
-                    titulo: row[4],
-                    fecha_inicio: row[5],
-                    lengua: row[row.length - 1]
-                };
-            } else {
-                // Genérico para tablas simples
-                const tableSchema = schema.find(t => t.name === tableName);
-                const columns = tableSchema.columns.map(col => col.name);
-                row.forEach((val, i) => { if (columns[i+1]) obj[columns[i+1]] = val; });
-                obj.lengua = row[row.length - 1];
-            }
-            return obj;
-        }).filter(item => item.lengua === App.currentLanguage);
-    }
-};
-
-        const Render = {
-            renderCV() {
-                if (!App.cvData) return;
-
-                let desc_es = "Sociólogo y científico de datos neurodivergente y amado por Dios. Me defino como un agente de cambio. Disfruto simplificando problemas complejos, automatizando la investigación social y haciendo la vida más fácil para quienes me rodean, empezando por mí mismo."
-                let desc_en = "Neurodivergent and God-loved sociologist and data scientist. I define myself as a change agent. I enjoy simplifying hard problems, automatizing social research and making life easier to others around me, starting by myself." 
-                
-                document.getElementById('personName').textContent = "Diego Paucar"
-                document.getElementById('professions').textContent = App.cvData.profesiones?.map(p => p.profesion).join(' | ') || '';
-                document.getElementById('description').textContent = (App.currentLanguage === "es") ? desc_es : desc_en;
-                
-                this.renderTimeline();
-                this.renderInfoSections();
-                this.renderSkills();
-
-                // Show/hide admin controls based on login status
-                document.getElementById('addExpBtn').style.display = App.isLoggedIn ? 'inline-block' : 'none';
-            },
-
-            renderTimeline() {
-                const container = document.getElementById('timelineContainer');
-                container.innerHTML = '';
-                console.log(App.cvData)
-                if (!App.cvData.experiencia || App.cvData.experiencia.length === 0) {
-                    container.innerHTML = '<p class="lang-content active" data-lang="en">No experience available.</p><p class="lang-content" data-lang="es">No hay experiencia disponible.</p>';
-                    return;
-                }
-
-                const sorted = [...App.cvData.experiencia].sort((a, b) => {
-                    const dateA = new Date(a.inicio_anio === 'Actual' ? Date.now() : a.inicio_anio);
-                    const dateB = new Date(b.inicio_anio === 'Actual' ? Date.now() : b.inicio_anio);
-                    return dateB - dateA;
-                });
-
-                sorted.forEach((exp, index) => {
-                    const isLeft = index % 2 === 0;
-                    const year = this.formatYear(exp.inicio_anio, exp.fin_anio);
-                    const categoryClass = this.getCategoryClass(exp.profesion_id);
-
-                    const item = document.createElement('div');
-                    item.className = 'timeline-item';
-                    
-                    const contentClass = isLeft ? 'left' : 'right';
-                    const emptyDiv = isLeft ? '' : `<div></div>`;
-                    const bulletDiv = `
-                        <div class="timeline-center">
-                            <div class="timeline-bullet ${categoryClass}"></div>
-                            <p class="timeline-year">${year}</p>
-                        </div>
-                    `;
-                    const deleteBtn = App.isLoggedIn ? `<button class="btn-delete" onclick="CRUD.deleteExperience(${exp.id})">Delete</button>` : '';
-                    const contentDiv = `
-                        <div class="timeline-content ${contentClass}">
-                            <div class="timeline-header">
-                                <h3 class="editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${exp.rol}</h3>
-                            </div>
-                            <p class="timeline-role editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${exp.institucion}</p>
-                            ${deleteBtn}
-                        </div>
-                    `;
-                    const revealDiv = exp.tareas ? `<div class="timeline-hover-reveal">${exp.tareas}</div>` : `<div></div>`;
-
-                    if (isLeft) {
-                        item.innerHTML = `${contentDiv}${bulletDiv}${revealDiv}`;
+                    if (App.isLoggedIn) {
+                        btn.textContent = "🔓 Logout";
+                        btn.onclick = () => {
+                            Auth.logout();
+                            UI.updateConfigButton();
+                        };
                     } else {
-                        item.innerHTML = `${revealDiv}${bulletDiv}${contentDiv}`;
+                        btn.textContent = "⚙ Config";
+                        btn.onclick = () => UI.toggleLoginModal();
+                    }
+                },
+            };
+
+            const AutoExport = {
+                isExporting: false,
+
+                async exportOnChange() {
+                    if (!App.isLoggedIn || this.isExporting) return;
+
+                    this.isExporting = true;
+                    try {
+                        await this.exportToJSON();
+                    } catch (error) {
+                        console.error(
+                            "Error en exportación automática:",
+                            error,
+                        );
+                    } finally {
+                        this.isExporting = false;
+                    }
+                },
+
+                async exportToJSON() {
+                    if (!App.cvData) return;
+
+                    const exportData = this.reconstructOriginalJSON();
+                    const dataStr = JSON.stringify(exportData, null, 2);
+                    const dataBlob = new Blob([dataStr], {
+                        type: "application/json",
+                    });
+                    const url = URL.createObjectURL(dataBlob);
+                    const link = document.createElement("a");
+
+                    link.href = url;
+                    link.download = `cv_modified_${this.getTimestamp()}.json`;
+                    link.style.display = "none";
+                    document.body.appendChild(link);
+                    link.click();
+
+                    setTimeout(() => {
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+                    }, 100);
+                },
+
+                reconstructOriginalJSON() {
+                    if (!App.originalData) {
+                        return {
+                            version: App.dataVersion,
+                            data: App.cvData,
+                        };
                     }
 
-                    container.appendChild(item);
-                });
-                
-                <!-- Show add button when logged in -->
-                const addBtn = document.getElementById('addExpBtn');
-                if (addBtn) addBtn.style.display = App.isLoggedIn ? 'inline-block' : 'none';
-            },
+                    const reconstructed = JSON.parse(
+                        JSON.stringify(App.originalData),
+                    );
+                    reconstructed.data = {
+                        ...reconstructed.data,
+                        datos_personales: this.mergeLanguageRows(
+                            "datos_personales",
+                            this.reconstructPersonalData(),
+                        ),
+                        profesiones: this.mergeLanguageRows(
+                            "profesiones",
+                            this.reconstructProfessions(),
+                        ),
+                        experiencia: this.mergeLanguageRows(
+                            "experiencia",
+                            this.reconstructExperience(),
+                        ),
+                        educacion: this.mergeLanguageRows(
+                            "educacion",
+                            this.reconstructEducation(),
+                        ),
+                        enlaces_personales: this.mergeLanguageRows(
+                            "enlaces_personales",
+                            this.reconstructLinks(),
+                        ),
+                        skills: this.mergeLanguageRows(
+                            "skills",
+                            this.reconstructSkills(),
+                        ),
+                        certifications: this.mergeLanguageRows(
+                            "certifications",
+                            this.reconstructCertifications(),
+                        ),
+                        publications: this.mergeLanguageRows(
+                            "publications",
+                            this.reconstructPublications(),
+                        ),
+                        portfolio_items: this.mergeLanguageRows(
+                            "portfolio_items",
+                            this.reconstructPortfolioItems(),
+                        ),
+                    };
 
-            getCategoryClass(profId) {
-                const map = { 1: 'work', 2: 'design', 3: 'education' }; // Assuming profession IDs map to categories
-                return map[profId] || 'other';
-            },
+                    return reconstructed;
+                },
 
-            renderInfoSections() {
-                const container = document.getElementById('infoSection');
-                container.innerHTML = '';
-            
-                // Filter education by language
-                const filteredEdu = App.cvData.educacion.filter(edu => edu.lengua === App.currentLanguage);
-                if (filteredEdu.length > 0) {
-                    const eduCard = document.createElement('div');
-                    eduCard.className = 'info-card';
-                    <!-- Add delete buttons and edit capability to education items -->
-                    const eduItems = filteredEdu.map(edu => {
-                        const deleteBtn = App.isLoggedIn ? `<button class="btn-delete" onclick="CRUD.deleteEducation(${edu.id})">Delete</button>` : '';
-                        return `
-                            <div class="info-item">
-                                <h4 class="editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${edu.titulo}</h4>
-                                <p class="editable-field" ondblclick="CRUD.makeEditable(this, 'text')">${edu.institucion}</p>
-                                <p>${edu.fecha_inicio ? new Date(edu.fecha_inicio).getFullYear() : 'Year unknown'}</p>
-                                ${deleteBtn}
-                            </div>
-                        `;
-                    }).join('');
-                    
-                    eduCard.innerHTML = `
-                        <h3>
-                            <span class="lang-content active" data-lang="en">Education</span>
-                            <span class="lang-content" data-lang="es">Educación</span>
-                        </h3>
-                        ${eduItems}
-                        ${App.isLoggedIn ? '<button class="btn-add" onclick="CRUD.openCreateModal(\'educacion\')">+ Add Education</button>' : ''}
-                    `;
-                    container.appendChild(eduCard);
-                }
+                mergeLanguageRows(tableName, currentLanguageRows) {
+                    const originalRows = Array.isArray(
+                        App.originalData?.data?.[tableName],
+                    )
+                        ? App.originalData.data[tableName]
+                        : [];
+                    const otherLanguageRows = originalRows.filter(
+                        (row) =>
+                            this.getRowLanguage(row) !== App.currentLanguage,
+                    );
 
-                if (App.cvData.enlaces_personales && App.cvData.enlaces_personales.length > 0) {
-                    const linksCard = document.createElement('div');
-                    linksCard.className = 'info-card';
-                    <!-- Add delete buttons to links -->
-                    const linkItems = App.cvData.enlaces_personales.map(link => {
-                        const deleteBtn = App.isLoggedIn ? `<button class="btn-delete" onclick="CRUD.deleteLink(${link.id})">Delete</button>` : '';
-                        return `
-                            <div class="info-item">
-                                <h4><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.tipo}</a></h4>
-                                ${deleteBtn}
-                            </div>
-                        `;
-                    }).join('');
-                    
+                    return [...currentLanguageRows, ...otherLanguageRows];
+                },
+
+                getRowLanguage(row) {
+                    if (Array.isArray(row)) {
+                        return row[row.length - 1];
+                    }
+
+                    if (row && typeof row === "object") {
+                        return row.lengua || null;
+                    }
+
+                    return null;
+                },
+
+                getOriginalPersonalRow() {
+                    return (
+                        App.originalData?.data?.datos_personales?.find(
+                            (row) =>
+                                row[row.length - 1] === App.currentLanguage,
+                        ) ||
+                        App.originalData?.data?.datos_personales?.[0] ||
+                        []
+                    );
+                },
+
+                reconstructPersonalData() {
+                    const originalRow = this.getOriginalPersonalRow();
+
+                    return [
+                        [
+                            originalRow[0] || "1",
+                            App.cvData.nombres ||
+                                originalRow[1] ||
+                                "Diego Mauricio Paucar Villacorta",
+                            originalRow[2] || "",
+                            originalRow[3] || "",
+                            originalRow[4] || "",
+                            App.cvData.perfil || originalRow[5] || "",
+                            App.currentLanguage,
+                        ],
+                    ];
+                },
+
+                reconstructProfessions() {
+                    return (App.cvData.profesiones || []).map((item) => [
+                        item.id || "1",
+                        item.persona_id || "1",
+                        item.profesion || "",
+                        item.lengua || App.currentLanguage,
+                    ]);
+                },
+
+                reconstructExperience() {
+                    return (App.cvData.experiencia || []).map((item) => [
+                        item.id || "1",
+                        item.persona_id || "1",
+                        item.profesion_id || "1",
+                        item.experiencia_categoria || "",
+                        item.inicio_anio || "",
+                        item.institucion || "",
+                        item.lugar || "",
+                        item.rol || "",
+                        item.tareas || "",
+                        item.logros || null,
+                        item.referencia || null,
+                        item.referencia_linkedin || null,
+                        item.lengua || App.currentLanguage,
+                    ]);
+                },
+
+                reconstructEducation() {
+                    return (App.cvData.educacion || []).map((item) => [
+                        item.id || "1",
+                        item.persona_id || "1",
+                        item.grado_instruccion || "",
+                        item.institucion || "",
+                        item.titulo || "",
+                        item.fecha_inicio || "",
+                        Boolean(item.en_curso),
+                        item.lengua || App.currentLanguage,
+                    ]);
+                },
+
+                reconstructLinks() {
+                    return (App.cvData.enlaces_personales || []).map((item) => [
+                        item.id || "1",
+                        item.persona_id || "1",
+                        item.tipo || "",
+                        item.url || "",
+                        item.lengua || App.currentLanguage,
+                    ]);
+                },
+
+                reconstructSkills() {
+                    return (App.cvData.skills || []).map((item) => {
+                        if (
+                            item.certificate_name &&
+                            String(item.certificate_name).trim() !== ""
+                        ) {
+                            return [
+                                item.id || "1",
+                                item.persona_id || "1",
+                                item.profesion_id || null,
+                                item.skill_name || "",
+                                item.skill_level || "",
+                                item.tipo_skill || "",
+                                item.certificate_name || "",
+                                item.certificate_year || "",
+                                item.certificate_institution || "",
+                                item.certificate_path || "",
+                                item.lengua || App.currentLanguage,
+                            ];
+                        }
+
+                        return [
+                            item.id || "1",
+                            item.persona_id || "1",
+                            item.profesion_id || null,
+                            item.skill_name || "",
+                            item.skill_level || "",
+                            item.tipo_skill || "",
+                            item.certificate_name || "",
+                            item.lengua || App.currentLanguage,
+                        ];
+                    });
+                },
+
+                reconstructCertifications() {
+                    return (App.cvData.certifications || []).map((item) => [
+                        item.id || "1",
+                        item.persona_id || "1",
+                        item.name || "",
+                        item.issuer || "",
+                        item.year || "",
+                        item.url || null,
+                        item.lengua || App.currentLanguage,
+                    ]);
+                },
+
+                reconstructPublications() {
+                    return (App.cvData.publications || []).map((item) => [
+                        item.id || "1",
+                        item.persona_id || "1",
+                        item.title || "",
+                        item.authors || "",
+                        item.year || "",
+                        item.publication_type || "",
+                        item.journal_or_publisher || "",
+                        item.volume || null,
+                        item.pages || null,
+                        item.doi || null,
+                        item.url || null,
+                        item.contribution || "",
+                        item.lengua || App.currentLanguage,
+                    ]);
+                },
+
+                reconstructPortfolioItems() {
+                    return (App.cvData.portfolio_items || []).map((item) => [
+                        item.id || "1",
+                        item.persona_id || "1",
+                        item.item_type || "",
+                        item.title || "",
+                        item.description || "",
+                        item.date_created || "",
+                        item.url || null,
+                        item.repository_link || null,
+                        item.image_path || null,
+                        item.additional_info || null,
+                        item.lengua || App.currentLanguage,
+                    ]);
+                },
+
+                getTimestamp() {
+                    return new Date()
+                        .toISOString()
+                        .replace(/[:.]/g, "-")
+                        .split("T")[0];
+                },
+            };
+
+            const Data = {
+                async fetchCVData() {
+                    const embeddedCVData = LocalFileData.getCVData();
+
+                    if (location.protocol === "file:" && embeddedCVData) {
+                        App.originalData = embeddedCVData;
+                        const cachedData = App.isLoggedIn
+                            ? CacheManager.loadFromCache()
+                            : null;
+
+                        if (cachedData) {
+                            App.cvData = cachedData;
+                            Render.renderCV();
+                            return;
+                        }
+
+                        this.refreshParsedData();
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch("./cvs.json");
+                        if (!response.ok)
+                            throw new Error("Error al cargar cvs.json");
+
+                        App.originalData = await response.json();
+                        const cachedData = App.isLoggedIn
+                            ? CacheManager.loadFromCache()
+                            : null;
+
+                        if (cachedData) {
+                            App.cvData = cachedData;
+                            Render.renderCV();
+                            return;
+                        }
+
+                        this.refreshParsedData();
+                    } catch (error) {
+                        if (embeddedCVData) {
+                            App.originalData = embeddedCVData;
+                            const cachedData = App.isLoggedIn
+                                ? CacheManager.loadFromCache()
+                                : null;
+
+                            if (cachedData) {
+                                App.cvData = cachedData;
+                                Render.renderCV();
+                                return;
+                            }
+
+                            this.refreshParsedData();
+                            return;
+                        }
+
+                        console.error("Error en Data.fetchCVData:", error);
+                    }
+                },
+
+                refreshParsedData() {
+                    if (!App.originalData?.data) return;
+
+                    const { data, tables } = App.originalData;
+                    App.cvData = {
+                        profesiones: this.mapAndFilter(
+                            data.profesiones || [],
+                            tables,
+                            "profesiones",
+                        ),
+                        experiencia: this.mapAndFilter(
+                            data.experiencia || [],
+                            tables,
+                            "experiencia",
+                        ),
+                        educacion: this.mapAndFilter(
+                            data.educacion || [],
+                            tables,
+                            "educacion",
+                        ),
+                        enlaces_personales: this.mapAndFilter(
+                            data.enlaces_personales || [],
+                            tables,
+                            "enlaces_personales",
+                        ),
+                        skills: this.mapAndFilter(
+                            data.skills || [],
+                            tables,
+                            "skills",
+                        ),
+                        certifications: this.mapAndFilter(
+                            data.certifications || [],
+                            tables,
+                            "certifications",
+                        ),
+                        portfolio_items: this.mapAndFilter(
+                            data.portfolio_items || [],
+                            tables,
+                            "portfolio_items",
+                        ),
+                        publications: this.mapAndFilter(
+                            data.publications || [],
+                            tables,
+                            "publications",
+                        ),
+                    };
+
+                    const personalRow =
+                        data.datos_personales.find(
+                            (row) =>
+                                row[row.length - 1] === App.currentLanguage,
+                        ) || data.datos_personales[0];
+
+                    App.cvData.nombres =
+                        personalRow?.[1] || "Diego Mauricio Paucar Villacorta";
+                    App.cvData.perfil = personalRow?.[5] || "";
+
+                    Render.renderCV();
+                },
+
+                mapAndFilter(dataArray, schema, tableName) {
+                    if (!Array.isArray(dataArray)) return [];
+
+                    return dataArray
+                        .map((row, index) => {
+                            let obj = {};
+
+                            if (tableName === "experiencia") {
+                                if (Array.isArray(row)) {
+                                    const hasCategory = row.length >= 13;
+                                    obj = {
+                                        id: row[0],
+                                        persona_id: row[1],
+                                        profesion_id: row[2],
+                                        experiencia_categoria: hasCategory
+                                            ? row[3]
+                                            : "",
+                                        inicio_anio: hasCategory
+                                            ? row[4]
+                                            : row[3],
+                                        institucion: hasCategory
+                                            ? row[5]
+                                            : row[4],
+                                        lugar: hasCategory ? row[6] : row[5],
+                                        rol: hasCategory ? row[7] : row[6],
+                                        tareas: hasCategory ? row[8] : row[7],
+                                        logros: hasCategory ? row[9] : row[8],
+                                        referencia: hasCategory
+                                            ? row[10]
+                                            : row[9],
+                                        referencia_linkedin: hasCategory
+                                            ? row[11]
+                                            : row[10],
+                                        lengua: row[row.length - 1],
+                                    };
+                                } else {
+                                    obj = {
+                                        id: row.id || row.n,
+                                        persona_id: row.persona_id,
+                                        profesion_id: row.profesion_id,
+                                        experiencia_categoria:
+                                            row.experiencia_categoria || "",
+                                        inicio_anio: row.inicio_anio,
+                                        institucion: row.institucion,
+                                        lugar: row.lugar,
+                                        rol: row.rol,
+                                        tareas: row.tareas,
+                                        logros: row.logros,
+                                        referencia: row.referencia,
+                                        referencia_linkedin:
+                                            row.referencia_linkedin,
+                                        lengua: row.lengua,
+                                    };
+                                }
+                            } else if (tableName === "skills") {
+                                const longFormat = row.length >= 11;
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    profesion_id: row[2],
+                                    skill_name: row[3],
+                                    skill_level: row[4],
+                                    tipo_skill: row[5],
+                                    certificate_name: row[6] || "",
+                                    certificate_year: longFormat
+                                        ? row[7]
+                                        : null,
+                                    certificate_institution: longFormat
+                                        ? row[8]
+                                        : "",
+                                    certificate_path: longFormat ? row[9] : "",
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "educacion") {
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    grado_instruccion: row[2],
+                                    institucion: row[3],
+                                    titulo: row[4],
+                                    fecha_inicio: row[5],
+                                    en_curso: row[6],
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "portfolio_items") {
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    item_type: row[2],
+                                    title: row[3],
+                                    description: row[4],
+                                    date_created: row[5],
+                                    url: row[6],
+                                    repository_link: row[7],
+                                    image_path: row[8],
+                                    additional_info: row[9],
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "certifications") {
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    name: row[2],
+                                    issuer: row[3],
+                                    year: row[4],
+                                    url: row[5],
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "publications") {
+                                if (Array.isArray(row)) {
+                                    if (row.length <= 2) {
+                                        obj = {
+                                            id: String(index + 1),
+                                            persona_id: "1",
+                                            title: row[0] || "",
+                                            authors: "",
+                                            year: "",
+                                            publication_type: "",
+                                            journal_or_publisher: "",
+                                            volume: null,
+                                            pages: null,
+                                            doi: null,
+                                            url: row[1] || null,
+                                            contribution: "",
+                                            lengua: null,
+                                        };
+                                    } else {
+                                        obj = {
+                                            id: row[0],
+                                            persona_id: row[1],
+                                            title: row[2],
+                                            authors: row[3],
+                                            year: row[4],
+                                            publication_type: row[5],
+                                            journal_or_publisher: row[6],
+                                            volume: row[7],
+                                            pages: row[8],
+                                            doi: row[9],
+                                            url: row[10],
+                                            contribution: row[11] || "",
+                                            lengua: row[row.length - 1],
+                                        };
+                                    }
+                                } else {
+                                    obj = {
+                                        id: row.id,
+                                        persona_id: row.persona_id,
+                                        title: row.title,
+                                        authors: row.authors,
+                                        year: row.year,
+                                        publication_type: row.publication_type,
+                                        journal_or_publisher:
+                                            row.journal_or_publisher,
+                                        volume: row.volume,
+                                        pages: row.pages,
+                                        doi: row.doi,
+                                        url: row.url,
+                                        contribution: row.contribution || "",
+                                        lengua: row.lengua,
+                                    };
+                                }
+                            } else {
+                                const tableSchema = schema.find(
+                                    (table) => table.name === tableName,
+                                );
+                                const columns =
+                                    tableSchema?.columns?.map(
+                                        (col) => col.name,
+                                    ) || [];
+                                row.forEach((value, index) => {
+                                    if (columns[index + 1]) {
+                                        obj[columns[index + 1]] = value;
+                                    }
+                                });
+                                obj.lengua = row[row.length - 1];
+                            }
+
+                            return obj;
+                        })
+                        .filter(
+                            (item) =>
+                                !item.lengua ||
+                                item.lengua === App.currentLanguage,
+                        );
+                },
+            };
+
+            const Render = {
+                renderCV() {
+                    if (!App.cvData) return;
+
+                    document.getElementById("personName").textContent =
+                        App.cvData.nombres || "Diego Paucar";
+                    document.getElementById("professions").textContent =
+                        App.cvData.profesiones
+                            ?.map((item) => item.profesion)
+                            .join(" | ") || "";
+                    document.getElementById("description").textContent =
+                        App.cvData.perfil || "";
+
+                    this.renderProjects();
+                    this.renderPublications();
+                    this.renderTimeline();
+                    this.renderInfoSections();
+                    this.renderSkills();
+
+                    const addExpBtn = document.getElementById("addExpBtn");
+                    if (addExpBtn) {
+                        addExpBtn.style.display = App.isLoggedIn
+                            ? "inline-block"
+                            : "none";
+                    }
+
+                    UI.initLanguageUI();
+                },
+
+                renderProjects() {
+                    const grid = document.getElementById("projectsGrid");
+                    if (!grid) return;
+
+                    const projects = App.cvData.portfolio_items || [];
+                    if (projects.length === 0) {
+                        grid.innerHTML = `<p>${
+                            App.currentLanguage === "es"
+                                ? "No hay proyectos disponibles."
+                                : "No projects available."
+                        }</p>`;
+                        return;
+                    }
+
+                    grid.innerHTML = projects
+                        .map((project) => {
+                            const link = project.repository_link || project.url;
+                            const linkLabel = project.repository_link
+                                ? "GitHub"
+                                : App.currentLanguage === "es"
+                                  ? "Ver proyecto"
+                                  : "View project";
+
+                            return `
+                                        <div class="project-card">
+                                            <div class="project-card-header">
+                                                <h3>${project.title}</h3>
+                                                ${
+                                                    link
+                                                        ? `<a href="${link}" target="_blank" rel="noopener noreferrer" class="project-link">
+                                                            <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                                                            ${linkLabel}
+                                                        </a>`
+                                                        : ""
+                                                }
+                                            </div>
+                                            <p>${project.description || ""}</p>
+                                        </div>
+                                    `;
+                        })
+                        .join("");
+                },
+
+                renderPublications() {
+                    const container =
+                        document.getElementById("publicationsList");
+                    if (!container) return;
+
+                    const publications = [
+                        ...(App.cvData.publications || []),
+                    ].sort(
+                        (a, b) =>
+                            this.getPublicationPriority(b) -
+                                this.getPublicationPriority(a) ||
+                            this.getSortableDate(b.year) -
+                                this.getSortableDate(a.year),
+                    );
+                    if (publications.length === 0) {
+                        container.innerHTML = `<p>${
+                            App.currentLanguage === "es"
+                                ? "No hay publicaciones registradas."
+                                : "No publications listed."
+                        }</p>`;
+                        return;
+                    }
+
+                    container.innerHTML = publications
+                        .map(
+                            (pub) => `
+                                        <div class="publication-item">
+                                            <h4>${pub.title}</h4>
+                                            <p class="pub-meta"><em>${pub.journal_or_publisher || ""}</em>${
+                                                pub.year ? `, ${pub.year}` : ""
+                                            }</p>
+                                            ${pub.authors ? `<p>${pub.authors}</p>` : ""}
+                                            ${
+                                                pub.contribution
+                                                    ? `<p class="pub-role">${pub.contribution}</p>`
+                                                    : ""
+                                            }
+                                            ${pub.doi ? `<p class="pub-meta">DOI: ${pub.doi}</p>` : ""}
+                                            ${
+                                                pub.url
+                                                    ? `<a href="${pub.url}" target="_blank" rel="noopener noreferrer" class="publication-link">${
+                                                          App.currentLanguage ===
+                                                          "es"
+                                                              ? "Ver publicación"
+                                                              : "View publication"
+                                                      }</a>`
+                                                    : ""
+                                            }
+                                        </div>
+                                    `,
+                        )
+                        .join("");
+                },
+
+                renderTimeline() {
+                    const container =
+                        document.getElementById("timelineContainer");
+                    if (!container) return;
+
+                    container.innerHTML = "";
+                    const experiences = App.cvData.experiencia || [];
+
+                    if (experiences.length === 0) {
+                        container.innerHTML = `<p>${
+                            App.currentLanguage === "es"
+                                ? "No hay experiencia disponible."
+                                : "No experience available."
+                        }</p>`;
+                        return;
+                    }
+
+                    const visibleItems = [...experiences]
+                        .sort(
+                            (a, b) =>
+                                this.getExperiencePriority(b) -
+                                    this.getExperiencePriority(a) ||
+                                this.getSortableDate(b.inicio_anio) -
+                                    this.getSortableDate(a.inicio_anio),
+                        )
+                        .slice(0, 10);
+
+                    visibleItems.forEach((exp, index) => {
+                        const isLeft = index % 2 === 0;
+                        const year = this.formatYear(exp.inicio_anio);
+                        const categoryClass = this.getCategoryClass(
+                            exp.profesion_id,
+                        );
+                        const item = document.createElement("div");
+                        item.className = "timeline-item";
+
+                        const role = this.escapeHtml(exp.rol || "");
+                        const institution = this.escapeHtml(
+                            exp.institucion || "",
+                        );
+                        const location = this.escapeHtml(exp.lugar || "");
+                        const category = this.escapeHtml(
+                            exp.experiencia_categoria || "",
+                        );
+                        const contentClass = isLeft ? "left" : "right";
+                        const deleteBtn = App.isLoggedIn
+                            ? `<button class="btn-delete" onclick="CRUD.deleteExperience('${exp.id}')">Delete</button>`
+                            : "";
+                        const bulletDiv = `
+                                    <div class="timeline-center">
+                                        <div class="timeline-bullet ${categoryClass}"></div>
+                                        <p class="timeline-year">${year}</p>
+                                    </div>
+                                `;
+                        const contentDiv = `
+                                    <div class="timeline-content ${contentClass}">
+                                        <div class="timeline-header">
+                                            <h3
+                                                class="editable-field"
+                                                data-table="experiencia"
+                                                data-id="${exp.id}"
+                                                data-field="rol"
+                                                ondblclick="CRUD.makeEditable(this, 'text')"
+                                            >${role}</h3>
+                                        </div>
+                                        ${
+                                            category
+                                                ? `<p class="timeline-category">${category}</p>`
+                                                : ""
+                                        }
+                                        <p
+                                            class="timeline-role editable-field"
+                                            data-table="experiencia"
+                                            data-id="${exp.id}"
+                                            data-field="institucion"
+                                            ondblclick="CRUD.makeEditable(this, 'text')"
+                                        >${institution}${location ? ` · ${location}` : ""}</p>
+                                        ${deleteBtn}
+                                    </div>
+                                `;
+                        const detailBlocks = [
+                            exp.tareas
+                                ? `<p class="timeline-detail">${this.linkifyText(exp.tareas)}</p>`
+                                : "",
+                            exp.logros
+                                ? `<p class="timeline-detail"><span class="timeline-detail-label">${
+                                      App.currentLanguage === "es"
+                                          ? "Logros:"
+                                          : "Highlights:"
+                                  }</span> ${this.linkifyText(exp.logros)}</p>`
+                                : "",
+                        ]
+                            .filter(Boolean)
+                            .join("");
+                        const revealDiv = detailBlocks
+                            ? `<div class="timeline-hover-reveal">${detailBlocks}</div>`
+                            : "<div></div>";
+
+                        item.innerHTML = isLeft
+                            ? `${contentDiv}${bulletDiv}${revealDiv}`
+                            : `${revealDiv}${bulletDiv}${contentDiv}`;
+
+                        container.appendChild(item);
+                    });
+                },
+
+                getCategoryClass(profId) {
+                    const map = {
+                        1: "work",
+                        2: "other",
+                        3: "design",
+                    };
+                    return map[Number(profId)] || "other";
+                },
+
+                getExperiencePriority(exp) {
+                    const priorityById = {
+                        17: 120,
+                        9: 118,
+                        21: 114,
+                        23: 112,
+                        20: 108,
+                        19: 106,
+                        18: 104,
+                        22: 102,
+                        24: 100,
+                        28: 98,
+                        25: 88,
+                        26: 84,
+                        27: 82,
+                    };
+
+                    return priorityById[Number(exp.id)] || 0;
+                },
+
+                getPublicationPriority(pub) {
+                    const contribution = String(
+                        pub.contribution || "",
+                    ).toLowerCase();
+
+                    if (
+                        contribution.includes("lead author") ||
+                        contribution.includes("autor principal")
+                    ) {
+                        return 100;
+                    }
+
+                    if (
+                        contribution.includes("methodological") ||
+                        contribution.includes("metodológico") ||
+                        contribution.includes("data analyst") ||
+                        contribution.includes("analista de datos")
+                    ) {
+                        return 80;
+                    }
+
+                    return 0;
+                },
+
+                renderInfoSections() {
+                    const credentialsGrid =
+                        document.getElementById("credentialsGrid");
+                    const container = document.getElementById("infoSection");
+                    const education = [...(App.cvData.educacion || [])].sort(
+                        (a, b) =>
+                            new Date(b.fecha_inicio || 0) -
+                            new Date(a.fecha_inicio || 0),
+                    );
+                    const certificationsSource =
+                        App.cvData.certifications?.length > 0
+                            ? App.cvData.certifications
+                            : (App.cvData.skills || [])
+                                  .filter(
+                                      (skill) =>
+                                          skill.certificate_name &&
+                                          skill.certificate_name.trim() !== "",
+                                  )
+                                  .map((skill) => ({
+                                      id: skill.id,
+                                      name: skill.certificate_name,
+                                      issuer:
+                                          skill.certificate_institution ||
+                                          skill.skill_name ||
+                                          "",
+                                      year: skill.certificate_year,
+                                      url: skill.certificate_path || null,
+                                  }));
+                    const certifications = [...certificationsSource].sort(
+                        (a, b) =>
+                            this.getSortableDate(b.year) -
+                            this.getSortableDate(a.year),
+                    );
+
+                    if (credentialsGrid) {
+                        credentialsGrid.innerHTML = certifications.length
+                            ? certifications
+                                  .map(
+                                      (cert) => `
+                                            <div class="credential-item">
+                                                <span class="credential-type">${
+                                                    App.currentLanguage === "es"
+                                                        ? "Certificación"
+                                                        : "Certification"
+                                                }</span>
+                                                <h4>${cert.name || ""}</h4>
+                                                <span class="credential-issuer">${cert.issuer || ""}</span>
+                                                <span class="credential-year">${this.formatYear(cert.year)}</span>
+                                                ${
+                                                    cert.url
+                                                        ? `<a href="${cert.url}" target="_blank" rel="noopener noreferrer" class="publication-link">${
+                                                              App.currentLanguage ===
+                                                              "es"
+                                                                  ? "Ver credencial"
+                                                                  : "View credential"
+                                                          }</a>`
+                                                        : ""
+                                                }
+                                            </div>
+                                        `,
+                                  )
+                                  .join("")
+                            : `<p>${
+                                  App.currentLanguage === "es"
+                                      ? "No hay credenciales disponibles."
+                                      : "No credentials available."
+                              }</p>`;
+                    }
+
+                    if (!container) return;
+
+                    const links = App.cvData.enlaces_personales || [];
+                    container.innerHTML = "";
+
+                    if (
+                        education.length === 0 &&
+                        links.length === 0 &&
+                        !App.isLoggedIn
+                    ) {
+                        container.style.display = "none";
+                        return;
+                    }
+
+                    container.style.display = "grid";
+
+                    if (education.length > 0) {
+                        const educationCard = document.createElement("div");
+                        educationCard.className = "info-card";
+                        educationCard.innerHTML = `
+                                <h3>
+                                    <span class="lang-content active" data-lang="en">Education</span>
+                                    <span class="lang-content" data-lang="es">Educación</span>
+                                </h3>
+                                ${education
+                                    .map(
+                                        (edu) => `
+                                            <div class="info-item">
+                                                <h4>${edu.titulo || ""}</h4>
+                                                <p>${edu.institucion || ""}</p>
+                                                <p>${this.formatYear(edu.fecha_inicio)}</p>
+                                            </div>
+                                        `,
+                                    )
+                                    .join("")}
+                            `;
+                        container.appendChild(educationCard);
+                    }
+
+                    const linksCard = document.createElement("div");
+                    linksCard.className = "info-card";
+                    const linkItems = links
+                        .map((link) => {
+                            const deleteBtn = App.isLoggedIn
+                                ? `<button class="btn-delete" onclick="CRUD.deleteLink('${link.id}')">Delete</button>`
+                                : "";
+
+                            return `
+                                        <div class="info-item">
+                                            <h4><a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.tipo}</a></h4>
+                                            ${deleteBtn}
+                                        </div>
+                                    `;
+                        })
+                        .join("");
+
                     linksCard.innerHTML = `
-                        <h3>
-                            <span class="lang-content active" data-lang="en">Links</span>
-                            <span class="lang-content" data-lang="es">Enlaces</span>
-                        </h3>
-                        ${linkItems}
-                        ${App.isLoggedIn ? '<button class="btn-add" onclick="CRUD.openCreateModal(\'enlaces_personales\')">+ Add Link</button>' : ''}
-                    `;
+                                <h3>
+                                    <span class="lang-content active" data-lang="en">Links</span>
+                                    <span class="lang-content" data-lang="es">Enlaces</span>
+                                </h3>
+                                ${linkItems}
+                                ${
+                                    App.isLoggedIn
+                                        ? '<button class="btn-add" onclick="CRUD.openCreateModal(\'enlaces_personales\')">+ Add Link</button>'
+                                        : ""
+                                }
+                            `;
                     container.appendChild(linksCard);
-                }
-            },
+                },
 
-            renderSkills() {
-                const container = document.getElementById('skillsSection');
-                if (!App.cvData.skills || App.cvData.skills.length === 0) {
-                    container.style.display = 'none';
-                    return;
-                }
+                renderSkills() {
+                    const container = document.getElementById("skillsSection");
+                    if (!container) return;
 
-                container.innerHTML = `
-                    <h2 class="section-title">
-                        <span class="lang-content active" data-lang="en">Skills</span>
-                        <span class="lang-content" data-lang="es">Habilidades</span>
-                    </h2>
-                    <div class="skills-grid">
-                        ${App.cvData.skills.map(skill => `
-                            <span class="skill-tag">${skill.skill_name}</span>
-                        `).join('')}
-                    </div>
-                `;
-            },
+                    const skills = (App.cvData.skills || []).filter(
+                        (skill) =>
+                            !(
+                                skill.certificate_name &&
+                                String(skill.certificate_name).trim()
+                            ),
+                    );
 
-            formatYear(start, end) {
-                const startDate = new Date(start);
-                const startYear = isNaN(startDate) ? start : startDate.getFullYear();
-                
-                let endYear;
-                if (end === 'Actual') {
-                    endYear = 'Present';
-                } else {
-                    const endDate = new Date(end);
-                    endYear = isNaN(endDate) ? end : endDate.getFullYear();
-                }
-                
-                return `${startYear}`;
-            }
-        };
-
-        <!-- Add CRUD operations module for edit/delete/create functionality -->
-        const CRUD = {
-            currentEditElement: null,
-            currentEditField: null,
-
-            makeEditable(element, fieldType) {
-                if (!App.isLoggedIn) return;
-
-                // Prevent making nested elements editable
-                if (element.querySelector('.edit-controls')) return;
-
-                const originalContent = element.innerHTML; // Keep HTML for nested tags like <a>
-                const inputType = fieldType === 'textarea' ? 'textarea' : 'input';
-                const input = document.createElement(inputType);
-                
-                // Extract plain text for input value
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = originalContent;
-                input.value = tempDiv.textContent.trim(); // Use textContent to get plain text
-
-                input.className = `editable-${fieldType}`;
-
-                element.innerHTML = '';
-                element.appendChild(input);
-                element.classList.add('edit-mode');
-
-                const saveBtn = document.createElement('button');
-                saveBtn.textContent = 'Save';
-                saveBtn.type = 'button';
-                saveBtn.className = 'btn-primary';
-                saveBtn.style.marginRight = '0.5rem';
-                saveBtn.onclick = (e) => {
-                    e.preventDefault();
-                    CRUD.saveEdit(element, input.value, originalContent, fieldType);
-                };
-
-                const cancelBtn = document.createElement('button');
-                cancelBtn.textContent = 'Cancel';
-                cancelBtn.type = 'button';
-                cancelBtn.className = 'btn-secondary';
-                cancelBtn.onclick = (e) => {
-                    e.preventDefault();
-                    CRUD.cancelEdit(element, originalContent);
-                };
-
-                const controls = document.createElement('div');
-                controls.className = 'edit-controls active';
-                controls.appendChild(saveBtn);
-                controls.appendChild(cancelBtn);
-
-                element.appendChild(controls);
-                input.focus();
-
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' && fieldType === 'text') {
-                        e.preventDefault(); // Prevent default Enter behavior for text input
-                        CRUD.saveEdit(element, input.value, originalContent, fieldType);
+                    if (skills.length === 0) {
+                        container.style.display = "none";
+                        return;
                     }
-                    if (e.key === 'Escape') {
-                        e.preventDefault();
+
+                    container.style.display = "block";
+                    container.innerHTML = `
+                                <h2 class="section-title">
+                                    <span class="lang-content active" data-lang="en">Skills</span>
+                                    <span class="lang-content" data-lang="es">Habilidades</span>
+                                </h2>
+                                <div class="skills-grid">
+                                    ${skills
+                                        .map(
+                                            (skill) =>
+                                                `<span class="skill-tag">${skill.skill_name}</span>`,
+                                        )
+                                        .join("")}
+                                </div>
+                            `;
+                },
+
+                escapeHtml(value) {
+                    return String(value ?? "")
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#39;");
+                },
+
+                linkifyText(value) {
+                    return this.escapeHtml(value).replace(
+                        /(https?:\/\/[^\s<)]+)/g,
+                        '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>',
+                    );
+                },
+
+                formatYear(value) {
+                    if (!value) return "";
+                    if (value === "Actual") {
+                        return App.currentLanguage === "es"
+                            ? "Actual"
+                            : "Present";
+                    }
+
+                    const date = new Date(value);
+                    return Number.isNaN(date.getTime())
+                        ? String(value)
+                        : String(date.getFullYear());
+                },
+
+                getSortableDate(value) {
+                    if (value === "Actual" || value === "Actualidad") {
+                        return Number.MAX_SAFE_INTEGER;
+                    }
+
+                    if (typeof value === "number") {
+                        return value;
+                    }
+
+                    const raw = String(value ?? "").trim();
+                    if (!raw) return 0;
+
+                    if (/^\d{4}$/.test(raw)) {
+                        return Number(raw);
+                    }
+
+                    const timestamp = new Date(raw).getTime();
+                    return Number.isNaN(timestamp) ? 0 : timestamp;
+                },
+            };
+
+            const CRUD = {
+                currentEditElement: null,
+                currentEditField: null,
+
+                makeEditable(element, fieldType) {
+                    if (!App.isLoggedIn) return;
+                    if (element.querySelector(".edit-controls")) return;
+
+                    const originalContent = element.innerHTML;
+                    const input = document.createElement(
+                        fieldType === "textarea" ? "textarea" : "input",
+                    );
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = originalContent;
+                    input.value = tempDiv.textContent.trim();
+                    input.className = `editable-${fieldType}`;
+
+                    element.innerHTML = "";
+                    element.appendChild(input);
+                    element.classList.add("edit-mode");
+
+                    const saveBtn = document.createElement("button");
+                    saveBtn.textContent = "Save";
+                    saveBtn.type = "button";
+                    saveBtn.className = "btn-primary";
+                    saveBtn.style.marginRight = "0.5rem";
+                    saveBtn.onclick = (event) => {
+                        event.preventDefault();
+                        CRUD.saveEdit(element, input.value, originalContent);
+                    };
+
+                    const cancelBtn = document.createElement("button");
+                    cancelBtn.textContent = "Cancel";
+                    cancelBtn.type = "button";
+                    cancelBtn.className = "btn-secondary";
+                    cancelBtn.onclick = (event) => {
+                        event.preventDefault();
                         CRUD.cancelEdit(element, originalContent);
+                    };
+
+                    const controls = document.createElement("div");
+                    controls.className = "edit-controls active";
+                    controls.appendChild(saveBtn);
+                    controls.appendChild(cancelBtn);
+                    element.appendChild(controls);
+                    input.focus();
+
+                    input.addEventListener("keydown", (event) => {
+                        if (event.key === "Enter" && fieldType === "text") {
+                            event.preventDefault();
+                            CRUD.saveEdit(
+                                element,
+                                input.value,
+                                originalContent,
+                            );
+                        }
+                        if (event.key === "Escape") {
+                            event.preventDefault();
+                            CRUD.cancelEdit(element, originalContent);
+                        }
+                    });
+                },
+
+                saveEdit(element, newValue, originalHtml) {
+                    element.classList.remove("edit-mode");
+                    element.innerHTML = newValue;
+                    this.updateDataInMemory(element, newValue);
+                    CacheManager.saveToCache(App.cvData);
+
+                    if (App.isLoggedIn) {
+                        setTimeout(() => AutoExport.exportOnChange(), 100);
                     }
-                });
-            },
+                },
 
-    saveEdit(element, newValue, originalHtml, fieldType) {
-        element.classList.remove('edit-mode');
-        element.innerHTML = newValue;
-        
-        // Actualizar en memoria
-        this.updateDataInMemory(element, newValue);
-        
-        // Guardar en caché
-        CacheManager.saveToCache(App.cvData);
-        
-        // Exportar automáticamente
-        if (App.isLoggedIn) {
-            setTimeout(() => AutoExport.exportOnChange(), 100);
-        }
-    },
+                deleteExperience(id) {
+                    if (!confirm("Delete this experience?")) return;
 
-    deleteExperience(id) {
-        if (!confirm('Delete this experience?')) return;
-        
-        // Buscar el índice para eliminarlo del array
-        const index = App.cvData.experiencia.findIndex(e => e.id === id);
-        if (index !== -1) {
-            App.cvData.experiencia.splice(index, 1);
-        }
-        
-        CacheManager.saveToCache(App.cvData);
-        Render.renderTimeline();
-        
-        // Exportar automáticamente
-        if (App.isLoggedIn) {
-            setTimeout(() => AutoExport.exportOnChange(), 100);
-        }
-    },
-    
-    deleteEducation(id) {
-        if (!confirm('Delete this education?')) return;
-        
-        const index = App.cvData.educacion.findIndex(e => e.id === id);
-        if (index !== -1) {
-            App.cvData.educacion.splice(index, 1);
-        }
-        
-        CacheManager.saveToCache(App.cvData);
-        Render.renderInfoSections();
-        
-        // Exportar automáticamente
-        if (App.isLoggedIn) {
-            setTimeout(() => AutoExport.exportOnChange(), 100);
-        }
-    },
-
-    deleteLink(id) {
-        if (!confirm('Delete this link?')) return;
-        
-        const index = App.cvData.enlaces_personales.findIndex(e => e.id === id);
-        if (index !== -1) {
-            App.cvData.enlaces_personales.splice(index, 1);
-        }
-        
-        CacheManager.saveToCache(App.cvData);
-        Render.renderInfoSections();
-        
-        // Exportar automáticamente
-        if (App.isLoggedIn) {
-            setTimeout(() => AutoExport.exportOnChange(), 100);
-        }
-    },
-            cancelEdit(element, originalHtml) {
-                element.classList.remove('edit-mode');
-                element.innerHTML = originalHtml;
-                const controls = element.querySelector('.edit-controls');
-                if(controls) controls.remove();
-            },
-
-            openCreateModal(tableName) {
-                const modal = document.getElementById('createModal');
-                const title = document.getElementById('createModalTitle');
-                const container = document.getElementById('formFieldsContainer');
-
-                const schema = this.getTableSchema(tableName);
-                title.textContent = `Add New ${tableName.charAt(0).toUpperCase() + tableName.slice(1)}`; // Capitalize table name
-                container.innerHTML = '';
-
-                Object.entries(schema).forEach(([fieldName, fieldType]) => {
-                    const group = document.createElement('div');
-                    group.className = 'form-group';
-                    
-                    const label = document.createElement('label');
-                    label.textContent = fieldName.replace(/_/g, ' ').toUpperCase();
-                    
-                    let input;
-                    if (fieldType === 'textarea') {
-                        input = document.createElement('textarea');
-                    } else {
-                        input = document.createElement('input');
-                        input.type = fieldType === 'date' ? 'date' : 'text';
+                    const index = App.cvData.experiencia.findIndex(
+                        (entry) => String(entry.id) === String(id),
+                    );
+                    if (index !== -1) {
+                        App.cvData.experiencia.splice(index, 1);
                     }
-                    input.id = `field-${fieldName}`;
-                    input.dataset.field = fieldName;
-                    input.required = true; // Assume most fields are required
 
-                    group.appendChild(label);
-                    group.appendChild(input);
-                    container.appendChild(group);
-                });
-
-                modal.classList.add('active');
-                document.getElementById('createForm').dataset.table = tableName;
-                
-                // Focus first input
-                const firstInput = container.querySelector('input, textarea');
-                if (firstInput) firstInput.focus();
-            },
-
-            closeCreateModal() {
-                const modal = document.getElementById('createModal');
-                modal.classList.remove('active');
-                document.getElementById('createForm').reset(); // Reset form on close
-                document.getElementById('formFieldsContainer').innerHTML = ''; // Clear fields
-            },
-
-            handleCreateSubmit(event) {
-                event.preventDefault();
-                const form = document.getElementById('createForm');
-                const tableName = form.dataset.table;
-                const newEntry = {};
-
-                // Basic validation for required fields
-                let allFieldsValid = true;
-                form.querySelectorAll('[data-field]').forEach(input => {
-                    if (input.required && !input.value.trim()) {
-                        allFieldsValid = false;
-                        input.style.borderColor = 'red'; // Highlight invalid field
-                    } else {
-                        input.style.borderColor = ''; // Reset border color
-                        newEntry[input.dataset.field] = input.value;
-                    }
-                });
-
-                if (!allFieldsValid) {
-                    alert('Please fill in all required fields.');
-                    return;
-                }
-
-                // Generate a simple unique ID
-                const currentEntries = App.cvData[tableName] || [];
-                const maxId = Math.max(0, ...currentEntries.map(e => e.id || 0));
-                newEntry.id = maxId + 1;
-
-                newEntry.lengua = App.currentLanguage;
-        
-                // Agregar a los datos
-                if (!App.cvData[tableName]) {
-                    App.cvData[tableName] = [];
-                }
-                App.cvData[tableName].push(newEntry);
-        
-                // Guardar en caché
-                CacheManager.saveToCache(App.cvData);
-        
-                // Re-renderizar
-                if (tableName === 'experiencia') {
+                    CacheManager.saveToCache(App.cvData);
                     Render.renderTimeline();
-                } else if (tableName === 'educacion' || tableName === 'enlaces_personales') {
-                    Render.renderInfoSections();
-                }
-        
-                // Exportar automáticamente
-                if (App.isLoggedIn) {
-                    setTimeout(() => AutoExport.exportOnChange(), 100);
-                }
-        
-                CRUD.closeCreateModal();
-                form.reset();
-                    },
-                updateDataInMemory(element, newValue) {
-        // Esta función necesita mapear el elemento DOM a los datos
-        // Implementación simplificada:
-        const parentItem = element.closest('.timeline-item, .info-item');
-        if (!parentItem) return;
-        
-        // Aquí necesitarías lógica para encontrar qué campo específico actualizar
-        // Por ahora, solo registro
-        console.log('Actualizando campo:', {
-            element: element.className,
-            value: newValue,
-            parent: parentItem
-        });},
 
-            getTableSchema(tableName) {
-                // Define the schema for each table that can be created
-                const schemas = {
-                    experiencia: {
-                        institucion: 'text',
-                        rol: 'text',
-                        inicio_anio: 'date',
-                        fin_anio: 'date',
-                        tareas: 'textarea'
-                    },
-                    educacion: {
-                        titulo: 'text',
-                        institucion: 'text',
-                        fecha_inicio: 'date'
-                    },
-                    enlaces_personales: {
-                        tipo: 'text',
-                        url: 'text'
+                    if (App.isLoggedIn) {
+                        setTimeout(() => AutoExport.exportOnChange(), 100);
                     }
-                };
-                return schemas[tableName] || {};
-            }
-        };
-document.addEventListener('DOMContentLoaded', async () => {
-    UI.initLanguageUI();
-    UI.updateConfigButton();
-    await Auth.init();
-    await Data.fetchCVData(); // Esto cargará y renderizará todo
-});
-        document.addEventListener('keydown', (e) => {
-            const modal = document.getElementById('loginModal');
-            const createModal = document.getElementById('createModal');
-            if (modal.classList.contains('active')) {
-                if (e.key === 'Escape') {
+                },
+
+                deleteEducation(id) {
+                    if (!confirm("Delete this education?")) return;
+
+                    const index = App.cvData.educacion.findIndex(
+                        (entry) => String(entry.id) === String(id),
+                    );
+                    if (index !== -1) {
+                        App.cvData.educacion.splice(index, 1);
+                    }
+
+                    CacheManager.saveToCache(App.cvData);
+                    Render.renderInfoSections();
+
+                    if (App.isLoggedIn) {
+                        setTimeout(() => AutoExport.exportOnChange(), 100);
+                    }
+                },
+
+                deleteLink(id) {
+                    if (!confirm("Delete this link?")) return;
+
+                    const index = App.cvData.enlaces_personales.findIndex(
+                        (entry) => String(entry.id) === String(id),
+                    );
+                    if (index !== -1) {
+                        App.cvData.enlaces_personales.splice(index, 1);
+                    }
+
+                    CacheManager.saveToCache(App.cvData);
+                    Render.renderInfoSections();
+
+                    if (App.isLoggedIn) {
+                        setTimeout(() => AutoExport.exportOnChange(), 100);
+                    }
+                },
+
+                cancelEdit(element, originalHtml) {
+                    element.classList.remove("edit-mode");
+                    element.innerHTML = originalHtml;
+                },
+
+                openCreateModal(tableName) {
+                    const modal = document.getElementById("createModal");
+                    const title = document.getElementById("createModalTitle");
+                    const container = document.getElementById(
+                        "formFieldsContainer",
+                    );
+                    const schema = this.getTableSchema(tableName);
+
+                    title.textContent = `Add New ${
+                        tableName.charAt(0).toUpperCase() + tableName.slice(1)
+                    }`;
+                    container.innerHTML = "";
+
+                    Object.entries(schema).forEach(([fieldName, fieldType]) => {
+                        const group = document.createElement("div");
+                        group.className = "form-group";
+
+                        const label = document.createElement("label");
+                        label.textContent = fieldName
+                            .replace(/_/g, " ")
+                            .toUpperCase();
+
+                        const input = document.createElement(
+                            fieldType === "textarea" ? "textarea" : "input",
+                        );
+                        if (fieldType !== "textarea") {
+                            input.type = fieldType === "date" ? "date" : "text";
+                        }
+
+                        input.id = `field-${fieldName}`;
+                        input.dataset.field = fieldName;
+                        input.required = true;
+
+                        group.appendChild(label);
+                        group.appendChild(input);
+                        container.appendChild(group);
+                    });
+
+                    modal.classList.add("active");
+                    document.getElementById("createForm").dataset.table =
+                        tableName;
+                    const firstInput =
+                        container.querySelector("input, textarea");
+                    if (firstInput) firstInput.focus();
+                },
+
+                closeCreateModal() {
+                    const modal = document.getElementById("createModal");
+                    modal.classList.remove("active");
+                    document.getElementById("createForm").reset();
+                    document.getElementById("formFieldsContainer").innerHTML =
+                        "";
+                },
+
+                handleCreateSubmit(event) {
+                    event.preventDefault();
+                    const form = document.getElementById("createForm");
+                    const tableName = form.dataset.table;
+                    const newEntry = {};
+                    let allFieldsValid = true;
+
+                    form.querySelectorAll("[data-field]").forEach((input) => {
+                        if (input.required && !input.value.trim()) {
+                            allFieldsValid = false;
+                            input.style.borderColor = "red";
+                        } else {
+                            input.style.borderColor = "";
+                            newEntry[input.dataset.field] = input.value;
+                        }
+                    });
+
+                    if (!allFieldsValid) {
+                        alert("Please fill in all required fields.");
+                        return;
+                    }
+
+                    const currentEntries = App.cvData[tableName] || [];
+                    const maxId = Math.max(
+                        0,
+                        ...currentEntries.map((entry) => Number(entry.id) || 0),
+                    );
+
+                    newEntry.id = String(maxId + 1);
+                    newEntry.persona_id = "1";
+                    newEntry.lengua = App.currentLanguage;
+
+                    if (tableName === "experiencia") {
+                        newEntry.profesion_id = "1";
+                        newEntry.lugar = "";
+                        newEntry.logros = null;
+                        newEntry.referencia = null;
+                        newEntry.referencia_linkedin = null;
+                    }
+
+                    if (tableName === "educacion") {
+                        newEntry.grado_instruccion = "";
+                        newEntry.en_curso = false;
+                    }
+
+                    if (!App.cvData[tableName]) {
+                        App.cvData[tableName] = [];
+                    }
+                    App.cvData[tableName].push(newEntry);
+
+                    CacheManager.saveToCache(App.cvData);
+
+                    if (tableName === "experiencia") {
+                        Render.renderTimeline();
+                    } else if (
+                        tableName === "educacion" ||
+                        tableName === "enlaces_personales"
+                    ) {
+                        Render.renderInfoSections();
+                    }
+
+                    if (App.isLoggedIn) {
+                        setTimeout(() => AutoExport.exportOnChange(), 100);
+                    }
+
+                    this.closeCreateModal();
+                    form.reset();
+                },
+
+                updateDataInMemory(element, newValue) {
+                    const tableName = element.dataset.table;
+                    const fieldName = element.dataset.field;
+                    const entryId = element.dataset.id;
+
+                    if (
+                        !tableName ||
+                        !fieldName ||
+                        !entryId ||
+                        !Array.isArray(App.cvData[tableName])
+                    ) {
+                        return;
+                    }
+
+                    const entry = App.cvData[tableName].find(
+                        (item) => String(item.id) === String(entryId),
+                    );
+                    if (entry) {
+                        entry[fieldName] = newValue;
+                    }
+                },
+
+                getTableSchema(tableName) {
+                    const schemas = {
+                        experiencia: {
+                            institucion: "text",
+                            rol: "text",
+                            inicio_anio: "date",
+                            tareas: "textarea",
+                        },
+                        educacion: {
+                            titulo: "text",
+                            institucion: "text",
+                            fecha_inicio: "date",
+                        },
+                        enlaces_personales: {
+                            tipo: "text",
+                            url: "text",
+                        },
+                    };
+
+                    return schemas[tableName] || {};
+                },
+            };
+
+            document.addEventListener("DOMContentLoaded", async () => {
+                UI.initLanguageUI();
+                UI.updateConfigButton();
+                await Auth.init();
+                await Data.fetchCVData();
+            });
+
+            document.addEventListener("keydown", (event) => {
+                const loginModal = document.getElementById("loginModal");
+                const createModal = document.getElementById("createModal");
+
+                if (
+                    event.key === "Escape" &&
+                    loginModal?.classList.contains("active")
+                ) {
                     UI.toggleLoginModal();
                 }
-            }
-            if (createModal.classList.contains('active')) {
-                if (e.key === 'Escape') {
+
+                if (
+                    event.key === "Escape" &&
+                    createModal?.classList.contains("active")
+                ) {
                     CRUD.closeCreateModal();
                 }
-            }
-        });
-    </script>
-</body>
+            });
+        </script>
+    </body>
 </html>
- 
