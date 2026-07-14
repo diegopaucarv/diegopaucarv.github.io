@@ -492,6 +492,16 @@
                 box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
             }
 
+            .timeline-inline-detail {
+                display: none;
+                margin-top: 0.7rem;
+                padding-top: 0.65rem;
+                border-top: 1px solid var(--border);
+                font-size: 0.8rem;
+                color: var(--text-light);
+                line-height: 1.55;
+            }
+
             .timeline-detail + .timeline-detail {
                 margin-top: 0.55rem;
             }
@@ -876,27 +886,14 @@
                     display: none;
                 }
 
+                .timeline-inline-detail {
+                    display: block;
+                }
+
                 .header-controls {
                     top: 0.75rem;
                     right: 0.75rem;
                     gap: 0.5rem;
-                }
-            }
-
-            /* ── PRINT ── */
-            @media print {
-                .header-controls,
-                .btn-print,
-                .btn-add,
-                .btn-delete {
-                    display: none !important;
-                }
-
-                body {
-                    background: white;
-                }
-                .header {
-                    padding-top: 1.5rem;
                 }
             }
 
@@ -1031,18 +1028,7 @@
                 resize: vertical;
                 min-height: 80px;
             }
-            /* En lugar de opacity: 0 y pointer-events: none */
-            .timeline-hover-reveal {
-                opacity: 1 !important;
-                transform: none !important;
-                pointer-events: auto !important;
-                padding: 0.3rem 0.5rem !important;
-                background: transparent !important;
-                border: none !important;
-                box-shadow: none !important;
-                font-size: 0.7rem !important;
-                color: var(--text-muted) !important;
-            }
+
             .form-group input:focus,
             .form-group textarea:focus {
                 outline: none;
@@ -1051,167 +1037,303 @@
                 box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
             }
 
+            @page {
+                size: A4 portrait;
+                margin: 12mm;
+            }
+
             @media print {
-                .header {
-                    grid-template-columns: 56px 1fr !important;
-                    gap: 0.95rem !important;
-                    align-items: start !important;
-                    padding: 0.55rem 1.35rem 0.75rem !important;
+                html,
+                body {
+                    width: auto !important;
+                    min-width: 0 !important;
+                    background: white !important;
+                    margin: 0 !important;
                 }
-                .header-content h1 {
-                    font-size: 1.5rem !important;
+
+                html {
+                    padding: 0 !important;
                 }
-                .header-subtitle {
-                    font-size: 0.58rem !important;
-                }
-                .header-professions {
-                    font-size: 0.74rem !important;
-                    font-weight: 600 !important;
-                    letter-spacing: 0.015em !important;
-                    margin-bottom: 0.2rem !important;
-                }
-                .header-description {
-                    font-size: 0.76rem !important;
-                    line-height: 1.34 !important;
-                    max-width: none !important;
-                    margin-bottom: 0.22rem !important;
-                }
-                .profile-image {
-                    width: 50px !important;
-                    height: 50px !important;
-                }
-                .timeline-section {
-                    margin: 0.5rem auto !important;
-                    padding: 0 0.8rem !important;
-                }
-                .timeline-item {
-                    margin-bottom: 0.4rem !important;
-                    gap: 0.5rem !important;
-                }
-                .timeline-content {
-                    font-size: 0.68rem !important;
-                }
-                .timeline-item h3 {
-                    font-size: 0.74rem !important;
-                }
-                .timeline-role {
-                    font-size: 0.63rem !important;
-                }
-                .timeline-category {
-                    font-size: 0.54rem !important;
-                    padding: 0.08rem 0.3rem !important;
-                    margin-top: 0.15rem !important;
-                }
-                .timeline-year {
-                    font-size: 0.54rem !important;
-                }
-                .timeline-hover-reveal {
-                    display: block !important;
-                    opacity: 1 !important;
-                    transform: none !important;
-                    font-size: 0.62rem !important;
-                    padding: 0.2rem 0.4rem !important;
-                    background: transparent !important;
-                    border: none !important;
+
+                * {
+                    animation: none !important;
+                    transition: none !important;
                     box-shadow: none !important;
+                    text-shadow: none !important;
                 }
-                .info-section {
-                    margin: 0.5rem auto !important;
-                    padding: 0 0.8rem !important;
-                    gap: 0.5rem !important;
+
+                .header-controls,
+                .btn-print,
+                .btn-add,
+                .btn-delete,
+                .modal-overlay {
+                    display: none !important;
                 }
-                .info-card {
-                    padding: 0.5rem 0.8rem !important;
+
+                body {
+                    color: var(--text) !important;
+                    print-color-adjust: exact;
+                    -webkit-print-color-adjust: exact;
+                    font-size: 9.3pt !important;
+                    padding: 6mm 5mm !important;
                 }
-                .info-card h3 {
-                    font-size: 0.58rem !important;
-                    margin-bottom: 0.3rem !important;
-                }
-                .info-item {
-                    margin-bottom: 0.2rem !important;
-                }
-                .info-item h4 {
-                    font-size: 0.68rem !important;
-                }
-                .info-item p {
-                    font-size: 0.63rem !important;
-                }
-                .skills-section {
-                    margin: 0.5rem auto !important;
-                    padding: 0 0.8rem !important;
-                }
-                .skill-tag {
-                    font-size: 0.58rem !important;
-                    padding: 0.1rem 0.4rem !important;
-                }
-                .section-title {
-                    font-size: 0.54rem !important;
-                    margin-bottom: 0.4rem !important;
-                }
+
+                .header,
                 .projects-section,
+                .publications-section,
                 .credentials-section,
-                .publications-section {
-                    margin: 0.3rem auto !important;
-                    padding: 0 0.8rem !important;
+                .timeline-section,
+                .info-section,
+                .skills-section {
+                    width: 100% !important;
+                    max-width: none !important;
+                    margin: 0 0 3.2mm 0 !important;
+                    padding: 0 !important;
+                    box-sizing: border-box !important;
+                    page-break-inside: avoid !important;
                 }
-                .projects-grid,
-                .credentials-grid {
-                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-                    gap: 0.45rem !important;
+
+                .footer {
+                    display: none !important;
                 }
-                .publications-list {
+
+                .header {
                     display: grid !important;
-                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-                    gap: 0.45rem !important;
+                    grid-template-columns: 56px 1fr !important;
+                    gap: 4mm !important;
+                    align-items: start !important;
+                    border-bottom: 1px solid var(--border) !important;
+                    padding-bottom: 3.5mm !important;
+                    margin-bottom: 3.5mm !important;
                 }
+
+                .profile-image {
+                    width: 56px !important;
+                    height: 56px !important;
+                }
+
+                .header-content h1 {
+                    font-size: 14.5pt !important;
+                    line-height: 1.07 !important;
+                    margin-bottom: 0.9mm !important;
+                }
+
+                .header-subtitle {
+                    font-size: 6.2pt !important;
+                    margin-bottom: 0.8mm !important;
+                }
+
+                .header-professions {
+                    font-size: 7.4pt !important;
+                    font-weight: 600 !important;
+                    margin-bottom: 1mm !important;
+                }
+
+                .header-description {
+                    font-size: 7pt !important;
+                    line-height: 1.28 !important;
+                    color: #4f4f4f !important;
+                    max-width: none !important;
+                    margin-bottom: 0 !important;
+                }
+
+                .section-title {
+                    font-size: 6.1pt !important;
+                    margin-bottom: 2mm !important;
+                }
+
+                .projects-section,
+                .publications-section,
+                .credentials-section,
+                .timeline-section,
+                .info-section,
+                .skills-section {
+                    margin-bottom: 2.8mm !important;
+                }
+
+                .projects-grid,
+                .publications-list,
+                .credentials-grid {
+                    display: grid !important;
+                    grid-template-columns: 1fr !important;
+                    gap: 2mm !important;
+                }
+
                 .project-card,
+                .publication-item,
                 .credential-item,
-                .publication-item {
-                    padding: 0.4rem 0.6rem !important;
+                .info-card {
+                    padding: 2.5mm 3mm !important;
+                    border-radius: 6px !important;
+                    border: 1px solid var(--border) !important;
+                    background: #fff !important;
+                    page-break-inside: avoid !important;
                 }
+
                 .project-card h3,
+                .publication-item h4,
                 .credential-item h4,
-                .publication-item h4 {
-                    font-size: 0.69rem !important;
+                .info-item h4 {
+                    font-size: 8pt !important;
+                    line-height: 1.25 !important;
                 }
+
                 .project-card p,
-                .credential-item .credential-issuer,
-                .credential-item .credential-year,
                 .publication-item p,
                 .pub-meta,
                 .pub-role,
                 .publication-link,
-                .credential-type {
-                    font-size: 0.59rem !important;
+                .credential-type,
+                .credential-issuer,
+                .credential-year,
+                .info-item p {
+                    font-size: 6.8pt !important;
+                    line-height: 1.3 !important;
                 }
-                .timeline-detail {
-                    font-size: 0.56rem !important;
-                    line-height: 1.28 !important;
-                }
-                .projects-grid,
-                .credentials-grid,
-                .publications-list,
-                .skills-grid {
-                    break-inside: avoid !important;
-                }
+
                 .projects-grid .project-card:nth-child(n + 3),
                 .publications-list .publication-item:nth-child(n + 3),
-                .timeline .timeline-item:nth-child(n + 9),
-                .skills-grid .skill-tag:nth-child(n + 11),
-                .info-section .info-card:nth-child(n + 2) {
+                .skills-grid .skill-tag:nth-child(n + 9) {
                     display: none !important;
                 }
-                .publication-item {
-                    page-break-inside: avoid !important;
-                    min-height: 100% !important;
+
+                .timeline .timeline-item[data-exp-id="24"],
+                .timeline .timeline-item[data-exp-id="28"],
+                .timeline .timeline-item[data-exp-id="25"],
+                .timeline .timeline-item[data-exp-id="26"],
+                .timeline .timeline-item[data-exp-id="27"] {
+                    display: none !important;
                 }
-                .footer {
-                    padding: 0.25rem !important;
-                    font-size: 0.48rem !important;
-                    margin-top: 0.2rem !important;
-                }
+
                 .credentials-grid .credential-item:nth-child(n + 7) {
                     display: none !important;
+                }
+
+                .info-section {
+                    display: grid !important;
+                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                    gap: 2mm !important;
+                }
+
+                .info-card h3 {
+                    font-size: 6.1pt !important;
+                    margin-bottom: 1.6mm !important;
+                    padding-bottom: 1.2mm !important;
+                }
+
+                .info-item {
+                    margin-bottom: 1.4mm !important;
+                }
+
+                .skills-grid {
+                    gap: 1.2mm !important;
+                }
+
+                .skill-tag {
+                    font-size: 6.8pt !important;
+                    padding: 0.9mm 2.2mm !important;
+                }
+
+                .timeline {
+                    padding-left: 0 !important;
+                }
+
+                .timeline::before {
+                    display: none !important;
+                }
+
+                .timeline-item {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    gap: 0 !important;
+                    margin-bottom: 2.6mm !important;
+                    opacity: 1 !important;
+                    page-break-inside: avoid !important;
+                }
+
+                .timeline-center {
+                    order: 0 !important;
+                    display: flex !important;
+                    flex-direction: row !important;
+                    align-items: center !important;
+                    gap: 2mm !important;
+                    padding-top: 0 !important;
+                    margin-bottom: 1mm !important;
+                    position: static !important;
+                    left: auto !important;
+                    top: auto !important;
+                }
+
+                .timeline-year {
+                    order: 0 !important;
+                    font-size: 6.2pt !important;
+                    letter-spacing: 0.08em !important;
+                }
+
+                .timeline-bullet {
+                    width: 7px !important;
+                    height: 7px !important;
+                    box-shadow: none !important;
+                    border: 1.5px solid #fff !important;
+                }
+
+                .timeline-content {
+                    order: 1 !important;
+                    margin-left: 0 !important;
+                    text-align: left !important;
+                    font-size: 6.8pt !important;
+                }
+
+                .timeline-content.left,
+                .timeline-content.right {
+                    text-align: left !important;
+                }
+
+                .timeline-content .timeline-header,
+                .timeline-content.left .timeline-header {
+                    flex-direction: row !important;
+                    margin-bottom: 0.8mm !important;
+                }
+
+                .timeline-item h3 {
+                    font-size: 7.7pt !important;
+                    line-height: 1.22 !important;
+                }
+
+                .timeline-role {
+                    font-size: 6.6pt !important;
+                    text-transform: none !important;
+                    letter-spacing: 0 !important;
+                    margin-top: 0 !important;
+                }
+
+                .timeline-category {
+                    font-size: 5.8pt !important;
+                    padding: 0.4mm 1.6mm !important;
+                    margin-top: 0.8mm !important;
+                }
+
+                .timeline-hover-reveal {
+                    display: none !important;
+                }
+
+                .timeline-inline-detail {
+                    display: block !important;
+                    margin-top: 1mm !important;
+                    padding-top: 1mm !important;
+                    border-top: 1px solid var(--border) !important;
+                    font-size: 6.3pt !important;
+                    color: var(--text-light) !important;
+                    line-height: 1.25 !important;
+                }
+
+                .timeline-detail {
+                    font-size: inherit !important;
+                    line-height: inherit !important;
+                }
+
+                .timeline-detail + .timeline-detail {
+                    margin-top: 1mm !important;
                 }
             }
         </style>
@@ -1435,7 +1557,7 @@
                 currentLanguage: localStorage.getItem("language") || "en",
                 isLoggedIn: Boolean(localStorage.getItem("sessionToken")),
                 credentials: null,
-                dataVersion: "2.4",
+                dataVersion: "2.8",
             };
 
             const LocalFileData = {
@@ -2384,12 +2506,12 @@
                     const visibleItems = [...experiences]
                         .sort(
                             (a, b) =>
-                                this.getExperiencePriority(b) -
-                                    this.getExperiencePriority(a) ||
                                 this.getSortableDate(b.inicio_anio) -
-                                    this.getSortableDate(a.inicio_anio),
+                                    this.getSortableDate(a.inicio_anio) ||
+                                this.getExperiencePriority(b) -
+                                    this.getExperiencePriority(a),
                         )
-                        .slice(0, 10);
+                        .slice(0, 8);
 
                     visibleItems.forEach((exp, index) => {
                         const isLeft = index % 2 === 0;
@@ -2399,6 +2521,7 @@
                         );
                         const item = document.createElement("div");
                         item.className = "timeline-item";
+                        item.dataset.expId = exp.id;
 
                         const role = this.escapeHtml(exp.rol || "");
                         const institution = this.escapeHtml(
@@ -2418,6 +2541,23 @@
                                         <p class="timeline-year">${year}</p>
                                     </div>
                                 `;
+                        const detailBlocks = [
+                            exp.tareas
+                                ? `<p class="timeline-detail">${this.linkifyText(exp.tareas)}</p>`
+                                : "",
+                            exp.logros
+                                ? `<p class="timeline-detail"><span class="timeline-detail-label">${
+                                      App.currentLanguage === "es"
+                                          ? "Logros:"
+                                          : "Highlights:"
+                                  }</span> ${this.linkifyText(exp.logros)}</p>`
+                                : "",
+                        ]
+                            .filter(Boolean)
+                            .join("");
+                        const inlineDetail = detailBlocks
+                            ? `<div class="timeline-inline-detail">${detailBlocks}</div>`
+                            : "";
                         const contentDiv = `
                                     <div class="timeline-content ${contentClass}">
                                         <div class="timeline-header">
@@ -2441,23 +2581,10 @@
                                             data-field="institucion"
                                             ondblclick="CRUD.makeEditable(this, 'text')"
                                         >${institution}${location ? ` · ${location}` : ""}</p>
+                                        ${inlineDetail}
                                         ${deleteBtn}
                                     </div>
                                 `;
-                        const detailBlocks = [
-                            exp.tareas
-                                ? `<p class="timeline-detail">${this.linkifyText(exp.tareas)}</p>`
-                                : "",
-                            exp.logros
-                                ? `<p class="timeline-detail"><span class="timeline-detail-label">${
-                                      App.currentLanguage === "es"
-                                          ? "Logros:"
-                                          : "Highlights:"
-                                  }</span> ${this.linkifyText(exp.logros)}</p>`
-                                : "",
-                        ]
-                            .filter(Boolean)
-                            .join("");
                         const revealDiv = detailBlocks
                             ? `<div class="timeline-hover-reveal">${detailBlocks}</div>`
                             : "<div></div>";
@@ -2481,17 +2608,16 @@
 
                 getExperiencePriority(exp) {
                     const priorityById = {
-                        17: 120,
-                        9: 118,
-                        21: 114,
-                        23: 112,
-                        20: 108,
-                        19: 106,
-                        18: 104,
-                        22: 102,
-                        24: 100,
-                        28: 98,
-                        25: 88,
+                        17: 130,
+                        23: 124,
+                        18: 120,
+                        21: 116,
+                        22: 114,
+                        24: 110,
+                        28: 108,
+                        20: 104,
+                        19: 100,
+                        25: 92,
                         26: 84,
                         27: 82,
                     };
@@ -2714,33 +2840,76 @@
                 },
 
                 formatYear(value) {
-                    if (!value) return "";
-                    if (value === "Actual") {
+                    if (value === null || value === undefined || value === "") {
+                        return "";
+                    }
+
+                    if (
+                        value === "Actual" ||
+                        value === "Actualidad" ||
+                        value === "Present"
+                    ) {
                         return App.currentLanguage === "es"
                             ? "Actual"
                             : "Present";
                     }
 
-                    const date = new Date(value);
+                    if (
+                        typeof value === "number" &&
+                        value >= 1900 &&
+                        value <= 2100
+                    ) {
+                        return String(value);
+                    }
+
+                    const raw = String(value).trim();
+                    if (!raw) return "";
+
+                    if (/^\d{4}$/.test(raw)) {
+                        return raw;
+                    }
+
+                    const isoMatch = raw.match(/^(\d{4})-\d{2}-\d{2}$/);
+                    if (isoMatch) {
+                        return isoMatch[1];
+                    }
+
+                    const date = new Date(raw);
                     return Number.isNaN(date.getTime())
-                        ? String(value)
+                        ? raw
                         : String(date.getFullYear());
                 },
 
                 getSortableDate(value) {
-                    if (value === "Actual" || value === "Actualidad") {
+                    if (
+                        value === "Actual" ||
+                        value === "Actualidad" ||
+                        value === "Present"
+                    ) {
                         return Number.MAX_SAFE_INTEGER;
                     }
 
                     if (typeof value === "number") {
-                        return value;
+                        if (value >= 1900 && value <= 2100) {
+                            return Date.UTC(value, 0, 1);
+                        }
+                        return value > 100000 ? value : 0;
                     }
 
                     const raw = String(value ?? "").trim();
                     if (!raw) return 0;
 
                     if (/^\d{4}$/.test(raw)) {
-                        return Number(raw);
+                        return Date.UTC(Number(raw), 0, 1);
+                    }
+
+                    const isoMatch = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+                    if (isoMatch) {
+                        return Date.UTC(
+                            Number(isoMatch[1]),
+                            Number(isoMatch[2]) - 1,
+                            Number(isoMatch[3]),
+                        );
                     }
 
                     const timestamp = new Date(raw).getTime();

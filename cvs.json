@@ -6,17 +6,24 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "nombres",
           "type": "VARCHAR(200)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "telefono",
@@ -46,7 +53,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -64,22 +73,31 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "profesion",
           "type": "VARCHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -89,7 +107,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -107,27 +127,38 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "tipo",
           "type": "VARCHAR(50)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "url",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -137,7 +168,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -155,22 +188,31 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "profesion_id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "experiencia_categoria",
@@ -180,7 +222,9 @@
         {
           "name": "inicio_anio",
           "type": "CHAR(50)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "institucion",
@@ -225,7 +269,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -243,27 +289,38 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "grado_instruccion",
           "type": "VARCHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "institucion",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "titulo",
@@ -278,7 +335,9 @@
         {
           "name": "en_curso",
           "type": "BOOLEAN",
-          "constraints": ["DEFAULT FALSE"]
+          "constraints": [
+            "DEFAULT FALSE"
+          ]
         },
         {
           "name": "lengua",
@@ -293,17 +352,24 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "profesion_id",
@@ -313,17 +379,23 @@
         {
           "name": "skill_name",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "skill_level",
           "type": "CHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "tipo_skill",
           "type": "CHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "certificate_name",
@@ -358,32 +430,45 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "title",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "authors",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "year",
           "type": "YEAR",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "publication_type",
           "type": "VARCHAR(50)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "journal_or_publisher",
@@ -423,7 +508,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -441,27 +528,38 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "course_name",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "institution",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "start_date",
           "type": "DATE",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "end_date",
@@ -491,7 +589,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -509,22 +609,31 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "item_type",
           "type": "VARCHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "title",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "description",
@@ -564,7 +673,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -582,27 +693,38 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "name",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "issuer",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "year",
           "type": "YEAR",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "url",
@@ -617,7 +739,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -635,17 +759,24 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "portafolio_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "categoria",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -660,27 +791,38 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "titulo",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "descripcion",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -695,22 +837,31 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "service_id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "variation_description",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "price",
           "type": "DECIMAL(10, 2)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -730,7 +881,7 @@
         "+51 902-413-372",
         "diegopaucarv@hotmail.com",
         "Lima, Peru",
-        "ML Engineer / Applied AI Researcher building production-grade NLP systems, agentic LLM workflows, and evaluation pipelines for AI-assisted analysis. Combines software engineering, data science, and methodological research to deliver robust ML systems, analytics solutions, and decision-support tools for research and institutional clients.",
+        "ML Engineer specializing in NLP, LLM systems, and analytics automation. Builds production AI workflows, evaluation pipelines, and decision-support tools for institutional, research, and consulting environments.",
         "en"
       ],
       [
@@ -739,22 +890,70 @@
         "+51 902-413-372",
         "diegopaucarv@hotmail.com",
         "Lima, Perú",
-        "Ingeniero de ML / Investigador de IA aplicada que construye sistemas NLP en producción, flujos agénticos con LLM y pipelines de evaluación para análisis asistido por IA. Combino ingeniería de software, ciencia de datos e investigación metodológica para desarrollar sistemas de ML robustos, soluciones analíticas y herramientas de apoyo a la decisión para clientes de investigación e institucionales.",
+        "Ingeniero de ML especializado en NLP, sistemas con LLM y automatización analítica. Construyo flujos de IA en producción, pipelines de evaluación y herramientas de apoyo a la decisión para entornos institucionales, de investigación y consultoría.",
         "es"
       ]
     ],
     "profesiones": [
-      [1, 1, "ML Engineer", "en"],
-      [2, 1, "Applied AI / NLP", "en"],
-      [3, 1, "Analytics Consultant", "en"],
-      [1, 1, "Ingeniero de ML", "es"],
-      [2, 1, "IA Aplicada / NLP", "es"],
-      [3, 1, "Consultor de Analytics", "es"]
+      [
+        1,
+        1,
+        "ML Engineer",
+        "en"
+      ],
+      [
+        2,
+        1,
+        "Applied NLP & LLMs",
+        "en"
+      ],
+      [
+        3,
+        1,
+        "Analytics Automation",
+        "en"
+      ],
+      [
+        1,
+        1,
+        "Ingeniero de ML",
+        "es"
+      ],
+      [
+        2,
+        1,
+        "NLP y LLMs Aplicados",
+        "es"
+      ],
+      [
+        3,
+        1,
+        "Automatización Analítica",
+        "es"
+      ]
     ],
     "enlaces_personales": [
-      [1, 1, "Website", "https://www.facebook.com/escape.ccss/", "en"],
-      [2, 1, "GitHub", "https://github.com/diegopaucarv", "en"],
-      [3, 1, "LinkedIn", "https://www.linkedin.com/in/diegopaucarv/", "en"],
+      [
+        1,
+        1,
+        "Website",
+        "https://www.facebook.com/escape.ccss/",
+        "en"
+      ],
+      [
+        2,
+        1,
+        "GitHub",
+        "https://github.com/diegopaucarv",
+        "en"
+      ],
+      [
+        3,
+        1,
+        "LinkedIn",
+        "https://www.linkedin.com/in/diegopaucarv/",
+        "en"
+      ],
       [
         4,
         1,
@@ -762,9 +961,27 @@
         "https://public.tableau.com/app/profile/diego.paucar",
         "en"
       ],
-      [1, 1, "Sitio web", "https://www.facebook.com/escape.ccss/", "es"],
-      [2, 1, "GitHub", "https://github.com/diegopaucarv", "es"],
-      [3, 1, "LinkedIn", "https://www.linkedin.com/in/diegopaucarv/", "es"],
+      [
+        1,
+        1,
+        "Sitio web",
+        "https://www.facebook.com/escape.ccss/",
+        "es"
+      ],
+      [
+        2,
+        1,
+        "GitHub",
+        "https://github.com/diegopaucarv",
+        "es"
+      ],
+      [
+        3,
+        1,
+        "LinkedIn",
+        "https://www.linkedin.com/in/diegopaucarv/",
+        "es"
+      ],
       [
         4,
         1,
@@ -783,23 +1000,8 @@
         "ESCAPE - BI & Analytics Consulting",
         "Lima, Peru / Remote",
         "Senior Data Scientist & AI Consultant",
-        "Delivered BI and analytics consulting for government agencies, NGOs, and private-sector clients. Designed automated qualitative and quantitative workflows with NLP, ML, and AI, plus process-mining and optimization solutions. Led workshops on methodological innovation and AI-driven decision making.",
-        "Delivered analytics solutions for multiple government agencies and NGOs. Designed BPMN process improvements and corporate change programs for mining, food, and other industries.",
-        null,
-        null,
-        "en"
-      ],
-      [
-        "9",
-        "1",
-        "1",
-        "Applied NLP / AI",
-        "Actual",
-        "Universidad Científica del Sur",
-        "Lima, Peru",
-        "AI Specialist / NLP Engineer",
-        "Developed a production text analysis pipeline using Modal, Llama 3, sentence similarity, and BERTopic. Built evaluation frameworks for model quality, latency, and token efficiency.",
-        null,
+        "Delivered BI and analytics consulting engagements for government agencies, NGOs, and private-sector clients. Scoped and implemented NLP/ML workflows for qualitative and quantitative analysis, built process-mining and optimization solutions, and translated analytical requirements into reusable dashboards, reports, and training for decision-makers.",
+        "Supported multi-client delivery across public and private organizations, including BPMN redesign and change-program work for mining, food, and other sectors.",
         null,
         null,
         "en"
@@ -813,7 +1015,7 @@
         "Facilitadores Asociados",
         "Lima, Peru",
         "Consultant & Analyst",
-        "Designed BPMN process flows and corporate change programs for large mining, food, and other industry clients. Developed pedagogical resources, websites, and dashboards for tracking educational progress and KPI compliance.",
+        "Delivered BPMN process maps, operational diagnostics, and change-program materials for large mining, food, and diversified-industry clients. Built supporting websites, pedagogical assets, and KPI dashboards used to track training progress and compliance.",
         null,
         null,
         null,
@@ -828,7 +1030,7 @@
         "Massive Dynamics Perú SAC",
         "Lima, Peru",
         "Project Assistant / Chatbot Developer",
-        "Supported the development of a data-analysis-centric chatbot using Azure Databricks, Azure Machine Learning, and OpenAI's ChatGPT. Used SQL for data lake and blob storage management, and HTML/JavaScript for visual components.",
+        "Contributed to delivery of a chatbot for data-analysis use cases using Azure Databricks, Azure Machine Learning, and OpenAI models. Supported SQL-based data lake and blob-storage workflows and built HTML/JavaScript components for the user-facing experience.",
         null,
         null,
         null,
@@ -843,7 +1045,7 @@
         "APOYO Comunicación",
         "Lima, Peru",
         "Insights Consultant",
-        "Developed topic analysis and similarity classification pipelines, database curation workflows for stakeholder analysis, multivariate classification pipelines for corporate sustainability culture surveys, and qualitative analysis workflows in MAXQDA for stakeholder research.",
+        "Delivered analytics workflows for stakeholder and corporate-reputation studies, including topic analysis, similarity classification, stakeholder-database curation, multivariate survey modeling, and MAXQDA-based qualitative analysis for client reporting.",
         null,
         null,
         null,
@@ -857,8 +1059,8 @@
         "2025",
         "Academic Consulting - COVID-19 Vaccination in Debate",
         "Remote",
-        "Methodological Designer & Data Analyst",
-        "Designed a mixed-method discourse-analysis workflow for digital news on COVID-19 vaccination in Mexico, Brazil, and Peru. Applied framing and narrative analysis, BERTopic, multimodal BERTopic, semantic segmentation with all-MiniLM-L6-v2 embeddings, Gemini 1.5 Pro-assisted coding, ACM/SVD, hierarchical clustering, Gap Statistic, silhouette evaluation, and Cramér's V. Publication: https://www.scielo.cl/scielo.php?pid=S0719-15292025000200055&script=sci_arttext",
+        "Data Analysis Consultant for Academia",
+        "Led the analytical design for a mixed-method study of digital news coverage on COVID-19 vaccination across Mexico, Brazil, and Peru. Delivered discourse, framing, narrative, multimodal topic-modeling, semantic-segmentation, clustering, and correspondence-analysis workflows to support comparative findings for publication. Publication: https://www.scielo.cl/scielo.php?pid=S0719-15292025000200055&script=sci_arttext",
         null,
         null,
         null,
@@ -872,8 +1074,8 @@
         "2024",
         "Academic Consulting - Gender Variable in Science Communication on Twitter/X",
         "Remote",
-        "Data Analyst & Methodological Consultant",
-        "Designed the analysis strategy for a mixed study of 13,165 Twitter/X posts from 17 science communicators. Implemented social-media metrics, temporal analysis, efficiency indicators, stratified sampling in SPSS, manual inductive coding, automated sentiment analysis, PCA-based exploration, log transforms, and ROC-based evaluation. Publication: https://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2415-09592024000400017",
+        "Data Analysis Consultant for Academia",
+        "Delivered the analysis workflow for a mixed study of 13,165 Twitter/X posts from 17 science communicators. Built the data-collection, cleaning, metrics, sampling, sentiment, PCA exploration, and ROC-based evaluation pipeline used to derive final thematic and communicative categories. Publication: https://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2415-09592024000400017",
         null,
         null,
         null,
@@ -887,8 +1089,8 @@
         "2024",
         "Academic Consulting - Media and Social Conflicts During COVID-19",
         "Remote",
-        "Data Analyst & Methodological Reviewer",
-        "Conducted data analysis and methodological review for a mixed, descriptive study of 53 front pages from major Peruvian newspapers. Applied framing analysis, critical discourse analysis based on Fairclough's tridimensional model, descriptive frequency analysis of actors and valuations, and comparative analysis between reference and popular press. Publication: https://revistasinvestigacion.unmsm.edu.pe/index.php/discursos/article/view/25876",
+        "Data Analysis Consultant for Academia",
+        "Delivered data analysis and methodological review for a mixed study of 53 newspaper front pages on media coverage and social conflict during the pandemic. Applied framing analysis, critical discourse analysis, and cross-outlet comparison to structure publication-ready results. Publication: https://revistasinvestigacion.unmsm.edu.pe/index.php/discursos/article/view/25876",
         null,
         null,
         null,
@@ -902,8 +1104,8 @@
         "2024",
         "Academic Consulting - Female Cyberactivism on Twitter",
         "Remote",
-        "Data Analyst & NLP Research Consultant",
-        "Supported a mixed-method study combining large-scale Twitter analysis with structured interviews. Implemented descriptive analysis of viral content and engagement metrics, social network analysis in Gephi with modularity and centrality, BERTopic-based topic modeling, qualitative coding in Atlas.ti, and integrated interpretation of online and offline participation dynamics.",
+        "Data Analysis Consultant for Academia",
+        "Supported a mixed-method study combining large-scale Twitter analysis with structured interviews. Delivered social-network analysis in Gephi, BERTopic-based topic modeling, engagement analysis, and qualitative coding support to connect digital participation patterns with interview evidence.",
         null,
         null,
         null,
@@ -917,8 +1119,8 @@
         "2024",
         "Academic Consulting - Connective Action & Conservative Mobilization",
         "Remote",
-        "Methodological Designer & Data Analyst",
-        "Designed the computational workflow for a study of digital activism against Peru's gender-approach school curriculum. Built and analyzed a 6,221-post Facebook corpus using BERTopic, multimodal BERTopic, multilingual-e5 embeddings, Gemini 1.5 Pro image analysis, pysentimiento, co-occurrence analysis, and Random Forest models with temporal cross-validation. Publication: https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
+        "Data Analysis Consultant for Academia",
+        "Designed and delivered the computational analysis pipeline for a 6,221-post Facebook study on digital activism against Peru's gender-approach school curriculum. Built multimodal NLP and predictive workflows—BERTopic, multilingual-e5 embeddings, sentiment, co-occurrence analysis, and Random Forest models with temporal validation—to generate publication-ready findings. Publication: https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
         null,
         null,
         null,
@@ -978,23 +1180,8 @@
         "ESCAPE - Consultoría BI & Analytics",
         "Lima, Perú / Remoto",
         "Senior Data Scientist y Consultor IA",
-        "Realicé consultoría BI y analytics para agencias gubernamentales, ONGs y clientes privados. Diseñé flujos automatizados de análisis cualitativo y cuantitativo con NLP, ML e IA, además de soluciones de minería de procesos y optimización. Lideré talleres sobre innovación metodológica y toma de decisiones con IA.",
-        "Entregué soluciones de analytics para múltiples agencias gubernamentales y ONGs. Diseñé mejoras de procesos BPMN y programas de cambio corporativo para minería, alimentos y otros rubros.",
-        null,
-        null,
-        "es"
-      ],
-      [
-        "9",
-        "1",
-        "1",
-        "NLP Aplicado / IA",
-        "Actual",
-        "Universidad Científica del Sur",
-        "Lima, Perú",
-        "Especialista en IA / Ingeniero NLP",
-        "Desarrollé un pipeline de análisis de texto en producción usando Modal, Llama 3, similitud semántica y BERTopic. Construí marcos de evaluación para calidad del modelo, latencia y eficiencia de tokens.",
-        null,
+        "Lideré consultorías de BI y analytics para agencias gubernamentales, ONGs y clientes privados. Diseñé e implementé flujos de NLP/ML para análisis cualitativo y cuantitativo, soluciones de minería de procesos y optimización, y entregables reutilizables como dashboards, reportes y talleres para tomadores de decisión.",
+        "Apoyé entregas para múltiples organizaciones públicas y privadas, incluyendo rediseño BPMN y trabajo de programas de cambio para minería, alimentos y otros sectores.",
         null,
         null,
         "es"
@@ -1008,7 +1195,7 @@
         "Facilitadores Asociados",
         "Lima, Perú",
         "Consultor y Analista",
-        "Diseño de flujos de proceso BPMN y programas de cambio corporativo para grandes clientes de minería, alimentos y otros rubros. Desarrollo de recursos pedagógicos, sitios web y paneles de control para el seguimiento del progreso educativo y cumplimiento de KPI.",
+        "Entregué mapas de procesos BPMN, diagnósticos operativos y materiales de cambio organizacional para grandes clientes de minería, alimentos y otros rubros. Desarrollé sitios web, recursos pedagógicos y dashboards de KPI para seguimiento de progreso formativo y cumplimiento.",
         null,
         null,
         null,
@@ -1023,7 +1210,7 @@
         "Massive Dynamics Perú SAC",
         "Lima, Perú",
         "Asistente de Proyectos / Desarrollador Chatbot",
-        "Apoyé el desarrollo de un chatbot centrado en análisis de datos usando Azure Databricks, Azure Machine Learning y ChatGPT de OpenAI. Utilicé SQL para gestión de datalakes y blobs, y HTML/JavaScript para componentes visuales.",
+        "Contribuí a la entrega de un chatbot orientado a casos de uso de análisis de datos con Azure Databricks, Azure Machine Learning y modelos de OpenAI. Apoyé flujos SQL para datalakes y blob storage y desarrollé componentes HTML/JavaScript para la experiencia de usuario.",
         null,
         null,
         null,
@@ -1038,7 +1225,7 @@
         "APOYO Comunicación",
         "Lima, Perú",
         "Consultor de Insights",
-        "Desarrollo de pipelines de análisis de temas y clasificación de similitudes, flujos de trabajo de curación de bases de datos para análisis de stakeholders, pipelines de clasificación multivariante para encuestas de cultura de sostenibilidad corporativa y flujos de análisis cualitativo en MAXQDA para investigación con stakeholders.",
+        "Entregué flujos analíticos para estudios de stakeholders y reputación corporativa, incluyendo análisis de temas, clasificación de similitudes, curación de bases de stakeholders, modelamiento multivariante de encuestas y análisis cualitativo en MAXQDA para reportes al cliente.",
         null,
         null,
         null,
@@ -1052,8 +1239,8 @@
         "2025",
         "Consultoría Académica - La vacunación contra la COVID-19 en debate",
         "Remoto",
-        "Diseñador Metodológico y Analista de Datos",
-        "Diseñé un flujo mixto de análisis del discurso para noticias digitales sobre vacunación contra la COVID-19 en México, Brasil y Perú. Apliqué framing y estructuras narrativas, BERTopic, BERTopic multimodal, segmentación semántica con embeddings all-MiniLM-L6-v2, codificación asistida por Gemini 1.5 Pro, ACM/SVD, clusterización jerárquica, Gap Statistic, evaluación silhouette y V de Cramér. Publicación: https://www.scielo.cl/scielo.php?pid=S0719-15292025000200055&script=sci_arttext",
+        "Consultor de análisis de datos para academia",
+        "Lideré el diseño analítico de un estudio mixto sobre cobertura periodística digital de la vacunación contra la COVID-19 en México, Brasil y Perú. Entregué flujos de análisis del discurso, framing, estructuras narrativas, modelado multimodal de tópicos, segmentación semántica, clusterización y análisis de correspondencias para sostener hallazgos comparativos publicables. Publicación: https://www.scielo.cl/scielo.php?pid=S0719-15292025000200055&script=sci_arttext",
         null,
         null,
         null,
@@ -1067,8 +1254,8 @@
         "2024",
         "Consultoría Académica - La variable de género en la difusión científica por Twitter/X",
         "Remoto",
-        "Analista de Datos y Consultor Metodológico",
-        "Diseñé la estrategia analítica para un estudio mixto de 13,165 publicaciones de Twitter/X de 17 divulgadores científicos. Implementé métricas de redes, análisis temporal, indicadores de eficiencia, muestreo estratificado en SPSS, codificación manual inductiva, análisis automatizado de sentimientos, exploración con ACP, transformaciones logarítmicas y evaluación con curvas ROC. Publicación: https://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2415-09592024000400017",
+        "Consultor de análisis de datos para academia",
+        "Entregué el flujo de análisis para un estudio mixto de 13,165 publicaciones de Twitter/X de 17 divulgadores científicos. Construí el pipeline de recolección, limpieza, métricas, muestreo, sentimientos, exploración con ACP y evaluación con curvas ROC que permitió derivar las categorías temáticas y comunicativas finales. Publicación: https://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2415-09592024000400017",
         null,
         null,
         null,
@@ -1082,8 +1269,8 @@
         "2024",
         "Consultoría Académica - Medios y conflictos sociales durante la COVID-19",
         "Remoto",
-        "Analista de Datos y Revisor Metodológico",
-        "Realicé el análisis de datos y la revisión metodológica de un estudio mixto y descriptivo sobre 53 portadas de los principales diarios peruanos. Apliqué análisis de framing, análisis crítico del discurso basado en el modelo tridimensional de Fairclough, análisis descriptivo de frecuencias de actores y valoraciones, y comparación entre prensa de referencia y prensa popular. Publicación: https://revistasinvestigacion.unmsm.edu.pe/index.php/discursos/article/view/25876",
+        "Consultor de análisis de datos para academia",
+        "Entregué análisis de datos y revisión metodológica para un estudio mixto de 53 portadas de diarios sobre cobertura mediática y conflicto social durante la pandemia. Apliqué framing, análisis crítico del discurso y comparación entre medios para estructurar resultados listos para publicación. Publicación: https://revistasinvestigacion.unmsm.edu.pe/index.php/discursos/article/view/25876",
         null,
         null,
         null,
@@ -1097,8 +1284,8 @@
         "2024",
         "Consultoría Académica - Protestas en 280 caracteres",
         "Remoto",
-        "Analista de Datos y Consultor de Investigación NLP",
-        "Apoyé un estudio mixto que combinó análisis masivo de Twitter con entrevistas estructuradas. Implementé análisis descriptivo de contenidos virales y métricas de interacción, análisis de redes sociales en Gephi con modularidad y centralidad, modelado de tópicos con BERTopic, codificación cualitativa en Atlas.ti e integración interpretativa de la participación online y offline.",
+        "Consultor de análisis de datos para academia",
+        "Apoyé un estudio mixto que combinó análisis masivo de Twitter con entrevistas estructuradas. Entregué análisis de redes sociales en Gephi, modelado de tópicos con BERTopic, análisis de interacción y soporte de codificación cualitativa para conectar patrones de participación digital con evidencia de entrevistas.",
         null,
         null,
         null,
@@ -1112,8 +1299,8 @@
         "2024",
         "Consultoría Académica - Acción conectiva y movilización conservadora",
         "Remoto",
-        "Diseñador Metodológico y Analista de Datos",
-        "Diseñé el flujo computacional de un estudio sobre activismo digital contra el currículo escolar con enfoque de género en Perú. Construí y analicé un corpus de 6,221 publicaciones de Facebook con BERTopic, BERTopic multimodal, embeddings multilingual-e5, análisis de imágenes con Gemini 1.5 Pro, pysentimiento, análisis de coocurrencias y modelos Random Forest con validación cruzada temporal. Publicación: https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
+        "Consultor de análisis de datos para academia",
+        "Diseñé y entregué el pipeline computacional para un estudio de 6,221 publicaciones de Facebook sobre activismo digital contra el currículo escolar con enfoque de género en Perú. Construí flujos multimodales de NLP y analítica predictiva con BERTopic, embeddings multilingual-e5, sentimientos, coocurrencias y modelos Random Forest con validación temporal para generar hallazgos listos para publicación. Publicación: https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
         null,
         null,
         null,
@@ -1672,7 +1859,7 @@
         1,
         "Microsoft AI-102: Azure ML, NLP & AI",
         "Microsoft",
-        2023,
+        2025,
         "https://learn.microsoft.com/es-es/users/diegomauriciopaucarvillacorta-9426/credentials/c3cdb017bddf82a8?ref=https%3A%2F%2Fwww.linkedin.com%2F",
         "en"
       ],
@@ -1681,7 +1868,7 @@
         1,
         "NVIDIA NCA-GENL: AI and DL Ops knowledge",
         "NVIDIA",
-        2024,
+        2025,
         "https://www.credly.com/badges/5a1b0a52-6ea7-42bc-8a2f-0aab57879a43/",
         "en"
       ],
@@ -1690,7 +1877,7 @@
         1,
         "Tableau Certified Data Analyst",
         "Tableau",
-        2023,
+        2025,
         "https://www.credly.com/badges/2b43ae9e-c9fa-4da6-a79d-df2d1ba7ecab/linked_in_profile",
         "en"
       ],
@@ -1698,8 +1885,8 @@
         5,
         1,
         "UML 2.5 — OMG OCUP2",
-        "OMG",
-        2020,
+        "EDMA / OMG",
+        2025,
         "https://www.credly.com/badges/27d58355-d2ae-46c2-adf8-4981fba7e093/public_url",
         "en"
       ],
@@ -1708,7 +1895,7 @@
         1,
         "MAXQDA AI-Assist Professional Trainer",
         "MAXQDA / VERBI",
-        2020,
+        2025,
         "https://www.maxqda.com/workshoptrainer/diego-mauricio-paucar-villacorta",
         "en"
       ],
@@ -1726,7 +1913,7 @@
         1,
         "Azure ML, NLP e IA — Microsoft AI-102",
         "Microsoft",
-        2023,
+        2025,
         "https://learn.microsoft.com/es-es/users/diegomauriciopaucarvillacorta-9426/credentials/c3cdb017bddf82a8?ref=https%3A%2F%2Fwww.linkedin.com%2F",
         "es"
       ],
@@ -1735,7 +1922,7 @@
         1,
         "Progreso actual en LLMs y Deep Learning — NVIDIA NCA-GENL",
         "NVIDIA",
-        2024,
+        2025,
         "https://www.credly.com/badges/5a1b0a52-6ea7-42bc-8a2f-0aab57879a43/",
         "es"
       ],
@@ -1744,7 +1931,7 @@
         1,
         "Data Storytelling y Análisis — Tableau Certified Data Analyst",
         "Tableau",
-        2023,
+        2025,
         "https://www.credly.com/badges/2b43ae9e-c9fa-4da6-a79d-df2d1ba7ecab/linked_in_profile",
         "es"
       ],
@@ -1752,8 +1939,8 @@
         5,
         1,
         "Modelamiento y Análisis de Sistemas con UML 2.5 — OMG OCUP2",
-        "OMG",
-        2020,
+        "EDMA / OMG",
+        2025,
         "https://www.credly.com/badges/27d58355-d2ae-46c2-adf8-4981fba7e093/public_url",
         "es"
       ],
@@ -1762,7 +1949,7 @@
         1,
         "Investigación cualitativa automatizada — MAXQDA Professional Trainer",
         "MAXQDA / VERBI",
-        2020,
+        2025,
         "https://www.maxqda.com/workshoptrainer/diego-mauricio-paucar-villacorta",
         "es"
       ]
