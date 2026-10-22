@@ -7,7 +7,7 @@ window.__CV_CONFIG__ = {
   ]
 };
 
-window.__CV_DATA__ = {
+window.__CV_DATA__ = 
 {
   "tables": [
     {
@@ -1063,4 +1063,4 @@ window.__CV_DATA__ = {
     {"type": "<class 'sqlglot.expressions.Drop'>", "raw_sql": "DROP TABLE IF EXISTS servicios"},
     {"type": "<class 'sqlglot.expressions.Drop'>", "raw_sql": "DROP TABLE IF EXISTS service_variations"}
   ]
-}
+};
