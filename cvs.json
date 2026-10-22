@@ -1,3 +1,13 @@
+window.__CV_CONFIG__ = {
+  "users": [
+    {
+      "email": "diegoblaster@hotmail.com",
+      "password": "mauricio"
+    }
+  ]
+};
+
+window.__CV_DATA__ = {
 {
   "tables": [
     {
