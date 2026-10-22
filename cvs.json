@@ -1,1957 +1,2634 @@
 {
-    "tables": [
+  "tables": [
+    {
+      "name": "datos_personales",
+      "columns": [
         {
-            "name": "datos_personales",
-            "columns": [
-                {
-                    "name": "n",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "nombres",
-                    "type": "VARCHAR(200)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "telefono",
-                    "type": "VARCHAR(20)",
-                    "constraints": []
-                },
-                {
-                    "name": "email",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "lugar",
-                    "type": "CHAR(50)",
-                    "constraints": []
-                },
-                {
-                    "name": "perfil",
-                    "type": "TEXT",
-                    "constraints": []
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                },
-                {
-                    "name": "created_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()"
-                    ]
-                },
-                {
-                    "name": "updated_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()",
-                        "ON UPDATE CURRENT_TIMESTAMP()"
-                    ]
-                }
-            ]
+          "name": "n",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
-            "name": "profesiones",
-            "columns": [
-                {
-                    "name": "n",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "id",
-                    "type": "INT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "profesion",
-                    "type": "VARCHAR(100)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                },
-                {
-                    "name": "created_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()"
-                    ]
-                },
-                {
-                    "name": "updated_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()",
-                        "ON UPDATE CURRENT_TIMESTAMP()"
-                    ]
-                }
-            ]
+          "name": "id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
-            "name": "enlaces_personales",
-            "columns": [
-                {
-                    "name": "n",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "id",
-                    "type": "INT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "tipo",
-                    "type": "VARCHAR(50)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "url",
-                    "type": "VARCHAR(255)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                },
-                {
-                    "name": "created_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()"
-                    ]
-                },
-                {
-                    "name": "updated_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()",
-                        "ON UPDATE CURRENT_TIMESTAMP()"
-                    ]
-                }
-            ]
+          "name": "nombres",
+          "type": "VARCHAR(200)",
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
-            "name": "experiencia",
-            "columns": [
-                {
-                    "name": "n",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "profesion_id",
-                    "type": "INT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "experiencia_categoria",
-                    "type": "VARCHAR(100)",
-                    "constraints": []
-                },
-                {
-                    "name": "inicio_anio",
-                    "type": "CHAR(50)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "institucion",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "lugar",
-                    "type": "VARCHAR(100)",
-                    "constraints": []
-                },
-                {
-                    "name": "rol",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "tareas",
-                    "type": "TEXT",
-                    "constraints": []
-                },
-                {
-                    "name": "logros",
-                    "type": "TEXT",
-                    "constraints": []
-                },
-                {
-                    "name": "referencia",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "referencia_linkedin",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                },
-                {
-                    "name": "created_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()"
-                    ]
-                },
-                {
-                    "name": "updated_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()",
-                        "ON UPDATE CURRENT_TIMESTAMP()"
-                    ]
-                }
-            ]
+          "name": "telefono",
+          "type": "VARCHAR(20)",
+          "constraints": []
         },
         {
-            "name": "educacion",
-            "columns": [
-                {
-                    "name": "n",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "id",
-                    "type": "INT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "grado_instruccion",
-                    "type": "ENUM('Primaria', 'Secundaria', 'Técnico Superior', 'Universitario/Bachiller', 'Especialización', 'Licenciatura', 'Maestría', 'Doctorado', 'Post-Doctorado')",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "institucion",
-                    "type": "VARCHAR(255)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "titulo",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "fecha_inicio",
-                    "type": "DATE",
-                    "constraints": []
-                },
-                {
-                    "name": "en_curso",
-                    "type": "BOOLEAN",
-                    "constraints": [
-                        "DEFAULT FALSE"
-                    ]
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                }
-            ]
+          "name": "email",
+          "type": "VARCHAR(255)",
+          "constraints": []
         },
         {
-            "name": "skills",
-            "columns": [
-                {
-                    "name": "n",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "id",
-                    "type": "INT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "profesion_id",
-                    "type": "INT",
-                    "constraints": []
-                },
-                {
-                    "name": "skill_name",
-                    "type": "VARCHAR(255)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "skill_level",
-                    "type": "CHAR(100)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "tipo_skill",
-                    "type": "CHAR(100)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "certificate_name",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "certificate_year",
-                    "type": "DATE",
-                    "constraints": []
-                },
-                {
-                    "name": "certificate_institution",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "certificate_path",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                }
-            ]
+          "name": "lugar",
+          "type": "CHAR(50)",
+          "constraints": []
         },
         {
-            "name": "publications",
-            "columns": [
-                {
-                    "name": "id",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "title",
-                    "type": "VARCHAR(500)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "authors",
-                    "type": "VARCHAR(500)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "year",
-                    "type": "YEAR",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "publication_type",
-                    "type": "ENUM('Article', 'Book', 'Book Chapter', 'Conference Paper', 'Other')",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "journal_or_publisher",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "volume",
-                    "type": "VARCHAR(50)",
-                    "constraints": []
-                },
-                {
-                    "name": "pages",
-                    "type": "VARCHAR(50)",
-                    "constraints": []
-                },
-                {
-                    "name": "doi",
-                    "type": "VARCHAR(100)",
-                    "constraints": []
-                },
-                {
-                    "name": "url",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                },
-                {
-                    "name": "created_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()"
-                    ]
-                },
-                {
-                    "name": "updated_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()",
-                        "ON UPDATE CURRENT_TIMESTAMP()"
-                    ]
-                }
-            ]
+          "name": "perfil",
+          "type": "TEXT",
+          "constraints": []
         },
         {
-            "name": "teaching_experience",
-            "columns": [
-                {
-                    "name": "id",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "course_name",
-                    "type": "VARCHAR(255)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "institution",
-                    "type": "VARCHAR(255)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "start_date",
-                    "type": "DATE",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "end_date",
-                    "type": "DATE",
-                    "constraints": []
-                },
-                {
-                    "name": "number_of_sessions",
-                    "type": "UINT",
-                    "constraints": []
-                },
-                {
-                    "name": "location",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "description",
-                    "type": "TEXT",
-                    "constraints": []
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                },
-                {
-                    "name": "created_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()"
-                    ]
-                },
-                {
-                    "name": "updated_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()",
-                        "ON UPDATE CURRENT_TIMESTAMP()"
-                    ]
-                }
-            ]
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
         },
         {
-            "name": "portfolio_items",
-            "columns": [
-                {
-                    "name": "id",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "item_type",
-                    "type": "ENUM('Writing', 'Presentation', 'Data Visualization', 'Software Project', 'Audiovisual project', 'Other')",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "title",
-                    "type": "VARCHAR(255)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "description",
-                    "type": "TEXT",
-                    "constraints": []
-                },
-                {
-                    "name": "date_created",
-                    "type": "DATE",
-                    "constraints": []
-                },
-                {
-                    "name": "url",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "repository_link",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "image_path",
-                    "type": "VARCHAR(255)",
-                    "constraints": []
-                },
-                {
-                    "name": "additional_info",
-                    "type": "JSON",
-                    "constraints": []
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                },
-                {
-                    "name": "created_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()"
-                    ]
-                },
-                {
-                    "name": "updated_at",
-                    "type": "TIMESTAMP",
-                    "constraints": [
-                        "DEFAULT CURRENT_TIMESTAMP()",
-                        "ON UPDATE CURRENT_TIMESTAMP()"
-                    ]
-                }
-            ]
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
-            "name": "portafolio_categoria",
-            "columns": [
-                {
-                    "name": "id",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "portafolio_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "categoria",
-                    "type": "VARCHAR(500)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                }
-            ]
-        },
-        {
-            "name": "servicios",
-            "columns": [
-                {
-                    "name": "n",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "id",
-                    "type": "INT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "persona_id",
-                    "type": "UINT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "titulo",
-                    "type": "VARCHAR(500)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "descripcion",
-                    "type": "VARCHAR(500)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                }
-            ]
-        },
-        {
-            "name": "service_variations",
-            "columns": [
-                {
-                    "name": "id",
-                    "type": "UINT",
-                    "constraints": [
-                        "AUTO_INCREMENT",
-                        "PRIMARY KEY"
-                    ]
-                },
-                {
-                    "name": "service_id",
-                    "type": "INT",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "variation_description",
-                    "type": "VARCHAR(500)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "price",
-                    "type": "DECIMAL(10, 2)",
-                    "constraints": [
-                        "NOT NULL"
-                    ]
-                },
-                {
-                    "name": "lengua",
-                    "type": "CHAR(2)",
-                    "constraints": []
-                }
-            ]
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()",
+            "ON UPDATE CURRENT_TIMESTAMP()"
+          ]
         }
-    ],
-    "views": [],
-    "indexes": [],
-    "data": {
-        "datos_personales": [
-            [
-                "1",
-                "Diego Mauricio Paucar Villacorta",
-                "+51 902-413-372",
-                "diegopaucarv@hotmail.com",
-                "Lima, Peru",
-                "I'm an innovation-minded data scientist, social scientist, and software developer based in Peru.",
-                "en"
-            ],
-            [
-                "1",
-                "Diego Mauricio Paucar Villacorta",
-                "+51 902-413-372",
-                "diegopaucarv@hotmail.com",
-                "Lima, Peru",
-                "Soy un científico de datos, científico social y desarrollador de software orientado a la innovación, radicado en Perú.",
-                "es"
-            ]
-        ],
-        "enlaces_personales": [
-            [
-                "1",
-                "1",
-                "Página web",
-                "https://www.facebook.com/escape.ccss/",
-                "es"
-            ],
-            [
-                "2",
-                "1",
-                "Github",
-                "https://gist.github.com/diegopaucarv",
-                "es"
-            ],
-            [
-                "1",
-                "1",
-                "Página web",
-                "https://www.facebook.com/escape.ccss/",
-                "en"
-            ],
-            [
-                "2",
-                "1",
-                "Github",
-                "https://gist.github.com/diegopaucarv",
-                "en"
-            ]
-        ],
-        "educacion": [
-            [
-                "1",
-                "1",
-                "Técnico Superior",
-                "CIBERTEC",
-                "Ciencias de la Computación",
-                "2023-04-01",
-                true,
-                "es"
-            ],
-            [
-                "2",
-                "1",
-                "Universitario/Bachiller",
-                "Universidad Nacional Mayor de San Marcos",
-                "Ciencias Sociales (Sociología)",
-                "2012-04-01",
-                false,
-                "es"
-            ],
-            [
-                "1",
-                "1",
-                "Técnico Superior",
-                "CIBERTEC",
-                "Technical en Computer Science",
-                "2023-04-01",
-                true,
-                "en"
-            ],
-            [
-                "2",
-                "1",
-                "Universitario/Bachiller",
-                "Universidad Nacional Mayor de San Marcos",
-                "University en Social Sciences (Sociology)",
-                "2012-04-01",
-                false,
-                "en"
-            ]
-        ],
-        "profesiones": [
-            [
-                "1",
-                "1",
-                "Data Scientist",
-                "en"
-            ],
-            [
-                "2",
-                "1",
-                "Social Scientist",
-                "en"
-            ],
-            [
-                "3",
-                "1",
-                "Sofware Developer",
-                "en"
-            ],
-            [
-                "1",
-                "1",
-                "Científico de Datos",
-                "es"
-            ],
-            [
-                "2",
-                "1",
-                "Científico Social",
-                "es"
-            ],
-            [
-                "3",
-                "1",
-                "Programador",
-                "es"
-            ]
-        ],
-        "experiencia": [
-            [
-                "10",
-                "1",
-                "2",
-                "Actual",
-                "ESCAPE",
-                "Lima, Lima",
-                "Social Research Instructor and Advisor",
-                "I founded a non-profit called ESCAPE, and I coupled with many student organisations from the social sciences to design and share top-notch education regarding quantitative and qualitative analysis in the social sciences.",
-                null,
-                null,
-                "https://www.facebook.com/escape.ccss/",
-                "en"
-            ],
-            [
-                "9",
-                "1",
-                "1",
-                "Actual",
-                "Universidad Científica del Sur",
-                "Lima, Lima",
-                "Artificial Intelligence Specialist",
-                "Developed a text analysis pipeline using Modal, Llama 3, Sentence Similarity, and BERTopic.",
-                null,
-                null,
-                null,
-                "en"
-            ],
-            [
-                "8",
-                "1",
-                "3",
-                "2023-07-01",
-                "Massive Dynamics",
-                "Lima, Lima",
-                "Chatbot Developer",
-                "Developed a data analysis centered chatbot using Azure Databricks, Azure Machine Learning, Open AI's ChatGPT, SQL, HTML, and JavaScript.",
-                null,
-                null,
-                null,
-                "en"
-            ],
-            [
-                "7",
-                "1",
-                "2",
-                "2022-07-01",
-                "Apoyo Comunicación",
-                "Lima, Lima",
-                "Social Data Analyst",
-                "Designed, managed, analyzed, and published stakeholder analysis, social responsibility, and corporate reputation projects for various sectors.",
-                null,
-                null,
-                null,
-                "en"
-            ],
-            [
-                "6",
-                "1",
-                "2",
-                "2018-02-01",
-                "Congregación de Religiosas Trinitarias Terciarias",
-                "Lima, Perú",
-                "Researcher and Facilitator",
-                "Developed a diagnosis focused on the capacities of vulnerable populations (children, women, and low-income families), solidarity economy, and community development through training and volunteering with youth at El Rescate (Cercado de Lima). The survey included an evaluation of the work of the Trinitarians in the area.",
-                null,
-                "Flora Balarezo Flores",
-                "florabalarezo@gmail.com",
-                "en"
-            ],
-            [
-                "5",
-                "1",
-                "2",
-                "2017-10-01",
-                "Consorcio de Investigación Económica y Social - CIES",
-                "Lima, Perú",
-                "Writer",
-                "Winner of a contest for the writing and editing of three scientific articles in the journal Economía y Sociedad No. 92.",
-                null,
-                "Iliana Carrasco Díaz",
-                "prensa@cies.org.pe",
-                "en"
-            ],
-            [
-                "4",
-                "1",
-                "2",
-                "2017-05-01",
-                "Asociación Red Innova",
-                "Lima, Perú",
-                "Research Intern",
-                "Co-author of performance evaluation of a public health project led by Community Health Agents in three communities in the Loreto region; supported translation of drafts and proposals, systematic review, and data analysis.",
-                null,
-                "Chris Westgard",
-                "cmwestgard@gmail.com",
-                "en"
-            ],
-            [
-                "3",
-                "1",
-                "2",
-                "2015-02-01",
-                "Asociación Civil AYNE-Perú Trinitarias",
-                "Lima, Perú",
-                "Researcher",
-                "Designed, organized, and conducted focus groups and surveys with the help of volunteer students and teachers for a general evaluation of AYNE's impact on social vulnerability, entrepreneurship, and citizenship in six communities in Ancón and Puente Piedra.",
-                null,
-                "Flora Balarezo Flores",
-                "florabalarezo@gmail.com",
-                "en"
-            ],
-            [
-                "2",
-                "1",
-                "2",
-                "2016-04-01",
-                "Red Muqui",
-                "Lima, Perú",
-                "Formulator",
-                "Conducted participatory meetings to formulate a project on primary health care and environmental policy advocacy for peasant communities in Espinar (Cusco), San Mateo de Huanchor (Lima), Quiulachoca (Pasco), and La Oroya (Junín) (Submitted to the European Union).",
-                null,
-                "Javier Jahncke",
-                "jjahncke@muqui.org",
-                "en"
-            ],
-            [
-                "1",
-                "1",
-                "2",
-                "2015-08-01",
-                "Obs. de Economía Social, Solidaria y Popular, UNMSM",
-                "Lima, Perú",
-                "Researcher",
-                "Conducted a case study research on the history, organization, economy, and social interactions in a Cooperative in Collique (Comas) (final report delivered; publication pending).",
-                null,
-                "Luis Montoya",
-                "lmontoyac@unmsm.edu.pe",
-                "en"
-            ],
-            [
-                "10",
-                "1",
-                "2",
-                "Actual",
-                "ESCAPE",
-                "Lima, Lima",
-                "Instructor y Asesor de Investigación Social",
-                "Fundé una organización sin fines de lucro llamada ESCAPE y colaboré con muchas organizaciones estudiantiles de las ciencias sociales para diseñar y compartir educación de primera calidad sobre análisis cuantitativo y cualitativo en las ciencias sociales.",
-                null,
-                null,
-                "https://www.facebook.com/escape.ccss/",
-                "es"
-            ],
-            [
-                "9",
-                "1",
-                "1",
-                "Actual",
-                "Universidad Científica del Sur",
-                "Lima, Lima",
-                "Especialista en Inteligencia Artificial",
-                "Desarrollé una canalización de análisis de texto utilizando Modal, Llama 3, Sentence Similarity y BERTopic.",
-                null,
-                null,
-                null,
-                "es"
-            ],
-            [
-                "8",
-                "1",
-                "3",
-                "2023-07-01",
-                "Massive Dynamics",
-                "Lima, Lima",
-                "Desarrollador de Chatbots",
-                "Desarrollé un chatbot centrado en análisis de datos utilizando Azure Databricks, Azure Machine Learning, ChatGPT de Open AI, SQL, HTML y JavaScript.",
-                null,
-                null,
-                null,
-                "es"
-            ],
-            [
-                "7",
-                "1",
-                "2",
-                "2022-07-01",
-                "Apoyo Comunicación",
-                "Lima, Lima",
-                "Analista de Datos Sociales",
-                "Diseñé, gestioné, analicé y publiqué proyectos de análisis de stakeholders, responsabilidad social y reputación corporativa para varios sectores.",
-                null,
-                null,
-                null,
-                "es"
-            ],
-            [
-                "6",
-                "1",
-                "2",
-                "2018-02-01",
-                "Congregación de Religiosas Trinitarias Terciarias",
-                "Lima, Perú",
-                "Investigador y Facilitador",
-                "Desarrollé un diagnóstico enfocado en las capacidades de poblaciones vulnerables (niños, mujeres y familias de bajos ingresos), economía solidaria y desarrollo comunitario a través de capacitación y voluntariado con jóvenes en El Rescate (Cercado de Lima). La encuesta incluyó una evaluación del trabajo de las Trinitarias en la zona.",
-                null,
-                "Flora Balarezo Flores",
-                "florabalarezo@gmail.com",
-                "es"
-            ],
-            [
-                "5",
-                "1",
-                "2",
-                "2017-10-01",
-                "Consorcio de Investigación Económica y Social - CIES",
-                "Lima, Perú",
-                "Redactor",
-                "Ganador de concurso para la redacción y edición de tres artículos científicos en la revista Economía y Sociedad No. 92.",
-                null,
-                "Iliana Carrasco Díaz",
-                "prensa@cies.org.pe",
-                "es"
-            ],
-            [
-                "4",
-                "1",
-                "2",
-                "2017-05-01",
-                "Asociación Red Innova",
-                "Lima, Perú",
-                "Practicante de Investigaciones",
-                "Co-autor de evaluación de desempeño de un proyecto de salud pública a cargo de Agentes Comunitarios de Salud en tres comunidades en la región de Loreto; se brindó apoyo en la traducción de borradores y propuestas, revisión sistemática y análisis de datos.",
-                null,
-                "Chris Westgard",
-                "cmwestgard@gmail.com",
-                "es"
-            ],
-            [
-                "3",
-                "1",
-                "2",
-                "2015-02-01",
-                "Asociación Civil AYNE-Perú Trinitarias",
-                "Lima, Perú",
-                "Investigador",
-                "Diseñé, organicé y llevé a cabo grupos focales y encuestas con la ayuda de estudiantes voluntarios y docentes para una evaluación general del impacto de AYNE en la vulnerabilidad social, el emprendimiento y la ciudadanía en seis comunidades de Ancón y Puente Piedra.",
-                null,
-                "Flora Balarezo Flores",
-                "florabalarezo@gmail.com",
-                "es"
-            ],
-            [
-                "2",
-                "1",
-                "2",
-                "2016-04-01",
-                "Red Muqui",
-                "Lima, Perú",
-                "Formulador",
-                "Llevé a cabo reuniones participativas para formular un proyecto sobre atención primaria de salud e incidencia en políticas ambientales para comunidades campesinas en Espinar (Cusco), San Mateo de Huanchor (Lima), Quiulachoca (Pasco) y La Oroya (Junín) (Presentado a la Unión Europea).",
-                null,
-                "Javier Jahncke",
-                "jjahncke@muqui.org",
-                "es"
-            ],
-            [
-                "1",
-                "1",
-                "2",
-                "2015-08-01",
-                "Obs. de Economía Social, Solidaria y Popular, UNMSM",
-                "Lima, Perú",
-                "Investigador",
-                "Realicé una investigación de caso sobre la historia, organización, economía e interacciones sociales en una Cooperativa en Collique (Comas) (entregado informe final; publicación pendiente).",
-                null,
-                "Luis Montoya",
-                "lmontoyac@unmsm.edu.pe",
-                "es"
-            ]
-        ],
-        "skills": [
-            [
-                "1",
-                "1",
-                null,
-                "Liderazgo",
-                "Especialista",
-                "Habilidades blandas",
-                "",
-                "es"
-            ],
-            [
-                "2",
-                "1",
-                null,
-                "Habilidades de comunicación",
-                "Especialista",
-                "Habilidades blandas",
-                "",
-                "es"
-            ],
-            [
-                "3",
-                "1",
-                "1",
-                "Python",
-                "Especialista",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "4",
-                "1",
-                "3",
-                "Javascript",
-                "Especialista",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "5",
-                "1",
-                null,
-                "Pensamiento crítico",
-                "Especialista",
-                "Habilidades blandas",
-                "",
-                "es"
-            ],
-            [
-                "6",
-                "1",
-                "3",
-                "Gestión de bases de datos",
-                "Especialista",
-                "Habilidades profesionales",
-                "",
-                "es"
-            ],
-            [
-                "7",
-                "1",
-                null,
-                "Enfoque en detalles",
-                "Especialista",
-                "Habilidades blandas",
-                "",
-                "es"
-            ],
-            [
-                "8",
-                "1",
-                "1",
-                "Metodología de investigación",
-                "Especialista",
-                "Habilidades académicas",
-                "",
-                "es"
-            ],
-            [
-                "9",
-                "1",
-                "1",
-                "Aprendizaje automático",
-                "Especialista",
-                "Habilidades profesionales",
-                "",
-                "es"
-            ],
-            [
-                "10",
-                "1",
-                "3",
-                "Java",
-                "Especialista",
-                "Software",
-                "Java 8 de Oracle (1Z0-808)",
-                "es"
-            ],
-            [
-                "11",
-                "1",
-                "1",
-                "Aprendizaje profundo",
-                "Especialista",
-                "Software",
-                "DeepLearning.AI (varios certificados)",
-                "es"
-            ],
-            [
-                "12",
-                "1",
-                "1",
-                "Análisis de datos",
-                "Especialista",
-                "Habilidades académicas",
-                "EDX MIT Análisis de Datos para Científicos Sociales",
-                "es"
-            ],
-            [
-                "13",
-                "1",
-                null,
-                "Inglés",
-                "Especialista",
-                "Idiomas",
-                "Cambridge Advanced",
-                "es"
-            ],
-            [
-                "14",
-                "1",
-                "2",
-                "Humanidades digitales",
-                "Especialista",
-                "Habilidades académicas",
-                "Explorador de Complejidad Introducción a Humanidades Digitales",
-                "es"
-            ],
-            [
-                "15",
-                "1",
-                null,
-                "Microsoft PowerPoint",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "16",
-                "1",
-                null,
-                "Microsoft Word",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "17",
-                "1",
-                null,
-                "Microsoft Excel",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "18",
-                "1",
-                null,
-                "Microsoft Project",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "19",
-                "1",
-                null,
-                "Adobe Photoshop e Illustrator",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "20",
-                "1",
-                "2",
-                "Revisión literaria",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "21",
-                "1",
-                "2",
-                "Zotero",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "22",
-                "1",
-                "2",
-                "Atlas.ti",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "23",
-                "1",
-                "2",
-                "NVivo 10",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "24",
-                "1",
-                "2",
-                "SPSS V24",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "25",
-                "1",
-                "2",
-                "Epidat 4.2",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "26",
-                "1",
-                "2",
-                "R",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "27",
-                "1",
-                "2",
-                "Gephi",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "28",
-                "1",
-                "2",
-                "ArcGIS 10",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "29",
-                "1",
-                "1",
-                "MySQL",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "30",
-                "1",
-                "3",
-                ".NET",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "31",
-                "1",
-                "3",
-                "React",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "32",
-                "1",
-                "3",
-                "Bash",
-                "Conoce y practica",
-                "Software",
-                "",
-                "es"
-            ],
-            [
-                "1",
-                "1",
-                null,
-                "Leadership",
-                "Specialist",
-                "Soft skills",
-                "",
-                "en"
-            ],
-            [
-                "2",
-                "1",
-                null,
-                "Communication skills",
-                "Specialist",
-                "Soft skills",
-                "",
-                "en"
-            ],
-            [
-                "3",
-                "1",
-                "1",
-                "Python",
-                "Specialist",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "4",
-                "1",
-                "3",
-                "Javascript",
-                "Specialist",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "5",
-                "1",
-                null,
-                "Critical Thinking",
-                "Specialist",
-                "Soft skills",
-                "",
-                "en"
-            ],
-            [
-                "6",
-                "1",
-                "3",
-                "Database Management",
-                "Specialist",
-                "Professional skills",
-                "",
-                "en"
-            ],
-            [
-                "7",
-                "1",
-                null,
-                "Detail-focused",
-                "Specialist",
-                "Soft skills",
-                "",
-                "en"
-            ],
-            [
-                "8",
-                "1",
-                "1",
-                "Research Methodology",
-                "Specialist",
-                "Academic skills",
-                "",
-                "en"
-            ],
-            [
-                "9",
-                "1",
-                "1",
-                "Machine Learning",
-                "Specialist",
-                "Professional skills",
-                "",
-                "en"
-            ],
-            [
-                "10",
-                "1",
-                "3",
-                "Java",
-                "Specialist",
-                "Software",
-                "Oracle's Java 8 (1Z0-808)",
-                "en"
-            ],
-            [
-                "11",
-                "1",
-                "1",
-                "Deep Learning",
-                "Specialist",
-                "Software",
-                "DeepLearning.AI (various certificates)",
-                "en"
-            ],
-            [
-                "12",
-                "1",
-                "1",
-                "Data Analysis",
-                "Specialist",
-                "Academic skills",
-                "EDX MIT Data Analysis for Social Scientists",
-                "en"
-            ],
-            [
-                "13",
-                "1",
-                null,
-                "English",
-                "Specialist",
-                "Languages",
-                "Cambridge Advanced",
-                "en"
-            ],
-            [
-                "14",
-                "1",
-                "2",
-                "Digital Humanities",
-                "Specialist",
-                "Academic skills",
-                "Complexity Explorer's Introduction to Digital Humanities",
-                "en"
-            ],
-            [
-                "15",
-                "1",
-                null,
-                "Microsoft PowerPoint",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "16",
-                "1",
-                null,
-                "Microsoft Word",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "17",
-                "1",
-                null,
-                "Microsoft Excel",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "18",
-                "1",
-                null,
-                "Microsoft Project",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "19",
-                "1",
-                null,
-                "Adobe Photoshop and Illustrator",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "20",
-                "1",
-                "2",
-                "Literature Review",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "21",
-                "1",
-                "2",
-                "Zotero",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "22",
-                "1",
-                "2",
-                "Atlas.ti",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "23",
-                "1",
-                "2",
-                "NVivo 10",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "24",
-                "1",
-                "2",
-                "SPSS V24",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "25",
-                "1",
-                "2",
-                "Epidat 4.2",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "26",
-                "1",
-                "2",
-                "R",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "27",
-                "1",
-                "2",
-                "Gephi",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "28",
-                "1",
-                "2",
-                "ArcGIS 10",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "29",
-                "1",
-                "1",
-                "MySQL",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "30",
-                "1",
-                "3",
-                ".NET",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "31",
-                "1",
-                "3",
-                "React",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ],
-            [
-                "32",
-                "1",
-                "3",
-                "Bash",
-                "Familiar and practicing",
-                "Software",
-                "",
-                "en"
-            ]
-        ],
-        "publications": [
-            [
-                "Community Health Workers: Case Study in the Amazon of Peru",
-                "https://pubmed.ncbi.nlm.nih.gov/29582342/"
-            ]
-        ],
-        "servicios": [
-            [
-                "1",
-                "1",
-                "Análisis de Datos",
-                "Análisis cuantitativo y cualitativo para investigaciones académicas y corporativas",
-                "es"
-            ],
-            [
-                "2",
-                "1",
-                "Desarrollo de IA",
-                "Desarrollo de soluciones de Inteligencia Artificial y Machine Learning",
-                "es"
-            ],
-            [
-                "3",
-                "1",
-                "Consultoría en Investigación Social",
-                "Diseño y ejecución de proyectos de investigación social",
-                "es"
-            ],
-            [
-                "1",
-                "1",
-                "Data Analysis",
-                "Quantitative and qualitative analysis for academic and corporate research",
-                "en"
-            ],
-            [
-                "2",
-                "1",
-                "AI Development",
-                "Development of Artificial Intelligence and Machine Learning solutions",
-                "en"
-            ],
-            [
-                "3",
-                "1",
-                "Social Research Consulting",
-                "Design and execution of social research projects",
-                "en"
-            ]
-        ]
+      ]
     },
-    "other": [
+    {
+      "name": "profesiones",
+      "columns": [
         {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "DROP SCHEMA IF EXISTS cvs"
+          "name": "n",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
-            "type": "<class 'sqlglot.expressions.Use'>",
-            "raw_sql": "USE cvs"
+          "name": "id",
+          "type": "INT",
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "/* Personal Data Table */ DROP TABLE IF EXISTS datos_personales"
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "/* Personal Links Table */ DROP TABLE IF EXISTS profesiones"
+          "name": "profesion",
+          "type": "VARCHAR(100)",
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "DROP TABLE IF EXISTS enlaces_personales"
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
         },
         {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "/* Experience Table */ DROP TABLE IF EXISTS experiencia"
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "/* Education Table */ DROP TABLE IF EXISTS educacion"
-        },
-        {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "/* Skills Table */ DROP TABLE IF EXISTS skills"
-        },
-        {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "DROP TABLE IF EXISTS portafolio_categoria"
-        },
-        {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "DROP TABLE IF EXISTS servicios"
-        },
-        {
-            "type": "<class 'sqlglot.expressions.Drop'>",
-            "raw_sql": "DROP TABLE IF EXISTS service_variations"
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()",
+            "ON UPDATE CURRENT_TIMESTAMP()"
+          ]
         }
+      ]
+    },
+    {
+      "name": "enlaces_personales",
+      "columns": [
+        {
+          "name": "n",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "INT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "tipo",
+          "type": "VARCHAR(50)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "url",
+          "type": "VARCHAR(255)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()",
+            "ON UPDATE CURRENT_TIMESTAMP()"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "experiencia",
+      "columns": [
+        {
+          "name": "n",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "profesion_id",
+          "type": "INT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "experiencia_categoria",
+          "type": "VARCHAR(100)",
+          "constraints": []
+        },
+        {
+          "name": "inicio_anio",
+          "type": "CHAR(50)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "institucion",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "lugar",
+          "type": "VARCHAR(100)",
+          "constraints": []
+        },
+        {
+          "name": "rol",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "tareas",
+          "type": "TEXT",
+          "constraints": []
+        },
+        {
+          "name": "logros",
+          "type": "TEXT",
+          "constraints": []
+        },
+        {
+          "name": "referencia",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "referencia_linkedin",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()",
+            "ON UPDATE CURRENT_TIMESTAMP()"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "educacion",
+      "columns": [
+        {
+          "name": "n",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "INT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "grado_instruccion",
+          "type": "VARCHAR(100)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "institucion",
+          "type": "VARCHAR(255)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "titulo",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "fecha_inicio",
+          "type": "DATE",
+          "constraints": []
+        },
+        {
+          "name": "en_curso",
+          "type": "BOOLEAN",
+          "constraints": [
+            "DEFAULT FALSE"
+          ]
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        }
+      ]
+    },
+    {
+      "name": "skills",
+      "columns": [
+        {
+          "name": "n",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "INT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "profesion_id",
+          "type": "INT",
+          "constraints": []
+        },
+        {
+          "name": "skill_name",
+          "type": "VARCHAR(255)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "skill_level",
+          "type": "CHAR(100)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "tipo_skill",
+          "type": "CHAR(100)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "certificate_name",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "certificate_year",
+          "type": "DATE",
+          "constraints": []
+        },
+        {
+          "name": "certificate_institution",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "certificate_path",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        }
+      ]
+    },
+    {
+      "name": "publications",
+      "columns": [
+        {
+          "name": "id",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(500)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "authors",
+          "type": "VARCHAR(500)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "year",
+          "type": "YEAR",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "publication_type",
+          "type": "VARCHAR(50)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "journal_or_publisher",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "volume",
+          "type": "VARCHAR(50)",
+          "constraints": []
+        },
+        {
+          "name": "pages",
+          "type": "VARCHAR(50)",
+          "constraints": []
+        },
+        {
+          "name": "doi",
+          "type": "VARCHAR(100)",
+          "constraints": []
+        },
+        {
+          "name": "url",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "contribution",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()",
+            "ON UPDATE CURRENT_TIMESTAMP()"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "teaching_experience",
+      "columns": [
+        {
+          "name": "id",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "course_name",
+          "type": "VARCHAR(255)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "institution",
+          "type": "VARCHAR(255)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "start_date",
+          "type": "DATE",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "end_date",
+          "type": "DATE",
+          "constraints": []
+        },
+        {
+          "name": "number_of_sessions",
+          "type": "UINT",
+          "constraints": []
+        },
+        {
+          "name": "location",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "constraints": []
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()",
+            "ON UPDATE CURRENT_TIMESTAMP()"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "portfolio_items",
+      "columns": [
+        {
+          "name": "id",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "item_type",
+          "type": "VARCHAR(100)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(255)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "constraints": []
+        },
+        {
+          "name": "date_created",
+          "type": "DATE",
+          "constraints": []
+        },
+        {
+          "name": "url",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "repository_link",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "image_path",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "additional_info",
+          "type": "JSON",
+          "constraints": []
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()",
+            "ON UPDATE CURRENT_TIMESTAMP()"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "certifications",
+      "columns": [
+        {
+          "name": "id",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR(255)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "issuer",
+          "type": "VARCHAR(255)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "year",
+          "type": "YEAR",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "url",
+          "type": "VARCHAR(255)",
+          "constraints": []
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()",
+            "ON UPDATE CURRENT_TIMESTAMP()"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "portafolio_categoria",
+      "columns": [
+        {
+          "name": "id",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "portafolio_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "categoria",
+          "type": "VARCHAR(500)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        }
+      ]
+    },
+    {
+      "name": "servicios",
+      "columns": [
+        {
+          "name": "n",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "id",
+          "type": "INT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "persona_id",
+          "type": "UINT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "titulo",
+          "type": "VARCHAR(500)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "descripcion",
+          "type": "VARCHAR(500)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        }
+      ]
+    },
+    {
+      "name": "service_variations",
+      "columns": [
+        {
+          "name": "id",
+          "type": "UINT",
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
+        },
+        {
+          "name": "service_id",
+          "type": "INT",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "variation_description",
+          "type": "VARCHAR(500)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "price",
+          "type": "DECIMAL(10, 2)",
+          "constraints": [
+            "NOT NULL"
+          ]
+        },
+        {
+          "name": "lengua",
+          "type": "CHAR(2)",
+          "constraints": []
+        }
+      ]
+    }
+  ],
+  "views": [],
+  "indexes": [],
+  "data": {
+    "datos_personales": [
+      [
+        "1",
+        "Diego Mauricio Paucar Villacorta",
+        "+51 902-413-372",
+        "diegopaucarv@hotmail.com",
+        "Lima, Peru",
+        "ML Engineer specializing in NLP, LLM systems, and analytics automation. Builds production AI workflows, evaluation pipelines, and decision-support tools for institutional, research, and consulting environments.",
+        "en"
+      ],
+      [
+        "1",
+        "Diego Mauricio Paucar Villacorta",
+        "+51 902-413-372",
+        "diegopaucarv@hotmail.com",
+        "Lima, Perú",
+        "Ingeniero de ML especializado en NLP, sistemas con LLM y automatización analítica. Construyo flujos de IA en producción, pipelines de evaluación y herramientas de apoyo a la decisión para entornos institucionales, de investigación y consultoría.",
+        "es"
+      ]
+    ],
+    "profesiones": [
+      [
+        1,
+        1,
+        "ML Engineer",
+        "en"
+      ],
+      [
+        2,
+        1,
+        "Applied NLP & LLMs",
+        "en"
+      ],
+      [
+        3,
+        1,
+        "Analytics Automation",
+        "en"
+      ],
+      [
+        1,
+        1,
+        "Ingeniero de ML",
+        "es"
+      ],
+      [
+        2,
+        1,
+        "NLP y LLMs Aplicados",
+        "es"
+      ],
+      [
+        3,
+        1,
+        "Automatización Analítica",
+        "es"
+      ]
+    ],
+    "enlaces_personales": [
+      [
+        1,
+        1,
+        "Website",
+        "https://www.facebook.com/escape.ccss/",
+        "en"
+      ],
+      [
+        2,
+        1,
+        "GitHub",
+        "https://github.com/diegopaucarv",
+        "en"
+      ],
+      [
+        3,
+        1,
+        "LinkedIn",
+        "https://www.linkedin.com/in/diegopaucarv/",
+        "en"
+      ],
+      [
+        4,
+        1,
+        "Tableau Public",
+        "https://public.tableau.com/app/profile/diego.paucar",
+        "en"
+      ],
+      [
+        1,
+        1,
+        "Sitio web",
+        "https://www.facebook.com/escape.ccss/",
+        "es"
+      ],
+      [
+        2,
+        1,
+        "GitHub",
+        "https://github.com/diegopaucarv",
+        "es"
+      ],
+      [
+        3,
+        1,
+        "LinkedIn",
+        "https://www.linkedin.com/in/diegopaucarv/",
+        "es"
+      ],
+      [
+        4,
+        1,
+        "Tableau Public",
+        "https://public.tableau.com/app/profile/diego.paucar",
+        "es"
+      ]
+    ],
+    "experiencia": [
+      [
+        "17",
+        "1",
+        "1",
+        "BI & Analytics Consulting",
+        "Actual",
+        "ESCAPE - BI & Analytics Consulting",
+        "Lima, Peru / Remote",
+        "Senior Data Scientist & AI Consultant",
+        "Delivered BI and analytics consulting engagements for government agencies, NGOs, and private-sector clients. Scoped and implemented NLP/ML workflows for qualitative and quantitative analysis, built process-mining and optimization solutions, and translated analytical requirements into reusable dashboards, reports, and training for decision-makers.",
+        "Supported multi-client delivery across public and private organizations, including BPMN redesign and change-program work for mining, food, and other sectors.",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "18",
+        "1",
+        "3",
+        "Corporate Consulting",
+        "2024-08-01",
+        "Facilitadores Asociados",
+        "Lima, Peru",
+        "Consultant & Analyst",
+        "Delivered BPMN process maps, operational diagnostics, and change-program materials for large mining, food, and diversified-industry clients. Built supporting websites, pedagogical assets, and KPI dashboards used to track training progress and compliance.",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "20",
+        "1",
+        "3",
+        "AI Development",
+        "2023-07-01",
+        "Massive Dynamics Perú SAC",
+        "Lima, Peru",
+        "Project Assistant / Chatbot Developer",
+        "Contributed to delivery of a chatbot for data-analysis use cases using Azure Databricks, Azure Machine Learning, and OpenAI models. Supported SQL-based data lake and blob-storage workflows and built HTML/JavaScript components for the user-facing experience.",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "19",
+        "1",
+        "2",
+        "Data Analysis",
+        "2022-08-01",
+        "APOYO Comunicación",
+        "Lima, Peru",
+        "Insights Consultant",
+        "Delivered analytics workflows for stakeholder and corporate-reputation studies, including topic analysis, similarity classification, stakeholder-database curation, multivariate survey modeling, and MAXQDA-based qualitative analysis for client reporting.",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "23",
+        "1",
+        "2",
+        "Academic Consulting",
+        "2025",
+        "Academic Consulting - COVID-19 Vaccination in Debate",
+        "Remote",
+        "Data Analysis Consultant for Academia",
+        "Led the analytical design for a mixed-method study of digital news coverage on COVID-19 vaccination across Mexico, Brazil, and Peru. Delivered discourse, framing, narrative, multimodal topic-modeling, semantic-segmentation, clustering, and correspondence-analysis workflows to support comparative findings for publication. Publication: https://www.scielo.cl/scielo.php?pid=S0719-15292025000200055&script=sci_arttext",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "22",
+        "1",
+        "2",
+        "Academic Consulting",
+        "2024",
+        "Academic Consulting - Gender Variable in Science Communication on Twitter/X",
+        "Remote",
+        "Data Analysis Consultant for Academia",
+        "Delivered the analysis workflow for a mixed study of 13,165 Twitter/X posts from 17 science communicators. Built the data-collection, cleaning, metrics, sampling, sentiment, PCA exploration, and ROC-based evaluation pipeline used to derive final thematic and communicative categories. Publication: https://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2415-09592024000400017",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "24",
+        "1",
+        "2",
+        "Academic Consulting",
+        "2024",
+        "Academic Consulting - Media and Social Conflicts During COVID-19",
+        "Remote",
+        "Data Analysis Consultant for Academia",
+        "Delivered data analysis and methodological review for a mixed study of 53 newspaper front pages on media coverage and social conflict during the pandemic. Applied framing analysis, critical discourse analysis, and cross-outlet comparison to structure publication-ready results. Publication: https://revistasinvestigacion.unmsm.edu.pe/index.php/discursos/article/view/25876",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "28",
+        "1",
+        "2",
+        "Academic Consulting",
+        "2024",
+        "Academic Consulting - Female Cyberactivism on Twitter",
+        "Remote",
+        "Data Analysis Consultant for Academia",
+        "Supported a mixed-method study combining large-scale Twitter analysis with structured interviews. Delivered social-network analysis in Gephi, BERTopic-based topic modeling, engagement analysis, and qualitative coding support to connect digital participation patterns with interview evidence.",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "21",
+        "1",
+        "2",
+        "Academic Consulting",
+        "2024",
+        "Academic Consulting - Connective Action & Conservative Mobilization",
+        "Remote",
+        "Data Analysis Consultant for Academia",
+        "Designed and delivered the computational analysis pipeline for a 6,221-post Facebook study on digital activism against Peru's gender-approach school curriculum. Built multimodal NLP and predictive workflows—BERTopic, multilingual-e5 embeddings, sentiment, co-occurrence analysis, and Random Forest models with temporal validation—to generate publication-ready findings. Publication: https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "25",
+        "1",
+        "2",
+        "Research",
+        "2020-02-01",
+        "AYNE-Perú Trinitarias",
+        "Lima, Peru",
+        "Research Consultant",
+        "Designed, facilitated, analyzed, and reported community risk and social development surveys using questionnaire design and mixed descriptive/Bayesian statistical analysis workflows in Lima and Chiclayo (Peru).",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "26",
+        "1",
+        "2",
+        "Research",
+        "2019-06-01",
+        "i4d - Innovation for Development",
+        "Lima, Peru",
+        "Research Assistant",
+        "Translated interviews to English and generated GIS entries for mining projects. Designed and implemented a virtual course for local government authorities (CENEPRED). Generated GIS outputs.",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "27",
+        "1",
+        "2",
+        "Research",
+        "2019-02-01",
+        "N&P Forest Woodwork",
+        "Lima, Peru",
+        "Qualitative Data Analyst",
+        "Transcribed and analyzed qualitative data from 32 Amazonian communities for a major hydrocarbons company operating in Loreto and Amazonas using MAXQDA.",
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        "17",
+        "1",
+        "1",
+        "Consultoría BI y Analytics",
+        "Actual",
+        "ESCAPE - Consultoría BI & Analytics",
+        "Lima, Perú / Remoto",
+        "Senior Data Scientist y Consultor IA",
+        "Lideré consultorías de BI y analytics para agencias gubernamentales, ONGs y clientes privados. Diseñé e implementé flujos de NLP/ML para análisis cualitativo y cuantitativo, soluciones de minería de procesos y optimización, y entregables reutilizables como dashboards, reportes y talleres para tomadores de decisión.",
+        "Apoyé entregas para múltiples organizaciones públicas y privadas, incluyendo rediseño BPMN y trabajo de programas de cambio para minería, alimentos y otros sectores.",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "18",
+        "1",
+        "3",
+        "Consultoría Corporativa",
+        "2024-08-01",
+        "Facilitadores Asociados",
+        "Lima, Perú",
+        "Consultor y Analista",
+        "Entregué mapas de procesos BPMN, diagnósticos operativos y materiales de cambio organizacional para grandes clientes de minería, alimentos y otros rubros. Desarrollé sitios web, recursos pedagógicos y dashboards de KPI para seguimiento de progreso formativo y cumplimiento.",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "20",
+        "1",
+        "3",
+        "Desarrollo de IA",
+        "2023-07-01",
+        "Massive Dynamics Perú SAC",
+        "Lima, Perú",
+        "Asistente de Proyectos / Desarrollador Chatbot",
+        "Contribuí a la entrega de un chatbot orientado a casos de uso de análisis de datos con Azure Databricks, Azure Machine Learning y modelos de OpenAI. Apoyé flujos SQL para datalakes y blob storage y desarrollé componentes HTML/JavaScript para la experiencia de usuario.",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "19",
+        "1",
+        "2",
+        "Análisis de Datos",
+        "2022-08-01",
+        "APOYO Comunicación",
+        "Lima, Perú",
+        "Consultor de Insights",
+        "Entregué flujos analíticos para estudios de stakeholders y reputación corporativa, incluyendo análisis de temas, clasificación de similitudes, curación de bases de stakeholders, modelamiento multivariante de encuestas y análisis cualitativo en MAXQDA para reportes al cliente.",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "23",
+        "1",
+        "2",
+        "Consultoría Académica",
+        "2025",
+        "Consultoría Académica - La vacunación contra la COVID-19 en debate",
+        "Remoto",
+        "Consultor de análisis de datos para academia",
+        "Lideré el diseño analítico de un estudio mixto sobre cobertura periodística digital de la vacunación contra la COVID-19 en México, Brasil y Perú. Entregué flujos de análisis del discurso, framing, estructuras narrativas, modelado multimodal de tópicos, segmentación semántica, clusterización y análisis de correspondencias para sostener hallazgos comparativos publicables. Publicación: https://www.scielo.cl/scielo.php?pid=S0719-15292025000200055&script=sci_arttext",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "22",
+        "1",
+        "2",
+        "Consultoría Académica",
+        "2024",
+        "Consultoría Académica - La variable de género en la difusión científica por Twitter/X",
+        "Remoto",
+        "Consultor de análisis de datos para academia",
+        "Entregué el flujo de análisis para un estudio mixto de 13,165 publicaciones de Twitter/X de 17 divulgadores científicos. Construí el pipeline de recolección, limpieza, métricas, muestreo, sentimientos, exploración con ACP y evaluación con curvas ROC que permitió derivar las categorías temáticas y comunicativas finales. Publicación: https://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2415-09592024000400017",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "24",
+        "1",
+        "2",
+        "Consultoría Académica",
+        "2024",
+        "Consultoría Académica - Medios y conflictos sociales durante la COVID-19",
+        "Remoto",
+        "Consultor de análisis de datos para academia",
+        "Entregué análisis de datos y revisión metodológica para un estudio mixto de 53 portadas de diarios sobre cobertura mediática y conflicto social durante la pandemia. Apliqué framing, análisis crítico del discurso y comparación entre medios para estructurar resultados listos para publicación. Publicación: https://revistasinvestigacion.unmsm.edu.pe/index.php/discursos/article/view/25876",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "28",
+        "1",
+        "2",
+        "Consultoría Académica",
+        "2024",
+        "Consultoría Académica - Protestas en 280 caracteres",
+        "Remoto",
+        "Consultor de análisis de datos para academia",
+        "Apoyé un estudio mixto que combinó análisis masivo de Twitter con entrevistas estructuradas. Entregué análisis de redes sociales en Gephi, modelado de tópicos con BERTopic, análisis de interacción y soporte de codificación cualitativa para conectar patrones de participación digital con evidencia de entrevistas.",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "21",
+        "1",
+        "2",
+        "Consultoría Académica",
+        "2024",
+        "Consultoría Académica - Acción conectiva y movilización conservadora",
+        "Remoto",
+        "Consultor de análisis de datos para academia",
+        "Diseñé y entregué el pipeline computacional para un estudio de 6,221 publicaciones de Facebook sobre activismo digital contra el currículo escolar con enfoque de género en Perú. Construí flujos multimodales de NLP y analítica predictiva con BERTopic, embeddings multilingual-e5, sentimientos, coocurrencias y modelos Random Forest con validación temporal para generar hallazgos listos para publicación. Publicación: https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "25",
+        "1",
+        "2",
+        "Investigación",
+        "2020-02-01",
+        "AYNE-Perú Trinitarias",
+        "Lima, Perú",
+        "Consultor de Investigación",
+        "Diseño, facilitación, análisis y reporte de encuestas de riesgo comunitario y desarrollo social utilizando flujos de trabajo de diseño de cuestionarios y análisis estadístico descriptivo/bayesiano mixto en Lima y Chiclayo (Perú).",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "26",
+        "1",
+        "2",
+        "Investigación",
+        "2019-06-01",
+        "i4d - Innovation for Development",
+        "Lima, Perú",
+        "Asistente de Investigación",
+        "Traduje entrevistas al inglés y generé entradas GIS para proyectos mineros. Diseñé e implementé un curso virtual para autoridades de gobiernos locales (CENEPRED). Generé salidas GIS.",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "27",
+        "1",
+        "2",
+        "Investigación",
+        "2019-02-01",
+        "N&P Forest Woodwork",
+        "Lima, Perú",
+        "Analista de Datos Cualitativos",
+        "Transcribí y analicé datos cualitativos de 32 comunidades amazónicas para una importante empresa de hidrocarburos que opera en Loreto y Amazonas utilizando MAXQDA.",
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        "29",
+        "2",
+        "1",
+        "2",
+        "Práctica Pre-Profesional",
+        "2014-05-20",
+        "Municipalidad Provincial de Ilo",
+        "Ilo, Perú",
+        "Practicante Pre-Profesional",
+        "Práctica pre-profesional del 20 may al 20 ago 2014 (3 meses).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "30",
+        "2",
+        "1",
+        "2",
+        "Pre-Professional Internship",
+        "2014-05-20",
+        "Municipalidad Provincial de Ilo",
+        "Ilo, Peru",
+        "Pre-Professional Intern",
+        "Pre-professional internship from May 20 to Aug 20, 2014 (3 months).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "31",
+        "3",
+        "1",
+        "2",
+        "Pasantía de Investigación",
+        "2017-05-22",
+        "Asociación RED INNOVA",
+        "Perú",
+        "Pasante de Investigación",
+        "Pasantía de investigación del 22 may al 24 ago 2017 (~3 meses).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "32",
+        "3",
+        "1",
+        "2",
+        "Research Internship",
+        "2017-05-22",
+        "Asociación RED INNOVA",
+        "Peru",
+        "Research Intern",
+        "Research internship from May 22 to Aug 24, 2017 (~3 months).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "33",
+        "4",
+        "1",
+        "2",
+        "Redacción",
+        "2017-11-10",
+        "Consorcio de Investigación Económica y Social (CIES)",
+        "Lima, Perú",
+        "Redactor (Revista Economía y Sociedad)",
+        "Redacción para la Revista Economía y Sociedad (constancia emitida el 10 nov 2017).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "34",
+        "4",
+        "1",
+        "2",
+        "Writing",
+        "2017-11-10",
+        "Consorcio de Investigación Económica y Social (CIES)",
+        "Lima, Peru",
+        "Writer (Economía y Sociedad Journal)",
+        "Writing for the Economía y Sociedad Journal (certificate issued Nov 10, 2017).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "35",
+        "5",
+        "1",
+        "2",
+        "Consultoría",
+        "2018-02-01",
+        "AYNE Perú - Trinitarias",
+        "Lima, Perú",
+        "Consultor (Diagnóstico para el desarrollo)",
+        "Consultoría para diagnóstico de desarrollo, feb–abr 2018 (3 meses).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "36",
+        "5",
+        "1",
+        "2",
+        "Consulting",
+        "2018-02-01",
+        "AYNE Perú - Trinitarias",
+        "Lima, Peru",
+        "Consultant (Development Diagnosis)",
+        "Development diagnosis consulting, Feb–Apr 2018 (3 months).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "37",
+        "6",
+        "1",
+        "2",
+        "Locación de Servicios",
+        "2018-10-29",
+        "N&P Forest Wood Work SRL",
+        "Lima, Perú",
+        "Locador de Servicios",
+        "Análisis, sistematización y redacción, 29 oct – 28 nov 2018 (1 mes).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "38",
+        "6",
+        "1",
+        "2",
+        "Service Contract",
+        "2018-10-29",
+        "N&P Forest Wood Work SRL",
+        "Lima, Peru",
+        "Service Provider",
+        "Analysis, systematization, and writing, Oct 29 – Nov 28, 2018 (1 month).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "39",
+        "7",
+        "1",
+        "2",
+        "Locación de Servicios",
+        "2018-11-29",
+        "N&P Forest Wood Work SRL",
+        "Lima, Perú",
+        "Locador de Servicios",
+        "Análisis, sistematización y redacción, 29 nov – 14 dic 2018 (0.5 mes).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "40",
+        "7",
+        "1",
+        "2",
+        "Service Contract",
+        "2018-11-29",
+        "N&P Forest Wood Work SRL",
+        "Lima, Peru",
+        "Service Provider",
+        "Analysis, systematization, and writing, Nov 29 – Dec 14, 2018 (0.5 months).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "41",
+        "8",
+        "1",
+        "2",
+        "Asistencia de Investigación",
+        "2019-03-01",
+        "Consultoría Ministerio del Ambiente / FIDA",
+        "Lima, Perú",
+        "Asistente de Investigación",
+        "Asistencia de investigación, mar–abr 2019 (2 meses).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "42",
+        "8",
+        "1",
+        "2",
+        "Research Assistance",
+        "2019-03-01",
+        "Consultancy Ministry of Environment / FIDA",
+        "Lima, Peru",
+        "Research Assistant",
+        "Research assistance, Mar–Apr 2019 (2 months).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "43",
+        "9",
+        "1",
+        "2",
+        "Asistencia de Investigación",
+        "2019-10-28",
+        "Innovación para el Desarrollo (i4d)",
+        "Lima, Perú",
+        "Asistente de Investigación",
+        "Traducción de entrevistas, generación de entradas GIS, diseño e implementación de curso virtual para autoridades locales (CENEPRED). 28 oct – 30 dic 2019 (~2 meses).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "44",
+        "9",
+        "1",
+        "2",
+        "Research Assistance",
+        "2019-10-28",
+        "Innovation for Development (i4d)",
+        "Lima, Peru",
+        "Research Assistant",
+        "Interview translation, GIS data entry, design and implementation of a virtual course for local authorities (CENEPRED). Oct 28 – Dec 30, 2019 (~2 months).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "45",
+        "10",
+        "1",
+        "2",
+        "Consultoría",
+        "2024-03-08",
+        "AYNE Perú - Trinitarias",
+        "Lima, Perú",
+        "Consultor de Diagnóstico Comunitario",
+        "Diagnóstico social de la comunidad Asociación Unidos La Grama, distrito de Puente Piedra (RHE E001-19, 08 mar 2024); diagnóstico de la Red de Mujeres Jequetepeque (RHE E001-21, 30 sep 2024); diseño, análisis e informe de entrevistas a asociadas y lideresas de la Red de Mujeres (RHE E001-22, 30 sep 2024).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "46",
+        "10",
+        "1",
+        "2",
+        "Consulting",
+        "2024-03-08",
+        "AYNE Perú - Trinitarias",
+        "Lima, Peru",
+        "Community Diagnosis Consultant",
+        "Social diagnosis of the Asociación Unidos La Grama community, Puente Piedra district (RHE E001-19, Mar 8, 2024); diagnosis of the Jequetepeque Women's Network (RHE E001-21, Sep 30, 2024); design, analysis, and reporting of interviews with network members and leaders (RHE E001-22, Sep 30, 2024).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "47",
+        "11",
+        "1",
+        "2",
+        "Consultoría Corporativa",
+        "2024-09-02",
+        "Facilitadores y Consultores Asociados S.A.C.",
+        "Lima, Perú",
+        "Consultor",
+        "Contrato de locación N°007-2024 (02 sep – 29 nov 2024, S/1,500/mes). Servicios: materiales PPT e informe final taller Eco Ajinomoto, propuesta Heineken, levantamiento de información Cencosud, materiales PPT PepsiCo, diagrama de procesos (RHE E001-25, 30 sep 2024); liderazgo y seguimiento de feria de sostenibilidad Calidda, material didáctico y encuesta Radical Collaboration – Nestlé, aplicativo automatizado de envío de certificados, configuración de Teams, seguimiento de proyectos Sonepar e Inspirax (RHE E001-26, 31 oct 2024); materiales PepsiCo, informe Radical Collaboration, evento de orientación vocacional Alicorp, materiales Deposeguros, Banreservas e Innominds, Makuna, informe Cartocor (RHE E001-27, 04 dic 2024); desarrollo web eldesafiodellider.com (RHE E001-29, 24 ene 2025); mantenimiento web facilitadoresasociados.com (RHE E001-31, 27 ene 2025).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "48",
+        "11",
+        "1",
+        "2",
+        "Corporate Consulting",
+        "2024-09-02",
+        "Facilitadores y Consultores Asociados S.A.C.",
+        "Lima, Peru",
+        "Consultant",
+        "Service agreement N°007-2024 (Sep 2 – Nov 29, 2024, S/1,500/month). Services: PPT materials and final report for Eco Ajinomoto workshop, Heineken proposal, Cencosud data gathering, PepsiCo PPT materials, process diagram (RHE E001-25, Sep 30, 2024); leadership and follow-up of Calidda sustainability fair, didactic material and survey for Radical Collaboration – Nestlé, automated certificate-sending app, Teams setup, project follow-up for Sonepar and Inspirax (RHE E001-26, Oct 31, 2024); PepsiCo materials, Radical Collaboration report, Alicorp vocational event, Deposeguros/Banreservas/Innominds materials, Makuna, Cartocor report (RHE E001-27, Dec 4, 2024); web development for eldesafiodellider.com (RHE E001-29, Jan 24, 2025); web maintenance for facilitadoresasociados.com (RHE E001-31, Jan 27, 2025).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "49",
+        "12",
+        "1",
+        "2",
+        "Consultoría en Investigación",
+        "2024-07-01",
+        "Universidad Nacional Mayor de San Marcos - Grupo INCLUSIV",
+        "Lima, Perú",
+        "Asesor Técnico Externo y Colaborador",
+        "Proyecto A24012411: \"Representaciones sociales de los riesgos del cambio climático y sus efectos en la salud en estudiantes universitarios de la facultad de educación en una universidad pública\" (jul–dic 2024, 6 meses). Actividades: asesoramiento metodológico en diseño, codificación cualitativa, procesamiento textual, análisis cuantitativo y estadístico; administración, depuración y estructuración de bases de datos; aplicación de instrumentos cualitativos y cuantitativos; programación, implementación y despliegue del software analítico REII; redacción de informes técnicos de avance e informes finales; evaluación de resultados; apoyo en liderazgo operativo y coordinación del equipo.",
+        "Proyecto aprobado y financiado por VRIP/RAIS – UNMSM.",
+        "Constancia UNMSM INCLUSIV, 22 oct 2026",
+        null,
+        "es"
+      ],
+      [
+        "50",
+        "12",
+        "1",
+        "2",
+        "Research Consulting",
+        "2024-07-01",
+        "Universidad Nacional Mayor de San Marcos - INCLUSIV Group",
+        "Lima, Peru",
+        "External Technical Advisor and Collaborator",
+        "Project A24012411: \"Social representations of climate change risks and their effects on health in university students of the faculty of education at a public university\" (Jul–Dec 2024, 6 months). Activities: methodological advising on design, qualitative coding, textual processing, quantitative and statistical analysis; database administration, cleaning and structuring; application of qualitative and quantitative instruments; programming, implementation and deployment of the REII analytical software; writing of technical progress and final reports; results evaluation; support in operational leadership and team coordination.",
+        "Project approved and funded by VRIP/RAIS – UNMSM.",
+        "Constancia UNMSM INCLUSIV, 22 oct 2026",
+        null,
+        "en"
+      ],
+      [
+        "51",
+        "13",
+        "1",
+        "2",
+        "Consultoría en Investigación",
+        "2025-07-01",
+        "Universidad Nacional Mayor de San Marcos - Grupo INCLUSIV",
+        "Lima, Perú",
+        "Asesor Técnico Externo y Colaborador",
+        "Proyecto A25011451: \"Estudio comparativo de las representaciones sociales sobre los riesgos del cambio climático y sus efectos en la salud, en estudiantes de educación, de universidades públicas\" (jul–dic 2025, 6 meses). Mismas actividades técnicas y metodológicas que el proyecto anterior.",
+        "Proyecto aprobado y financiado por VRIP/RAIS – UNMSM.",
+        "Constancia UNMSM INCLUSIV, 22 oct 2026",
+        null,
+        "es"
+      ],
+      [
+        "52",
+        "13",
+        "1",
+        "2",
+        "Research Consulting",
+        "2025-07-01",
+        "Universidad Nacional Mayor de San Marcos - INCLUSIV Group",
+        "Lima, Peru",
+        "External Technical Advisor and Collaborator",
+        "Project A25011451: \"Comparative study of social representations on climate change risks and their effects on health in education students from public universities\" (Jul–Dec 2025, 6 months). Same technical and methodological activities as the previous project.",
+        "Project approved and funded by VRIP/RAIS – UNMSM.",
+        "Constancia UNMSM INCLUSIV, 22 oct 2026",
+        null,
+        "en"
+      ],
+      [
+        "53",
+        "14",
+        "1",
+        "2",
+        "Consultoría en Investigación",
+        "2026-05-01",
+        "Universidad Nacional Mayor de San Marcos - Grupo INCLUSIV",
+        "Lima, Perú",
+        "Colaborador Externo Adherente Oficial",
+        "Proyecto A26012041: \"Experiencias y respuestas adaptativas de los equipos de salud del primer nivel de atención frente a diversas emergencias ambientales en la región Ayacucho\" (may–oct 2026, 6 meses). Actividades: asesoramiento metodológico, codificación cualitativa, procesamiento textual, análisis cuantitativo y estadístico; administración y depuración de bases de datos; aplicación de instrumentos; programación e implementación de REII; redacción de informes técnicos y finales; evaluación de resultados.",
+        "Condición aprobada mediante Resolución Rectoral. Proyecto financiado por VRIP/RAIS – UNMSM.",
+        "Constancia UNMSM INCLUSIV, 22 oct 2026",
+        null,
+        "es"
+      ],
+      [
+        "54",
+        "14",
+        "1",
+        "2",
+        "Research Consulting",
+        "2026-05-01",
+        "Universidad Nacional Mayor de San Marcos - INCLUSIV Group",
+        "Lima, Peru",
+        "Official External Adherent Collaborator",
+        "Project A26012041: \"Experiences and adaptive responses of first-level healthcare teams facing various environmental emergencies in the Ayacucho region\" (May–Oct 2026, 6 months). Activities: methodological advising, qualitative coding, textual processing, quantitative and statistical analysis; database administration and cleaning; application of instruments; REII programming and implementation; writing of technical and final reports; results evaluation.",
+        "Condition approved by Rectoral Resolution. Project funded by VRIP/RAIS – UNMSM.",
+        "Constancia UNMSM INCLUSIV, 22 oct 2026",
+        null,
+        "en"
+      ],
+      [
+        "55",
+        "15",
+        "1",
+        "2",
+        "Docencia",
+        "2025-04-24",
+        "Fundación San Marcos",
+        "Lima, Perú",
+        "Docente de Talleres",
+        "Cursos dictados: \"Análisis de Datos con IA\" (24 abr 2025, RHE E001-35); \"Análisis de Datos Exploratorio y Dashboards\" (04 sep 2025, RHE E001-37); \"Análisis Cualitativo con IA\" (21 ene 2026, RHE E001-40).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "56",
+        "15",
+        "1",
+        "2",
+        "Teaching",
+        "2025-04-24",
+        "Fundación San Marcos",
+        "Lima, Peru",
+        "Workshop Instructor",
+        "Courses taught: \"Data Analysis with AI\" (Apr 24, 2025, RHE E001-35); \"Exploratory Data Analysis and Dashboards\" (Sep 4, 2025, RHE E001-37); \"Qualitative Analysis with AI\" (Jan 21, 2026, RHE E001-40).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "57",
+        "16",
+        "1",
+        "2",
+        "Docencia",
+        "2020-02-17",
+        "UNMSM / Colegio de Sociólogos / CREAR PERÚ",
+        "Lima, Perú",
+        "Docente",
+        "Dictado del curso \"Análisis de Datos Cualitativos\" (17 feb – 02 mar 2020, 20 horas).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "58",
+        "16",
+        "1",
+        "2",
+        "Teaching",
+        "2020-02-17",
+        "UNMSM / Colegio de Sociólogos / CREAR PERÚ",
+        "Lima, Peru",
+        "Instructor",
+        "Taught the course \"Qualitative Data Analysis\" (Feb 17 – Mar 2, 2020, 20 hours).",
+        "",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "59",
+        "17",
+        "1",
+        "2",
+        "Consultoría",
+        "2025-03-10",
+        "AYNE Perú - Trinitarias",
+        "Lima, Perú",
+        "Consultor de Diagnóstico Comunitario",
+        "Diagnóstico de comunidades La Grama, San Juan y Valle Sagrado (10 mar 2025, RHE E001-32); diagnóstico de comunidades Oasis y Las Gardenias (16 abr 2025, RHE E001-33).",
+        "",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "60",
+        "17",
+        "1",
+        "2",
+        "Consulting",
+        "2025-03-10",
+        "AYNE Perú - Trinitarias",
+        "Lima, Peru",
+        "Community Diagnosis Consultant",
+        "Diagnosis of La Grama, San Juan, and Valle Sagrado communities (Mar 10, 2025, RHE E001-32); diagnosis of Oasis and Las Gardenias communities (Apr 16, 2025, RHE E001-33).",
+        "",
+        null,
+        null,
+        "en"
+      ]
+    ],
+    "educacion": [
+      [
+        4,
+        1,
+        "Specialization",
+        "ISIL",
+        "Data Science & AI Specialization",
+        "2024-01-01",
+        false,
+        "en"
+      ],
+      [
+        1,
+        1,
+        "Higher Technical Education",
+        "CIBERTEC",
+        "Computer Programming & IT",
+        "2023-04-01",
+        false,
+        "en"
+      ],
+      [
+        2,
+        1,
+        "Undergraduate",
+        "Universidad Nacional Mayor de San Marcos",
+        "Social Sciences (Sociology)",
+        "2010-04-01",
+        false,
+        "en"
+      ],
+      [
+        4,
+        1,
+        "Especialización",
+        "ISIL",
+        "Especialización en Ciencia de Datos e IA",
+        "2024-01-01",
+        false,
+        "es"
+      ],
+      [
+        1,
+        1,
+        "Técnico Superior",
+        "CIBERTEC",
+        "Programación e Informática",
+        "2023-04-01",
+        false,
+        "es"
+      ],
+      [
+        2,
+        1,
+        "Pregrado",
+        "Universidad Nacional Mayor de San Marcos",
+        "Sociología",
+        "2010-04-01",
+        false,
+        "es"
+      ]
+    ],
+    "skills": [
+      [
+        1,
+        1,
+        1,
+        "Python",
+        "Specialist",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        2,
+        1,
+        1,
+        "Natural Language Processing (NLP)",
+        "Specialist",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        3,
+        1,
+        1,
+        "LLMs & Agentic Systems (LangGraph)",
+        "Specialist",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        4,
+        1,
+        3,
+        "SQL & Database Management",
+        "Specialist",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        5,
+        1,
+        1,
+        "Machine Learning",
+        "Specialist",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        6,
+        1,
+        3,
+        "AWS (SageMaker, Lambda, EC2)",
+        "Familiar",
+        "Cloud",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        7,
+        1,
+        3,
+        "Docker & Containerization",
+        "Familiar",
+        "DevOps",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        8,
+        1,
+        3,
+        "React & Frontend Development",
+        "Familiar",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        9,
+        1,
+        3,
+        "Tableau (Data Visualization)",
+        "Specialist",
+        "Software",
+        "Tableau Certified Data Analyst",
+        "2023-01-01",
+        "Tableau",
+        null,
+        "en"
+      ],
+      [
+        10,
+        1,
+        1,
+        "Data Engineering & ETL",
+        "Specialist",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "en"
+      ],
+      [
+        11,
+        1,
+        null,
+        "English",
+        "Specialist",
+        "Languages",
+        "Certificate in Advanced English (C1)",
+        "2018-01-01",
+        "Cambridge",
+        null,
+        "en"
+      ],
+      [
+        1,
+        1,
+        1,
+        "Python",
+        "Especialista",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        2,
+        1,
+        1,
+        "Procesamiento de Lenguaje Natural (NLP)",
+        "Especialista",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        3,
+        1,
+        1,
+        "LLMs y Sistemas Agénticos (LangGraph)",
+        "Especialista",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        4,
+        1,
+        3,
+        "SQL y Gestión de Bases de Datos",
+        "Especialista",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        5,
+        1,
+        1,
+        "Aprendizaje Automático",
+        "Especialista",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        6,
+        1,
+        3,
+        "AWS (SageMaker, Lambda, EC2)",
+        "Conoce y practica",
+        "Cloud",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        7,
+        1,
+        3,
+        "Docker y Contenedores",
+        "Conoce y practica",
+        "DevOps",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        8,
+        1,
+        3,
+        "React y Desarrollo Frontend",
+        "Conoce y practica",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        9,
+        1,
+        3,
+        "Tableau (Visualización de Datos)",
+        "Especialista",
+        "Software",
+        "Tableau Certified Data Analyst",
+        "2023-01-01",
+        "Tableau",
+        null,
+        "es"
+      ],
+      [
+        10,
+        1,
+        1,
+        "Ingeniería de Datos y ETL",
+        "Especialista",
+        "Software",
+        null,
+        null,
+        null,
+        null,
+        "es"
+      ],
+      [
+        11,
+        1,
+        null,
+        "Inglés",
+        "Especialista",
+        "Idiomas",
+        "Certificate in Advanced English (C1)",
+        "2018-01-01",
+        "Cambridge",
+        null,
+        "es"
+      ]
+    ],
+    "publications": [
+      [
+        "1",
+        "1",
+        "How Do Waste-Picker Families Endure? Resolving Pains and Managing Support Systems as Close Relationship “Resourcing:” A CGT with Readily Available Data",
+        "Paucar Villacorta, D. M.",
+        "2020",
+        "Article",
+        "Grounded Theory Review",
+        "19(2)",
+        "88–106",
+        null,
+        "https://groundedtheoryreview.org/index.php/gtr/article/view/338",
+        "Lead author",
+        "en"
+      ],
+      [
+        "1",
+        "1",
+        "¿Cómo resisten las familias recicladoras? Resolución del sufrimiento y gestión de sistemas de apoyo como “resourcing” en relaciones cercanas: una teoría fundamentada clásica con datos fácilmente disponibles",
+        "Páucar Villacorta, D. M.",
+        "2020",
+        "Artículo",
+        "Grounded Theory Review",
+        "19(2)",
+        "88–106",
+        null,
+        "https://groundedtheoryreview.org/index.php/gtr/article/view/338",
+        "Autor principal",
+        "es"
+      ],
+      [
+        "2",
+        "1",
+        "Connective action and conservative mobilization: analysis of digital activism against the school curriculum with gender approach in Peru",
+        "",
+        "2026",
+        "Article",
+        "Revista Latina de Comunicación Social",
+        "84",
+        "1–33",
+        "10.4185/rlcs-2026-25531",
+        "https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
+        "Methodological designer & data analyst",
+        "en"
+      ],
+      [
+        "2",
+        "1",
+        "Acción conectiva y movilización conservadora: análisis del activismo digital contra el currículo escolar con enfoque de género en Perú",
+        "",
+        "2026",
+        "Artículo",
+        "Revista Latina de Comunicación Social",
+        "84",
+        "1–33",
+        "10.4185/rlcs-2026-25531",
+        "https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
+        "Diseñador metodológico y analista de datos",
+        "es"
+      ]
+    ],
+    "portfolio_items": [
+      [
+        "1",
+        "1",
+        "Software Project",
+        "Geno-CGT",
+        "Production-grade AI-assisted qualitative analysis system orchestrating 96 specialized LLM agents via LangGraph with two-tier model strategy (PRO/FLASH) and HITL validation.",
+        "2026-01-01",
+        "https://github.com/diegopaucarv/geno-cgt",
+        "https://github.com/diegopaucarv/geno-cgt",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "2",
+        "1",
+        "Software Project",
+        "REII - Reproducible Social Inquiry",
+        "Framework for reproducible and iterative social inquiry using NLP pipelines (ALCESTE, Stanza, sliding windows) and fine-tuned transformers for Spanish social science texts.",
+        "2025-01-01",
+        "https://github.com/diegopaucarv/reii",
+        "https://github.com/diegopaucarv/reii",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "3",
+        "1",
+        "Software Project",
+        "Escape Dashboard",
+        "Full-stack web application for monitoring social research projects, built with React, FastAPI, PostgreSQL, Redis, Docker, and Kubernetes. Real-time dashboards.",
+        "2024-06-01",
+        "https://github.com/diegopaucarv/escape_dashboard",
+        "https://github.com/diegopaucarv/escape_dashboard",
+        null,
+        null,
+        "en"
+      ],
+      [
+        "1",
+        "1",
+        "Proyecto de Software",
+        "Geno-CGT",
+        "Sistema de análisis cualitativo asistido por IA en producción que orquesta 96 agentes LLM vía LangGraph con estrategia de dos modelos (PRO/FLASH) y validación HITL.",
+        "2026-01-01",
+        "https://github.com/diegopaucarv/geno-cgt",
+        "https://github.com/diegopaucarv/geno-cgt",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "2",
+        "1",
+        "Proyecto de Software",
+        "REII - Investigación Social Reproducible",
+        "Framework para investigación social reproducible e iterativa con pipelines de NLP (ALCESTE, Stanza, ventanas deslizantes) y transformers afinados.",
+        "2025-01-01",
+        "https://github.com/diegopaucarv/reii",
+        "https://github.com/diegopaucarv/reii",
+        null,
+        null,
+        "es"
+      ],
+      [
+        "3",
+        "1",
+        "Proyecto de Software",
+        "Escape Dashboard",
+        "Aplicación web full-stack para monitorear proyectos de investigación social, construida con React, FastAPI, PostgreSQL, Redis, Docker y Kubernetes.",
+        "2024-06-01",
+        "https://github.com/diegopaucarv/escape_dashboard",
+        "https://github.com/diegopaucarv/escape_dashboard",
+        null,
+        null,
+        "es"
+      ]
+    ],
+    "certifications": [
+      [
+        1,
+        1,
+        "Oracle AI Database SQL Associate (1Z0-171)",
+        "Oracle University",
+        2026,
+        null,
+        "en"
+      ],
+      [
+        2,
+        1,
+        "Microsoft AI-102: Azure ML, NLP & AI",
+        "Microsoft",
+        2025,
+        "https://learn.microsoft.com/es-es/users/diegomauriciopaucarvillacorta-9426/credentials/c3cdb017bddf82a8?ref=https%3A%2F%2Fwww.linkedin.com%2F",
+        "en"
+      ],
+      [
+        3,
+        1,
+        "NVIDIA NCA-GENL: AI and DL Ops knowledge",
+        "NVIDIA",
+        2025,
+        "https://www.credly.com/badges/5a1b0a52-6ea7-42bc-8a2f-0aab57879a43/",
+        "en"
+      ],
+      [
+        4,
+        1,
+        "Tableau Certified Data Analyst",
+        "Tableau",
+        2025,
+        "https://www.credly.com/badges/2b43ae9e-c9fa-4da6-a79d-df2d1ba7ecab/linked_in_profile",
+        "en"
+      ],
+      [
+        5,
+        1,
+        "UML 2.5 — OMG OCUP2",
+        "EDMA / OMG",
+        2025,
+        "https://www.credly.com/badges/27d58355-d2ae-46c2-adf8-4981fba7e093/public_url",
+        "en"
+      ],
+      [
+        6,
+        1,
+        "MAXQDA AI-Assist Professional Trainer",
+        "MAXQDA / VERBI",
+        2025,
+        "https://www.maxqda.com/workshoptrainer/diego-mauricio-paucar-villacorta",
+        "en"
+      ],
+      [
+        1,
+        1,
+        "Oracle AI Database SQL Associate (1Z0-171)",
+        "Oracle University",
+        2026,
+        null,
+        "es"
+      ],
+      [
+        2,
+        1,
+        "Azure ML, NLP e IA — Microsoft AI-102",
+        "Microsoft",
+        2025,
+        "https://learn.microsoft.com/es-es/users/diegomauriciopaucarvillacorta-9426/credentials/c3cdb017bddf82a8?ref=https%3A%2F%2Fwww.linkedin.com%2F",
+        "es"
+      ],
+      [
+        3,
+        1,
+        "Progreso actual en LLMs y Deep Learning — NVIDIA NCA-GENL",
+        "NVIDIA",
+        2025,
+        "https://www.credly.com/badges/5a1b0a52-6ea7-42bc-8a2f-0aab57879a43/",
+        "es"
+      ],
+      [
+        4,
+        1,
+        "Data Storytelling y Análisis — Tableau Certified Data Analyst",
+        "Tableau",
+        2025,
+        "https://www.credly.com/badges/2b43ae9e-c9fa-4da6-a79d-df2d1ba7ecab/linked_in_profile",
+        "es"
+      ],
+      [
+        5,
+        1,
+        "Modelamiento y Análisis de Sistemas con UML 2.5 — OMG OCUP2",
+        "EDMA / OMG",
+        2025,
+        "https://www.credly.com/badges/27d58355-d2ae-46c2-adf8-4981fba7e093/public_url",
+        "es"
+      ],
+      [
+        6,
+        1,
+        "Investigación cualitativa automatizada — MAXQDA Professional Trainer",
+        "MAXQDA / VERBI",
+        2025,
+        "https://www.maxqda.com/workshoptrainer/diego-mauricio-paucar-villacorta",
+        "es"
+      ]
+    ],
+    "teaching_experience": [
+      [
+        "1",
+        "1",
+        "Análisis de Datos Cualitativos",
+        "UNMSM / Colegio de Sociólogos / CREAR PERÚ",
+        "2020-02-17",
+        "2020-03-02",
+        null,
+        "Lima, Perú",
+        "Curso de 20 horas académicas sobre análisis de datos cualitativos.",
+        "es"
+      ],
+      [
+        "2",
+        "1",
+        "Qualitative Data Analysis",
+        "UNMSM / Colegio de Sociólogos / CREAR PERÚ",
+        "2020-02-17",
+        "2020-03-02",
+        null,
+        "Lima, Peru",
+        "20-academic-hour course on qualitative data analysis.",
+        "en"
+      ],
+      [
+        "3",
+        "1",
+        "Talleres de Análisis de Datos (IA, Exploratorio, Cualitativo)",
+        "Fundación San Marcos",
+        "2025-04-24",
+        "2026-01-21",
+        null,
+        "Lima, Perú",
+        "Cursos: \"Análisis de Datos con IA\" (24 abr 2025); \"Análisis de Datos Exploratorio y Dashboards\" (04 sep 2025); \"Análisis Cualitativo con IA\" (21 ene 2026).",
+        "es"
+      ],
+      [
+        "4",
+        "1",
+        "Data Analysis Workshops (AI, Exploratory, Qualitative)",
+        "Fundación San Marcos",
+        "2025-04-24",
+        "2026-01-21",
+        null,
+        "Lima, Peru",
+        "Courses: \"Data Analysis with AI\" (Apr 24, 2025); \"Exploratory Data Analysis and Dashboards\" (Sep 4, 2025); \"Qualitative Analysis with AI\" (Jan 21, 2026).",
+        "en"
+      ],
+      [
+        "5",
+        "1",
+        "Taller de Data Storytelling para Profesionales de Ciencias Sociales",
+        "CMPJ (via Andrea Torres)",
+        "2024-06-23",
+        "2024-06-23",
+        null,
+        "Lima, Perú",
+        "Taller de data storytelling para profesionales de ciencias sociales (RHE E001-20, 23 jun 2024).",
+        "es"
+      ],
+      [
+        "6",
+        "1",
+        "Data Storytelling Workshop for Social Science Professionals",
+        "CMPJ (via Andrea Torres)",
+        "2024-06-23",
+        "2024-06-23",
+        null,
+        "Lima, Peru",
+        "Data storytelling workshop for social science professionals (RHE E001-20, Jun 23, 2024).",
+        "en"
+      ]
     ]
+  },
+  "servicios": [
+    [
+      "1",
+      "1",
+      "Análisis de Datos",
+      "Análisis cuantitativo y cualitativo para investigaciones académicas y corporativas",
+      "es"
+    ],
+    [
+      "2",
+      "1",
+      "Desarrollo de IA",
+      "Desarrollo de soluciones de Inteligencia Artificial y Machine Learning",
+      "es"
+    ],
+    [
+      "3",
+      "1",
+      "Consultoría en Investigación Social",
+      "Diseño y ejecución de proyectos de investigación social",
+      "es"
+    ],
+    [
+      "1",
+      "1",
+      "Data Analysis",
+      "Quantitative and qualitative analysis for academic and corporate research",
+      "en"
+    ],
+    [
+      "2",
+      "1",
+      "AI Development",
+      "Development of Artificial Intelligence and Machine Learning solutions",
+      "en"
+    ],
+    [
+      "3",
+      "1",
+      "Social Research Consulting",
+      "Design and execution of social research projects",
+      "en"
+    ]
+  ],
+  "other": [
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "DROP SCHEMA IF EXISTS cvs"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Use'>",
+      "raw_sql": "USE cvs"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "/* Personal Data Table */ DROP TABLE IF EXISTS datos_personales"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "/* Personal Links Table */ DROP TABLE IF EXISTS profesiones"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "DROP TABLE IF EXISTS enlaces_personales"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "/* Experience Table */ DROP TABLE IF EXISTS experiencia"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "/* Education Table */ DROP TABLE IF EXISTS educacion"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "/* Skills Table */ DROP TABLE IF EXISTS skills"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "DROP TABLE IF EXISTS portafolio_categoria"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "DROP TABLE IF EXISTS servicios"
+    },
+    {
+      "type": "<class 'sqlglot.expressions.Drop'>",
+      "raw_sql": "DROP TABLE IF EXISTS service_variations"
+    }
+  ]
 }
