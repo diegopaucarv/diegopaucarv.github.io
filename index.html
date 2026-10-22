@@ -11,7 +11,11 @@
             rel="stylesheet"
         />
         <style>
-            * { margin: 0; padding: 0; box-sizing: border-box; }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
             :root {
                 --primary: #1a1a1a;
@@ -26,14 +30,18 @@
 
                 /* Categorías por tipo de experiencia */
                 --cat-consulting: #2563eb;
-                --cat-research:   #0891b2;
-                --cat-teaching:   #7c3aed;
+                --cat-research: #0891b2;
+                --cat-teaching: #7c3aed;
                 --cat-internship: #d97706;
-                --cat-other:      #6b6b6b;
+                --cat-other: #6b6b6b;
             }
 
             body {
-                font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+                font-family:
+                    "Inter",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
                 background: var(--background);
                 color: var(--text);
                 line-height: 1.6;
@@ -41,384 +49,855 @@
 
             /* ── HEADER CONTROLS ── */
             .header-controls {
-                position: fixed; top: 1.5rem; right: 1.5rem; z-index: 1000;
-                display: flex; gap: 0.75rem; align-items: center;
+                position: fixed;
+                top: 1.5rem;
+                right: 1.5rem;
+                z-index: 1000;
+                display: flex;
+                gap: 0.75rem;
+                align-items: center;
             }
             .language-toggle {
-                display: flex; gap: 0; background: var(--surface);
-                border: 1px solid var(--border); border-radius: 6px; padding: 3px;
+                display: flex;
+                gap: 0;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 3px;
             }
             .lang-btn {
-                padding: 0.35rem 0.7rem; background: transparent; border: none;
-                cursor: pointer; font-size: 0.78rem; font-weight: 600;
-                color: var(--text-muted); transition: all 0.2s ease;
-                border-radius: 4px; letter-spacing: 0.05em; font-family: "Inter", sans-serif;
-            }
-            .lang-btn.active { background: var(--primary); color: var(--surface); }
-            .btn-config {
-                padding: 0.4rem 0.85rem; background: var(--surface);
-                border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
-                font-size: 0.78rem; font-weight: 600; color: var(--text-light);
-                transition: all 0.2s ease; letter-spacing: 0.03em;
+                padding: 0.35rem 0.7rem;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 0.78rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                transition: all 0.2s ease;
+                border-radius: 4px;
+                letter-spacing: 0.05em;
                 font-family: "Inter", sans-serif;
             }
-            .btn-config:hover { background: var(--primary); color: var(--surface); border-color: var(--primary); }
+            .lang-btn.active {
+                background: var(--primary);
+                color: var(--surface);
+            }
+            .btn-config {
+                padding: 0.4rem 0.85rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.78rem;
+                font-weight: 600;
+                color: var(--text-light);
+                transition: all 0.2s ease;
+                letter-spacing: 0.03em;
+                font-family: "Inter", sans-serif;
+            }
+            .btn-config:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+            }
 
             /* ── MODALS ── */
             .modal-overlay {
-                display: none; position: fixed; inset: 0;
-                background: rgba(26,26,26,0.55); backdrop-filter: blur(2px);
-                z-index: 2000; align-items: center; justify-content: center;
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(26, 26, 26, 0.55);
+                backdrop-filter: blur(2px);
+                z-index: 2000;
+                align-items: center;
+                justify-content: center;
             }
-            .modal-overlay.active { display: flex; }
+            .modal-overlay.active {
+                display: flex;
+            }
             .modal {
-                background: var(--surface); border-radius: 10px; padding: 2rem 2.25rem;
-                width: 90%; max-width: 420px;
-                box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+                background: var(--surface);
+                border-radius: 10px;
+                padding: 2rem 2.25rem;
+                width: 90%;
+                max-width: 420px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
                 border: 1px solid var(--border);
             }
             .modal h2 {
-                margin-bottom: 1.5rem; font-size: 1.35rem; font-weight: 700;
-                font-family: "Lora", Georgia, serif; letter-spacing: -0.02em;
+                margin-bottom: 1.5rem;
+                font-size: 1.35rem;
+                font-weight: 700;
+                font-family: "Lora", Georgia, serif;
+                letter-spacing: -0.02em;
             }
-            .modal-form { display: flex; flex-direction: column; gap: 0.875rem; }
+            .modal-form {
+                display: flex;
+                flex-direction: column;
+                gap: 0.875rem;
+            }
             .modal-form input {
-                padding: 0.7rem 0.9rem; border: 1px solid var(--border);
-                border-radius: 6px; font-size: 0.95rem; background: var(--background);
-                color: var(--text); font-family: "Inter", sans-serif;
+                padding: 0.7rem 0.9rem;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                font-size: 0.95rem;
+                background: var(--background);
+                color: var(--text);
+                font-family: "Inter", sans-serif;
             }
             .modal-form input:focus {
-                outline: none; border-color: var(--primary); background: var(--surface);
-                box-shadow: 0 0 0 3px rgba(26,26,26,0.06);
+                outline: none;
+                border-color: var(--primary);
+                background: var(--surface);
+                box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
             }
-            .modal-buttons { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
-            .btn-primary, .btn-secondary {
-                flex: 1; padding: 0.7rem; border: none; border-radius: 6px;
-                cursor: pointer; font-weight: 600; font-size: 0.9rem;
-                transition: all 0.2s ease; font-family: "Inter", sans-serif;
+            .modal-buttons {
+                display: flex;
+                gap: 0.75rem;
+                margin-top: 0.5rem;
             }
-            .btn-primary { background: var(--primary); color: var(--surface); }
-            .btn-primary:hover { background: #333; }
+            .btn-primary,
             .btn-secondary {
-                background: transparent; color: var(--text-light);
+                flex: 1;
+                padding: 0.7rem;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+                font-size: 0.9rem;
+                transition: all 0.2s ease;
+                font-family: "Inter", sans-serif;
+            }
+            .btn-primary {
+                background: var(--primary);
+                color: var(--surface);
+            }
+            .btn-primary:hover {
+                background: #333;
+            }
+            .btn-secondary {
+                background: transparent;
+                color: var(--text-light);
                 border: 1px solid var(--border);
             }
-            .btn-secondary:hover { background: var(--background); }
-            .modal-error { color: var(--accent); font-size: 0.875rem; margin-top: 0.25rem; }
+            .btn-secondary:hover {
+                background: var(--background);
+            }
+            .modal-error {
+                color: var(--accent);
+                font-size: 0.875rem;
+                margin-top: 0.25rem;
+            }
 
             /* ── HEADER ── */
             .header {
-                display: grid; grid-template-columns: auto 1fr;
-                gap: 2.25rem; padding: 5rem 3rem 3rem;
-                max-width: 960px; margin: 0 auto;
-                border-bottom: 1px solid var(--border); align-items: start;
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 2.25rem;
+                padding: 5rem 3rem 3rem;
+                max-width: 960px;
+                margin: 0 auto;
+                border-bottom: 1px solid var(--border);
+                align-items: start;
             }
             .profile-image {
-                width: 110px; height: 110px; border-radius: 8px;
-                object-fit: cover; border: 1px solid var(--border);
+                width: 110px;
+                height: 110px;
+                border-radius: 8px;
+                object-fit: cover;
+                border: 1px solid var(--border);
                 background: var(--border);
             }
             .header-content h1 {
-                font-size: 2.4rem; font-weight: 700; letter-spacing: -0.03em;
-                line-height: 1.15; margin-bottom: 0.35rem;
+                font-size: 2.4rem;
+                font-weight: 700;
+                letter-spacing: -0.03em;
+                line-height: 1.15;
+                margin-bottom: 0.35rem;
                 font-family: "Lora", Georgia, serif;
             }
             .header-professions {
-                font-size: 0.98rem; color: var(--text-light); margin-bottom: 0.6rem;
+                font-size: 0.98rem;
+                color: var(--text-light);
+                margin-bottom: 0.6rem;
                 font-weight: 500;
             }
             .header-description {
-                font-size: 0.92rem; color: var(--text-light); line-height: 1.6;
-                margin-bottom: 1rem; max-width: 620px;
+                font-size: 0.92rem;
+                color: var(--text-light);
+                line-height: 1.6;
+                margin-bottom: 1rem;
+                max-width: 620px;
             }
 
             /* Contact bar */
             .contact-bar {
-                display: flex; flex-wrap: wrap; gap: 0.9rem 1.4rem;
-                margin-bottom: 1rem; font-size: 0.85rem; color: var(--text-light);
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.9rem 1.4rem;
+                margin-bottom: 1rem;
+                font-size: 0.85rem;
+                color: var(--text-light);
             }
-            .contact-bar a, .contact-bar span {
-                display: inline-flex; align-items: center; gap: 0.35rem;
-                color: var(--text-light); text-decoration: none;
+            .contact-bar a,
+            .contact-bar span {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.35rem;
+                color: var(--text-light);
+                text-decoration: none;
             }
-            .contact-bar a:hover { color: var(--text); text-decoration: underline; }
-            .contact-bar svg { width: 13px; height: 13px; opacity: 0.7; flex-shrink: 0; }
+            .contact-bar a:hover {
+                color: var(--text);
+                text-decoration: underline;
+            }
+            .contact-bar svg {
+                width: 13px;
+                height: 13px;
+                opacity: 0.7;
+                flex-shrink: 0;
+            }
 
             .btn-print {
-                display: inline-flex; align-items: center; gap: 0.5rem;
-                padding: 0.55rem 1.1rem; background: transparent; color: var(--text);
-                border: 1px solid var(--border); border-radius: 6px; cursor: pointer;
-                font-size: 0.85rem; font-weight: 600; transition: all 0.2s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.55rem 1.1rem;
+                background: transparent;
+                color: var(--text);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.85rem;
+                font-weight: 600;
+                transition: all 0.2s ease;
                 font-family: "Inter", sans-serif;
             }
-            .btn-print:hover { background: var(--primary); color: var(--surface); border-color: var(--primary); }
+            .btn-print:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+            }
 
             /* ── SECTIONS ── */
             .section-wrapper {
-                max-width: 960px; margin: 3.5rem auto; padding: 0 3rem;
+                max-width: 960px;
+                margin: 3.5rem auto;
+                padding: 0 3rem;
             }
             .section-title {
-                font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-                letter-spacing: 0.14em; color: var(--text-muted);
-                margin-bottom: 1.75rem; display: flex; align-items: center; gap: 1rem;
+                font-size: 0.72rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.14em;
+                color: var(--text-muted);
+                margin-bottom: 1.75rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
             }
             .section-title::after {
-                content: ""; flex: 1; height: 1px; background: var(--border);
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: var(--border);
             }
 
             /* ── TIMELINE (single column) ── */
-            .timeline { position: relative; }
+            .timeline {
+                position: relative;
+            }
 
             .timeline::before {
-                content: ""; position: absolute; left: 12px; top: 10px;
-                bottom: 10px; width: 1px; background: var(--border);
+                content: "";
+                position: absolute;
+                left: 12px;
+                top: 10px;
+                bottom: 10px;
+                width: 1px;
+                background: var(--border);
             }
 
             .timeline-item {
-                position: relative; padding-left: 3rem; margin-bottom: 2.25rem;
+                position: relative;
+                padding-left: 3rem;
+                margin-bottom: 2.25rem;
             }
 
             .timeline-bullet {
-                position: absolute; left: 7px; top: 8px;
-                width: 12px; height: 12px; border-radius: 50%;
-                background: var(--border); border: 2px solid var(--surface);
-                box-shadow: 0 0 0 1px var(--border); z-index: 1;
+                position: absolute;
+                left: 7px;
+                top: 8px;
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: var(--border);
+                border: 2px solid var(--surface);
+                box-shadow: 0 0 0 1px var(--border);
+                z-index: 1;
             }
-            .timeline-bullet.consulting { background: var(--cat-consulting); box-shadow: 0 0 0 1px var(--cat-consulting); }
-            .timeline-bullet.research   { background: var(--cat-research);   box-shadow: 0 0 0 1px var(--cat-research); }
-            .timeline-bullet.teaching   { background: var(--cat-teaching);   box-shadow: 0 0 0 1px var(--cat-teaching); }
-            .timeline-bullet.internship { background: var(--cat-internship); box-shadow: 0 0 0 1px var(--cat-internship); }
-            .timeline-bullet.other      { background: var(--cat-other);      box-shadow: 0 0 0 1px var(--cat-other); }
+            .timeline-bullet.consulting {
+                background: var(--cat-consulting);
+                box-shadow: 0 0 0 1px var(--cat-consulting);
+            }
+            .timeline-bullet.research {
+                background: var(--cat-research);
+                box-shadow: 0 0 0 1px var(--cat-research);
+            }
+            .timeline-bullet.teaching {
+                background: var(--cat-teaching);
+                box-shadow: 0 0 0 1px var(--cat-teaching);
+            }
+            .timeline-bullet.internship {
+                background: var(--cat-internship);
+                box-shadow: 0 0 0 1px var(--cat-internship);
+            }
+            .timeline-bullet.other {
+                background: var(--cat-other);
+                box-shadow: 0 0 0 1px var(--cat-other);
+            }
 
             .timeline-year {
-                font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;
-                letter-spacing: 0.1em; font-weight: 700; margin-bottom: 0.35rem;
+                font-size: 0.7rem;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                font-weight: 700;
+                margin-bottom: 0.35rem;
                 display: inline-block;
             }
             .timeline-item h3 {
-                font-size: 1rem; font-weight: 700; color: var(--text);
-                letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 0.2rem;
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--text);
+                letter-spacing: -0.01em;
+                line-height: 1.3;
+                margin-bottom: 0.2rem;
             }
             .timeline-institution {
-                font-size: 0.87rem; color: var(--text-light);
-                font-weight: 500; margin-bottom: 0.5rem;
+                font-size: 0.87rem;
+                color: var(--text-light);
+                font-weight: 500;
+                margin-bottom: 0.5rem;
             }
             .timeline-category {
-                display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px;
-                background: var(--background); border: 1px solid var(--border);
-                color: var(--text-muted); font-size: 0.7rem; font-weight: 600;
-                letter-spacing: 0.02em; margin-bottom: 0.5rem;
+                display: inline-block;
+                padding: 0.15rem 0.6rem;
+                border-radius: 999px;
+                background: var(--background);
+                border: 1px solid var(--border);
+                color: var(--text-muted);
+                font-size: 0.7rem;
+                font-weight: 600;
+                letter-spacing: 0.02em;
+                margin-bottom: 0.5rem;
             }
             .timeline-detail {
-                font-size: 0.84rem; color: var(--text-light); line-height: 1.55;
+                font-size: 0.84rem;
+                color: var(--text-light);
+                line-height: 1.55;
                 margin-top: 0.35rem;
             }
             .timeline-detail-label {
-                font-weight: 700; color: var(--text); margin-right: 0.25rem;
+                font-weight: 700;
+                color: var(--text);
+                margin-right: 0.25rem;
             }
             .timeline-detail a {
-                color: var(--cat-consulting); text-decoration: none; word-break: break-all;
+                color: var(--cat-consulting);
+                text-decoration: none;
+                word-break: break-all;
             }
-            .timeline-detail a:hover { text-decoration: underline; }
+            .timeline-detail a:hover {
+                text-decoration: underline;
+            }
 
             /* ── TEACHING ── */
-            .teaching-list { display: flex; flex-direction: column; gap: 1rem; }
+            .teaching-list {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
             .teaching-item {
-                padding: 1rem 1.25rem; background: var(--surface);
-                border: 1px solid var(--border); border-left: 3px solid var(--cat-teaching);
+                padding: 1rem 1.25rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-left: 3px solid var(--cat-teaching);
                 border-radius: 8px;
             }
             .teaching-header {
-                display: flex; justify-content: space-between; align-items: baseline;
-                gap: 1rem; margin-bottom: 0.25rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 1rem;
+                margin-bottom: 0.25rem;
             }
             .teaching-item h4 {
-                font-size: 0.95rem; font-weight: 700; color: var(--text);
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--text);
                 letter-spacing: -0.01em;
             }
             .teaching-date {
-                font-size: 0.75rem; color: var(--text-muted); font-weight: 600;
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                font-weight: 600;
                 white-space: nowrap;
             }
             .teaching-institution {
-                font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.4rem;
+                font-size: 0.85rem;
+                color: var(--text-light);
+                margin-bottom: 0.4rem;
             }
             .teaching-description {
-                font-size: 0.83rem; color: var(--text-light); line-height: 1.55;
+                font-size: 0.83rem;
+                color: var(--text-light);
+                line-height: 1.55;
             }
 
             /* ── PROJECTS / PUBLICATIONS / CREDENTIALS ── */
-            .projects-grid, .credentials-grid {
-                display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            .projects-grid,
+            .credentials-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
                 gap: 1.25rem;
             }
-            .project-card, .credential-item {
-                padding: 1.5rem; background: var(--surface);
-                border: 1px solid var(--border); border-radius: 10px;
-                transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            .project-card,
+            .credential-item {
+                padding: 1.5rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                transition:
+                    box-shadow 0.2s ease,
+                    border-color 0.2s ease;
             }
-            .project-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.07); border-color: var(--border-strong); }
+            .project-card:hover {
+                box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+                border-color: var(--border-strong);
+            }
             .project-card-header {
-                display: flex; align-items: flex-start; justify-content: space-between;
-                gap: 1rem; margin-bottom: 0.6rem;
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 1rem;
+                margin-bottom: 0.6rem;
             }
             .project-card h3 {
-                font-size: 1rem; font-weight: 700; letter-spacing: -0.01em;
-                color: var(--text); font-family: "Lora", Georgia, serif;
+                font-size: 1rem;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+                color: var(--text);
+                font-family: "Lora", Georgia, serif;
             }
-            .project-card p { font-size: 0.84rem; color: var(--text-light); line-height: 1.55; }
+            .project-card p {
+                font-size: 0.84rem;
+                color: var(--text-light);
+                line-height: 1.55;
+            }
             .project-link {
-                display: inline-flex; align-items: center; gap: 0.3rem;
-                font-size: 0.78rem; font-weight: 600; color: var(--text-muted);
-                text-decoration: none; border: 1px solid var(--border);
-                border-radius: 5px; padding: 0.25rem 0.6rem; white-space: nowrap;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.3rem;
+                font-size: 0.78rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                text-decoration: none;
+                border: 1px solid var(--border);
+                border-radius: 5px;
+                padding: 0.25rem 0.6rem;
+                white-space: nowrap;
                 flex-shrink: 0;
             }
-            .project-link:hover { background: var(--primary); color: var(--surface); border-color: var(--primary); }
-            .project-link svg { width: 13px; height: 13px; }
+            .project-link:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+            }
+            .project-link svg {
+                width: 13px;
+                height: 13px;
+            }
 
-            .publications-list { display: flex; flex-direction: column; gap: 1rem; }
+            /* -- Image-enabled project card -- */
+            .project-card.has-image {
+                overflow: hidden;
+            }
+
+            .project-card.has-image img {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.3s ease;
+            }
+
+            .project-card.has-image:hover img {
+                transform: scale(1.04);
+            }
+
+            .project-card.has-image .project-card-header {
+                margin-bottom: 0.75rem;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+            .project-card.has-image .project-link {
+                position: absolute;
+                bottom: 0.5rem;
+                right: 0.5rem;
+                z-index: 10;
+                background: rgba(0, 0, 0, 0.6);
+                padding: 0.3rem 0.7rem;
+                border: none;
+            }
+
+            /* -- Default (no-image) project card -- */
+            .project-card.default-card {
+                padding-left: 0.75rem;
+            }
+
+            .project-card.default-card::before {
+                content: "";
+                display: block;
+                width: 4px;
+                height: 100%;
+                background: var(--primary);
+                border-radius: 0 0 10px 0;
+                position: absolute;
+                left: 1.5rem;
+                top: 0;
+                bottom: 0;
+            }
+
+            .project-card.default-card > * {
+                padding-left: 1.25rem;
+            }
+
+            /* -- Subtle base class change -- */
+            .project-card {
+                position: relative;
+            }
+
+            .publications-list {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
             .publication-item {
-                padding: 1.25rem 1.5rem; background: var(--surface);
-                border: 1px solid var(--border); border-radius: 10px;
+                padding: 1.25rem 1.5rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 10px;
             }
             .publication-item h4 {
-                font-size: 0.95rem; font-weight: 700; color: var(--text);
-                letter-spacing: -0.01em; font-family: "Lora", Georgia, serif;
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: var(--text);
+                letter-spacing: -0.01em;
+                font-family: "Lora", Georgia, serif;
                 margin-bottom: 0.35rem;
             }
-            .pub-meta, .publication-item p {
-                font-size: 0.82rem; color: var(--text-light); line-height: 1.5;
+            .pub-meta,
+            .publication-item p {
+                font-size: 0.82rem;
+                color: var(--text-light);
+                line-height: 1.5;
             }
-            .pub-role { margin-top: 0.35rem; color: var(--text); font-weight: 600; }
+            .pub-role {
+                margin-top: 0.35rem;
+                color: var(--text);
+                font-weight: 600;
+            }
             .publication-link {
-                display: inline-block; margin-top: 0.45rem; color: var(--cat-consulting);
-                font-size: 0.78rem; text-decoration: none; font-weight: 600;
+                display: inline-block;
+                margin-top: 0.45rem;
+                color: var(--cat-consulting);
+                font-size: 0.78rem;
+                text-decoration: none;
+                font-weight: 600;
             }
-            .publication-link:hover { text-decoration: underline; }
+            .publication-link:hover {
+                text-decoration: underline;
+            }
 
-            .credential-item { display: flex; flex-direction: column; gap: 0.2rem; }
-            .credential-item h4 { font-size: 0.9rem; font-weight: 700; letter-spacing: -0.01em; }
-            .credential-issuer { font-size: 0.82rem; color: var(--text-light); font-weight: 500; }
-            .credential-year { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.15rem; }
+            .credential-item {
+                display: flex;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            .credential-item h4 {
+                font-size: 0.9rem;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+            }
+            .credential-issuer {
+                font-size: 0.82rem;
+                color: var(--text-light);
+                font-weight: 500;
+            }
+            .credential-year {
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 0.15rem;
+            }
             .credential-type {
-                font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase;
-                letter-spacing: 0.08em; font-weight: 700;
+                font-size: 0.68rem;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                font-weight: 700;
             }
 
             /* ── INFO CARDS ── */
             .info-grid {
-                display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 1.5rem;
             }
             .info-card {
-                padding: 1.75rem; border: 1px solid var(--border);
-                border-radius: 10px; background: var(--surface);
+                padding: 1.75rem;
+                border: 1px solid var(--border);
+                border-radius: 10px;
+                background: var(--surface);
             }
             .info-card h3 {
-                font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-                letter-spacing: 0.14em; color: var(--text-muted);
-                margin-bottom: 1.25rem; padding-bottom: 0.75rem;
+                font-size: 0.72rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.14em;
+                color: var(--text-muted);
+                margin-bottom: 1.25rem;
+                padding-bottom: 0.75rem;
                 border-bottom: 1px solid var(--border);
             }
-            .info-item { margin-bottom: 1.1rem; }
-            .info-item:last-child { margin-bottom: 0; }
-            .info-item h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.15rem; }
-            .info-item p { font-size: 0.82rem; color: var(--text-muted); }
-            .info-item a {
-                color: var(--text); text-decoration: none; font-weight: 500;
-                font-size: 0.9rem; border-bottom: 1px solid var(--border);
+            .info-item {
+                margin-bottom: 1.1rem;
             }
-            .info-item a:hover { border-color: var(--text); }
+            .info-item:last-child {
+                margin-bottom: 0;
+            }
+            .info-item h4 {
+                font-size: 0.9rem;
+                font-weight: 600;
+                margin-bottom: 0.15rem;
+            }
+            .info-item p {
+                font-size: 0.82rem;
+                color: var(--text-muted);
+            }
+            .info-item a {
+                color: var(--text);
+                text-decoration: none;
+                font-weight: 500;
+                font-size: 0.9rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .info-item a:hover {
+                border-color: var(--text);
+            }
 
             /* ── SKILLS ── */
-            .skills-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-            .skill-tag {
-                display: inline-block; padding: 0.35rem 0.85rem;
-                background: var(--surface); border: 1px solid var(--border);
-                border-radius: 100px; font-size: 0.82rem; color: var(--text-light);
-                font-weight: 500; transition: all 0.2s ease;
+            .skills-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
             }
-            .skill-tag:hover { background: var(--primary); color: var(--surface); border-color: var(--primary); }
+            .skill-tag {
+                display: inline-block;
+                padding: 0.35rem 0.85rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 100px;
+                font-size: 0.82rem;
+                color: var(--text-light);
+                font-weight: 500;
+                transition: all 0.2s ease;
+            }
+            .skill-tag:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+            }
 
             /* ── FOOTER ── */
             .footer {
-                text-align: center; padding: 2rem 3rem; color: var(--text-muted);
-                font-size: 0.82rem; border-top: 1px solid var(--border);
+                text-align: center;
+                padding: 2rem 3rem;
+                color: var(--text-muted);
+                font-size: 0.82rem;
+                border-top: 1px solid var(--border);
                 margin-top: 4rem;
             }
 
             /* ── EDIT MODE ── */
-            .editable-field { cursor: pointer; position: relative; }
-            .editable-field:hover { background: rgba(26,26,26,0.03); border-radius: 3px; }
+            .editable-field {
+                cursor: pointer;
+                position: relative;
+            }
+            .editable-field:hover {
+                background: rgba(26, 26, 26, 0.03);
+                border-radius: 3px;
+            }
             .editable-field.edit-mode {
-                background: #fffbf0; padding: 0.4rem 0.6rem; border-radius: 4px;
+                background: #fffbf0;
+                padding: 0.4rem 0.6rem;
+                border-radius: 4px;
                 border: 1.5px solid var(--primary);
             }
-            .editable-field input, .editable-field textarea {
-                width: 100%; padding: 0.4rem 0.5rem; border: 1px solid var(--primary);
-                border-radius: 4px; font-family: inherit; font-size: inherit;
-                background: var(--surface); color: var(--text);
+            .editable-field input,
+            .editable-field textarea {
+                width: 100%;
+                padding: 0.4rem 0.5rem;
+                border: 1px solid var(--primary);
+                border-radius: 4px;
+                font-family: inherit;
+                font-size: inherit;
+                background: var(--surface);
+                color: var(--text);
             }
-            .edit-controls { display: none; gap: 0.5rem; margin-top: 0.5rem; }
-            .edit-controls.active { display: flex; }
+            .edit-controls {
+                display: none;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            .edit-controls.active {
+                display: flex;
+            }
             .btn-delete {
-                padding: 0.3rem 0.65rem; background: var(--accent); color: white;
-                border: none; border-radius: 4px; cursor: pointer; font-size: 0.78rem;
-                font-weight: 600; opacity: 0; transition: opacity 0.15s ease;
-                position: absolute; top: 0.25rem; right: 0.25rem;
+                padding: 0.3rem 0.65rem;
+                background: var(--accent);
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 0.78rem;
+                font-weight: 600;
+                opacity: 0;
+                transition: opacity 0.15s ease;
+                position: absolute;
+                top: 0.25rem;
+                right: 0.25rem;
                 font-family: "Inter", sans-serif;
             }
-            .timeline-item:hover .btn-delete, .info-item:hover .btn-delete { opacity: 1; }
-            .btn-delete:hover { background: #a93226; }
+            .timeline-item:hover .btn-delete,
+            .info-item:hover .btn-delete {
+                opacity: 1;
+            }
+            .btn-delete:hover {
+                background: #a93226;
+            }
             .btn-add {
-                display: inline-block; padding: 0.45rem 0.9rem; background: transparent;
-                color: var(--text-light); border: 1px dashed var(--border);
-                border-radius: 6px; cursor: pointer; font-size: 0.82rem;
-                font-weight: 600; margin-top: 1rem;
+                display: inline-block;
+                padding: 0.45rem 0.9rem;
+                background: transparent;
+                color: var(--text-light);
+                border: 1px dashed var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.82rem;
+                font-weight: 600;
+                margin-top: 1rem;
                 font-family: "Inter", sans-serif;
             }
-            .btn-add:hover { background: var(--primary); color: var(--surface); border-color: var(--primary); border-style: solid; }
+            .btn-add:hover {
+                background: var(--primary);
+                color: var(--surface);
+                border-color: var(--primary);
+                border-style: solid;
+            }
 
             /* ── CREATE MODAL ── */
-            .create-modal { max-width: 560px; }
-            .form-group { margin-bottom: 1rem; }
+            .create-modal {
+                max-width: 560px;
+            }
+            .form-group {
+                margin-bottom: 1rem;
+            }
             .form-group label {
-                display: block; font-weight: 600; margin-bottom: 0.4rem;
-                font-size: 0.8rem; color: var(--text-light);
-                text-transform: uppercase; letter-spacing: 0.06em;
+                display: block;
+                font-weight: 600;
+                margin-bottom: 0.4rem;
+                font-size: 0.8rem;
+                color: var(--text-light);
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
             }
-            .form-group input, .form-group textarea {
-                width: 100%; padding: 0.7rem 0.9rem; border: 1px solid var(--border);
-                border-radius: 6px; font-family: "Inter", sans-serif; font-size: 0.95rem;
-                background: var(--background); color: var(--text);
+            .form-group input,
+            .form-group textarea {
+                width: 100%;
+                padding: 0.7rem 0.9rem;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                font-family: "Inter", sans-serif;
+                font-size: 0.95rem;
+                background: var(--background);
+                color: var(--text);
             }
-            .form-group textarea { resize: vertical; min-height: 80px; }
-            .form-group input:focus, .form-group textarea:focus {
-                outline: none; border-color: var(--primary); background: var(--surface);
-                box-shadow: 0 0 0 3px rgba(26,26,26,0.06);
+            .form-group textarea {
+                resize: vertical;
+                min-height: 80px;
+            }
+            .form-group input:focus,
+            .form-group textarea:focus {
+                outline: none;
+                border-color: var(--primary);
+                background: var(--surface);
+                box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.06);
             }
 
             /* ── LANGUAGE VISIBILITY ── */
-            .lang-content { display: none; }
-            .lang-content.active { display: block; }
+            .lang-content {
+                display: none;
+            }
+            .lang-content.active {
+                display: block;
+            }
 
             /* ── RESPONSIVE ── */
             @media (max-width: 768px) {
-                .header { grid-template-columns: 1fr; gap: 1.5rem; padding: 4rem 1.5rem 2.5rem; }
-                .profile-image { width: 80px; height: 80px; }
-                .header-content h1 { font-size: 1.9rem; }
-                .section-wrapper { padding: 0 1.5rem; }
-                .projects-grid, .credentials-grid, .info-grid { grid-template-columns: 1fr; }
-                .header-controls { top: 0.75rem; right: 0.75rem; gap: 0.5rem; }
-                .teaching-header { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+                .header {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                    padding: 4rem 1.5rem 2.5rem;
+                }
+                .profile-image {
+                    width: 80px;
+                    height: 80px;
+                }
+                .header-content h1 {
+                    font-size: 1.9rem;
+                }
+                .section-wrapper {
+                    padding: 0 1.5rem;
+                }
+                .projects-grid,
+                .credentials-grid,
+                .info-grid {
+                    grid-template-columns: 1fr;
+                }
+                .header-controls {
+                    top: 0.75rem;
+                    right: 0.75rem;
+                    gap: 0.5rem;
+                }
+                .teaching-header {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.15rem;
+                }
             }
 
             /* ── PRINT ── */
-            @page { size: A4 portrait; margin: 14mm 12mm; }
+            @page {
+                size: A4 portrait;
+                margin: 14mm 12mm;
+            }
 
             @media print {
-                html, body {
+                html,
+                body {
                     background: white !important;
                     color: var(--text) !important;
                     margin: 0 !important;
@@ -439,10 +918,13 @@
                 .btn-print,
                 .btn-add,
                 .btn-delete,
-                .modal-overlay { display: none !important; }
+                .modal-overlay {
+                    display: none !important;
+                }
 
                 /* Allow sections to flow across pages */
-                .header, .section-wrapper {
+                .header,
+                .section-wrapper {
                     max-width: none !important;
                     margin: 0 0 5mm 0 !important;
                     padding: 0 !important;
@@ -455,18 +937,52 @@
                 .project-card,
                 .publication-item,
                 .credential-item,
-                .info-card { page-break-inside: avoid !important; }
+                .info-card {
+                    page-break-inside: avoid !important;
+                }
 
                 /* ── NO BOXES: replace with subtle separators ── */
-                .project-card, .publication-item, .credential-item,
-                .info-card, .teaching-item {
+                /* -- Image-enabled project card (print) -- */
+                .project-card.has-image {
                     border: none !important;
                     border-radius: 0 !important;
                     background: transparent !important;
                     padding: 2.5mm 0 !important;
                     border-bottom: 1px solid #e6e1db !important;
                 }
-                .teaching-item { border-left: none !important; }
+
+                .project-card.has-image img {
+                    width: 100% !important;
+                    max-height: 6cm !important;
+                    object-fit: contain !important;
+                    display: block !important;
+                    page-break-inside: avoid !important;
+                }
+
+                .project-card.has-image .project-link {
+                    display: none !important;
+                }
+
+                /* -- Default project card (print) -- */
+                .project-card.default-card {
+                    border: none !important;
+                    border-radius: 0 !important;
+                    background: transparent !important;
+                    padding: 2.5mm 0 !important;
+                    border-bottom: 1px solid #e6e1db !important;
+                }
+
+                .project-card.default-card::before {
+                    display: none !important;
+                }
+
+                .project-card.default-card > * {
+                    padding-left: 0 !important;
+                }
+
+                .teaching-item {
+                    page-break-inside: avoid !important;
+                }
 
                 /* Header compact */
                 .header {
@@ -477,12 +993,33 @@
                     padding-bottom: 4mm !important;
                     margin-bottom: 5mm !important;
                 }
-                .profile-image { width: 60px !important; height: 60px !important; }
-                .header-content h1 { font-size: 15pt !important; line-height: 1.1 !important; margin-bottom: 1mm !important; }
-                .header-professions { font-size: 8pt !important; margin-bottom: 1mm !important; }
-                .header-description { font-size: 7.4pt !important; line-height: 1.35 !important; margin-bottom: 2mm !important; }
-                .contact-bar { font-size: 7pt !important; gap: 3mm !important; margin-bottom: 0 !important; }
-                .contact-bar svg { width: 8px !important; height: 8px !important; }
+                .profile-image {
+                    width: 60px !important;
+                    height: 60px !important;
+                }
+                .header-content h1 {
+                    font-size: 15pt !important;
+                    line-height: 1.1 !important;
+                    margin-bottom: 1mm !important;
+                }
+                .header-professions {
+                    font-size: 8pt !important;
+                    margin-bottom: 1mm !important;
+                }
+                .header-description {
+                    font-size: 7.4pt !important;
+                    line-height: 1.35 !important;
+                    margin-bottom: 2mm !important;
+                }
+                .contact-bar {
+                    font-size: 7pt !important;
+                    gap: 3mm !important;
+                    margin-bottom: 0 !important;
+                }
+                .contact-bar svg {
+                    width: 8px !important;
+                    height: 8px !important;
+                }
 
                 /* Section titles */
                 .section-title {
@@ -491,65 +1028,143 @@
                 }
 
                 /* Timeline compact */
-                .timeline::before { left: 5px !important; }
-                .timeline-item { padding-left: 6mm !important; margin-bottom: 3.5mm !important; }
-                .timeline-bullet { left: 0 !important; top: 3px !important; width: 8px !important; height: 8px !important; border-width: 1.5px !important; }
-                .timeline-year { font-size: 6.4pt !important; margin-bottom: 0.8mm !important; }
-                .timeline-item h3 { font-size: 8.4pt !important; line-height: 1.2 !important; margin-bottom: 0.6mm !important; }
-                .timeline-institution { font-size: 7.4pt !important; margin-bottom: 1mm !important; }
+                .timeline::before {
+                    left: 5px !important;
+                }
+                .timeline-item {
+                    padding-left: 6mm !important;
+                    margin-bottom: 3.5mm !important;
+                }
+                .timeline-bullet {
+                    left: 0 !important;
+                    top: 3px !important;
+                    width: 8px !important;
+                    height: 8px !important;
+                    border-width: 1.5px !important;
+                }
+                .timeline-year {
+                    font-size: 6.4pt !important;
+                    margin-bottom: 0.8mm !important;
+                }
+                .timeline-item h3 {
+                    font-size: 8.4pt !important;
+                    line-height: 1.2 !important;
+                    margin-bottom: 0.6mm !important;
+                }
+                .timeline-institution {
+                    font-size: 7.4pt !important;
+                    margin-bottom: 1mm !important;
+                }
                 .timeline-category {
-                    font-size: 6pt !important; padding: 0.4mm 1.6mm !important;
+                    font-size: 6pt !important;
+                    padding: 0.4mm 1.6mm !important;
                     margin-bottom: 1mm !important;
                 }
                 .timeline-detail {
-                    font-size: 7pt !important; line-height: 1.35 !important;
+                    font-size: 7pt !important;
+                    line-height: 1.35 !important;
                     margin-top: 0.6mm !important;
                 }
 
                 /* Teaching */
-                .teaching-item h4 { font-size: 8.4pt !important; }
-                .teaching-institution { font-size: 7.2pt !important; }
-                .teaching-date { font-size: 6.4pt !important; }
-                .teaching-description { font-size: 7pt !important; line-height: 1.35 !important; }
+                .teaching-item h4 {
+                    font-size: 8.4pt !important;
+                }
+                .teaching-institution {
+                    font-size: 7.2pt !important;
+                }
+                .teaching-date {
+                    font-size: 6.4pt !important;
+                }
+                .teaching-description {
+                    font-size: 7pt !important;
+                    line-height: 1.35 !important;
+                }
 
                 /* Projects / publications / credentials */
                 .project-card h3,
                 .publication-item h4,
                 .credential-item h4,
-                .info-item h4 { font-size: 8.2pt !important; line-height: 1.25 !important; }
+                .info-item h4 {
+                    font-size: 8.2pt !important;
+                    line-height: 1.25 !important;
+                }
 
                 .project-card p,
                 .publication-item p,
-                .pub-meta, .pub-role, .publication-link,
-                .credential-type, .credential-issuer, .credential-year,
-                .info-item p { font-size: 7pt !important; line-height: 1.3 !important; }
+                .pub-meta,
+                .pub-role,
+                .publication-link,
+                .credential-type,
+                .credential-issuer,
+                .credential-year,
+                .info-item p {
+                    font-size: 7pt !important;
+                    line-height: 1.3 !important;
+                }
 
                 /* Skills compact */
-                .skills-grid { gap: 1.2mm !important; }
-                .skill-tag { font-size: 6.8pt !important; padding: 0.9mm 2.2mm !important; }
+                .skills-grid {
+                    gap: 1.2mm !important;
+                }
+                .skill-tag {
+                    font-size: 6.8pt !important;
+                    padding: 0.9mm 2.2mm !important;
+                }
 
                 /* Info cards */
-                .info-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 3mm !important; }
-                .info-card h3 { font-size: 6.4pt !important; margin-bottom: 1.5mm !important; padding-bottom: 1.2mm !important; }
-                .info-item { margin-bottom: 1.4mm !important; }
+                .info-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                    gap: 3mm !important;
+                }
+                .info-card h3 {
+                    font-size: 6.4pt !important;
+                    margin-bottom: 1.5mm !important;
+                    padding-bottom: 1.2mm !important;
+                }
+                .info-item {
+                    margin-bottom: 1.4mm !important;
+                }
 
                 /* Footer hidden */
-                .footer { display: none !important; }
+                .footer {
+                    display: none !important;
+                }
 
                 /* Links: keep visible but neutral */
-                a { color: var(--text) !important; text-decoration: none !important; }
+                a {
+                    color: var(--text) !important;
+                    text-decoration: none !important;
+                }
             }
         </style>
     </head>
     <body>
-
         <!-- Header controls -->
         <div class="header-controls">
             <div class="language-toggle">
-                <button class="lang-btn active" data-lang="en" onclick="UI.changeLanguage('en')">EN</button>
-                <button class="lang-btn" data-lang="es" onclick="UI.changeLanguage('es')">ES</button>
+                <button
+                    class="lang-btn active"
+                    data-lang="en"
+                    onclick="UI.changeLanguage('en')"
+                >
+                    EN
+                </button>
+                <button
+                    class="lang-btn"
+                    data-lang="es"
+                    onclick="UI.changeLanguage('es')"
+                >
+                    ES
+                </button>
             </div>
-            <button class="btn-config" onclick="UI.toggleLoginModal()" id="configBtn">⚙ Config</button>
+            <button
+                class="btn-config"
+                onclick="UI.toggleLoginModal()"
+                id="configBtn"
+            >
+                ⚙ Config
+            </button>
         </div>
 
         <!-- Login Modal -->
@@ -557,12 +1172,34 @@
             <div class="modal">
                 <h2 id="modalTitle">Login</h2>
                 <form class="modal-form" onsubmit="Auth.handleLogin(event)">
-                    <input type="email" id="emailInput" placeholder="Email" required />
-                    <input type="password" id="passwordInput" placeholder="Password" required />
+                    <input
+                        type="email"
+                        id="emailInput"
+                        placeholder="Email"
+                        required
+                    />
+                    <input
+                        type="password"
+                        id="passwordInput"
+                        placeholder="Password"
+                        required
+                    />
                     <div id="modalError" class="modal-error"></div>
                     <div class="modal-buttons">
-                        <button type="submit" class="btn-primary" id="submitBtn">Login</button>
-                        <button type="button" class="btn-secondary" onclick="UI.toggleLoginModal()">Cancel</button>
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                            id="submitBtn"
+                        >
+                            Login
+                        </button>
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            onclick="UI.toggleLoginModal()"
+                        >
+                            Cancel
+                        </button>
                     </div>
                 </form>
             </div>
@@ -570,7 +1207,12 @@
 
         <!-- Header -->
         <div class="header">
-            <img id="profileImage" src="imageedit_6_7342620706.jpg" alt="Diego Paucar" class="profile-image" />
+            <img
+                id="profileImage"
+                src="images/imageedit_6_7342620706.jpg"
+                alt="Diego Paucar"
+                class="profile-image"
+            />
             <div class="header-content">
                 <h1 id="personName">Diego Paucar</h1>
                 <p class="header-professions" id="professions"></p>
@@ -578,7 +1220,9 @@
                 <div class="contact-bar" id="contactBar"></div>
                 <button class="btn-print" onclick="window.print()">
                     <span>📄</span>
-                    <span class="lang-content active" data-lang="en">Print Resume</span>
+                    <span class="lang-content active" data-lang="en"
+                        >Print Resume</span
+                    >
                     <span class="lang-content" data-lang="es">Imprimir CV</span>
                 </button>
             </div>
@@ -587,11 +1231,20 @@
         <!-- Timeline / Experience -->
         <div class="section-wrapper">
             <h2 class="section-title">
-                <span class="lang-content active" data-lang="en">Experience</span>
+                <span class="lang-content active" data-lang="en"
+                    >Experience</span
+                >
                 <span class="lang-content" data-lang="es">Experiencia</span>
             </h2>
             <div class="timeline" id="timelineContainer"></div>
-            <button class="btn-add" id="addExpBtn" style="display:none" onclick="CRUD.openCreateModal('experiencia')">+ Add Experience</button>
+            <button
+                class="btn-add"
+                id="addExpBtn"
+                style="display: none"
+                onclick="CRUD.openCreateModal('experiencia')"
+            >
+                + Add Experience
+            </button>
         </div>
 
         <!-- Teaching -->
@@ -615,8 +1268,12 @@
         <!-- Publications -->
         <div class="section-wrapper" id="publicationsSection">
             <h2 class="section-title">
-                <span class="lang-content active" data-lang="en">Research &amp; Publications</span>
-                <span class="lang-content" data-lang="es">Investigación y Publicaciones</span>
+                <span class="lang-content active" data-lang="en"
+                    >Research &amp; Publications</span
+                >
+                <span class="lang-content" data-lang="es"
+                    >Investigación y Publicaciones</span
+                >
             </h2>
             <div class="publications-list" id="publicationsList"></div>
         </div>
@@ -624,7 +1281,9 @@
         <!-- Credentials -->
         <div class="section-wrapper" id="credentialsSection">
             <h2 class="section-title">
-                <span class="lang-content active" data-lang="en">Credentials</span>
+                <span class="lang-content active" data-lang="en"
+                    >Credentials</span
+                >
                 <span class="lang-content" data-lang="es">Credenciales</span>
             </h2>
             <div class="credentials-grid" id="credentialsGrid"></div>
@@ -642,11 +1301,27 @@
         <div class="modal-overlay" id="createModal">
             <div class="modal create-modal">
                 <h2 id="createModalTitle">Create New Entry</h2>
-                <form class="modal-form" id="createForm" onsubmit="CRUD.handleCreateSubmit(event)">
+                <form
+                    class="modal-form"
+                    id="createForm"
+                    onsubmit="CRUD.handleCreateSubmit(event)"
+                >
                     <div id="formFieldsContainer"></div>
                     <div class="modal-buttons">
-                        <button type="submit" class="btn-primary" id="createSubmitBtn">Create</button>
-                        <button type="button" class="btn-secondary" onclick="CRUD.closeCreateModal()">Cancel</button>
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                            id="createSubmitBtn"
+                        >
+                            Create
+                        </button>
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            onclick="CRUD.closeCreateModal()"
+                        >
+                            Cancel
+                        </button>
                     </div>
                 </form>
             </div>
@@ -654,11 +1329,14 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p class="lang-content active" data-lang="en">© 2026 Diego Paucar. All rights reserved.</p>
-            <p class="lang-content" data-lang="es">© 2026 Diego Paucar. Todos los derechos reservados.</p>
+            <p class="lang-content active" data-lang="en">
+                © 2026 Diego Paucar. All rights reserved.
+            </p>
+            <p class="lang-content" data-lang="es">
+                © 2026 Diego Paucar. Todos los derechos reservados.
+            </p>
         </div>
 
-        <script src="./local-data.js"></script>
         <script>
             const App = {
                 cvData: null,
@@ -666,42 +1344,52 @@
                 currentLanguage: localStorage.getItem("language") || "en",
                 isLoggedIn: Boolean(localStorage.getItem("sessionToken")),
                 credentials: null,
-                dataVersion: "3.0",
+                dataVersion: "3.2",
             };
 
-            const LocalFileData = {
-                clone(v) { return v ? JSON.parse(JSON.stringify(v)) : null; },
-                getCVData() { return this.clone(window.__CV_DATA__ || null); },
-                getConfig() { return this.clone(window.__CV_CONFIG__ || null); },
-            };
-
+const IS_FILE_PROTOCOL = location.protocol === "file:";
             const CacheManager = {
                 saveToCache(data) {
                     try {
-                        localStorage.setItem("cvData_cache", JSON.stringify({
-                            data, timestamp: new Date().toISOString(),
-                            version: App.dataVersion,
-                        }));
-                    } catch (e) { console.error("Cache save:", e); }
+                        localStorage.setItem(
+                            "cvData_cache",
+                            JSON.stringify({
+                                data,
+                                timestamp: new Date().toISOString(),
+                                version: App.dataVersion,
+                            }),
+                        );
+                    } catch (e) {
+                        console.error("Cache save:", e);
+                    }
                 },
                 loadFromCache() {
                     try {
                         const cached = localStorage.getItem("cvData_cache");
                         if (!cached) return null;
                         const parsed = JSON.parse(cached);
-                        if (parsed.version === App.dataVersion) return parsed.data;
+                        if (parsed.version === App.dataVersion)
+                            return parsed.data;
                         localStorage.removeItem("cvData_cache");
-                    } catch (e) { console.error("Cache load:", e); }
+                    } catch (e) {
+                        console.error("Cache load:", e);
+                    }
                     return null;
                 },
                 exportModifiedData() {
                     if (!App.cvData) return alert("No data to export");
-                    const dataStr = JSON.stringify({
-                        version: App.dataVersion,
-                        timestamp: new Date().toISOString(),
-                        data: App.cvData,
-                    }, null, 2);
-                    const blob = new Blob([dataStr], { type: "application/json" });
+                    const dataStr = JSON.stringify(
+                        {
+                            version: App.dataVersion,
+                            timestamp: new Date().toISOString(),
+                            data: App.cvData,
+                        },
+                        null,
+                        2,
+                    );
+                    const blob = new Blob([dataStr], {
+                        type: "application/json",
+                    });
                     const url = URL.createObjectURL(blob);
                     const link = document.createElement("a");
                     link.href = url;
@@ -713,31 +1401,43 @@
                 },
             };
 
-            const Auth = {
-                async init() {
-                    const embeddedConfig = LocalFileData.getConfig();
-                    if (location.protocol === "file:" && embeddedConfig) {
-                        App.credentials = embeddedConfig;
-                        return;
-                    }
-                    try {
-                        const r = await fetch("./config.json");
-                        if (r.ok) App.credentials = await r.json();
-                        else if (embeddedConfig) App.credentials = embeddedConfig;
-                    } catch {
-                        if (embeddedConfig) App.credentials = embeddedConfig;
-                    }
-                },
+const Auth = {
+    async init() {
+        if (IS_FILE_PROTOCOL) {
+            console.warn(
+                "file:// — login deshabilitado. Usa `python -m http.server` para desarrollo local."
+            );
+            return;
+        }
+        try {
+            const r = await fetch("./config.json", { cache: "no-store" });
+            if (r.ok) App.credentials = await r.json();
+        } catch (e) {
+            console.warn("config.json no encontrado, login deshabilitado:", e);
+        }
+    },
                 handleLogin(event) {
                     event.preventDefault();
                     const email = document.getElementById("emailInput").value;
-                    const password = document.getElementById("passwordInput").value;
+                    const password =
+                        document.getElementById("passwordInput").value;
                     const errorDiv = document.getElementById("modalError");
                     errorDiv.textContent = "";
-                    if (!App.credentials) { errorDiv.textContent = "Auth not configured."; return; }
-                    const valid = App.credentials.users?.find(u => u.email === email && u.password === password);
-                    if (!valid) { errorDiv.textContent = "Invalid email or password."; return; }
-                    localStorage.setItem("sessionToken", btoa(`${email}:${Date.now()}`));
+                    if (!App.credentials) {
+                        errorDiv.textContent = "Auth not configured.";
+                        return;
+                    }
+                    const valid = App.credentials.users?.find(
+                        (u) => u.email === email && u.password === password,
+                    );
+                    if (!valid) {
+                        errorDiv.textContent = "Invalid email or password.";
+                        return;
+                    }
+                    localStorage.setItem(
+                        "sessionToken",
+                        btoa(`${email}:${Date.now()}`),
+                    );
                     App.isLoggedIn = true;
                     UI.updateConfigButton();
                     UI.toggleLoginModal();
@@ -762,22 +1462,30 @@
                 },
                 initLanguageUI() {
                     const lang = App.currentLanguage;
-                    document.querySelectorAll(".lang-btn").forEach(btn => {
-                        btn.classList.toggle("active", btn.dataset.lang === lang);
+                    document.querySelectorAll(".lang-btn").forEach((btn) => {
+                        btn.classList.toggle(
+                            "active",
+                            btn.dataset.lang === lang,
+                        );
                     });
-                    document.querySelectorAll(".lang-content").forEach(el => {
+                    document.querySelectorAll(".lang-content").forEach((el) => {
                         el.classList.toggle("active", el.dataset.lang === lang);
                     });
                 },
                 toggleLoginModal() {
-                    document.getElementById("loginModal")?.classList.toggle("active");
+                    document
+                        .getElementById("loginModal")
+                        ?.classList.toggle("active");
                 },
                 updateConfigButton() {
                     const btn = document.getElementById("configBtn");
                     if (!btn) return;
                     if (App.isLoggedIn) {
                         btn.textContent = "🔓 Logout";
-                        btn.onclick = () => { Auth.logout(); UI.updateConfigButton(); };
+                        btn.onclick = () => {
+                            Auth.logout();
+                            UI.updateConfigButton();
+                        };
                     } else {
                         btn.textContent = "⚙ Config";
                         btn.onclick = () => UI.toggleLoginModal();
@@ -790,14 +1498,24 @@
                 async exportOnChange() {
                     if (!App.isLoggedIn || this.isExporting) return;
                     this.isExporting = true;
-                    try { await this.exportToJSON(); }
-                    catch (e) { console.error(e); }
-                    finally { this.isExporting = false; }
+                    try {
+                        await this.exportToJSON();
+                    } catch (e) {
+                        console.error(e);
+                    } finally {
+                        this.isExporting = false;
+                    }
                 },
                 async exportToJSON() {
                     if (!App.cvData) return;
-                    const dataStr = JSON.stringify(this.reconstructOriginalJSON(), null, 2);
-                    const blob = new Blob([dataStr], { type: "application/json" });
+                    const dataStr = JSON.stringify(
+                        this.reconstructOriginalJSON(),
+                        null,
+                        2,
+                    );
+                    const blob = new Blob([dataStr], {
+                        type: "application/json",
+                    });
                     const url = URL.createObjectURL(blob);
                     const link = document.createElement("a");
                     link.href = url;
@@ -805,182 +1523,346 @@
                     link.style.display = "none";
                     document.body.appendChild(link);
                     link.click();
-                    setTimeout(() => { document.body.removeChild(link); URL.revokeObjectURL(url); }, 100);
+                    setTimeout(() => {
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+                    }, 100);
                 },
                 reconstructOriginalJSON() {
-                    if (!App.originalData) return { version: App.dataVersion, data: App.cvData };
+                    if (!App.originalData)
+                        return { version: App.dataVersion, data: App.cvData };
                     const r = JSON.parse(JSON.stringify(App.originalData));
                     r.data = {
                         ...r.data,
-                        datos_personales: this.mergeLanguageRows("datos_personales", this.reconstructPersonalData()),
-                        profesiones: this.mergeLanguageRows("profesiones", this.reconstructProfessions()),
-                        experiencia: this.mergeLanguageRows("experiencia", this.reconstructExperience()),
-                        teaching_experience: this.mergeLanguageRows("teaching_experience", this.reconstructTeaching()),
-                        educacion: this.mergeLanguageRows("educacion", this.reconstructEducation()),
-                        enlaces_personales: this.mergeLanguageRows("enlaces_personales", this.reconstructLinks()),
-                        skills: this.mergeLanguageRows("skills", this.reconstructSkills()),
-                        certifications: this.mergeLanguageRows("certifications", this.reconstructCertifications()),
-                        publications: this.mergeLanguageRows("publications", this.reconstructPublications()),
-                        portfolio_items: this.mergeLanguageRows("portfolio_items", this.reconstructPortfolioItems()),
+                        datos_personales: this.mergeLanguageRows(
+                            "datos_personales",
+                            this.reconstructPersonalData(),
+                        ),
+                        profesiones: this.mergeLanguageRows(
+                            "profesiones",
+                            this.reconstructProfessions(),
+                        ),
+                        experiencia: this.mergeLanguageRows(
+                            "experiencia",
+                            this.reconstructExperience(),
+                        ),
+                        teaching_experience: this.mergeLanguageRows(
+                            "teaching_experience",
+                            this.reconstructTeaching(),
+                        ),
+                        educacion: this.mergeLanguageRows(
+                            "educacion",
+                            this.reconstructEducation(),
+                        ),
+                        enlaces_personales: this.mergeLanguageRows(
+                            "enlaces_personales",
+                            this.reconstructLinks(),
+                        ),
+                        skills: this.mergeLanguageRows(
+                            "skills",
+                            this.reconstructSkills(),
+                        ),
+                        certifications: this.mergeLanguageRows(
+                            "certifications",
+                            this.reconstructCertifications(),
+                        ),
+                        publications: this.mergeLanguageRows(
+                            "publications",
+                            this.reconstructPublications(),
+                        ),
+                        portfolio_items: this.mergeLanguageRows(
+                            "portfolio_items",
+                            this.reconstructPortfolioItems(),
+                        ),
                     };
                     return r;
                 },
                 mergeLanguageRows(tableName, rows) {
-                    const orig = Array.isArray(App.originalData?.data?.[tableName])
-                        ? App.originalData.data[tableName] : [];
-                    const other = orig.filter(r => this.getRowLanguage(r) !== App.currentLanguage);
+                    const orig = Array.isArray(
+                        App.originalData?.data?.[tableName],
+                    )
+                        ? App.originalData.data[tableName]
+                        : [];
+                    const other = orig.filter(
+                        (r) => this.getRowLanguage(r) !== App.currentLanguage,
+                    );
                     return [...rows, ...other];
                 },
                 getRowLanguage(row) {
                     if (Array.isArray(row)) return row[row.length - 1];
-                    if (row && typeof row === "object") return row.lengua || null;
+                    if (row && typeof row === "object")
+                        return row.lengua || null;
                     return null;
                 },
                 getOriginalPersonalRow() {
-                    return App.originalData?.data?.datos_personales?.find(r => r[r.length - 1] === App.currentLanguage)
-                        || App.originalData?.data?.datos_personales?.[0] || [];
+                    return (
+                        App.originalData?.data?.datos_personales?.find(
+                            (r) => r[r.length - 1] === App.currentLanguage,
+                        ) ||
+                        App.originalData?.data?.datos_personales?.[0] ||
+                        []
+                    );
                 },
                 reconstructPersonalData() {
                     const o = this.getOriginalPersonalRow();
-                    return [[
-                        o[0] || "1",
-                        App.cvData.nombres || o[1] || "",
-                        App.cvData.telefono || o[2] || "",
-                        App.cvData.email || o[3] || "",
-                        App.cvData.lugar || o[4] || "",
-                        App.cvData.perfil || o[5] || "",
-                        App.currentLanguage,
-                    ]];
+                    return [
+                        [
+                            o[0] || "1",
+                            App.cvData.nombres || o[1] || "",
+                            App.cvData.telefono || o[2] || "",
+                            App.cvData.email || o[3] || "",
+                            App.cvData.lugar || o[4] || "",
+                            App.cvData.perfil || o[5] || "",
+                            App.currentLanguage,
+                        ],
+                    ];
                 },
                 reconstructProfessions() {
-                    return (App.cvData.profesiones || []).map(i => [
-                        i.id || "1", i.persona_id || "1", i.profesion || "", i.lengua || App.currentLanguage,
+                    return (App.cvData.profesiones || []).map((i) => [
+                        i.id || "1",
+                        i.persona_id || "1",
+                        i.profesion || "",
+                        i.lengua || App.currentLanguage,
                     ]);
                 },
                 reconstructExperience() {
-                    return (App.cvData.experiencia || []).map(i => [
-                        i.id || "1", i.persona_id || "1", i.profesion_id || "1",
-                        i.experiencia_categoria || "", i.inicio_anio || "",
-                        i.institucion || "", i.lugar || "", i.rol || "",
-                        i.tareas || "", i.logros || null, i.referencia || null,
-                        i.referencia_linkedin || null, i.lengua || App.currentLanguage,
+                    return (App.cvData.experiencia || []).map((i) => [
+                        i.id || "1",
+                        i.persona_id || "1",
+                        i.profesion_id || "1",
+                        i.experiencia_categoria || "",
+                        i.inicio_anio || "",
+                        i.institucion || "",
+                        i.lugar || "",
+                        i.rol || "",
+                        i.tareas || "",
+                        i.logros || null,
+                        i.referencia || null,
+                        i.referencia_linkedin || null,
+                        i.lengua || App.currentLanguage,
                     ]);
                 },
                 reconstructTeaching() {
-                    return (App.cvData.teaching_experience || []).map(i => [
-                        i.id || "1", i.persona_id || "1",
-                        i.course_name || "", i.institution || "",
-                        i.start_date || "", i.end_date || null,
-                        i.number_of_sessions || null, i.location || "",
-                        i.description || "", i.lengua || App.currentLanguage,
+                    return (App.cvData.teaching_experience || []).map((i) => [
+                        i.id || "1",
+                        i.persona_id || "1",
+                        i.course_name || "",
+                        i.institution || "",
+                        i.start_date || "",
+                        i.end_date || null,
+                        i.number_of_sessions || null,
+                        i.location || "",
+                        i.description || "",
+                        i.lengua || App.currentLanguage,
                     ]);
                 },
                 reconstructEducation() {
-                    return (App.cvData.educacion || []).map(i => [
-                        i.id || "1", i.persona_id || "1",
-                        i.grado_instruccion || "", i.institucion || "",
-                        i.titulo || "", i.fecha_inicio || "",
-                        Boolean(i.en_curso), i.lengua || App.currentLanguage,
+                    return (App.cvData.educacion || []).map((i) => [
+                        i.id || "1",
+                        i.persona_id || "1",
+                        i.grado_instruccion || "",
+                        i.institucion || "",
+                        i.titulo || "",
+                        i.fecha_inicio || "",
+                        Boolean(i.en_curso),
+                        i.lengua || App.currentLanguage,
                     ]);
                 },
                 reconstructLinks() {
-                    return (App.cvData.enlaces_personales || []).map(i => [
-                        i.id || "1", i.persona_id || "1",
-                        i.tipo || "", i.url || "", i.lengua || App.currentLanguage,
+                    return (App.cvData.enlaces_personales || []).map((i) => [
+                        i.id || "1",
+                        i.persona_id || "1",
+                        i.tipo || "",
+                        i.url || "",
+                        i.lengua || App.currentLanguage,
                     ]);
                 },
                 reconstructSkills() {
-                    return (App.cvData.skills || []).map(i => {
-                        if (i.certificate_name && String(i.certificate_name).trim() !== "") {
+                    return (App.cvData.skills || []).map((i) => {
+                        if (
+                            i.certificate_name &&
+                            String(i.certificate_name).trim() !== ""
+                        ) {
                             return [
-                                i.id || "1", i.persona_id || "1", i.profesion_id || null,
-                                i.skill_name || "", i.skill_level || "", i.tipo_skill || "",
-                                i.certificate_name || "", i.certificate_year || "",
-                                i.certificate_institution || "", i.certificate_path || "",
+                                i.id || "1",
+                                i.persona_id || "1",
+                                i.profesion_id || null,
+                                i.skill_name || "",
+                                i.skill_level || "",
+                                i.tipo_skill || "",
+                                i.certificate_name || "",
+                                i.certificate_year || "",
+                                i.certificate_institution || "",
+                                i.certificate_path || "",
                                 i.lengua || App.currentLanguage,
                             ];
                         }
                         return [
-                            i.id || "1", i.persona_id || "1", i.profesion_id || null,
-                            i.skill_name || "", i.skill_level || "", i.tipo_skill || "",
-                            i.certificate_name || "", i.lengua || App.currentLanguage,
+                            i.id || "1",
+                            i.persona_id || "1",
+                            i.profesion_id || null,
+                            i.skill_name || "",
+                            i.skill_level || "",
+                            i.tipo_skill || "",
+                            i.certificate_name || "",
+                            i.lengua || App.currentLanguage,
                         ];
                     });
                 },
                 reconstructCertifications() {
-                    return (App.cvData.certifications || []).map(i => [
-                        i.id || "1", i.persona_id || "1",
-                        i.name || "", i.issuer || "", i.year || "",
-                        i.url || null, i.lengua || App.currentLanguage,
+                    return (App.cvData.certifications || []).map((i) => [
+                        i.id || "1",
+                        i.persona_id || "1",
+                        i.name || "",
+                        i.issuer || "",
+                        i.year || "",
+                        i.url || null,
+                        i.lengua || App.currentLanguage,
                     ]);
                 },
                 reconstructPublications() {
-                    return (App.cvData.publications || []).map(i => [
-                        i.id || "1", i.persona_id || "1",
-                        i.title || "", i.authors || "", i.year || "",
-                        i.publication_type || "", i.journal_or_publisher || "",
-                        i.volume || null, i.pages || null, i.doi || null,
-                        i.url || null, i.contribution || "",
+                    return (App.cvData.publications || []).map((i) => [
+                        i.id || "1",
+                        i.persona_id || "1",
+                        i.title || "",
+                        i.authors || "",
+                        i.year || "",
+                        i.publication_type || "",
+                        i.journal_or_publisher || "",
+                        i.volume || null,
+                        i.pages || null,
+                        i.doi || null,
+                        i.url || null,
+                        i.contribution || "",
                         i.lengua || App.currentLanguage,
                     ]);
                 },
                 reconstructPortfolioItems() {
-                    return (App.cvData.portfolio_items || []).map(i => [
-                        i.id || "1", i.persona_id || "1",
-                        i.item_type || "", i.title || "", i.description || "",
-                        i.date_created || "", i.url || null,
-                        i.repository_link || null, i.image_path || null,
-                        i.additional_info || null, i.lengua || App.currentLanguage,
+                    return (App.cvData.portfolio_items || []).map((i) => [
+                        i.id || "1",
+                        i.persona_id || "1",
+                        i.item_type || "",
+                        i.title || "",
+                        i.description || "",
+                        i.date_created || "",
+                        i.url || null,
+                        i.repository_link || null,
+                        i.image_path || "",
+                        i.additional_info || null,
+                        i.lengua || App.currentLanguage,
                     ]);
                 },
             };
 
             const Data = {
-                async fetchCVData() {
-                    const embedded = LocalFileData.getCVData();
-                    let loaded = false;
+    async fetchCVData() {
+        if (IS_FILE_PROTOCOL) {
+            this.showFileProtocolBanner();
+            return;
+        }
 
-                    if (location.protocol !== "file:") {
-                        try {
-                            const r = await fetch("./cvs.json");
-                            if (r.ok) { App.originalData = await r.json(); loaded = true; }
-                        } catch (e) { console.warn("fetch cvs.json:", e); }
-                    }
+        try {
+            // cache-bust: cada reload trae el cvs.json actual, sin CDN stale
+            const r = await fetch("./cvs.json?t=" + Date.now(), {
+                cache: "no-store",
+            });
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            App.originalData = await r.json();
+            console.log(
+                `✅ cvs.json cargado: ${new Set(App.originalData.data.experiencia.map(x => x[0])).size} entradas de experiencia`
+            );
+        } catch (e) {
+            console.error("❌ No se pudo cargar cvs.json:", e);
+            document.body.innerHTML = `
+                <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif">
+                    <h1 style="color:#c0392b;margin-bottom:1rem">Error al cargar cvs.json</h1>
+                    <p>${String(e.message || e)}</p>
+                    <p style="margin-top:1rem;color:#666">Verifica que <code>cvs.json</code> exista junto a <code>index.html</code>.</p>
+                </div>`;
+            return;
+        }
 
-                    if (!loaded && embedded) {
-                        App.originalData = embedded;
-                        loaded = true;
-                    }
+        // Caché de ediciones (solo si logueado y versión coincide)
+        const cached = App.isLoggedIn ? CacheManager.loadFromCache() : null;
+        if (cached) {
+            App.cvData = cached;
+            Render.renderCV();
+            return;
+        }
+        this.refreshParsedData();
+    },
 
-                    if (!loaded) {
-                        console.error("No data source available (need cvs.json via server or window.__CV_DATA__).");
-                        return;
-                    }
-
-                    const cached = App.isLoggedIn ? CacheManager.loadFromCache() : null;
-                    if (cached) { App.cvData = cached; Render.renderCV(); return; }
-                    this.refreshParsedData();
-                },
+    showFileProtocolBanner() {
+        document.body.innerHTML = `
+            <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif;line-height:1.6">
+                <h1 style="color:#1a1a1a;margin-bottom:1rem">Necesitas un servidor local</h1>
+                <p>Estás abriendo este archivo con <code>file://</code>. Los navegadores no permiten cargar <code>cvs.json</code> desde disco por seguridad.</p>
+                <p style="margin-top:1.25rem"><strong>Ejecuta en la carpeta del proyecto:</strong></p>
+                <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem;overflow-x:auto">python -m http.server 8000</pre>
+                <p style="margin-top:1rem">Luego abre:</p>
+                <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem">http://localhost:8000</pre>
+                <p style="margin-top:1.5rem;color:#666;font-size:.9rem">En GitHub Pages (<code>https://</code>) este problema no existe; funciona directo.</p>
+            </div>`;
+    },
 
                 refreshParsedData() {
                     if (!App.originalData?.data) return;
                     const { data, tables } = App.originalData;
                     App.cvData = {
-                        profesiones: this.mapAndFilter(data.profesiones || [], tables, "profesiones"),
-                        experiencia: this.mapAndFilter(data.experiencia || [], tables, "experiencia"),
-                        teaching_experience: this.mapAndFilter(data.teaching_experience || [], tables, "teaching_experience"),
-                        educacion: this.mapAndFilter(data.educacion || [], tables, "educacion"),
-                        enlaces_personales: this.mapAndFilter(data.enlaces_personales || [], tables, "enlaces_personales"),
-                        skills: this.mapAndFilter(data.skills || [], tables, "skills"),
-                        certifications: this.mapAndFilter(data.certifications || [], tables, "certifications"),
-                        portfolio_items: this.mapAndFilter(data.portfolio_items || [], tables, "portfolio_items"),
-                        publications: this.mapAndFilter(data.publications || [], tables, "publications"),
+                        profesiones: this.mapAndFilter(
+                            data.profesiones || [],
+                            tables,
+                            "profesiones",
+                        ),
+                        experiencia: this.mapAndFilter(
+                            data.experiencia || [],
+                            tables,
+                            "experiencia",
+                        ),
+                        teaching_experience: this.mapAndFilter(
+                            data.teaching_experience || [],
+                            tables,
+                            "teaching_experience",
+                        ),
+                        educacion: this.mapAndFilter(
+                            data.educacion || [],
+                            tables,
+                            "educacion",
+                        ),
+                        enlaces_personales: this.mapAndFilter(
+                            data.enlaces_personales || [],
+                            tables,
+                            "enlaces_personales",
+                        ),
+                        skills: this.mapAndFilter(
+                            data.skills || [],
+                            tables,
+                            "skills",
+                        ),
+                        certifications: this.mapAndFilter(
+                            data.certifications || [],
+                            tables,
+                            "certifications",
+                        ),
+                        portfolio_items: this.mapAndFilter(
+                            data.portfolio_items || [],
+                            tables,
+                            "portfolio_items",
+                        ),
+                        publications: this.mapAndFilter(
+                            data.publications || [],
+                            tables,
+                            "publications",
+                        ),
                     };
 
-                    const personalRow = data.datos_personales.find(r => r[r.length - 1] === App.currentLanguage)
-                        || data.datos_personales[0];
+                    const personalRow =
+                        data.datos_personales.find(
+                            (r) => r[r.length - 1] === App.currentLanguage,
+                        ) || data.datos_personales[0];
 
-                    App.cvData.nombres = personalRow?.[1] || "Diego Mauricio Paucar Villacorta";
+                    App.cvData.nombres =
+                        personalRow?.[1] || "Diego Mauricio Paucar Villacorta";
                     App.cvData.telefono = personalRow?.[2] || "";
                     App.cvData.email = personalRow?.[3] || "";
                     App.cvData.lugar = personalRow?.[4] || "";
@@ -991,109 +1873,169 @@
 
                 mapAndFilter(arr, schema, tableName) {
                     if (!Array.isArray(arr)) return [];
-                    return arr.map((row, index) => {
-                        let obj = {};
+                    return arr
+                        .map((row, index) => {
+                            let obj = {};
 
-                        if (tableName === "experiencia") {
-                            if (Array.isArray(row)) {
-                                const hasCat = row.length >= 13;
-                                obj = {
-                                    id: row[0], persona_id: row[1], profesion_id: row[2],
-                                    experiencia_categoria: hasCat ? row[3] : "",
-                                    inicio_anio: hasCat ? row[4] : row[3],
-                                    institucion: hasCat ? row[5] : row[4],
-                                    lugar: hasCat ? row[6] : row[5],
-                                    rol: hasCat ? row[7] : row[6],
-                                    tareas: hasCat ? row[8] : row[7],
-                                    logros: hasCat ? row[9] : row[8],
-                                    referencia: hasCat ? row[10] : row[9],
-                                    referencia_linkedin: hasCat ? row[11] : row[10],
-                                    lengua: row[row.length - 1],
-                                };
-                            } else {
-                                obj = { ...row };
-                            }
-                        } else if (tableName === "teaching_experience") {
-                            obj = {
-                                id: row[0], persona_id: row[1],
-                                course_name: row[2], institution: row[3],
-                                start_date: row[4], end_date: row[5],
-                                number_of_sessions: row[6], location: row[7],
-                                description: row[8], lengua: row[row.length - 1],
-                            };
-                        } else if (tableName === "skills") {
-                            const longF = row.length >= 11;
-                            obj = {
-                                id: row[0], persona_id: row[1], profesion_id: row[2],
-                                skill_name: row[3], skill_level: row[4], tipo_skill: row[5],
-                                certificate_name: row[6] || "",
-                                certificate_year: longF ? row[7] : null,
-                                certificate_institution: longF ? row[8] : "",
-                                certificate_path: longF ? row[9] : "",
-                                lengua: row[row.length - 1],
-                            };
-                        } else if (tableName === "educacion") {
-                            obj = {
-                                id: row[0], persona_id: row[1],
-                                grado_instruccion: row[2], institucion: row[3],
-                                titulo: row[4], fecha_inicio: row[5],
-                                en_curso: row[6], lengua: row[row.length - 1],
-                            };
-                        } else if (tableName === "portfolio_items") {
-                            obj = {
-                                id: row[0], persona_id: row[1], item_type: row[2],
-                                title: row[3], description: row[4], date_created: row[5],
-                                url: row[6], repository_link: row[7],
-                                image_path: row[8], additional_info: row[9],
-                                lengua: row[row.length - 1],
-                            };
-                        } else if (tableName === "certifications") {
-                            obj = {
-                                id: row[0], persona_id: row[1],
-                                name: row[2], issuer: row[3], year: row[4],
-                                url: row[5], lengua: row[row.length - 1],
-                            };
-                        } else if (tableName === "publications") {
-                            if (Array.isArray(row)) {
-                                if (row.length <= 2) {
+                            if (tableName === "experiencia") {
+                                if (Array.isArray(row)) {
+                                    const hasCat = row.length >= 13;
                                     obj = {
-                                        id: String(index + 1), persona_id: "1",
-                                        title: row[0] || "", authors: "", year: "",
-                                        publication_type: "", journal_or_publisher: "",
-                                        volume: null, pages: null, doi: null,
-                                        url: row[1] || null, contribution: "", lengua: null,
-                                    };
-                                } else {
-                                    obj = {
-                                        id: row[0], persona_id: row[1], title: row[2],
-                                        authors: row[3], year: row[4], publication_type: row[5],
-                                        journal_or_publisher: row[6], volume: row[7],
-                                        pages: row[8], doi: row[9], url: row[10],
-                                        contribution: row[11] || "",
+                                        id: row[0],
+                                        persona_id: row[1],
+                                        profesion_id: row[2],
+                                        experiencia_categoria: hasCat
+                                            ? row[3]
+                                            : "",
+                                        inicio_anio: hasCat ? row[4] : row[3],
+                                        institucion: hasCat ? row[5] : row[4],
+                                        lugar: hasCat ? row[6] : row[5],
+                                        rol: hasCat ? row[7] : row[6],
+                                        tareas: hasCat ? row[8] : row[7],
+                                        logros: hasCat ? row[9] : row[8],
+                                        referencia: hasCat ? row[10] : row[9],
+                                        referencia_linkedin: hasCat
+                                            ? row[11]
+                                            : row[10],
                                         lengua: row[row.length - 1],
                                     };
+                                } else {
+                                    obj = { ...row };
+                                }
+                            } else if (tableName === "teaching_experience") {
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    course_name: row[2],
+                                    institution: row[3],
+                                    start_date: row[4],
+                                    end_date: row[5],
+                                    number_of_sessions: row[6],
+                                    location: row[7],
+                                    description: row[8],
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "skills") {
+                                const longF = row.length >= 11;
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    profesion_id: row[2],
+                                    skill_name: row[3],
+                                    skill_level: row[4],
+                                    tipo_skill: row[5],
+                                    certificate_name: row[6] || "",
+                                    certificate_year: longF ? row[7] : null,
+                                    certificate_institution: longF
+                                        ? row[8]
+                                        : "",
+                                    certificate_path: longF ? row[9] : "",
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "educacion") {
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    grado_instruccion: row[2],
+                                    institucion: row[3],
+                                    titulo: row[4],
+                                    fecha_inicio: row[5],
+                                    en_curso: row[6],
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "portfolio_items") {
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    item_type: row[2],
+                                    title: row[3],
+                                    description: row[4],
+                                    date_created: row[5],
+                                    url: row[6],
+                                    repository_link: row[7],
+                                    image_path: row[8],
+                                    additional_info: row[9],
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "certifications") {
+                                obj = {
+                                    id: row[0],
+                                    persona_id: row[1],
+                                    name: row[2],
+                                    issuer: row[3],
+                                    year: row[4],
+                                    url: row[5],
+                                    lengua: row[row.length - 1],
+                                };
+                            } else if (tableName === "publications") {
+                                if (Array.isArray(row)) {
+                                    if (row.length <= 2) {
+                                        obj = {
+                                            id: String(index + 1),
+                                            persona_id: "1",
+                                            title: row[0] || "",
+                                            authors: "",
+                                            year: "",
+                                            publication_type: "",
+                                            journal_or_publisher: "",
+                                            volume: null,
+                                            pages: null,
+                                            doi: null,
+                                            url: row[1] || null,
+                                            contribution: "",
+                                            lengua: null,
+                                        };
+                                    } else {
+                                        obj = {
+                                            id: row[0],
+                                            persona_id: row[1],
+                                            title: row[2],
+                                            authors: row[3],
+                                            year: row[4],
+                                            publication_type: row[5],
+                                            journal_or_publisher: row[6],
+                                            volume: row[7],
+                                            pages: row[8],
+                                            doi: row[9],
+                                            url: row[10],
+                                            contribution: row[11] || "",
+                                            lengua: row[row.length - 1],
+                                        };
+                                    }
+                                } else {
+                                    obj = { ...row };
                                 }
                             } else {
-                                obj = { ...row };
+                                const tbl = schema.find(
+                                    (t) => t.name === tableName,
+                                );
+                                const cols =
+                                    tbl?.columns?.map((c) => c.name) || [];
+                                row.forEach((v, i) => {
+                                    if (cols[i + 1]) obj[cols[i + 1]] = v;
+                                });
+                                obj.lengua = row[row.length - 1];
                             }
-                        } else {
-                            const tbl = schema.find(t => t.name === tableName);
-                            const cols = tbl?.columns?.map(c => c.name) || [];
-                            row.forEach((v, i) => { if (cols[i + 1]) obj[cols[i + 1]] = v; });
-                            obj.lengua = row[row.length - 1];
-                        }
-                        return obj;
-                    }).filter(i => !i.lengua || i.lengua === App.currentLanguage);
+                            return obj;
+                        })
+                        .filter(
+                            (i) =>
+                                !i.lengua || i.lengua === App.currentLanguage,
+                        );
                 },
             };
 
             const Render = {
                 renderCV() {
                     if (!App.cvData) return;
-                    document.getElementById("personName").textContent = App.cvData.nombres || "Diego Paucar";
+                    document.getElementById("personName").textContent =
+                        App.cvData.nombres || "Diego Paucar";
                     document.getElementById("professions").textContent =
-                        App.cvData.profesiones?.map(p => p.profesion).join(" | ") || "";
-                    document.getElementById("description").textContent = App.cvData.perfil || "";
+                        App.cvData.profesiones
+                            ?.map((p) => p.profesion)
+                            .join(" | ") || "";
+                    document.getElementById("description").textContent =
+                        App.cvData.perfil || "";
                     this.renderContact();
                     this.renderTimeline();
                     this.renderTeaching();
@@ -1104,7 +2046,10 @@
                     this.renderSkills();
 
                     const addBtn = document.getElementById("addExpBtn");
-                    if (addBtn) addBtn.style.display = App.isLoggedIn ? "inline-block" : "none";
+                    if (addBtn)
+                        addBtn.style.display = App.isLoggedIn
+                            ? "inline-block"
+                            : "none";
 
                     UI.initLanguageUI();
                 },
@@ -1113,15 +2058,23 @@
                     const bar = document.getElementById("contactBar");
                     if (!bar) return;
                     const items = [];
-                    const e = App.cvData.email, t = App.cvData.telefono, l = App.cvData.lugar;
+                    const e = App.cvData.email,
+                        t = App.cvData.telefono,
+                        l = App.cvData.lugar;
                     const links = App.cvData.enlaces_personales || [];
 
-                    if (e) items.push(`<a href="mailto:${this.escapeHtml(e)}">✉ ${this.escapeHtml(e)}</a>`);
+                    if (e)
+                        items.push(
+                            `<a href="mailto:${this.escapeHtml(e)}">✉ ${this.escapeHtml(e)}</a>`,
+                        );
                     if (t) items.push(`<span>☎ ${this.escapeHtml(t)}</span>`);
                     if (l) items.push(`<span>📍 ${this.escapeHtml(l)}</span>`);
-                    ["LinkedIn", "GitHub"].forEach(name => {
-                        const link = links.find(x => x.tipo === name);
-                        if (link) items.push(`<a href="${this.escapeHtml(link.url)}" target="_blank" rel="noopener">${name} ↗</a>`);
+                    ["LinkedIn", "GitHub"].forEach((name) => {
+                        const link = links.find((x) => x.tipo === name);
+                        if (link)
+                            items.push(
+                                `<a href="${this.escapeHtml(link.url)}" target="_blank" rel="noopener">${name} ↗</a>`,
+                            );
                     });
 
                     bar.innerHTML = items.join("");
@@ -1129,40 +2082,67 @@
                 },
 
                 renderTimeline() {
-                    const container = document.getElementById("timelineContainer");
+                    const container =
+                        document.getElementById("timelineContainer");
                     if (!container) return;
                     const exps = [...(App.cvData.experiencia || [])];
                     if (exps.length === 0) {
                         container.innerHTML = `<p style="color:var(--text-muted);font-size:0.9rem">${
-                            App.currentLanguage === "es" ? "No hay experiencia disponible." : "No experience available."
+                            App.currentLanguage === "es"
+                                ? "No hay experiencia disponible."
+                                : "No experience available."
                         }</p>`;
                         return;
                     }
 
                     // Sort by date descending
-                    exps.sort((a, b) => this.getSortableDate(b.inicio_anio) - this.getSortableDate(a.inicio_anio));
+                    exps.sort(
+                        (a, b) =>
+                            this.getSortableDate(b.inicio_anio) -
+                            this.getSortableDate(a.inicio_anio),
+                    );
 
-                    container.innerHTML = exps.map(exp => {
-                        const year = this.formatYear(exp.inicio_anio);
-                        const catClass = this.getCategoryClass(exp.experiencia_categoria);
-                        const role = this.escapeHtml(exp.rol || "");
-                        const institution = this.escapeHtml(exp.institucion || "");
-                        const location = this.escapeHtml(exp.lugar || "");
-                        const category = this.escapeHtml(exp.experiencia_categoria || "");
-                        const deleteBtn = App.isLoggedIn
-                            ? `<button class="btn-delete" onclick="CRUD.deleteExperience('${exp.id}')">Delete</button>` : "";
+                    container.innerHTML = exps
+                        .map((exp) => {
+                            const year = this.formatYear(exp.inicio_anio);
+                            const catClass = this.getCategoryClass(
+                                exp.experiencia_categoria,
+                            );
+                            const role = this.escapeHtml(exp.rol || "");
+                            const institution = this.escapeHtml(
+                                exp.institucion || "",
+                            );
+                            const location = this.escapeHtml(exp.lugar || "");
+                            const category = this.escapeHtml(
+                                exp.experiencia_categoria || "",
+                            );
+                            const deleteBtn = App.isLoggedIn
+                                ? `<button class="btn-delete" onclick="CRUD.deleteExperience('${exp.id}')">Delete</button>`
+                                : "";
 
-                        const detailBlocks = [
-                            exp.tareas ? `<p class="timeline-detail">${this.linkifyText(exp.tareas)}</p>` : "",
-                            exp.logros ? `<p class="timeline-detail"><span class="timeline-detail-label">${
-                                App.currentLanguage === "es" ? "Logros:" : "Highlights:"
-                            }</span> ${this.linkifyText(exp.logros)}</p>` : "",
-                            exp.referencia ? `<p class="timeline-detail"><span class="timeline-detail-label">${
-                                App.currentLanguage === "es" ? "Evidencia:" : "Evidence:"
-                            }</span> ${this.linkifyText(exp.referencia)}</p>` : "",
-                        ].filter(Boolean).join("");
+                            const detailBlocks = [
+                                exp.tareas
+                                    ? `<p class="timeline-detail">${this.linkifyText(exp.tareas)}</p>`
+                                    : "",
+                                exp.logros
+                                    ? `<p class="timeline-detail"><span class="timeline-detail-label">${
+                                          App.currentLanguage === "es"
+                                              ? "Logros:"
+                                              : "Highlights:"
+                                      }</span> ${this.linkifyText(exp.logros)}</p>`
+                                    : "",
+                                exp.referencia
+                                    ? `<p class="timeline-detail"><span class="timeline-detail-label">${
+                                          App.currentLanguage === "es"
+                                              ? "Evidencia:"
+                                              : "Evidence:"
+                                      }</span> ${this.linkifyText(exp.referencia)}</p>`
+                                    : "",
+                            ]
+                                .filter(Boolean)
+                                .join("");
 
-                        return `
+                            return `
                             <div class="timeline-item" data-exp-id="${exp.id}">
                                 <div class="timeline-bullet ${catClass}"></div>
                                 <p class="timeline-year">${year}</p>
@@ -1177,7 +2157,8 @@
                                 ${deleteBtn}
                             </div>
                         `;
-                    }).join("");
+                        })
+                        .join("");
                 },
 
                 renderTeaching() {
@@ -1186,14 +2167,25 @@
                     if (!container || !section) return;
                     const items = [...(App.cvData.teaching_experience || [])];
 
-                    if (items.length === 0) { section.style.display = "none"; return; }
+                    if (items.length === 0) {
+                        section.style.display = "none";
+                        return;
+                    }
                     section.style.display = "block";
 
-                    items.sort((a, b) => new Date(b.start_date || 0) - new Date(a.start_date || 0));
+                    items.sort(
+                        (a, b) =>
+                            new Date(b.start_date || 0) -
+                            new Date(a.start_date || 0),
+                    );
 
-                    container.innerHTML = items.map(t => {
-                        const dates = this.formatDateRange(t.start_date, t.end_date);
-                        return `
+                    container.innerHTML = items
+                        .map((t) => {
+                            const dates = this.formatDateRange(
+                                t.start_date,
+                                t.end_date,
+                            );
+                            return `
                             <div class="teaching-item">
                                 <div class="teaching-header">
                                     <h4>${this.escapeHtml(t.course_name || "")}</h4>
@@ -1203,7 +2195,8 @@
                                 ${t.description ? `<p class="teaching-description">${this.escapeHtml(t.description)}</p>` : ""}
                             </div>
                         `;
-                    }).join("");
+                        })
+                        .join("");
                 },
 
                 renderProjects() {
@@ -1211,78 +2204,142 @@
                     const section = document.getElementById("projectsSection");
                     if (!grid || !section) return;
                     const projects = App.cvData.portfolio_items || [];
-                    if (projects.length === 0) { section.style.display = "none"; return; }
+                    if (projects.length === 0) {
+                        section.style.display = "none";
+                        return;
+                    }
                     section.style.display = "block";
-                    grid.innerHTML = projects.map(project => {
-                        const link = project.repository_link || project.url;
-                        const label = project.repository_link ? "GitHub"
-                            : (App.currentLanguage === "es" ? "Ver proyecto" : "View project");
-                        return `
-                            <div class="project-card">
-                                <div class="project-card-header">
-                                    <h3>${this.escapeHtml(project.title)}</h3>
-                                    ${link ? `<a href="${this.escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="project-link">${label}</a>` : ""}
-                                </div>
-                                <p>${this.escapeHtml(project.description || "")}</p>
-                            </div>
-                        `;
-                    }).join("");
+                    grid.innerHTML = projects
+                        .map((project) => {
+                            const link = project.repository_link || project.url;
+                            const label = project.repository_link
+                                ? "GitHub"
+                                : App.currentLanguage === "es"
+                                  ? "Ver proyecto"
+                                  : "View project";
+                            const hasImage = !!project.image_path;
+
+                            return hasImage
+                                ? `\
+                <div class="project-card has-image">\
+                    <div class="project-card-header">\
+                        <img src="${this.escapeHtml(project.image_path)}" alt="${this.escapeHtml(project.title)}">\
+                        <h3>${this.escapeHtml(project.title)}</h3>\
+                        ${link ? `<a href="${this.escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="project-link">${label}</a>` : ""}\
+                    </div>\
+                    <p>${this.escapeHtml(project.description || "")}</p>\
+                </div>`
+                                : `\
+                <div class="project-card.default-card">\
+                    <div class="project-card-header">\
+                        <h3>${this.escapeHtml(project.title)}</h3>\
+                        ${link ? `<a href="${this.escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="project-link">${label}</a>` : ""}\
+                    </div>\
+                    <p>${this.escapeHtml(project.description || "")}</p>\
+                </div>`;
+                        })
+                        .join("");
                 },
 
                 renderPublications() {
-                    const container = document.getElementById("publicationsList");
-                    const section = document.getElementById("publicationsSection");
+                    const container =
+                        document.getElementById("publicationsList");
+                    const section = document.getElementById(
+                        "publicationsSection",
+                    );
                     if (!container || !section) return;
                     const pubs = [...(App.cvData.publications || [])];
-                    if (pubs.length === 0) { section.style.display = "none"; return; }
+                    if (pubs.length === 0) {
+                        section.style.display = "none";
+                        return;
+                    }
                     section.style.display = "block";
 
-                    pubs.sort((a, b) =>
-                        this.getPublicationPriority(b) - this.getPublicationPriority(a) ||
-                        this.getSortableDate(b.year) - this.getSortableDate(a.year));
+                    pubs.sort(
+                        (a, b) =>
+                            this.getPublicationPriority(b) -
+                                this.getPublicationPriority(a) ||
+                            this.getSortableDate(b.year) -
+                                this.getSortableDate(a.year),
+                    );
 
-                    container.innerHTML = pubs.map(pub => `
+                    container.innerHTML = pubs
+                        .map(
+                            (pub) => `
                         <div class="publication-item">
                             <h4>${this.escapeHtml(pub.title)}</h4>
                             <p class="pub-meta"><em>${this.escapeHtml(pub.journal_or_publisher || "")}</em>${pub.year ? `, ${pub.year}` : ""}</p>
                             ${pub.authors ? `<p>${this.escapeHtml(pub.authors)}</p>` : ""}
                             ${pub.contribution ? `<p class="pub-role">${this.escapeHtml(pub.contribution)}</p>` : ""}
                             ${pub.doi ? `<p class="pub-meta">DOI: ${this.escapeHtml(pub.doi)}</p>` : ""}
-                            ${pub.url ? `<a href="${this.escapeHtml(pub.url)}" target="_blank" rel="noopener noreferrer" class="publication-link">${
-                                App.currentLanguage === "es" ? "Ver publicación" : "View publication"
-                            }</a>` : ""}
+                            ${
+                                pub.url
+                                    ? `<a href="${this.escapeHtml(pub.url)}" target="_blank" rel="noopener noreferrer" class="publication-link">${
+                                          App.currentLanguage === "es"
+                                              ? "Ver publicación"
+                                              : "View publication"
+                                      }</a>`
+                                    : ""
+                            }
                         </div>
-                    `).join("");
+                    `,
+                        )
+                        .join("");
                 },
 
                 renderCredentials() {
                     const grid = document.getElementById("credentialsGrid");
-                    const section = document.getElementById("credentialsSection");
+                    const section =
+                        document.getElementById("credentialsSection");
                     if (!grid || !section) return;
-                    let src = App.cvData.certifications?.length > 0
-                        ? App.cvData.certifications
-                        : (App.cvData.skills || []).filter(s => s.certificate_name?.trim())
-                            .map(s => ({
-                                id: s.id, name: s.certificate_name,
-                                issuer: s.certificate_institution || s.skill_name || "",
-                                year: s.certificate_year, url: s.certificate_path || null,
-                            }));
-                    if (src.length === 0) { section.style.display = "none"; return; }
+                    let src =
+                        App.cvData.certifications?.length > 0
+                            ? App.cvData.certifications
+                            : (App.cvData.skills || [])
+                                  .filter((s) => s.certificate_name?.trim())
+                                  .map((s) => ({
+                                      id: s.id,
+                                      name: s.certificate_name,
+                                      issuer:
+                                          s.certificate_institution ||
+                                          s.skill_name ||
+                                          "",
+                                      year: s.certificate_year,
+                                      url: s.certificate_path || null,
+                                  }));
+                    if (src.length === 0) {
+                        section.style.display = "none";
+                        return;
+                    }
                     section.style.display = "block";
 
-                    src = [...src].sort((a, b) => this.getSortableDate(b.year) - this.getSortableDate(a.year));
+                    src = [...src].sort(
+                        (a, b) =>
+                            this.getSortableDate(b.year) -
+                            this.getSortableDate(a.year),
+                    );
 
-                    grid.innerHTML = src.map(cert => `
+                    grid.innerHTML = src
+                        .map(
+                            (cert) => `
                         <div class="credential-item">
                             <span class="credential-type">${App.currentLanguage === "es" ? "Certificación" : "Certification"}</span>
                             <h4>${this.escapeHtml(cert.name || "")}</h4>
                             <span class="credential-issuer">${this.escapeHtml(cert.issuer || "")}</span>
                             <span class="credential-year">${this.formatYear(cert.year)}</span>
-                            ${cert.url ? `<a href="${this.escapeHtml(cert.url)}" target="_blank" rel="noopener noreferrer" class="publication-link">${
-                                App.currentLanguage === "es" ? "Ver credencial" : "View credential"
-                            }</a>` : ""}
+                            ${
+                                cert.url
+                                    ? `<a href="${this.escapeHtml(cert.url)}" target="_blank" rel="noopener noreferrer" class="publication-link">${
+                                          App.currentLanguage === "es"
+                                              ? "Ver credencial"
+                                              : "View credential"
+                                      }</a>`
+                                    : ""
+                            }
                         </div>
-                    `).join("");
+                    `,
+                        )
+                        .join("");
                 },
 
                 renderInfoSections() {
@@ -1291,20 +2348,27 @@
                     grid.innerHTML = "";
 
                     const education = [...(App.cvData.educacion || [])].sort(
-                        (a, b) => new Date(b.fecha_inicio || 0) - new Date(a.fecha_inicio || 0));
+                        (a, b) =>
+                            new Date(b.fecha_inicio || 0) -
+                            new Date(a.fecha_inicio || 0),
+                    );
 
                     if (education.length > 0) {
                         const card = document.createElement("div");
                         card.className = "info-card";
                         card.innerHTML = `
                             <h3><span class="lang-content active" data-lang="en">Education</span><span class="lang-content" data-lang="es">Educación</span></h3>
-                            ${education.map(edu => `
+                            ${education
+                                .map(
+                                    (edu) => `
                                 <div class="info-item">
                                     <h4>${this.escapeHtml(edu.titulo || "")}</h4>
                                     <p>${this.escapeHtml(edu.institucion || "")}</p>
                                     <p>${this.formatYear(edu.fecha_inicio)}</p>
                                 </div>
-                            `).join("")}
+                            `,
+                                )
+                                .join("")}
                         `;
                         grid.appendChild(card);
                     }
@@ -1315,11 +2379,15 @@
                         card.className = "info-card";
                         card.innerHTML = `
                             <h3><span class="lang-content active" data-lang="en">Links</span><span class="lang-content" data-lang="es">Enlaces</span></h3>
-                            ${links.map(link => `
+                            ${links
+                                .map(
+                                    (link) => `
                                 <div class="info-item">
                                     <h4><a href="${this.escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${this.escapeHtml(link.tipo)}</a></h4>
                                 </div>
-                            `).join("")}
+                            `,
+                                )
+                                .join("")}
                         `;
                         grid.appendChild(card);
                     }
@@ -1331,8 +2399,14 @@
                 renderSkills() {
                     const section = document.getElementById("skillsSection");
                     if (!section) return;
-                    const skills = (App.cvData.skills || []).filter(s => !(s.certificate_name && s.certificate_name.trim()));
-                    if (skills.length === 0) { section.style.display = "none"; return; }
+                    const skills = (App.cvData.skills || []).filter(
+                        (s) =>
+                            !(s.certificate_name && s.certificate_name.trim()),
+                    );
+                    if (skills.length === 0) {
+                        section.style.display = "none";
+                        return;
+                    }
                     section.style.display = "block";
                     section.innerHTML = `
                         <h2 class="section-title">
@@ -1340,72 +2414,114 @@
                             <span class="lang-content" data-lang="es">Habilidades</span>
                         </h2>
                         <div class="skills-grid">
-                            ${skills.map(s => `<span class="skill-tag">${this.escapeHtml(s.skill_name)}</span>`).join("")}
+                            ${skills.map((s) => `<span class="skill-tag">${this.escapeHtml(s.skill_name)}</span>`).join("")}
                         </div>
                     `;
                 },
 
                 getCategoryClass(cat) {
                     const c = String(cat || "").toLowerCase();
-                    if (c.includes("docencia") || c.includes("teaching")) return "teaching";
-                    if (c.includes("investig") || c.includes("research") || c.includes("academic")) return "research";
-                    if (c.includes("practic") || c.includes("pasant") || c.includes("internship")) return "internship";
-                    if (c.includes("consult") || c.includes("analisis") || c.includes("analytics") ||
-                        c.includes("locación") || c.includes("locacion") || c.includes("desarrollo") || c.includes("development"))
+                    if (c.includes("docencia") || c.includes("teaching"))
+                        return "teaching";
+                    if (
+                        c.includes("investig") ||
+                        c.includes("research") ||
+                        c.includes("academic")
+                    )
+                        return "research";
+                    if (
+                        c.includes("practic") ||
+                        c.includes("pasant") ||
+                        c.includes("internship")
+                    )
+                        return "internship";
+                    if (
+                        c.includes("consult") ||
+                        c.includes("analisis") ||
+                        c.includes("analytics") ||
+                        c.includes("locación") ||
+                        c.includes("locacion") ||
+                        c.includes("desarrollo") ||
+                        c.includes("development")
+                    )
                         return "consulting";
                     return "other";
                 },
 
                 getPublicationPriority(pub) {
                     const c = String(pub.contribution || "").toLowerCase();
-                    if (c.includes("lead author") || c.includes("autor principal")) return 100;
-                    if (c.includes("methodological") || c.includes("metodológico") ||
-                        c.includes("data analyst") || c.includes("analista de datos")) return 80;
+                    if (
+                        c.includes("lead author") ||
+                        c.includes("autor principal")
+                    )
+                        return 100;
+                    if (
+                        c.includes("methodological") ||
+                        c.includes("metodológico") ||
+                        c.includes("data analyst") ||
+                        c.includes("analista de datos")
+                    )
+                        return 80;
                     return 0;
                 },
 
                 escapeHtml(v) {
                     return String(v ?? "")
-                        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-                        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#39;");
                 },
 
                 linkifyText(v) {
                     return this.escapeHtml(v).replace(
                         /(https?:\/\/[^\s<)]+)/g,
-                        '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+                        '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>',
+                    );
                 },
 
                 formatYear(v) {
                     if (v === null || v === undefined || v === "") return "";
                     if (v === "Actual" || v === "Actualidad" || v === "Present")
-                        return App.currentLanguage === "es" ? "Actual" : "Present";
-                    if (typeof v === "number" && v >= 1900 && v <= 2100) return String(v);
+                        return App.currentLanguage === "es"
+                            ? "Actual"
+                            : "Present";
+                    if (typeof v === "number" && v >= 1900 && v <= 2100)
+                        return String(v);
                     const raw = String(v).trim();
                     if (!raw) return "";
                     if (/^\d{4}$/.test(raw)) return raw;
                     const iso = raw.match(/^(\d{4})-\d{2}-\d{2}$/);
                     if (iso) return iso[1];
                     const d = new Date(raw);
-                    return Number.isNaN(d.getTime()) ? raw : String(d.getFullYear());
+                    return Number.isNaN(d.getTime())
+                        ? raw
+                        : String(d.getFullYear());
                 },
 
                 formatDateRange(start, end) {
-                    const fmt = d => {
+                    const fmt = (d) => {
                         if (!d) return "";
                         const date = new Date(d);
                         if (Number.isNaN(date.getTime())) return String(d);
-                        const locale = App.currentLanguage === "es" ? "es-PE" : "en-US";
-                        return date.toLocaleDateString(locale, { month: "short", year: "numeric" });
+                        const locale =
+                            App.currentLanguage === "es" ? "es-PE" : "en-US";
+                        return date.toLocaleDateString(locale, {
+                            month: "short",
+                            year: "numeric",
+                        });
                     };
-                    const s = fmt(start), e = fmt(end);
+                    const s = fmt(start),
+                        e = fmt(end);
                     if (!s && !e) return "";
                     if (!e) return s;
                     return `${s} – ${e}`;
                 },
 
                 getSortableDate(v) {
-                    if (v === "Actual" || v === "Actualidad" || v === "Present") return Number.MAX_SAFE_INTEGER;
+                    if (v === "Actual" || v === "Actualidad" || v === "Present")
+                        return Number.MAX_SAFE_INTEGER;
                     if (typeof v === "number") {
                         if (v >= 1900 && v <= 2100) return Date.UTC(v, 0, 1);
                         return v > 100000 ? v : 0;
@@ -1414,7 +2530,12 @@
                     if (!raw) return 0;
                     if (/^\d{4}$/.test(raw)) return Date.UTC(Number(raw), 0, 1);
                     const iso = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-                    if (iso) return Date.UTC(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+                    if (iso)
+                        return Date.UTC(
+                            Number(iso[1]),
+                            Number(iso[2]) - 1,
+                            Number(iso[3]),
+                        );
                     const t = new Date(raw).getTime();
                     return Number.isNaN(t) ? 0 : t;
                 },
@@ -1426,7 +2547,9 @@
                     if (element.querySelector(".edit-controls")) return;
 
                     const originalContent = element.innerHTML;
-                    const input = document.createElement(fieldType === "textarea" ? "textarea" : "input");
+                    const input = document.createElement(
+                        fieldType === "textarea" ? "textarea" : "input",
+                    );
                     const tempDiv = document.createElement("div");
                     tempDiv.innerHTML = originalContent;
                     input.value = tempDiv.textContent.trim();
@@ -1437,14 +2560,23 @@
                     element.classList.add("edit-mode");
 
                     const saveBtn = document.createElement("button");
-                    saveBtn.textContent = "Save"; saveBtn.type = "button";
-                    saveBtn.className = "btn-primary"; saveBtn.style.marginRight = "0.5rem";
-                    saveBtn.onclick = e => { e.preventDefault(); CRUD.saveEdit(element, input.value); };
+                    saveBtn.textContent = "Save";
+                    saveBtn.type = "button";
+                    saveBtn.className = "btn-primary";
+                    saveBtn.style.marginRight = "0.5rem";
+                    saveBtn.onclick = (e) => {
+                        e.preventDefault();
+                        CRUD.saveEdit(element, input.value);
+                    };
 
                     const cancelBtn = document.createElement("button");
-                    cancelBtn.textContent = "Cancel"; cancelBtn.type = "button";
+                    cancelBtn.textContent = "Cancel";
+                    cancelBtn.type = "button";
                     cancelBtn.className = "btn-secondary";
-                    cancelBtn.onclick = e => { e.preventDefault(); CRUD.cancelEdit(element, originalContent); };
+                    cancelBtn.onclick = (e) => {
+                        e.preventDefault();
+                        CRUD.cancelEdit(element, originalContent);
+                    };
 
                     const controls = document.createElement("div");
                     controls.className = "edit-controls active";
@@ -1453,9 +2585,15 @@
                     element.appendChild(controls);
                     input.focus();
 
-                    input.addEventListener("keydown", e => {
-                        if (e.key === "Enter" && fieldType === "text") { e.preventDefault(); CRUD.saveEdit(element, input.value); }
-                        if (e.key === "Escape") { e.preventDefault(); CRUD.cancelEdit(element, originalContent); }
+                    input.addEventListener("keydown", (e) => {
+                        if (e.key === "Enter" && fieldType === "text") {
+                            e.preventDefault();
+                            CRUD.saveEdit(element, input.value);
+                        }
+                        if (e.key === "Escape") {
+                            e.preventDefault();
+                            CRUD.cancelEdit(element, originalContent);
+                        }
                     });
                 },
 
@@ -1464,7 +2602,8 @@
                     element.innerHTML = newValue;
                     this.updateDataInMemory(element, newValue);
                     CacheManager.saveToCache(App.cvData);
-                    if (App.isLoggedIn) setTimeout(() => AutoExport.exportOnChange(), 100);
+                    if (App.isLoggedIn)
+                        setTimeout(() => AutoExport.exportOnChange(), 100);
                 },
 
                 cancelEdit(element, html) {
@@ -1474,17 +2613,22 @@
 
                 deleteExperience(id) {
                     if (!confirm("Delete this experience?")) return;
-                    const i = App.cvData.experiencia.findIndex(e => String(e.id) === String(id));
+                    const i = App.cvData.experiencia.findIndex(
+                        (e) => String(e.id) === String(id),
+                    );
                     if (i !== -1) App.cvData.experiencia.splice(i, 1);
                     CacheManager.saveToCache(App.cvData);
                     Render.renderTimeline();
-                    if (App.isLoggedIn) setTimeout(() => AutoExport.exportOnChange(), 100);
+                    if (App.isLoggedIn)
+                        setTimeout(() => AutoExport.exportOnChange(), 100);
                 },
 
                 openCreateModal(tableName) {
                     const modal = document.getElementById("createModal");
                     const title = document.getElementById("createModalTitle");
-                    const container = document.getElementById("formFieldsContainer");
+                    const container = document.getElementById(
+                        "formFieldsContainer",
+                    );
                     const schema = this.getTableSchema(tableName);
                     title.textContent = `Add New ${tableName}`;
                     container.innerHTML = "";
@@ -1493,9 +2637,14 @@
                         const group = document.createElement("div");
                         group.className = "form-group";
                         const label = document.createElement("label");
-                        label.textContent = field.replace(/_/g, " ").toUpperCase();
-                        const input = document.createElement(type === "textarea" ? "textarea" : "input");
-                        if (type !== "textarea") input.type = type === "date" ? "date" : "text";
+                        label.textContent = field
+                            .replace(/_/g, " ")
+                            .toUpperCase();
+                        const input = document.createElement(
+                            type === "textarea" ? "textarea" : "input",
+                        );
+                        if (type !== "textarea")
+                            input.type = type === "date" ? "date" : "text";
                         input.id = `field-${field}`;
                         input.dataset.field = field;
                         input.required = true;
@@ -1505,13 +2654,17 @@
                     });
 
                     modal.classList.add("active");
-                    document.getElementById("createForm").dataset.table = tableName;
+                    document.getElementById("createForm").dataset.table =
+                        tableName;
                 },
 
                 closeCreateModal() {
-                    document.getElementById("createModal").classList.remove("active");
+                    document
+                        .getElementById("createModal")
+                        .classList.remove("active");
                     document.getElementById("createForm").reset();
-                    document.getElementById("formFieldsContainer").innerHTML = "";
+                    document.getElementById("formFieldsContainer").innerHTML =
+                        "";
                 },
 
                 handleCreateSubmit(event) {
@@ -1521,47 +2674,86 @@
                     const newEntry = {};
                     let valid = true;
 
-                    form.querySelectorAll("[data-field]").forEach(input => {
-                        if (input.required && !input.value.trim()) { valid = false; input.style.borderColor = "red"; }
-                        else { input.style.borderColor = ""; newEntry[input.dataset.field] = input.value; }
+                    form.querySelectorAll("[data-field]").forEach((input) => {
+                        if (input.required && !input.value.trim()) {
+                            valid = false;
+                            input.style.borderColor = "red";
+                        } else {
+                            input.style.borderColor = "";
+                            newEntry[input.dataset.field] = input.value;
+                        }
                     });
-                    if (!valid) { alert("Fill all required fields."); return; }
+                    if (!valid) {
+                        alert("Fill all required fields.");
+                        return;
+                    }
 
                     const cur = App.cvData[tableName] || [];
-                    const maxId = Math.max(0, ...cur.map(e => Number(e.id) || 0));
+                    const maxId = Math.max(
+                        0,
+                        ...cur.map((e) => Number(e.id) || 0),
+                    );
                     newEntry.id = String(maxId + 1);
                     newEntry.persona_id = "1";
                     newEntry.lengua = App.currentLanguage;
 
                     if (tableName === "experiencia") {
-                        newEntry.profesion_id = "1"; newEntry.lugar = "";
-                        newEntry.logros = null; newEntry.referencia = null; newEntry.referencia_linkedin = null;
+                        newEntry.profesion_id = "1";
+                        newEntry.lugar = "";
+                        newEntry.logros = null;
+                        newEntry.referencia = null;
+                        newEntry.referencia_linkedin = null;
                     }
-                    if (tableName === "educacion") { newEntry.grado_instruccion = ""; newEntry.en_curso = false; }
+                    if (tableName === "educacion") {
+                        newEntry.grado_instruccion = "";
+                        newEntry.en_curso = false;
+                    }
 
                     if (!App.cvData[tableName]) App.cvData[tableName] = [];
                     App.cvData[tableName].push(newEntry);
                     CacheManager.saveToCache(App.cvData);
 
                     if (tableName === "experiencia") Render.renderTimeline();
-                    else if (tableName === "educacion" || tableName === "enlaces_personales") Render.renderInfoSections();
+                    else if (
+                        tableName === "educacion" ||
+                        tableName === "enlaces_personales"
+                    )
+                        Render.renderInfoSections();
 
-                    if (App.isLoggedIn) setTimeout(() => AutoExport.exportOnChange(), 100);
+                    if (App.isLoggedIn)
+                        setTimeout(() => AutoExport.exportOnChange(), 100);
                     this.closeCreateModal();
                     form.reset();
                 },
 
                 updateDataInMemory(element, newValue) {
                     const { table, field, id } = element.dataset;
-                    if (!table || !field || !id || !Array.isArray(App.cvData[table])) return;
-                    const entry = App.cvData[table].find(i => String(i.id) === String(id));
+                    if (
+                        !table ||
+                        !field ||
+                        !id ||
+                        !Array.isArray(App.cvData[table])
+                    )
+                        return;
+                    const entry = App.cvData[table].find(
+                        (i) => String(i.id) === String(id),
+                    );
                     if (entry) entry[field] = newValue;
                 },
 
                 getTableSchema(tableName) {
                     const s = {
-                        experiencia: { institucion: "text", rol: "text", inicio_anio: "date", tareas: "textarea" },
-                        educacion: { titulo: "text", institucion: "text", fecha_inicio: "date" },
+                        experiencia: {
+                            institucion: "text",
+                            rol: "text",
+                            inicio_anio: "date",
+                            tareas: "textarea",
+                        },
+                        educacion: {
+                            titulo: "text",
+                            institucion: "text",
+                            fecha_inicio: "date",
+                        },
                         enlaces_personales: { tipo: "text", url: "text" },
                     };
                     return s[tableName] || {};
@@ -1575,10 +2767,15 @@
                 await Data.fetchCVData();
             });
 
-            document.addEventListener("keydown", e => {
+            document.addEventListener("keydown", (e) => {
                 if (e.key === "Escape") {
-                    document.getElementById("loginModal")?.classList.contains("active") && UI.toggleLoginModal();
-                    document.getElementById("createModal")?.classList.contains("active") && CRUD.closeCreateModal();
+                    document
+                        .getElementById("loginModal")
+                        ?.classList.contains("active") && UI.toggleLoginModal();
+                    document
+                        .getElementById("createModal")
+                        ?.classList.contains("active") &&
+                        CRUD.closeCreateModal();
                 }
             });
         </script>

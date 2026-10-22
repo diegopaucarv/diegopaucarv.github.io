@@ -6,17 +6,24 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "nombres",
           "type": "VARCHAR(200)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "telefono",
@@ -46,7 +53,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -64,22 +73,31 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "profesion",
           "type": "VARCHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -89,7 +107,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -107,27 +127,38 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "tipo",
           "type": "VARCHAR(50)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "url",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -137,7 +168,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -155,22 +188,31 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "profesion_id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "experiencia_categoria",
@@ -180,7 +222,9 @@
         {
           "name": "inicio_anio",
           "type": "CHAR(50)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "institucion",
@@ -225,7 +269,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -243,27 +289,38 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "grado_instruccion",
           "type": "VARCHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "institucion",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "titulo",
@@ -278,7 +335,9 @@
         {
           "name": "en_curso",
           "type": "BOOLEAN",
-          "constraints": ["DEFAULT FALSE"]
+          "constraints": [
+            "DEFAULT FALSE"
+          ]
         },
         {
           "name": "lengua",
@@ -293,17 +352,24 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "profesion_id",
@@ -313,17 +379,23 @@
         {
           "name": "skill_name",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "skill_level",
           "type": "CHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "tipo_skill",
           "type": "CHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "certificate_name",
@@ -358,32 +430,45 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "title",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "authors",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "year",
           "type": "YEAR",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "publication_type",
           "type": "VARCHAR(50)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "journal_or_publisher",
@@ -423,7 +508,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -441,27 +528,38 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "course_name",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "institution",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "start_date",
           "type": "DATE",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "end_date",
@@ -491,7 +589,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -509,22 +609,31 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "item_type",
           "type": "VARCHAR(100)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "title",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "description",
@@ -564,7 +673,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -582,27 +693,38 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "name",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "issuer",
           "type": "VARCHAR(255)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "year",
           "type": "YEAR",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "url",
@@ -617,7 +739,9 @@
         {
           "name": "created_at",
           "type": "TIMESTAMP",
-          "constraints": ["DEFAULT CURRENT_TIMESTAMP()"]
+          "constraints": [
+            "DEFAULT CURRENT_TIMESTAMP()"
+          ]
         },
         {
           "name": "updated_at",
@@ -635,17 +759,24 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "portafolio_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "categoria",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -660,27 +791,38 @@
         {
           "name": "n",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "persona_id",
           "type": "UINT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "titulo",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "descripcion",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -695,22 +837,31 @@
         {
           "name": "id",
           "type": "UINT",
-          "constraints": ["AUTO_INCREMENT", "PRIMARY KEY"]
+          "constraints": [
+            "AUTO_INCREMENT",
+            "PRIMARY KEY"
+          ]
         },
         {
           "name": "service_id",
           "type": "INT",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "variation_description",
           "type": "VARCHAR(500)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "price",
           "type": "DECIMAL(10, 2)",
-          "constraints": ["NOT NULL"]
+          "constraints": [
+            "NOT NULL"
+          ]
         },
         {
           "name": "lengua",
@@ -744,17 +895,65 @@
       ]
     ],
     "profesiones": [
-      [1, 1, "ML Engineer", "en"],
-      [2, 1, "Applied NLP & LLMs", "en"],
-      [3, 1, "Analytics Automation", "en"],
-      [1, 1, "Ingeniero de ML", "es"],
-      [2, 1, "NLP y LLMs Aplicados", "es"],
-      [3, 1, "Automatización Analítica", "es"]
+      [
+        1,
+        1,
+        "ML Engineer",
+        "en"
+      ],
+      [
+        2,
+        1,
+        "Applied NLP & LLMs",
+        "en"
+      ],
+      [
+        3,
+        1,
+        "Analytics Automation",
+        "en"
+      ],
+      [
+        1,
+        1,
+        "Ingeniero de ML",
+        "es"
+      ],
+      [
+        2,
+        1,
+        "NLP y LLMs Aplicados",
+        "es"
+      ],
+      [
+        3,
+        1,
+        "Automatización Analítica",
+        "es"
+      ]
     ],
     "enlaces_personales": [
-      [1, 1, "Website", "https://www.facebook.com/escape.ccss/", "en"],
-      [2, 1, "GitHub", "https://github.com/diegopaucarv", "en"],
-      [3, 1, "LinkedIn", "https://www.linkedin.com/in/diegopaucarv/", "en"],
+      [
+        1,
+        1,
+        "Website",
+        "https://www.facebook.com/escape.ccss/",
+        "en"
+      ],
+      [
+        2,
+        1,
+        "GitHub",
+        "https://github.com/diegopaucarv",
+        "en"
+      ],
+      [
+        3,
+        1,
+        "LinkedIn",
+        "https://www.linkedin.com/in/diegopaucarv/",
+        "en"
+      ],
       [
         4,
         1,
@@ -762,9 +961,27 @@
         "https://public.tableau.com/app/profile/diego.paucar",
         "en"
       ],
-      [1, 1, "Sitio web", "https://www.facebook.com/escape.ccss/", "es"],
-      [2, 1, "GitHub", "https://github.com/diegopaucarv", "es"],
-      [3, 1, "LinkedIn", "https://www.linkedin.com/in/diegopaucarv/", "es"],
+      [
+        1,
+        1,
+        "Sitio web",
+        "https://www.facebook.com/escape.ccss/",
+        "es"
+      ],
+      [
+        2,
+        1,
+        "GitHub",
+        "https://github.com/diegopaucarv",
+        "es"
+      ],
+      [
+        3,
+        1,
+        "LinkedIn",
+        "https://www.linkedin.com/in/diegopaucarv/",
+        "es"
+      ],
       [
         4,
         1,
@@ -774,51 +991,6 @@
       ]
     ],
     "experiencia": [
-      [
-        "17",
-        "1",
-        "1",
-        "BI & Analytics Consulting",
-        "Actual",
-        "ESCAPE - BI & Analytics Consulting",
-        "Lima, Peru / Remote",
-        "Senior Data Scientist & AI Consultant",
-        "Delivered BI and analytics consulting engagements for government agencies, NGOs, and private-sector clients. Scoped and implemented NLP/ML workflows for qualitative and quantitative analysis, built process-mining and optimization solutions, and translated analytical requirements into reusable dashboards, reports, and training for decision-makers.",
-        "Supported multi-client delivery across public and private organizations, including BPMN redesign and change-program work for mining, food, and other sectors.",
-        null,
-        null,
-        "en"
-      ],
-      [
-        "18",
-        "1",
-        "3",
-        "Corporate Consulting",
-        "2024-08-01",
-        "Facilitadores Asociados",
-        "Lima, Peru",
-        "Consultant & Analyst",
-        "Delivered BPMN process maps, operational diagnostics, and change-program materials for large mining, food, and diversified-industry clients. Built supporting websites, pedagogical assets, and KPI dashboards used to track training progress and compliance.",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "20",
-        "1",
-        "3",
-        "AI Development",
-        "2023-07-01",
-        "Massive Dynamics Perú SAC",
-        "Lima, Peru",
-        "Project Assistant / Chatbot Developer",
-        "Contributed to delivery of a chatbot for data-analysis use cases using Azure Databricks, Azure Machine Learning, and OpenAI models. Supported SQL-based data lake and blob-storage workflows and built HTML/JavaScript components for the user-facing experience.",
-        null,
-        null,
-        null,
-        "en"
-      ],
       [
         "19",
         "1",
@@ -833,171 +1005,6 @@
         null,
         null,
         "en"
-      ],
-      [
-        "23",
-        "1",
-        "2",
-        "Academic Consulting",
-        "2025",
-        "Academic Consulting - COVID-19 Vaccination in Debate",
-        "Remote",
-        "Data Analysis Consultant for Academia",
-        "Led the analytical design for a mixed-method study of digital news coverage on COVID-19 vaccination across Mexico, Brazil, and Peru. Delivered discourse, framing, narrative, multimodal topic-modeling, semantic-segmentation, clustering, and correspondence-analysis workflows to support comparative findings for publication. Publication: https://www.scielo.cl/scielo.php?pid=S0719-15292025000200055&script=sci_arttext",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "22",
-        "1",
-        "2",
-        "Academic Consulting",
-        "2024",
-        "Academic Consulting - Gender Variable in Science Communication on Twitter/X",
-        "Remote",
-        "Data Analysis Consultant for Academia",
-        "Delivered the analysis workflow for a mixed study of 13,165 Twitter/X posts from 17 science communicators. Built the data-collection, cleaning, metrics, sampling, sentiment, PCA exploration, and ROC-based evaluation pipeline used to derive final thematic and communicative categories. Publication: https://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2415-09592024000400017",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "24",
-        "1",
-        "2",
-        "Academic Consulting",
-        "2024",
-        "Academic Consulting - Media and Social Conflicts During COVID-19",
-        "Remote",
-        "Data Analysis Consultant for Academia",
-        "Delivered data analysis and methodological review for a mixed study of 53 newspaper front pages on media coverage and social conflict during the pandemic. Applied framing analysis, critical discourse analysis, and cross-outlet comparison to structure publication-ready results. Publication: https://revistasinvestigacion.unmsm.edu.pe/index.php/discursos/article/view/25876",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "28",
-        "1",
-        "2",
-        "Academic Consulting",
-        "2024",
-        "Academic Consulting - Female Cyberactivism on Twitter",
-        "Remote",
-        "Data Analysis Consultant for Academia",
-        "Supported a mixed-method study combining large-scale Twitter analysis with structured interviews. Delivered social-network analysis in Gephi, BERTopic-based topic modeling, engagement analysis, and qualitative coding support to connect digital participation patterns with interview evidence.",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "21",
-        "1",
-        "2",
-        "Academic Consulting",
-        "2024",
-        "Academic Consulting - Connective Action & Conservative Mobilization",
-        "Remote",
-        "Data Analysis Consultant for Academia",
-        "Designed and delivered the computational analysis pipeline for a 6,221-post Facebook study on digital activism against Peru's gender-approach school curriculum. Built multimodal NLP and predictive workflows—BERTopic, multilingual-e5 embeddings, sentiment, co-occurrence analysis, and Random Forest models with temporal validation—to generate publication-ready findings. Publication: https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "25",
-        "1",
-        "2",
-        "Research",
-        "2020-02-01",
-        "AYNE-Perú Trinitarias",
-        "Lima, Peru",
-        "Research Consultant",
-        "Designed, facilitated, analyzed, and reported community risk and social development surveys using questionnaire design and mixed descriptive/Bayesian statistical analysis workflows in Lima and Chiclayo (Peru).",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "26",
-        "1",
-        "2",
-        "Research",
-        "2019-06-01",
-        "i4d - Innovation for Development",
-        "Lima, Peru",
-        "Research Assistant",
-        "Translated interviews to English and generated GIS entries for mining projects. Designed and implemented a virtual course for local government authorities (CENEPRED). Generated GIS outputs.",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "27",
-        "1",
-        "2",
-        "Research",
-        "2019-02-01",
-        "N&P Forest Woodwork",
-        "Lima, Peru",
-        "Qualitative Data Analyst",
-        "Transcribed and analyzed qualitative data from 32 Amazonian communities for a major hydrocarbons company operating in Loreto and Amazonas using MAXQDA.",
-        null,
-        null,
-        null,
-        "en"
-      ],
-      [
-        "17",
-        "1",
-        "1",
-        "Consultoría BI y Analytics",
-        "Actual",
-        "ESCAPE - Consultoría BI & Analytics",
-        "Lima, Perú / Remoto",
-        "Senior Data Scientist y Consultor IA",
-        "Lideré consultorías de BI y analytics para agencias gubernamentales, ONGs y clientes privados. Diseñé e implementé flujos de NLP/ML para análisis cualitativo y cuantitativo, soluciones de minería de procesos y optimización, y entregables reutilizables como dashboards, reportes y talleres para tomadores de decisión.",
-        "Apoyé entregas para múltiples organizaciones públicas y privadas, incluyendo rediseño BPMN y trabajo de programas de cambio para minería, alimentos y otros sectores.",
-        null,
-        null,
-        "es"
-      ],
-      [
-        "18",
-        "1",
-        "3",
-        "Consultoría Corporativa",
-        "2024-08-01",
-        "Facilitadores Asociados",
-        "Lima, Perú",
-        "Consultor y Analista",
-        "Entregué mapas de procesos BPMN, diagnósticos operativos y materiales de cambio organizacional para grandes clientes de minería, alimentos y otros rubros. Desarrollé sitios web, recursos pedagógicos y dashboards de KPI para seguimiento de progreso formativo y cumplimiento.",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "20",
-        "1",
-        "3",
-        "Desarrollo de IA",
-        "2023-07-01",
-        "Massive Dynamics Perú SAC",
-        "Lima, Perú",
-        "Asistente de Proyectos / Desarrollador Chatbot",
-        "Contribuí a la entrega de un chatbot orientado a casos de uso de análisis de datos con Azure Databricks, Azure Machine Learning y modelos de OpenAI. Apoyé flujos SQL para datalakes y blob storage y desarrollé componentes HTML/JavaScript para la experiencia de usuario.",
-        null,
-        null,
-        null,
-        "es"
       ],
       [
         "19",
@@ -1015,127 +1022,6 @@
         "es"
       ],
       [
-        "23",
-        "1",
-        "2",
-        "Consultoría Académica",
-        "2025",
-        "Consultoría Académica - La vacunación contra la COVID-19 en debate",
-        "Remoto",
-        "Consultor de análisis de datos para academia",
-        "Lideré el diseño analítico de un estudio mixto sobre cobertura periodística digital de la vacunación contra la COVID-19 en México, Brasil y Perú. Entregué flujos de análisis del discurso, framing, estructuras narrativas, modelado multimodal de tópicos, segmentación semántica, clusterización y análisis de correspondencias para sostener hallazgos comparativos publicables. Publicación: https://www.scielo.cl/scielo.php?pid=S0719-15292025000200055&script=sci_arttext",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "22",
-        "1",
-        "2",
-        "Consultoría Académica",
-        "2024",
-        "Consultoría Académica - La variable de género en la difusión científica por Twitter/X",
-        "Remoto",
-        "Consultor de análisis de datos para academia",
-        "Entregué el flujo de análisis para un estudio mixto de 13,165 publicaciones de Twitter/X de 17 divulgadores científicos. Construí el pipeline de recolección, limpieza, métricas, muestreo, sentimientos, exploración con ACP y evaluación con curvas ROC que permitió derivar las categorías temáticas y comunicativas finales. Publicación: https://www.scielo.org.pe/scielo.php?script=sci_arttext&pid=S2415-09592024000400017",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "24",
-        "1",
-        "2",
-        "Consultoría Académica",
-        "2024",
-        "Consultoría Académica - Medios y conflictos sociales durante la COVID-19",
-        "Remoto",
-        "Consultor de análisis de datos para academia",
-        "Entregué análisis de datos y revisión metodológica para un estudio mixto de 53 portadas de diarios sobre cobertura mediática y conflicto social durante la pandemia. Apliqué framing, análisis crítico del discurso y comparación entre medios para estructurar resultados listos para publicación. Publicación: https://revistasinvestigacion.unmsm.edu.pe/index.php/discursos/article/view/25876",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "28",
-        "1",
-        "2",
-        "Consultoría Académica",
-        "2024",
-        "Consultoría Académica - Protestas en 280 caracteres",
-        "Remoto",
-        "Consultor de análisis de datos para academia",
-        "Apoyé un estudio mixto que combinó análisis masivo de Twitter con entrevistas estructuradas. Entregué análisis de redes sociales en Gephi, modelado de tópicos con BERTopic, análisis de interacción y soporte de codificación cualitativa para conectar patrones de participación digital con evidencia de entrevistas.",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "21",
-        "1",
-        "2",
-        "Consultoría Académica",
-        "2024",
-        "Consultoría Académica - Acción conectiva y movilización conservadora",
-        "Remoto",
-        "Consultor de análisis de datos para academia",
-        "Diseñé y entregué el pipeline computacional para un estudio de 6,221 publicaciones de Facebook sobre activismo digital contra el currículo escolar con enfoque de género en Perú. Construí flujos multimodales de NLP y analítica predictiva con BERTopic, embeddings multilingual-e5, sentimientos, coocurrencias y modelos Random Forest con validación temporal para generar hallazgos listos para publicación. Publicación: https://nuevaepoca.revistalatinacs.org/index.php/revista/article/view/2553",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "25",
-        "1",
-        "2",
-        "Investigación",
-        "2020-02-01",
-        "AYNE-Perú Trinitarias",
-        "Lima, Perú",
-        "Consultor de Investigación",
-        "Diseño, facilitación, análisis y reporte de encuestas de riesgo comunitario y desarrollo social utilizando flujos de trabajo de diseño de cuestionarios y análisis estadístico descriptivo/bayesiano mixto en Lima y Chiclayo (Perú).",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "26",
-        "1",
-        "2",
-        "Investigación",
-        "2019-06-01",
-        "i4d - Innovation for Development",
-        "Lima, Perú",
-        "Asistente de Investigación",
-        "Traduje entrevistas al inglés y generé entradas GIS para proyectos mineros. Diseñé e implementé un curso virtual para autoridades de gobiernos locales (CENEPRED). Generé salidas GIS.",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "27",
-        "1",
-        "2",
-        "Investigación",
-        "2019-02-01",
-        "N&P Forest Woodwork",
-        "Lima, Perú",
-        "Analista de Datos Cualitativos",
-        "Transcribí y analicé datos cualitativos de 32 comunidades amazónicas para una importante empresa de hidrocarburos que opera en Loreto y Amazonas utilizando MAXQDA.",
-        null,
-        null,
-        null,
-        "es"
-      ],
-      [
-        "29",
         "2",
         "1",
         "2",
@@ -1151,7 +1037,6 @@
         "es"
       ],
       [
-        "30",
         "2",
         "1",
         "2",
@@ -1167,7 +1052,6 @@
         "en"
       ],
       [
-        "31",
         "3",
         "1",
         "2",
@@ -1183,7 +1067,6 @@
         "es"
       ],
       [
-        "32",
         "3",
         "1",
         "2",
@@ -1199,7 +1082,6 @@
         "en"
       ],
       [
-        "33",
         "4",
         "1",
         "2",
@@ -1215,7 +1097,6 @@
         "es"
       ],
       [
-        "34",
         "4",
         "1",
         "2",
@@ -1231,7 +1112,6 @@
         "en"
       ],
       [
-        "35",
         "5",
         "1",
         "2",
@@ -1247,7 +1127,6 @@
         "es"
       ],
       [
-        "36",
         "5",
         "1",
         "2",
@@ -1263,7 +1142,6 @@
         "en"
       ],
       [
-        "37",
         "6",
         "1",
         "2",
@@ -1279,7 +1157,6 @@
         "es"
       ],
       [
-        "38",
         "6",
         "1",
         "2",
@@ -1295,7 +1172,6 @@
         "en"
       ],
       [
-        "39",
         "7",
         "1",
         "2",
@@ -1311,7 +1187,6 @@
         "es"
       ],
       [
-        "40",
         "7",
         "1",
         "2",
@@ -1327,7 +1202,6 @@
         "en"
       ],
       [
-        "41",
         "8",
         "1",
         "2",
@@ -1343,7 +1217,6 @@
         "es"
       ],
       [
-        "42",
         "8",
         "1",
         "2",
@@ -1359,7 +1232,6 @@
         "en"
       ],
       [
-        "43",
         "9",
         "1",
         "2",
@@ -1375,7 +1247,6 @@
         "es"
       ],
       [
-        "44",
         "9",
         "1",
         "2",
@@ -1391,7 +1262,6 @@
         "en"
       ],
       [
-        "47",
         "11",
         "1",
         "2",
@@ -1407,7 +1277,6 @@
         "es"
       ],
       [
-        "48",
         "11",
         "1",
         "2",
@@ -1423,130 +1292,62 @@
         "en"
       ],
       [
-        "49",
-        "12",
+        "17",
+        "1",
+        "2",
+        "Consultoría Académica",
+        "2022-01-17",
+        "Facultad de Ciencias de la Comunicación y Creatividad — Universidad Científica del Sur",
+        "Lima, Perú",
+        "Consultor de Análisis de Datos para Academia",
+        "Cinco proyectos de consultoría académica en análisis de datos: (1) \"Acción conectiva y movilización conservadora\" — 6,221 posts de Facebook, BERTopic, multilingual-e5, Random Forest con validación temporal; publicado en Revista Latina de Comunicación Social (2026). (2) \"La variable de género en la difusión científica por Twitter/X\" — 13,165 posts de 17 divulgadores, pipeline de recolección, métricas, sentimientos, ACP y ROC; publicado en Discursos del Sur (2024). (3) \"Medios y conflictos sociales durante la COVID-19\" — 53 portadas, framing, ACD y comparación entre medios; publicado en Discursos del Sur (2024). (4) \"Protestas en 280 caracteres / Ciberactivismo femenino en Twitter\" — análisis de redes en Gephi, BERTopic y codificación cualitativa. (5) \"La vacunación contra la COVID-19 en debate: discursos en medios digitales de México, Brasil y Perú\" — análisis del discurso, framing, topic modeling multimodal y análisis de correspondencias; reconocimiento de participación vía dictamen SciELO/GT/015/2026 (abril 2026).",
+        "Evidencia: RHE E001-10, 11, 12, 13, 14 y 28; dictamen SciELO/GT/015/2026.",
+        "Evidence: RHE E001-10, 11, 12, 13, 14 and 28; SciELO/GT/015/2026 ruling.",
+        null,
+        "es"
+      ],
+      [
+        "17",
+        "1",
+        "2",
+        "Academic Consulting",
+        "2022-01-17",
+        "Faculty of Communication and Creativity — Universidad Científica del Sur",
+        "Lima, Peru",
+        "Data Analysis Consultant for Academia",
+        "Five academic data-analysis consulting projects: (1) \"Connective action and conservative mobilization\" — 6,221 Facebook posts, BERTopic, multilingual-e5, Random Forest with temporal validation; published in Revista Latina de Comunicación Social (2026). (2) \"The gender variable in science communication on Twitter/X\" — 13,165 posts from 17 science communicators, collection pipeline, metrics, sentiment, PCA and ROC; published in Discursos del Sur (2024). (3) \"Media and social conflicts during COVID-19\" — 53 front pages, framing, CDA and cross-outlet comparison; published in Discursos del Sur (2024). (4) \"Protests in 280 characters / Female cyberactivism on Twitter\" — social-network analysis in Gephi, BERTopic and qualitative coding. (5) \"COVID-19 vaccination in debate: media discourses from Mexico, Brazil and Peru\" — discourse analysis, framing, multimodal topic modeling and correspondence analysis; participation recognized via SciELO/GT/015/2026 ruling (April 2026).",
+        "Evidencia: RHE E001-10, 11, 12, 13, 14 y 28; dictamen SciELO/GT/015/2026.",
+        "Evidence: RHE E001-10, 11, 12, 13, 14 and 28; SciELO/GT/015/2026 ruling.",
+        null,
+        "en"
+      ],
+      [
+        "18",
         "1",
         "2",
         "Consultoría en Investigación",
         "2024-07-01",
-        "Universidad Nacional Mayor de San Marcos - Grupo INCLUSIV",
+        "Escuela de Enfermería, Facultad de Medicina — Universidad Nacional Mayor de San Marcos",
         "Lima, Perú",
-        "Asesor Técnico Externo y Colaborador",
-        "Proyecto A24012411: \"Representaciones sociales de los riesgos del cambio climático y sus efectos en la salud en estudiantes universitarios de la facultad de educación en una universidad pública\" (jul–dic 2024, 6 meses). Actividades: asesoramiento metodológico en diseño, codificación cualitativa, procesamiento textual, análisis cuantitativo y estadístico; administración, depuración y estructuración de bases de datos; aplicación de instrumentos cualitativos y cuantitativos; programación, implementación y despliegue del software analítico REII; redacción de informes técnicos de avance e informes finales; evaluación de resultados; apoyo en liderazgo operativo y coordinación del equipo.",
-        "Proyecto aprobado y financiado por VRIP/RAIS – UNMSM.",
-        "Constancia UNMSM INCLUSIV, 22 oct 2026",
+        "Asesor Técnico Externo y Colaborador de Investigación",
+        "Colaborador externo del Grupo de Investigación \"Salud Inclusiva en Grupos Vulnerables\" (INCLUSIV) en tres proyectos financiados por VRIP/RAIS-UNMSM, acumulando 18 meses: (1) A24012411 (jul–dic 2024) — Representaciones sociales de los riesgos del cambio climático y sus efectos en la salud en estudiantes universitarios de educación. (2) A25011451 (jul–dic 2025) — Estudio comparativo de representaciones sociales sobre riesgos del cambio climático en estudiantes de educación de universidades públicas. (3) A26012041 (may–oct 2026) — Experiencias y respuestas adaptativas de los equipos de salud del primer nivel de atención frente a emergencias ambientales en Ayacucho (condición aprobada por Resolución Rectoral). Actividades: asesoramiento metodológico, codificación cualitativa, procesamiento textual, análisis cuantitativo y estadístico; administración, depuración y estructuración de bases de datos; aplicación de instrumentos cualitativos y cuantitativos; programación, implementación y despliegue del software analítico REII; redacción de informes técnicos de avance e informes finales; evaluación de resultados; apoyo en liderazgo operativo y coordinación del equipo.",
+        "Constancia de Prestación de Servicios, UNMSM, 22 oct 2026.",
+        "Certificate of Service Provision, UNMSM, Oct 22, 2026.",
         null,
         "es"
       ],
       [
-        "50",
-        "12",
+        "18",
         "1",
         "2",
         "Research Consulting",
         "2024-07-01",
-        "Universidad Nacional Mayor de San Marcos - INCLUSIV Group",
+        "School of Nursing, Faculty of Medicine — Universidad Nacional Mayor de San Marcos",
         "Lima, Peru",
-        "External Technical Advisor and Collaborator",
-        "Project A24012411: \"Social representations of climate change risks and their effects on health in university students of the faculty of education at a public university\" (Jul–Dec 2024, 6 months). Activities: methodological advising on design, qualitative coding, textual processing, quantitative and statistical analysis; database administration, cleaning and structuring; application of qualitative and quantitative instruments; programming, implementation and deployment of the REII analytical software; writing of technical progress and final reports; results evaluation; support in operational leadership and team coordination.",
-        "Project approved and funded by VRIP/RAIS – UNMSM.",
-        "Constancia UNMSM INCLUSIV, 22 oct 2026",
-        null,
-        "en"
-      ],
-      [
-        "51",
-        "13",
-        "1",
-        "2",
-        "Consultoría en Investigación",
-        "2025-07-01",
-        "Universidad Nacional Mayor de San Marcos - Grupo INCLUSIV",
-        "Lima, Perú",
-        "Asesor Técnico Externo y Colaborador",
-        "Proyecto A25011451: \"Estudio comparativo de las representaciones sociales sobre los riesgos del cambio climático y sus efectos en la salud, en estudiantes de educación, de universidades públicas\" (jul–dic 2025, 6 meses). Mismas actividades técnicas y metodológicas que el proyecto anterior.",
-        "Proyecto aprobado y financiado por VRIP/RAIS – UNMSM.",
-        "Constancia UNMSM INCLUSIV, 22 oct 2026",
-        null,
-        "es"
-      ],
-      [
-        "52",
-        "13",
-        "1",
-        "2",
-        "Research Consulting",
-        "2025-07-01",
-        "Universidad Nacional Mayor de San Marcos - INCLUSIV Group",
-        "Lima, Peru",
-        "External Technical Advisor and Collaborator",
-        "Project A25011451: \"Comparative study of social representations on climate change risks and their effects on health in education students from public universities\" (Jul–Dec 2025, 6 months). Same technical and methodological activities as the previous project.",
-        "Project approved and funded by VRIP/RAIS – UNMSM.",
-        "Constancia UNMSM INCLUSIV, 22 oct 2026",
-        null,
-        "en"
-      ],
-      [
-        "53",
-        "14",
-        "1",
-        "2",
-        "Consultoría en Investigación",
-        "2026-05-01",
-        "Universidad Nacional Mayor de San Marcos - Grupo INCLUSIV",
-        "Lima, Perú",
-        "Colaborador Externo Adherente Oficial",
-        "Proyecto A26012041: \"Experiencias y respuestas adaptativas de los equipos de salud del primer nivel de atención frente a diversas emergencias ambientales en la región Ayacucho\" (may–oct 2026, 6 meses). Actividades: asesoramiento metodológico, codificación cualitativa, procesamiento textual, análisis cuantitativo y estadístico; administración y depuración de bases de datos; aplicación de instrumentos; programación e implementación de REII; redacción de informes técnicos y finales; evaluación de resultados.",
-        "Condición aprobada mediante Resolución Rectoral. Proyecto financiado por VRIP/RAIS – UNMSM.",
-        "Constancia UNMSM INCLUSIV, 22 oct 2026",
-        null,
-        "es"
-      ],
-      [
-        "54",
-        "14",
-        "1",
-        "2",
-        "Research Consulting",
-        "2026-05-01",
-        "Universidad Nacional Mayor de San Marcos - INCLUSIV Group",
-        "Lima, Peru",
-        "Official External Adherent Collaborator",
-        "Project A26012041: \"Experiences and adaptive responses of first-level healthcare teams facing various environmental emergencies in the Ayacucho region\" (May–Oct 2026, 6 months). Activities: methodological advising, qualitative coding, textual processing, quantitative and statistical analysis; database administration and cleaning; application of instruments; REII programming and implementation; writing of technical and final reports; results evaluation.",
-        "Condition approved by Rectoral Resolution. Project funded by VRIP/RAIS – UNMSM.",
-        "Constancia UNMSM INCLUSIV, 22 oct 2026",
-        null,
-        "en"
-      ],
-      [
-        "57",
-        "16",
-        "1",
-        "2",
-        "Docencia",
-        "2020-02-17",
-        "UNMSM / Colegio de Sociólogos / CREAR PERÚ",
-        "Lima, Perú",
-        "Docente",
-        "Dictado del curso \"Análisis de Datos Cualitativos\" (17 feb – 02 mar 2020, 20 horas).",
-        "",
-        null,
-        null,
-        "es"
-      ],
-      [
-        "58",
-        "16",
-        "1",
-        "2",
-        "Teaching",
-        "2020-02-17",
-        "UNMSM / Colegio de Sociólogos / CREAR PERÚ",
-        "Lima, Peru",
-        "Instructor",
-        "Taught the course \"Qualitative Data Analysis\" (Feb 17 – Mar 2, 2020, 20 hours).",
-        "",
-        null,
+        "External Technical Advisor and Research Collaborator",
+        "External collaborator of the \"Inclusive Health in Vulnerable Groups\" Research Group (INCLUSIV) on three VRIP/RAIS-UNMSM-funded projects totaling 18 months: (1) A24012411 (Jul–Dec 2024) — Social representations of climate change risks and their effects on health in university education students. (2) A25011451 (Jul–Dec 2025) — Comparative study of social representations on climate change risks among education students from public universities. (3) A26012041 (May–Oct 2026) — Experiences and adaptive responses of first-level healthcare teams facing environmental emergencies in Ayacucho (condition approved by Rectoral Resolution). Activities: methodological advising, qualitative coding, textual processing, quantitative and statistical analysis; database administration, cleaning and structuring; application of qualitative and quantitative instruments; programming, implementation and deployment of the REII analytical software; writing of technical progress and final reports; results evaluation; support in operational leadership and team coordination.",
+        "Constancia de Prestación de Servicios, UNMSM, 22 oct 2026.",
+        "Certificate of Service Provision, UNMSM, Oct 22, 2026.",
         null,
         "en"
       ]
@@ -1973,7 +1774,7 @@
         "2026-01-01",
         "https://github.com/diegopaucarv/geno-cgt",
         "https://github.com/diegopaucarv/geno-cgt",
-        null,
+        "images/geno-cgt-app.png",
         null,
         "en"
       ],
@@ -1986,7 +1787,7 @@
         "2025-01-01",
         "https://github.com/diegopaucarv/reii",
         "https://github.com/diegopaucarv/reii",
-        null,
+        "images/reei-survey.png",
         null,
         "en"
       ],
@@ -1999,7 +1800,7 @@
         "2024-06-01",
         "https://github.com/diegopaucarv/escape_dashboard",
         "https://github.com/diegopaucarv/escape_dashboard",
-        null,
+        "images/escape-dashboard.png",
         null,
         "en"
       ],
@@ -2012,7 +1813,7 @@
         "2026-01-01",
         "https://github.com/diegopaucarv/geno-cgt",
         "https://github.com/diegopaucarv/geno-cgt",
-        null,
+        "images/geno-cgt-app.png",
         null,
         "es"
       ],
@@ -2025,7 +1826,7 @@
         "2025-01-01",
         "https://github.com/diegopaucarv/reii",
         "https://github.com/diegopaucarv/reii",
-        null,
+        "images/reei-survey.png",
         null,
         "es"
       ],
@@ -2038,7 +1839,7 @@
         "2024-06-01",
         "https://github.com/diegopaucarv/escape_dashboard",
         "https://github.com/diegopaucarv/escape_dashboard",
-        null,
+        "images/escape-dashboard.png",
         null,
         "es"
       ]
