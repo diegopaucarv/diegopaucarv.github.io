@@ -1338,16 +1338,23 @@
         </div>
 
         <script>
+            /* ═══════════════════════════════════════════════════════════
+               CV APP — Estado global
+               ═══════════════════════════════════════════════════════════ */
             const App = {
                 cvData: null,
                 originalData: null,
                 currentLanguage: localStorage.getItem("language") || "en",
                 isLoggedIn: Boolean(localStorage.getItem("sessionToken")),
                 credentials: null,
-                dataVersion: "3.2",
+                dataVersion: "3.3",
             };
 
-const IS_FILE_PROTOCOL = location.protocol === "file:";
+            const IS_FILE_PROTOCOL = location.protocol === "file:";
+
+            /* ═══════════════════════════════════════════════════════════
+               CacheManager — guarda/lee ediciones del usuario
+               ═══════════════════════════════════════════════════════════ */
             const CacheManager = {
                 saveToCache(data) {
                     try {
@@ -1376,46 +1383,31 @@ const IS_FILE_PROTOCOL = location.protocol === "file:";
                     }
                     return null;
                 },
-                exportModifiedData() {
-                    if (!App.cvData) return alert("No data to export");
-                    const dataStr = JSON.stringify(
-                        {
-                            version: App.dataVersion,
-                            timestamp: new Date().toISOString(),
-                            data: App.cvData,
-                        },
-                        null,
-                        2,
-                    );
-                    const blob = new Blob([dataStr], {
-                        type: "application/json",
-                    });
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement("a");
-                    link.href = url;
-                    link.download = `cv_modified_${new Date().toISOString().split("T")[0]}.json`;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
-                },
             };
 
-const Auth = {
-    async init() {
-        if (IS_FILE_PROTOCOL) {
-            console.warn(
-                "file:// — login deshabilitado. Usa `python -m http.server` para desarrollo local."
-            );
-            return;
-        }
-        try {
-            const r = await fetch("./config.json", { cache: "no-store" });
-            if (r.ok) App.credentials = await r.json();
-        } catch (e) {
-            console.warn("config.json no encontrado, login deshabilitado:", e);
-        }
-    },
+            /* ═══════════════════════════════════════════════════════════
+               Auth — login (deshabilitado en file://)
+               ═══════════════════════════════════════════════════════════ */
+            const Auth = {
+                async init() {
+                    if (IS_FILE_PROTOCOL) {
+                        console.warn(
+                            "file:// — login deshabilitado. Usa `python -m http.server` para desarrollo local.",
+                        );
+                        return;
+                    }
+                    try {
+                        const r = await fetch("./config.json", {
+                            cache: "no-store",
+                        });
+                        if (r.ok) App.credentials = await r.json();
+                    } catch (e) {
+                        console.warn(
+                            "config.json no encontrado, login deshabilitado:",
+                            e,
+                        );
+                    }
+                },
                 handleLogin(event) {
                     event.preventDefault();
                     const email = document.getElementById("emailInput").value;
@@ -1453,6 +1445,9 @@ const Auth = {
                 },
             };
 
+            /* ═══════════════════════════════════════════════════════════
+               UI — idioma, modales, botón de config
+               ═══════════════════════════════════════════════════════════ */
             const UI = {
                 changeLanguage(lang) {
                     App.currentLanguage = lang;
@@ -1493,6 +1488,9 @@ const Auth = {
                 },
             };
 
+            /* ═══════════════════════════════════════════════════════════
+               AutoExport — reconstruye JSON y descarga al editar
+               ═══════════════════════════════════════════════════════════ */
             const AutoExport = {
                 isExporting: false,
                 async exportOnChange() {
@@ -1626,21 +1624,37 @@ const Auth = {
                     ]);
                 },
                 reconstructExperience() {
-                    return (App.cvData.experiencia || []).map((i) => [
-                        i.id || "1",
-                        i.persona_id || "1",
-                        i.profesion_id || "1",
-                        i.experiencia_categoria || "",
-                        i.inicio_anio || "",
-                        i.institucion || "",
-                        i.lugar || "",
-                        i.rol || "",
-                        i.tareas || "",
-                        i.logros || null,
-                        i.referencia || null,
-                        i.referencia_linkedin || null,
-                        i.lengua || App.currentLanguage,
-                    ]);
+                    const expSchema = (App.originalData?.tables || []).find(
+                        (t) => t.name === "experiencia",
+                    );
+                    const hasDur = expSchema?.columns?.some(
+                        (c) => c.name === "duracion_meses",
+                    );
+                    const hasFin = expSchema?.columns?.some(
+                        (c) => c.name === "fin_anio",
+                    );
+                    return (App.cvData.experiencia || []).map((i) => {
+                        const base = [
+                            i.id || "1",
+                            i.persona_id || "1",
+                            i.profesion_id || "1",
+                            i.experiencia_categoria || "",
+                            i.inicio_anio || "",
+                        ];
+                        if (hasDur) base.push(i.duracion_meses || "");
+                        if (hasFin) base.push(i.fin_anio || "");
+                        base.push(
+                            i.institucion || "",
+                            i.lugar || "",
+                            i.rol || "",
+                            i.tareas || "",
+                            i.logros || null,
+                            i.referencia || null,
+                            i.referencia_linkedin || null,
+                            i.lengua || App.currentLanguage,
+                        );
+                        return base;
+                    });
                 },
                 reconstructTeaching() {
                     return (App.cvData.teaching_experience || []).map((i) => [
@@ -1754,57 +1768,55 @@ const Auth = {
                 },
             };
 
+            /* ═══════════════════════════════════════════════════════════
+               Data — fetch + parse del JSON
+               ═══════════════════════════════════════════════════════════ */
             const Data = {
-    async fetchCVData() {
-        if (IS_FILE_PROTOCOL) {
-            this.showFileProtocolBanner();
-            return;
-        }
-
-        try {
-            // cache-bust: cada reload trae el cvs.json actual, sin CDN stale
-            const r = await fetch("./cvs.json?t=" + Date.now(), {
-                cache: "no-store",
-            });
-            if (!r.ok) throw new Error(`HTTP ${r.status}`);
-            App.originalData = await r.json();
-            console.log(
-                `✅ cvs.json cargado: ${new Set(App.originalData.data.experiencia.map(x => x[0])).size} entradas de experiencia`
-            );
-        } catch (e) {
-            console.error("❌ No se pudo cargar cvs.json:", e);
-            document.body.innerHTML = `
-                <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif">
-                    <h1 style="color:#c0392b;margin-bottom:1rem">Error al cargar cvs.json</h1>
-                    <p>${String(e.message || e)}</p>
-                    <p style="margin-top:1rem;color:#666">Verifica que <code>cvs.json</code> exista junto a <code>index.html</code>.</p>
-                </div>`;
-            return;
-        }
-
-        // Caché de ediciones (solo si logueado y versión coincide)
-        const cached = App.isLoggedIn ? CacheManager.loadFromCache() : null;
-        if (cached) {
-            App.cvData = cached;
-            Render.renderCV();
-            return;
-        }
-        this.refreshParsedData();
-    },
-
-    showFileProtocolBanner() {
-        document.body.innerHTML = `
-            <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif;line-height:1.6">
-                <h1 style="color:#1a1a1a;margin-bottom:1rem">Necesitas un servidor local</h1>
-                <p>Estás abriendo este archivo con <code>file://</code>. Los navegadores no permiten cargar <code>cvs.json</code> desde disco por seguridad.</p>
-                <p style="margin-top:1.25rem"><strong>Ejecuta en la carpeta del proyecto:</strong></p>
-                <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem;overflow-x:auto">python -m http.server 8000</pre>
-                <p style="margin-top:1rem">Luego abre:</p>
-                <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem">http://localhost:8000</pre>
-                <p style="margin-top:1.5rem;color:#666;font-size:.9rem">En GitHub Pages (<code>https://</code>) este problema no existe; funciona directo.</p>
-            </div>`;
-    },
-
+                async fetchCVData() {
+                    if (IS_FILE_PROTOCOL) {
+                        this.showFileProtocolBanner();
+                        return;
+                    }
+                    try {
+                        const r = await fetch("./cvs.json?t=" + Date.now(), {
+                            cache: "no-store",
+                        });
+                        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                        App.originalData = await r.json();
+                        console.log(
+                            `✅ cvs.json cargado: ${new Set(App.originalData.data.experiencia.map((x) => x[0])).size} entradas`,
+                        );
+                    } catch (e) {
+                        console.error("❌ No se pudo cargar cvs.json:", e);
+                        document.body.innerHTML = `
+                            <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif">
+                                <h1 style="color:#c0392b;margin-bottom:1rem">Error al cargar cvs.json</h1>
+                                <p>${String(e.message || e)}</p>
+                                <p style="margin-top:1rem;color:#666">Verifica que <code>cvs.json</code> exista junto a <code>index.html</code>.</p>
+                            </div>`;
+                        return;
+                    }
+                    const cached = App.isLoggedIn
+                        ? CacheManager.loadFromCache()
+                        : null;
+                    if (cached) {
+                        App.cvData = cached;
+                        Render.renderCV();
+                        return;
+                    }
+                    this.refreshParsedData();
+                },
+                showFileProtocolBanner() {
+                    document.body.innerHTML = `
+                        <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif;line-height:1.6">
+                            <h1 style="color:#1a1a1a;margin-bottom:1rem">Necesitas un servidor local</h1>
+                            <p>Estás abriendo este archivo con <code>file://</code>. Los navegadores no permiten cargar <code>cvs.json</code> desde disco por seguridad.</p>
+                            <p style="margin-top:1.25rem"><strong>Ejecuta en la carpeta del proyecto:</strong></p>
+                            <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem;overflow-x:auto">python -m http.server 8000</pre>
+                            <p style="margin-top:1rem">Luego abre:</p>
+                            <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem">http://localhost:8000</pre>
+                        </div>`;
+                },
                 refreshParsedData() {
                     if (!App.originalData?.data) return;
                     const { data, tables } = App.originalData;
@@ -1855,22 +1867,18 @@ const Auth = {
                             "publications",
                         ),
                     };
-
                     const personalRow =
                         data.datos_personales.find(
                             (r) => r[r.length - 1] === App.currentLanguage,
                         ) || data.datos_personales[0];
-
                     App.cvData.nombres =
                         personalRow?.[1] || "Diego Mauricio Paucar Villacorta";
                     App.cvData.telefono = personalRow?.[2] || "";
                     App.cvData.email = personalRow?.[3] || "";
                     App.cvData.lugar = personalRow?.[4] || "";
                     App.cvData.perfil = personalRow?.[5] || "";
-
                     Render.renderCV();
                 },
-
                 mapAndFilter(arr, schema, tableName) {
                     if (!Array.isArray(arr)) return [];
                     return arr
@@ -1879,26 +1887,66 @@ const Auth = {
 
                             if (tableName === "experiencia") {
                                 if (Array.isArray(row)) {
-                                    const hasCat = row.length >= 13;
-                                    obj = {
-                                        id: row[0],
-                                        persona_id: row[1],
-                                        profesion_id: row[2],
-                                        experiencia_categoria: hasCat
-                                            ? row[3]
-                                            : "",
-                                        inicio_anio: hasCat ? row[4] : row[3],
-                                        institucion: hasCat ? row[5] : row[4],
-                                        lugar: hasCat ? row[6] : row[5],
-                                        rol: hasCat ? row[7] : row[6],
-                                        tareas: hasCat ? row[8] : row[7],
-                                        logros: hasCat ? row[9] : row[8],
-                                        referencia: hasCat ? row[10] : row[9],
-                                        referencia_linkedin: hasCat
-                                            ? row[11]
-                                            : row[10],
-                                        lengua: row[row.length - 1],
-                                    };
+                                    const len = row.length;
+                                    const lengua = row[len - 1];
+                                    if (len >= 15) {
+                                        // 15 cols: id, pid, prof, cat, inicio, dur, fin, inst, lugar, rol, tareas, logros, ref, ref_li, lengua
+                                        obj = {
+                                            id: row[0],
+                                            persona_id: row[1],
+                                            profesion_id: row[2],
+                                            experiencia_categoria: row[3],
+                                            inicio_anio: row[4],
+                                            duracion_meses: row[5],
+                                            fin_anio: row[6],
+                                            institucion: row[7],
+                                            lugar: row[8],
+                                            rol: row[9],
+                                            tareas: row[10],
+                                            logros: row[11],
+                                            referencia: row[12],
+                                            referencia_linkedin: row[13],
+                                            lengua,
+                                        };
+                                    } else if (len === 14) {
+                                        // 14 cols: id, pid, prof, cat, inicio, dur, inst, lugar, rol, tareas, logros, ref, ref_li, lengua
+                                        obj = {
+                                            id: row[0],
+                                            persona_id: row[1],
+                                            profesion_id: row[2],
+                                            experiencia_categoria: row[3],
+                                            inicio_anio: row[4],
+                                            duracion_meses: row[5],
+                                            fin_anio: null,
+                                            institucion: row[6],
+                                            lugar: row[7],
+                                            rol: row[8],
+                                            tareas: row[9],
+                                            logros: row[10],
+                                            referencia: row[11],
+                                            referencia_linkedin: row[12],
+                                            lengua,
+                                        };
+                                    } else {
+                                        // 13 cols legacy
+                                        obj = {
+                                            id: row[0],
+                                            persona_id: row[1],
+                                            profesion_id: row[2],
+                                            experiencia_categoria: row[3],
+                                            inicio_anio: row[4],
+                                            duracion_meses: null,
+                                            fin_anio: null,
+                                            institucion: row[5],
+                                            lugar: row[6],
+                                            rol: row[7],
+                                            tareas: row[8],
+                                            logros: row[9],
+                                            referencia: row[10],
+                                            referencia_linkedin: row[11],
+                                            lengua,
+                                        };
+                                    }
                                 } else {
                                     obj = { ...row };
                                 }
@@ -2025,6 +2073,9 @@ const Auth = {
                 },
             };
 
+            /* ═══════════════════════════════════════════════════════════
+               Render — todo el layout
+               ═══════════════════════════════════════════════════════════ */
             const Render = {
                 renderCV() {
                     if (!App.cvData) return;
@@ -2050,7 +2101,6 @@ const Auth = {
                         addBtn.style.display = App.isLoggedIn
                             ? "inline-block"
                             : "none";
-
                     UI.initLanguageUI();
                 },
 
@@ -2062,7 +2112,6 @@ const Auth = {
                         t = App.cvData.telefono,
                         l = App.cvData.lugar;
                     const links = App.cvData.enlaces_personales || [];
-
                     if (e)
                         items.push(
                             `<a href="mailto:${this.escapeHtml(e)}">✉ ${this.escapeHtml(e)}</a>`,
@@ -2076,7 +2125,6 @@ const Auth = {
                                 `<a href="${this.escapeHtml(link.url)}" target="_blank" rel="noopener">${name} ↗</a>`,
                             );
                     });
-
                     bar.innerHTML = items.join("");
                     bar.style.display = items.length ? "flex" : "none";
                 },
@@ -2095,70 +2143,144 @@ const Auth = {
                         return;
                     }
 
-                    // Sort by date descending
-                    exps.sort(
-                        (a, b) =>
+                    exps.sort((a, b) => {
+                        const endA = this.getEndDate(a);
+                        const endB = this.getEndDate(b);
+                        if (endA !== endB) return endB - endA;
+                        return (
                             this.getSortableDate(b.inicio_anio) -
-                            this.getSortableDate(a.inicio_anio),
-                    );
-
+                            this.getSortableDate(a.inicio_anio)
+                        );
+                    });
                     container.innerHTML = exps
                         .map((exp) => {
-                            const year = this.formatYear(exp.inicio_anio);
+                            const dateRange = this.getDisplayDateRange(exp);
                             const catClass = this.getCategoryClass(
                                 exp.experiencia_categoria,
                             );
-                            const role = this.escapeHtml(exp.rol || "");
                             const institution = this.escapeHtml(
                                 exp.institucion || "",
                             );
                             const location = this.escapeHtml(exp.lugar || "");
-                            const category = this.escapeHtml(
-                                exp.experiencia_categoria || "",
-                            );
+                            const rol = this.escapeHtml(exp.rol || "");
+
+                            const durNum = parseFloat(exp.duracion_meses);
+                            const durLabel =
+                                !isNaN(durNum) && durNum > 0
+                                    ? `${durNum} ${
+                                          App.currentLanguage === "es"
+                                              ? durNum === 1
+                                                  ? "mes"
+                                                  : "meses"
+                                              : durNum === 1
+                                                ? "month"
+                                                : "months"
+                                      }`
+                                    : "";
+                            const subtitle = [location, durLabel]
+                                .filter(Boolean)
+                                .join(" - ");
+
                             const deleteBtn = App.isLoggedIn
                                 ? `<button class="btn-delete" onclick="CRUD.deleteExperience('${exp.id}')">Delete</button>`
                                 : "";
-
-                            const detailBlocks = [
-                                exp.tareas
-                                    ? `<p class="timeline-detail">${this.linkifyText(exp.tareas)}</p>`
-                                    : "",
-                                exp.logros
-                                    ? `<p class="timeline-detail"><span class="timeline-detail-label">${
-                                          App.currentLanguage === "es"
-                                              ? "Logros:"
-                                              : "Highlights:"
-                                      }</span> ${this.linkifyText(exp.logros)}</p>`
-                                    : "",
-                                exp.referencia
-                                    ? `<p class="timeline-detail"><span class="timeline-detail-label">${
-                                          App.currentLanguage === "es"
-                                              ? "Evidencia:"
-                                              : "Evidence:"
-                                      }</span> ${this.linkifyText(exp.referencia)}</p>`
-                                    : "",
-                            ]
-                                .filter(Boolean)
-                                .join("");
+                            const desc = exp.tareas
+                                ? `<p class="timeline-detail">${this.linkifyText(exp.tareas)}</p>`
+                                : "";
+                            const logr = exp.logros
+                                ? `<p class="timeline-detail">${this.linkifyText(exp.logros)}</p>`
+                                : "";
 
                             return `
                             <div class="timeline-item" data-exp-id="${exp.id}">
                                 <div class="timeline-bullet ${catClass}"></div>
-                                <p class="timeline-year">${year}</p>
+                                <p class="timeline-year">${dateRange}</p>
                                 <h3 class="editable-field"
-                                    data-table="experiencia" data-id="${exp.id}" data-field="rol"
-                                    ondblclick="CRUD.makeEditable(this, 'text')">${role}</h3>
-                                <p class="timeline-institution editable-field"
-                                   data-table="experiencia" data-id="${exp.id}" data-field="institucion"
-                                   ondblclick="CRUD.makeEditable(this, 'text')">${institution}${location ? ` · ${location}` : ""}</p>
-                                ${category ? `<span class="timeline-category">${category}</span>` : ""}
-                                ${detailBlocks}
+                                    data-table="experiencia" data-id="${exp.id}" data-field="institucion"
+                                    ondblclick="CRUD.makeEditable(this, 'text')">${institution}</h3>
+                                ${subtitle ? `<p class="timeline-institution">${subtitle}</p>` : ""}
+                                ${
+                                    rol
+                                        ? `<span class="timeline-category editable-field"
+                                             data-table="experiencia" data-id="${exp.id}" data-field="rol"
+                                             ondblclick="CRUD.makeEditable(this, 'text')">${rol}</span>`
+                                        : ""
+                                }
+                                ${desc}
+                                ${logr}
                                 ${deleteBtn}
                             </div>
                         `;
                         })
                         .join("");
+                },
+                getEndDate(exp) {
+                    // fin_anio explícito (incluye "Actual" / "Present")
+                    const finRaw = String(exp.fin_anio || "").trim();
+                    if (finRaw) {
+                        if (/^(actual|actualidad|present)$/i.test(finRaw))
+                            return Number.MAX_SAFE_INTEGER;
+                        const parsed = this.getSortableDate(finRaw);
+                        if (parsed > 0) return parsed;
+                    }
+                    // inicio contiene "Actual" / "Present"
+                    const inicioRaw = String(exp.inicio_anio || "");
+                    if (/(actual|actualidad|present)/i.test(inicioRaw))
+                        return Number.MAX_SAFE_INTEGER;
+                    // inicio + duración
+                    const inicioTs = this.getSortableDate(exp.inicio_anio);
+                    const dur = parseFloat(exp.duracion_meses);
+                    if (inicioTs > 0 && !isNaN(dur) && dur > 0) {
+                        return inicioTs + dur * 30 * 24 * 60 * 60 * 1000;
+                    }
+                    return inicioTs;
+                },
+
+                getDisplayDateRange(exp) {
+                    const raw = String(exp.inicio_anio || "").trim();
+                    if (!raw) return "";
+
+                    const locale =
+                        App.currentLanguage === "es" ? "es-PE" : "en-US";
+                    const fmtMonth = (d) =>
+                        d
+                            .toLocaleDateString(locale, {
+                                month: "short",
+                                year: "numeric",
+                            })
+                            .replace(/\./g, "")
+                            .toUpperCase();
+
+                    const iso = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+                    if (!iso) {
+                        return raw.replace(/\s*[–-]\s*/g, " – ").toUpperCase();
+                    }
+                    const start = new Date(
+                        Date.UTC(+iso[1], +iso[2] - 1, +iso[3]),
+                    );
+
+                    let end = null;
+                    if (exp.fin_anio) {
+                        const fin = String(exp.fin_anio).match(
+                            /^(\d{4})-(\d{2})-(\d{2})$/,
+                        );
+                        if (fin)
+                            end = new Date(
+                                Date.UTC(+fin[1], +fin[2] - 1, +fin[3]),
+                            );
+                    }
+                    if (!end) {
+                        const dur = parseFloat(exp.duracion_meses);
+                        if (!isNaN(dur) && dur > 0) {
+                            end = new Date(start);
+                            end.setUTCMonth(
+                                end.getUTCMonth() + Math.round(dur) - 1,
+                            );
+                        }
+                    }
+                    return end
+                        ? `${fmtMonth(start)} – ${fmtMonth(end)}`
+                        : fmtMonth(start);
                 },
 
                 renderTeaching() {
@@ -2166,19 +2288,16 @@ const Auth = {
                     const section = document.getElementById("teachingSection");
                     if (!container || !section) return;
                     const items = [...(App.cvData.teaching_experience || [])];
-
                     if (items.length === 0) {
                         section.style.display = "none";
                         return;
                     }
                     section.style.display = "block";
-
                     items.sort(
                         (a, b) =>
                             new Date(b.start_date || 0) -
                             new Date(a.start_date || 0),
                     );
-
                     container.innerHTML = items
                         .map((t) => {
                             const dates = this.formatDateRange(
@@ -2218,25 +2337,22 @@ const Auth = {
                                   ? "Ver proyecto"
                                   : "View project";
                             const hasImage = !!project.image_path;
-
                             return hasImage
-                                ? `\
-                <div class="project-card has-image">\
-                    <div class="project-card-header">\
-                        <img src="${this.escapeHtml(project.image_path)}" alt="${this.escapeHtml(project.title)}">\
-                        <h3>${this.escapeHtml(project.title)}</h3>\
-                        ${link ? `<a href="${this.escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="project-link">${label}</a>` : ""}\
-                    </div>\
-                    <p>${this.escapeHtml(project.description || "")}</p>\
-                </div>`
-                                : `\
-                <div class="project-card.default-card">\
-                    <div class="project-card-header">\
-                        <h3>${this.escapeHtml(project.title)}</h3>\
-                        ${link ? `<a href="${this.escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="project-link">${label}</a>` : ""}\
-                    </div>\
-                    <p>${this.escapeHtml(project.description || "")}</p>\
-                </div>`;
+                                ? `<div class="project-card has-image">
+                                <div class="project-card-header">
+                                    <img src="${this.escapeHtml(project.image_path)}" alt="${this.escapeHtml(project.title)}">
+                                    <h3>${this.escapeHtml(project.title)}</h3>
+                                    ${link ? `<a href="${this.escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="project-link">${label}</a>` : ""}
+                                </div>
+                                <p>${this.escapeHtml(project.description || "")}</p>
+                            </div>`
+                                : `<div class="project-card default-card">
+                                <div class="project-card-header">
+                                    <h3>${this.escapeHtml(project.title)}</h3>
+                                    ${link ? `<a href="${this.escapeHtml(link)}" target="_blank" rel="noopener noreferrer" class="project-link">${label}</a>` : ""}
+                                </div>
+                                <p>${this.escapeHtml(project.description || "")}</p>
+                            </div>`;
                         })
                         .join("");
                 },
@@ -2254,7 +2370,6 @@ const Auth = {
                         return;
                     }
                     section.style.display = "block";
-
                     pubs.sort(
                         (a, b) =>
                             this.getPublicationPriority(b) -
@@ -2262,7 +2377,6 @@ const Auth = {
                             this.getSortableDate(b.year) -
                                 this.getSortableDate(a.year),
                     );
-
                     container.innerHTML = pubs
                         .map(
                             (pub) => `
@@ -2312,13 +2426,11 @@ const Auth = {
                         return;
                     }
                     section.style.display = "block";
-
                     src = [...src].sort(
                         (a, b) =>
                             this.getSortableDate(b.year) -
                             this.getSortableDate(a.year),
                     );
-
                     grid.innerHTML = src
                         .map(
                             (cert) => `
@@ -2346,13 +2458,11 @@ const Auth = {
                     const grid = document.getElementById("infoGrid");
                     if (!grid) return;
                     grid.innerHTML = "";
-
                     const education = [...(App.cvData.educacion || [])].sort(
                         (a, b) =>
                             new Date(b.fecha_inicio || 0) -
                             new Date(a.fecha_inicio || 0),
                     );
-
                     if (education.length > 0) {
                         const card = document.createElement("div");
                         card.className = "info-card";
@@ -2372,7 +2482,6 @@ const Auth = {
                         `;
                         grid.appendChild(card);
                     }
-
                     const links = App.cvData.enlaces_personales || [];
                     if (links.length > 0) {
                         const card = document.createElement("div");
@@ -2391,7 +2500,6 @@ const Auth = {
                         `;
                         grid.appendChild(card);
                     }
-
                     document.getElementById("infoSection").style.display =
                         education.length || links.length ? "block" : "none";
                 },
@@ -2528,24 +2636,76 @@ const Auth = {
                     }
                     const raw = String(v ?? "").trim();
                     if (!raw) return 0;
-                    if (/^\d{4}$/.test(raw)) return Date.UTC(Number(raw), 0, 1);
+
                     const iso = raw.match(/^(\d{4})-(\d{2})-(\d{2})$/);
-                    if (iso)
-                        return Date.UTC(
-                            Number(iso[1]),
-                            Number(iso[2]) - 1,
-                            Number(iso[3]),
-                        );
+                    if (iso) return Date.UTC(+iso[1], +iso[2] - 1, +iso[3]);
+                    if (/^\d{4}$/.test(raw)) return Date.UTC(+raw, 0, 1);
+
+                    const MONTHS = {
+                        ene: 0,
+                        enero: 0,
+                        jan: 0,
+                        january: 0,
+                        feb: 1,
+                        febrero: 1,
+                        february: 1,
+                        mar: 2,
+                        marzo: 2,
+                        march: 2,
+                        abr: 3,
+                        abril: 3,
+                        apr: 3,
+                        april: 3,
+                        may: 4,
+                        mayo: 4,
+                        jun: 5,
+                        junio: 5,
+                        june: 5,
+                        jul: 6,
+                        julio: 6,
+                        july: 6,
+                        ago: 7,
+                        agosto: 7,
+                        aug: 7,
+                        august: 7,
+                        sep: 8,
+                        sept: 8,
+                        septiembre: 8,
+                        september: 8,
+                        oct: 9,
+                        octubre: 9,
+                        october: 9,
+                        nov: 10,
+                        noviembre: 10,
+                        november: 10,
+                        dic: 11,
+                        diciembre: 11,
+                        dec: 11,
+                        december: 11,
+                    };
+                    const m = raw.match(/([a-záéíóú]+)\.?\s*(\d{4})/i);
+                    if (m) {
+                        const mon = m[1].toLowerCase();
+                        if (MONTHS[mon] !== undefined)
+                            return Date.UTC(+m[2], MONTHS[mon], 1);
+                        return Date.UTC(+m[2], 0, 1);
+                    }
+
+                    const y = raw.match(/(\d{4})/);
+                    if (y) return Date.UTC(+y[1], 0, 1);
+
                     const t = new Date(raw).getTime();
                     return Number.isNaN(t) ? 0 : t;
                 },
             };
 
+            /* ═══════════════════════════════════════════════════════════
+               CRUD — edición inline + crear/borrar
+               ═══════════════════════════════════════════════════════════ */
             const CRUD = {
                 makeEditable(element, fieldType) {
                     if (!App.isLoggedIn) return;
                     if (element.querySelector(".edit-controls")) return;
-
                     const originalContent = element.innerHTML;
                     const input = document.createElement(
                         fieldType === "textarea" ? "textarea" : "input",
@@ -2554,11 +2714,9 @@ const Auth = {
                     tempDiv.innerHTML = originalContent;
                     input.value = tempDiv.textContent.trim();
                     input.className = `editable-${fieldType}`;
-
                     element.innerHTML = "";
                     element.appendChild(input);
                     element.classList.add("edit-mode");
-
                     const saveBtn = document.createElement("button");
                     saveBtn.textContent = "Save";
                     saveBtn.type = "button";
@@ -2568,7 +2726,6 @@ const Auth = {
                         e.preventDefault();
                         CRUD.saveEdit(element, input.value);
                     };
-
                     const cancelBtn = document.createElement("button");
                     cancelBtn.textContent = "Cancel";
                     cancelBtn.type = "button";
@@ -2577,14 +2734,12 @@ const Auth = {
                         e.preventDefault();
                         CRUD.cancelEdit(element, originalContent);
                     };
-
                     const controls = document.createElement("div");
                     controls.className = "edit-controls active";
                     controls.appendChild(saveBtn);
                     controls.appendChild(cancelBtn);
                     element.appendChild(controls);
                     input.focus();
-
                     input.addEventListener("keydown", (e) => {
                         if (e.key === "Enter" && fieldType === "text") {
                             e.preventDefault();
@@ -2596,7 +2751,6 @@ const Auth = {
                         }
                     });
                 },
-
                 saveEdit(element, newValue) {
                     element.classList.remove("edit-mode");
                     element.innerHTML = newValue;
@@ -2605,12 +2759,10 @@ const Auth = {
                     if (App.isLoggedIn)
                         setTimeout(() => AutoExport.exportOnChange(), 100);
                 },
-
                 cancelEdit(element, html) {
                     element.classList.remove("edit-mode");
                     element.innerHTML = html;
                 },
-
                 deleteExperience(id) {
                     if (!confirm("Delete this experience?")) return;
                     const i = App.cvData.experiencia.findIndex(
@@ -2622,7 +2774,6 @@ const Auth = {
                     if (App.isLoggedIn)
                         setTimeout(() => AutoExport.exportOnChange(), 100);
                 },
-
                 openCreateModal(tableName) {
                     const modal = document.getElementById("createModal");
                     const title = document.getElementById("createModalTitle");
@@ -2632,7 +2783,6 @@ const Auth = {
                     const schema = this.getTableSchema(tableName);
                     title.textContent = `Add New ${tableName}`;
                     container.innerHTML = "";
-
                     Object.entries(schema).forEach(([field, type]) => {
                         const group = document.createElement("div");
                         group.className = "form-group";
@@ -2652,12 +2802,10 @@ const Auth = {
                         group.appendChild(input);
                         container.appendChild(group);
                     });
-
                     modal.classList.add("active");
                     document.getElementById("createForm").dataset.table =
                         tableName;
                 },
-
                 closeCreateModal() {
                     document
                         .getElementById("createModal")
@@ -2666,14 +2814,12 @@ const Auth = {
                     document.getElementById("formFieldsContainer").innerHTML =
                         "";
                 },
-
                 handleCreateSubmit(event) {
                     event.preventDefault();
                     const form = document.getElementById("createForm");
                     const tableName = form.dataset.table;
                     const newEntry = {};
                     let valid = true;
-
                     form.querySelectorAll("[data-field]").forEach((input) => {
                         if (input.required && !input.value.trim()) {
                             valid = false;
@@ -2687,7 +2833,6 @@ const Auth = {
                         alert("Fill all required fields.");
                         return;
                     }
-
                     const cur = App.cvData[tableName] || [];
                     const maxId = Math.max(
                         0,
@@ -2696,7 +2841,6 @@ const Auth = {
                     newEntry.id = String(maxId + 1);
                     newEntry.persona_id = "1";
                     newEntry.lengua = App.currentLanguage;
-
                     if (tableName === "experiencia") {
                         newEntry.profesion_id = "1";
                         newEntry.lugar = "";
@@ -2708,24 +2852,20 @@ const Auth = {
                         newEntry.grado_instruccion = "";
                         newEntry.en_curso = false;
                     }
-
                     if (!App.cvData[tableName]) App.cvData[tableName] = [];
                     App.cvData[tableName].push(newEntry);
                     CacheManager.saveToCache(App.cvData);
-
                     if (tableName === "experiencia") Render.renderTimeline();
                     else if (
                         tableName === "educacion" ||
                         tableName === "enlaces_personales"
                     )
                         Render.renderInfoSections();
-
                     if (App.isLoggedIn)
                         setTimeout(() => AutoExport.exportOnChange(), 100);
                     this.closeCreateModal();
                     form.reset();
                 },
-
                 updateDataInMemory(element, newValue) {
                     const { table, field, id } = element.dataset;
                     if (
@@ -2740,7 +2880,6 @@ const Auth = {
                     );
                     if (entry) entry[field] = newValue;
                 },
-
                 getTableSchema(tableName) {
                     const s = {
                         experiencia: {
@@ -2760,6 +2899,9 @@ const Auth = {
                 },
             };
 
+            /* ═══════════════════════════════════════════════════════════
+               Bootstrap
+               ═══════════════════════════════════════════════════════════ */
             document.addEventListener("DOMContentLoaded", async () => {
                 UI.initLanguageUI();
                 UI.updateConfigButton();
