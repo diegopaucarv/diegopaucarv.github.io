@@ -1108,7 +1108,39 @@
                     font-size: 7pt !important;
                     line-height: 1.3 !important;
                 }
+                .credentials-grid {
+                    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+                    gap: 1.5mm 3mm !important;
+                }
 
+                .credential-item {
+                    padding: 0 !important;
+                    gap: 0 !important;
+                    border: none !important;
+                    border-radius: 0 !important;
+                    background: transparent !important;
+                }
+
+                .credential-item h4 {
+                    font-size: 7.2pt !important;
+                    line-height: 1.2 !important;
+                    margin: 0 !important;
+                    letter-spacing: 0 !important;
+                }
+
+                .credential-issuer,
+                .credential-year {
+                    font-size: 6.2pt !important;
+                    line-height: 1.25 !important;
+                }
+
+                /* these two only cost vertical space on paper */
+                .credential-type {
+                    display: none !important;
+                }
+                .credential-item .publication-link {
+                    display: none !important;
+                }
                 /* Skills compact */
                 .skills-grid {
                     gap: 1.2mm !important;
@@ -1253,13 +1285,20 @@
             </button>
         </div>
 
-        <!-- Teaching -->
-        <div class="section-wrapper" id="teachingSection">
+        <!-- Education + Links -->
+        <div class="section-wrapper" id="infoSection">
+            <div class="info-grid" id="infoGrid"></div>
+        </div>
+
+        <!-- Credentials -->
+        <div class="section-wrapper" id="credentialsSection">
             <h2 class="section-title">
-                <span class="lang-content active" data-lang="en">Teaching</span>
-                <span class="lang-content" data-lang="es">Docencia</span>
+                <span class="lang-content active" data-lang="en"
+                    >Credentials</span
+                >
+                <span class="lang-content" data-lang="es">Credenciales</span>
             </h2>
-            <div class="teaching-list" id="teachingList"></div>
+            <div class="credentials-grid" id="credentialsGrid"></div>
         </div>
 
         <!-- Projects -->
@@ -1284,24 +1323,17 @@
             <div class="publications-list" id="publicationsList"></div>
         </div>
 
-        <!-- Credentials -->
-        <div class="section-wrapper" id="credentialsSection">
+        <!-- Teaching -->
+        <!--         <div class="section-wrapper" id="teachingSection">
             <h2 class="section-title">
-                <span class="lang-content active" data-lang="en"
-                    >Credentials</span
-                >
-                <span class="lang-content" data-lang="es">Credenciales</span>
+                <span class="lang-content active" data-lang="en">Teaching</span>
+                <span class="lang-content" data-lang="es">Docencia</span>
             </h2>
-            <div class="credentials-grid" id="credentialsGrid"></div>
-        </div>
-
-        <!-- Education + Links -->
-        <div class="section-wrapper" id="infoSection">
-            <div class="info-grid" id="infoGrid"></div>
-        </div>
+            <div class="teaching-list" id="teachingList"></div>
+        </div>-->
 
         <!-- Skills -->
-        <div class="section-wrapper" id="skillsSection"></div>
+        <!--         <div class="section-wrapper" id="skillsSection"></div>-->
 
         <!-- Create Modal -->
         <div class="modal-overlay" id="createModal">
