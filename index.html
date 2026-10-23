@@ -894,7 +894,99 @@
                 size: A4 portrait;
                 margin: 14mm 12mm;
             }
+            /* ── TOGGLE: non-certified experience ── */
+            .toggle-uncertified {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.35rem 0.7rem;
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                user-select: none;
+                font-size: 0.72rem;
+                font-weight: 600;
+                color: var(--text-light);
+                letter-spacing: 0.03em;
+                font-family: "Inter", sans-serif;
+                transition: all 0.2s ease;
+            }
+            .toggle-uncertified:hover {
+                border-color: var(--border-strong);
+                color: var(--text);
+            }
+            .toggle-uncertified input {
+                position: absolute;
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .toggle-track {
+                width: 28px;
+                height: 16px;
+                background: var(--border-strong);
+                border-radius: 999px;
+                position: relative;
+                flex-shrink: 0;
+                transition: background 0.2s ease;
+            }
+            .toggle-track::after {
+                content: "";
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                width: 12px;
+                height: 12px;
+                background: white;
+                border-radius: 50%;
+                transition: transform 0.2s ease;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+            }
+            .toggle-uncertified input:checked + .toggle-track {
+                background: var(--primary);
+            }
+            .toggle-uncertified input:checked + .toggle-track::after {
+                transform: translateX(12px);
+            }
 
+            /* ── BADGES en credenciales ── */
+            .credential-badge-wrap {
+                height: 48px;
+                margin-bottom: 0.75rem;
+                display: flex;
+                align-items: center;
+            }
+            .credential-badge {
+                max-width: 48px;
+                max-height: 48px;
+                object-fit: contain;
+                display: block;
+                transition: transform 0.2s ease;
+            }
+            .credential-item:hover .credential-badge {
+                transform: scale(1.05);
+            }
+
+            /* ── Hint visual para experiencia no certificada ── */
+            .timeline-item.uncertified {
+                opacity: 0.85;
+            }
+            .timeline-item.uncertified::before {
+                content: "Sin certificado";
+                position: absolute;
+                top: 0.5rem;
+                right: 0;
+                font-size: 0.62rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                background: var(--background);
+                border: 1px solid var(--border);
+                padding: 0.1rem 0.5rem;
+                border-radius: 999px;
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+            }
             @media print {
                 html,
                 body {
@@ -1174,12 +1266,46 @@
                     color: var(--text) !important;
                     text-decoration: none !important;
                 }
+
+                @media print {
+                    /* toggle oculto en impresión */
+                    .toggle-uncertified {
+                        display: none !important;
+                    }
+
+                    /* badge compacto para impresión */
+                    .credential-badge-wrap {
+                        height: 8mm !important;
+                        margin-bottom: 0.8mm !important;
+                    }
+                    .credential-badge {
+                        max-width: 8mm !important;
+                        max-height: 8mm !important;
+                    }
+
+                    /* etiqueta "sin certificado" no se imprime */
+                    .timeline-item.uncertified::before {
+                        display: none !important;
+                    }
+                }
             }
         </style>
     </head>
     <body>
         <!-- Header controls -->
         <div class="header-controls">
+            <label
+                class="toggle-uncertified"
+                title="Mostrar experiencia no certificada"
+            >
+                <input
+                    type="checkbox"
+                    id="toggleUncertified"
+                    onchange="UI.toggleUncertified(this.checked)"
+                />
+                <span class="toggle-track"></span>
+                <span>No-cert</span>
+            </label>
             <div class="language-toggle">
                 <button
                     class="lang-btn active"
@@ -1376,23 +1502,25 @@
         </div>
 
         <script>
-            /* ═══════════════════════════════════════════════════════════
-               CV APP — Estado global
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           CV APP — Estado global
+           ═══════════════════════════════════════════════════════════════ */
             const App = {
                 cvData: null,
                 originalData: null,
                 currentLanguage: localStorage.getItem("language") || "en",
                 isLoggedIn: Boolean(localStorage.getItem("sessionToken")),
                 credentials: null,
-                dataVersion: "3.3",
+                dataVersion: "3.4", // bump: schema changed (badge_path, experiencia_no_certificada)
+                showUncertified:
+                    localStorage.getItem("showUncertified") !== "false",
             };
 
             const IS_FILE_PROTOCOL = location.protocol === "file:";
 
-            /* ═══════════════════════════════════════════════════════════
-               CacheManager — guarda/lee ediciones del usuario
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           CacheManager
+           ═══════════════════════════════════════════════════════════════ */
             const CacheManager = {
                 saveToCache(data) {
                     try {
@@ -1423,9 +1551,9 @@
                 },
             };
 
-            /* ═══════════════════════════════════════════════════════════
-               Auth — login (deshabilitado en file://)
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           Auth
+           ═══════════════════════════════════════════════════════════════ */
             const Auth = {
                 async init() {
                     if (IS_FILE_PROTOCOL) {
@@ -1483,9 +1611,9 @@
                 },
             };
 
-            /* ═══════════════════════════════════════════════════════════
-               UI — idioma, modales, botón de config
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           UI
+           ═══════════════════════════════════════════════════════════════ */
             const UI = {
                 changeLanguage(lang) {
                     App.currentLanguage = lang;
@@ -1524,11 +1652,19 @@
                         btn.onclick = () => UI.toggleLoginModal();
                     }
                 },
+                toggleUncertified(checked) {
+                    App.showUncertified = checked;
+                    localStorage.setItem(
+                        "showUncertified",
+                        checked ? "true" : "false",
+                    );
+                    Render.renderTimeline();
+                },
             };
 
-            /* ═══════════════════════════════════════════════════════════
-               AutoExport — reconstruye JSON y descarga al editar
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           AutoExport
+           ═══════════════════════════════════════════════════════════════ */
             const AutoExport = {
                 isExporting: false,
                 async exportOnChange() {
@@ -1581,6 +1717,10 @@
                         experiencia: this.mergeLanguageRows(
                             "experiencia",
                             this.reconstructExperience(),
+                        ),
+                        experiencia_no_certificada: this.mergeLanguageRows(
+                            "experiencia_no_certificada",
+                            this.reconstructExperienceNoCertificada(),
                         ),
                         teaching_experience: this.mergeLanguageRows(
                             "teaching_experience",
@@ -1694,6 +1834,42 @@
                         return base;
                     });
                 },
+                reconstructExperienceNoCertificada() {
+                    // misma estructura que experiencia (reusa schema detection)
+                    const expSchema = (App.originalData?.tables || []).find(
+                        (t) => t.name === "experiencia",
+                    );
+                    const hasDur = expSchema?.columns?.some(
+                        (c) => c.name === "duracion_meses",
+                    );
+                    const hasFin = expSchema?.columns?.some(
+                        (c) => c.name === "fin_anio",
+                    );
+                    return (App.cvData.experiencia_no_certificada || []).map(
+                        (i) => {
+                            const base = [
+                                i.id || "u1",
+                                i.persona_id || "1",
+                                i.profesion_id || "1",
+                                i.experiencia_categoria || "",
+                                i.inicio_anio || "",
+                            ];
+                            if (hasDur) base.push(i.duracion_meses || "");
+                            if (hasFin) base.push(i.fin_anio || "");
+                            base.push(
+                                i.institucion || "",
+                                i.lugar || "",
+                                i.rol || "",
+                                i.tareas || "",
+                                i.logros || null,
+                                i.referencia || null,
+                                i.referencia_linkedin || null,
+                                i.lengua || App.currentLanguage,
+                            );
+                            return base;
+                        },
+                    );
+                },
                 reconstructTeaching() {
                     return (App.cvData.teaching_experience || []).map((i) => [
                         i.id || "1",
@@ -1762,6 +1938,7 @@
                     });
                 },
                 reconstructCertifications() {
+                    // 8 cols: id, pid, name, issuer, year, url, badge_path, lengua
                     return (App.cvData.certifications || []).map((i) => [
                         i.id || "1",
                         i.persona_id || "1",
@@ -1769,6 +1946,7 @@
                         i.issuer || "",
                         i.year || "",
                         i.url || null,
+                        i.badge_path || null,
                         i.lengua || App.currentLanguage,
                     ]);
                 },
@@ -1806,9 +1984,9 @@
                 },
             };
 
-            /* ═══════════════════════════════════════════════════════════
-               Data — fetch + parse del JSON
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           Data
+           ═══════════════════════════════════════════════════════════════ */
             const Data = {
                 async fetchCVData() {
                     if (IS_FILE_PROTOCOL) {
@@ -1827,11 +2005,11 @@
                     } catch (e) {
                         console.error("❌ No se pudo cargar cvs.json:", e);
                         document.body.innerHTML = `
-                            <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif">
-                                <h1 style="color:#c0392b;margin-bottom:1rem">Error al cargar cvs.json</h1>
-                                <p>${String(e.message || e)}</p>
-                                <p style="margin-top:1rem;color:#666">Verifica que <code>cvs.json</code> exista junto a <code>index.html</code>.</p>
-                            </div>`;
+                        <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif">
+                            <h1 style="color:#c0392b;margin-bottom:1rem">Error al cargar cvs.json</h1>
+                            <p>${String(e.message || e)}</p>
+                            <p style="margin-top:1rem;color:#666">Verifica que <code>cvs.json</code> exista junto a <code>index.html</code>.</p>
+                        </div>`;
                         return;
                     }
                     const cached = App.isLoggedIn
@@ -1846,14 +2024,14 @@
                 },
                 showFileProtocolBanner() {
                     document.body.innerHTML = `
-                        <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif;line-height:1.6">
-                            <h1 style="color:#1a1a1a;margin-bottom:1rem">Necesitas un servidor local</h1>
-                            <p>Estás abriendo este archivo con <code>file://</code>. Los navegadores no permiten cargar <code>cvs.json</code> desde disco por seguridad.</p>
-                            <p style="margin-top:1.25rem"><strong>Ejecuta en la carpeta del proyecto:</strong></p>
-                            <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem;overflow-x:auto">python -m http.server 8000</pre>
-                            <p style="margin-top:1rem">Luego abre:</p>
-                            <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem">http://localhost:8000</pre>
-                        </div>`;
+                    <div style="max-width:640px;margin:4rem auto;padding:2rem;font-family:system-ui,sans-serif;line-height:1.6">
+                        <h1 style="color:#1a1a1a;margin-bottom:1rem">Necesitas un servidor local</h1>
+                        <p>Estás abriendo este archivo con <code>file://</code>. Los navegadores no permiten cargar <code>cvs.json</code> desde disco por seguridad.</p>
+                        <p style="margin-top:1.25rem"><strong>Ejecuta en la carpeta del proyecto:</strong></p>
+                        <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem;overflow-x:auto">python -m http.server 8000</pre>
+                        <p style="margin-top:1rem">Luego abre:</p>
+                        <pre style="background:#f4f4f4;padding:1rem;border-radius:6px;margin-top:.75rem">http://localhost:8000</pre>
+                    </div>`;
                 },
                 refreshParsedData() {
                     if (!App.originalData?.data) return;
@@ -1868,6 +2046,11 @@
                             data.experiencia || [],
                             tables,
                             "experiencia",
+                        ),
+                        experiencia_no_certificada: this.mapAndFilter(
+                            data.experiencia_no_certificada || [],
+                            tables,
+                            "experiencia_no_certificada",
                         ),
                         teaching_experience: this.mapAndFilter(
                             data.teaching_experience || [],
@@ -1923,12 +2106,14 @@
                         .map((row, index) => {
                             let obj = {};
 
-                            if (tableName === "experiencia") {
+                            if (
+                                tableName === "experiencia" ||
+                                tableName === "experiencia_no_certificada"
+                            ) {
                                 if (Array.isArray(row)) {
                                     const len = row.length;
                                     const lengua = row[len - 1];
                                     if (len >= 15) {
-                                        // 15 cols: id, pid, prof, cat, inicio, dur, fin, inst, lugar, rol, tareas, logros, ref, ref_li, lengua
                                         obj = {
                                             id: row[0],
                                             persona_id: row[1],
@@ -1947,7 +2132,6 @@
                                             lengua,
                                         };
                                     } else if (len === 14) {
-                                        // 14 cols: id, pid, prof, cat, inicio, dur, inst, lugar, rol, tareas, logros, ref, ref_li, lengua
                                         obj = {
                                             id: row[0],
                                             persona_id: row[1],
@@ -1966,7 +2150,6 @@
                                             lengua,
                                         };
                                     } else {
-                                        // 13 cols legacy
                                         obj = {
                                             id: row[0],
                                             persona_id: row[1],
@@ -2044,6 +2227,7 @@
                                     lengua: row[row.length - 1],
                                 };
                             } else if (tableName === "certifications") {
+                                const hasBadge = row.length >= 8;
                                 obj = {
                                     id: row[0],
                                     persona_id: row[1],
@@ -2051,6 +2235,7 @@
                                     issuer: row[3],
                                     year: row[4],
                                     url: row[5],
+                                    badge_path: hasBadge ? row[6] : null,
                                     lengua: row[row.length - 1],
                                 };
                             } else if (tableName === "publications") {
@@ -2111,9 +2296,9 @@
                 },
             };
 
-            /* ═══════════════════════════════════════════════════════════
-               Render — todo el layout
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           Render
+           ═══════════════════════════════════════════════════════════════ */
             const Render = {
                 renderCV() {
                     if (!App.cvData) return;
@@ -2171,7 +2356,20 @@
                     const container =
                         document.getElementById("timelineContainer");
                     if (!container) return;
-                    const exps = [...(App.cvData.experiencia || [])];
+
+                    // Merge certified + uncertified (if toggle is on)
+                    const exps = (App.cvData.experiencia || []).map((e) => ({
+                        ...e,
+                        _uncertified: false,
+                    }));
+                    if (App.showUncertified) {
+                        (App.cvData.experiencia_no_certificada || []).forEach(
+                            (e) => {
+                                exps.push({ ...e, _uncertified: true });
+                            },
+                        );
+                    }
+
                     if (exps.length === 0) {
                         container.innerHTML = `<p style="color:var(--text-muted);font-size:0.9rem">${
                             App.currentLanguage === "es"
@@ -2190,6 +2388,7 @@
                             this.getSortableDate(a.inicio_anio)
                         );
                     });
+
                     container.innerHTML = exps
                         .map((exp) => {
                             const dateRange = this.getDisplayDateRange(exp);
@@ -2201,6 +2400,12 @@
                             );
                             const location = this.escapeHtml(exp.lugar || "");
                             const rol = this.escapeHtml(exp.rol || "");
+                            const tableName = exp._uncertified
+                                ? "experiencia_no_certificada"
+                                : "experiencia";
+                            const uncertifiedClass = exp._uncertified
+                                ? " uncertified"
+                                : "";
 
                             const durNum = parseFloat(exp.duracion_meses);
                             const durLabel =
@@ -2230,30 +2435,29 @@
                                 : "";
 
                             return `
-                            <div class="timeline-item" data-exp-id="${exp.id}">
-                                <div class="timeline-bullet ${catClass}"></div>
-                                <p class="timeline-year">${dateRange}</p>
-                                <h3 class="editable-field"
-                                    data-table="experiencia" data-id="${exp.id}" data-field="institucion"
-                                    ondblclick="CRUD.makeEditable(this, 'text')">${institution}</h3>
-                                ${subtitle ? `<p class="timeline-institution">${subtitle}</p>` : ""}
-                                ${
-                                    rol
-                                        ? `<span class="timeline-category editable-field"
-                                             data-table="experiencia" data-id="${exp.id}" data-field="rol"
-                                             ondblclick="CRUD.makeEditable(this, 'text')">${rol}</span>`
-                                        : ""
-                                }
-                                ${desc}
-                                ${logr}
-                                ${deleteBtn}
-                            </div>
-                        `;
+                        <div class="timeline-item${uncertifiedClass}" data-exp-id="${exp.id}" data-exp-table="${tableName}">
+                            <div class="timeline-bullet ${catClass}"></div>
+                            <p class="timeline-year">${dateRange}</p>
+                            <h3 class="editable-field"
+                                data-table="${tableName}" data-id="${exp.id}" data-field="institucion"
+                                ondblclick="CRUD.makeEditable(this, 'text')">${institution}</h3>
+                            ${subtitle ? `<p class="timeline-institution">${subtitle}</p>` : ""}
+                            ${
+                                rol
+                                    ? `<span class="timeline-category editable-field"
+                                         data-table="${tableName}" data-id="${exp.id}" data-field="rol"
+                                         ondblclick="CRUD.makeEditable(this, 'text')">${rol}</span>`
+                                    : ""
+                            }
+                            ${desc}
+                            ${logr}
+                            ${deleteBtn}
+                        </div>
+                    `;
                         })
                         .join("");
                 },
                 getEndDate(exp) {
-                    // fin_anio explícito (incluye "Actual" / "Present")
                     const finRaw = String(exp.fin_anio || "").trim();
                     if (finRaw) {
                         if (/^(actual|actualidad|present)$/i.test(finRaw))
@@ -2261,11 +2465,9 @@
                         const parsed = this.getSortableDate(finRaw);
                         if (parsed > 0) return parsed;
                     }
-                    // inicio contiene "Actual" / "Present"
                     const inicioRaw = String(exp.inicio_anio || "");
                     if (/(actual|actualidad|present)/i.test(inicioRaw))
                         return Number.MAX_SAFE_INTEGER;
-                    // inicio + duración
                     const inicioTs = this.getSortableDate(exp.inicio_anio);
                     const dur = parseFloat(exp.duracion_meses);
                     if (inicioTs > 0 && !isNaN(dur) && dur > 0) {
@@ -2298,16 +2500,25 @@
                     );
 
                     let end = null;
+                    let endLabel = null;
                     if (exp.fin_anio) {
-                        const fin = String(exp.fin_anio).match(
-                            /^(\d{4})-(\d{2})-(\d{2})$/,
-                        );
-                        if (fin)
-                            end = new Date(
-                                Date.UTC(+fin[1], +fin[2] - 1, +fin[3]),
+                        const finRaw = String(exp.fin_anio).trim();
+                        if (/^(actual|actualidad|present)$/i.test(finRaw)) {
+                            endLabel =
+                                App.currentLanguage === "es"
+                                    ? "Actual"
+                                    : "Present";
+                        } else {
+                            const fin = finRaw.match(
+                                /^(\d{4})-(\d{2})-(\d{2})$/,
                             );
+                            if (fin)
+                                end = new Date(
+                                    Date.UTC(+fin[1], +fin[2] - 1, +fin[3]),
+                                );
+                        }
                     }
-                    if (!end) {
+                    if (!end && !endLabel) {
                         const dur = parseFloat(exp.duracion_meses);
                         if (!isNaN(dur) && dur > 0) {
                             end = new Date(start);
@@ -2316,6 +2527,7 @@
                             );
                         }
                     }
+                    if (endLabel) return `${fmtMonth(start)} – ${endLabel}`;
                     return end
                         ? `${fmtMonth(start)} – ${fmtMonth(end)}`
                         : fmtMonth(start);
@@ -2343,15 +2555,15 @@
                                 t.end_date,
                             );
                             return `
-                            <div class="teaching-item">
-                                <div class="teaching-header">
-                                    <h4>${this.escapeHtml(t.course_name || "")}</h4>
-                                    <span class="teaching-date">${dates}</span>
-                                </div>
-                                <p class="teaching-institution">${this.escapeHtml(t.institution || "")}${t.location ? ` · ${this.escapeHtml(t.location)}` : ""}</p>
-                                ${t.description ? `<p class="teaching-description">${this.escapeHtml(t.description)}</p>` : ""}
+                        <div class="teaching-item">
+                            <div class="teaching-header">
+                                <h4>${this.escapeHtml(t.course_name || "")}</h4>
+                                <span class="teaching-date">${dates}</span>
                             </div>
-                        `;
+                            <p class="teaching-institution">${this.escapeHtml(t.institution || "")}${t.location ? ` · ${this.escapeHtml(t.location)}` : ""}</p>
+                            ${t.description ? `<p class="teaching-description">${this.escapeHtml(t.description)}</p>` : ""}
+                        </div>
+                    `;
                         })
                         .join("");
                 },
@@ -2458,6 +2670,7 @@
                                           "",
                                       year: s.certificate_year,
                                       url: s.certificate_path || null,
+                                      badge_path: null,
                                   }));
                     if (src.length === 0) {
                         section.style.display = "none";
@@ -2473,6 +2686,11 @@
                         .map(
                             (cert) => `
                         <div class="credential-item">
+                            ${
+                                cert.badge_path
+                                    ? `<div class="credential-badge-wrap"><img src="${this.escapeHtml(cert.badge_path)}" alt="${this.escapeHtml(cert.name)} badge" class="credential-badge" loading="lazy"></div>`
+                                    : ""
+                            }
                             <span class="credential-type">${App.currentLanguage === "es" ? "Certificación" : "Certification"}</span>
                             <h4>${this.escapeHtml(cert.name || "")}</h4>
                             <span class="credential-issuer">${this.escapeHtml(cert.issuer || "")}</span>
@@ -2505,19 +2723,19 @@
                         const card = document.createElement("div");
                         card.className = "info-card";
                         card.innerHTML = `
-                            <h3><span class="lang-content active" data-lang="en">Education</span><span class="lang-content" data-lang="es">Educación</span></h3>
-                            ${education
-                                .map(
-                                    (edu) => `
-                                <div class="info-item">
-                                    <h4>${this.escapeHtml(edu.titulo || "")}</h4>
-                                    <p>${this.escapeHtml(edu.institucion || "")}</p>
-                                    <p>${this.formatYear(edu.fecha_inicio)}</p>
-                                </div>
-                            `,
-                                )
-                                .join("")}
-                        `;
+                        <h3><span class="lang-content active" data-lang="en">Education</span><span class="lang-content" data-lang="es">Educación</span></h3>
+                        ${education
+                            .map(
+                                (edu) => `
+                            <div class="info-item">
+                                <h4>${this.escapeHtml(edu.titulo || "")}</h4>
+                                <p>${this.escapeHtml(edu.institucion || "")}</p>
+                                <p>${this.formatYear(edu.fecha_inicio)}</p>
+                            </div>
+                        `,
+                            )
+                            .join("")}
+                    `;
                         grid.appendChild(card);
                     }
                     const links = App.cvData.enlaces_personales || [];
@@ -2525,17 +2743,17 @@
                         const card = document.createElement("div");
                         card.className = "info-card";
                         card.innerHTML = `
-                            <h3><span class="lang-content active" data-lang="en">Links</span><span class="lang-content" data-lang="es">Enlaces</span></h3>
-                            ${links
-                                .map(
-                                    (link) => `
-                                <div class="info-item">
-                                    <h4><a href="${this.escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${this.escapeHtml(link.tipo)}</a></h4>
-                                </div>
-                            `,
-                                )
-                                .join("")}
-                        `;
+                        <h3><span class="lang-content active" data-lang="en">Links</span><span class="lang-content" data-lang="es">Enlaces</span></h3>
+                        ${links
+                            .map(
+                                (link) => `
+                            <div class="info-item">
+                                <h4><a href="${this.escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">${this.escapeHtml(link.tipo)}</a></h4>
+                            </div>
+                        `,
+                            )
+                            .join("")}
+                    `;
                         grid.appendChild(card);
                     }
                     document.getElementById("infoSection").style.display =
@@ -2555,14 +2773,14 @@
                     }
                     section.style.display = "block";
                     section.innerHTML = `
-                        <h2 class="section-title">
-                            <span class="lang-content active" data-lang="en">Skills</span>
-                            <span class="lang-content" data-lang="es">Habilidades</span>
-                        </h2>
-                        <div class="skills-grid">
-                            ${skills.map((s) => `<span class="skill-tag">${this.escapeHtml(s.skill_name)}</span>`).join("")}
-                        </div>
-                    `;
+                    <h2 class="section-title">
+                        <span class="lang-content active" data-lang="en">Skills</span>
+                        <span class="lang-content" data-lang="es">Habilidades</span>
+                    </h2>
+                    <div class="skills-grid">
+                        ${skills.map((s) => `<span class="skill-tag">${this.escapeHtml(s.skill_name)}</span>`).join("")}
+                    </div>
+                `;
                 },
 
                 getCategoryClass(cat) {
@@ -2737,9 +2955,9 @@
                 },
             };
 
-            /* ═══════════════════════════════════════════════════════════
-               CRUD — edición inline + crear/borrar
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           CRUD
+           ═══════════════════════════════════════════════════════════════ */
             const CRUD = {
                 makeEditable(element, fieldType) {
                     if (!App.isLoggedIn) return;
@@ -2803,10 +3021,18 @@
                 },
                 deleteExperience(id) {
                     if (!confirm("Delete this experience?")) return;
-                    const i = App.cvData.experiencia.findIndex(
+                    // Try certified first
+                    let idx = App.cvData.experiencia.findIndex(
                         (e) => String(e.id) === String(id),
                     );
-                    if (i !== -1) App.cvData.experiencia.splice(i, 1);
+                    if (idx !== -1) {
+                        App.cvData.experiencia.splice(idx, 1);
+                    } else {
+                        // Try uncertified
+                        const unc = App.cvData.experiencia_no_certificada || [];
+                        idx = unc.findIndex((e) => String(e.id) === String(id));
+                        if (idx !== -1) unc.splice(idx, 1);
+                    }
                     CacheManager.saveToCache(App.cvData);
                     Render.renderTimeline();
                     if (App.isLoggedIn)
@@ -2937,12 +3163,14 @@
                 },
             };
 
-            /* ═══════════════════════════════════════════════════════════
-               Bootstrap
-               ═══════════════════════════════════════════════════════════ */
+            /* ═══════════════════════════════════════════════════════════════
+           Bootstrap
+           ═══════════════════════════════════════════════════════════════ */
             document.addEventListener("DOMContentLoaded", async () => {
                 UI.initLanguageUI();
                 UI.updateConfigButton();
+                const toggle = document.getElementById("toggleUncertified");
+                if (toggle) toggle.checked = App.showUncertified;
                 await Auth.init();
                 await Data.fetchCVData();
             });
